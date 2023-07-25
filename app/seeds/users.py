@@ -5,14 +5,14 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
+        username='DemolitZen', email='demo@aa.io', profile_pic="https://media.istockphoto.com/id/1321644048/photo/balance-at-work-is-very-important.jpg?b=1&s=612x612&w=0&k=20&c=wN746bvgneyk4JzFI3hv1LlvlIkjWm6BHING98G9ZoY=", password='password')
+    willow = User(
+        username='WellnessWillow', email='willow@aa.io', profile_pic="https://images.pexels.com/photos/11057172/pexels-photo-11057172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", password='password')
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        username='HappyHiker', email='bobbie@aa.io', profile_pic="https: // images.pexels.com/photos/2387866/pexels-photo-2387866.jpeg?auto=compress & cs=tinysrgb & w=1260 & h=750 & dpr=1", password='password')
 
     db.session.add(demo)
-    db.session.add(marnie)
+    db.session.add(willow)
     db.session.add(bobbie)
     db.session.commit()
 
@@ -25,8 +25,9 @@ def seed_users():
 # it will reset the primary keys for you as well.
 def undo_users():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
-        
+
     db.session.commit()

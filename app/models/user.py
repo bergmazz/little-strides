@@ -12,7 +12,13 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    profile_pic = db.Column(db.String(255))
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    routines = db.relationship(
+        "Routine", cascade="all, delete-orphan", lazy="joined", backref='user')
+    posts = db.relationship(
+        "Post", cascade="all, delete-orphan", lazy="joined", backref='user')
 
     @property
     def password(self):
@@ -29,5 +35,7 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'profilePic': self.profile_pic,
+            'email': self.email,
+            'routines': [routine.to_dict() for routine in self.routines],
         }
