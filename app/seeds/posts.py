@@ -39,7 +39,7 @@ def seed_posts():
 
     willow2 = Post(
         user_id=2,
-        content="Living with this kind of crippling anxiety is no easy feat, but I'm committed to overcoming it.  I've started creating a worry-time journal. This journal allows me to express my fears, putting them into perspective and freeing my mind from the burden. Meditation has also been instrumental in alleviating anxiety. Guided meditations provide a sense of peace and control over my thoughts. I'm determined to take small steps each day to live a more fulfilling life.",
+        content="Living with this kind of crippling anxiety is no easy feat, but I'm committed to overcoming it.  I've started creating a worry-time journal. It allows me to express my fears, putting them into perspective. Meditation has also been a life saver. Guided meditations provide a sense of peace and control over my thoughts. I'm determined to take small steps each day to live freer.",
         image="https://images.pexels.com/photos/2954199/pexels-photo-2954199.jpeg?auto=compress&cs=tinysrgb&w=1600",
         created_at=datetime(2022, 12, 20, 9, 0, 0)
     )
