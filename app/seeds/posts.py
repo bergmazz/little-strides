@@ -27,7 +27,7 @@ def seed_posts():
 
     demo4 = Post(
         user_id=1,
-        content="These days, I find myself dealing with sadness and stress more often than usual, and it's been a bit overwhelming. I'm not entirely sure what's triggering it, but I'm taking proactive steps to manage it. Journaling daily helps immensely. Writing things down helps me gain insights into the root causes of my stress- plus I can release some pent-up emotions without hurting anyone (as long as they dont read anything). I've started incorporating short stretching breaks into my day. These breaks serve as a reset button, helping me release muscle tension and relax my mind. Moreover, I've been taking occasional breaks from screens before bedtime to improve sleep quality. I believe that self-awareness and self-care are crucial in navigating through these STRESSFUL times.",
+        content="These days, I find myself dealing with sadness and stress more often than usual, and it's been a bit overwhelming. I'm not entirely sure what's triggering it, but I'm taking proactive steps to manage it. Journaling daily helps immensely. Writing things down helps me gain insights into the root causes of my stress- plus I can release some pent-up emotions without hurting anyone (as long as they dont read anything). I've started incorporating short stretching breaks into my day. These breaks serve as a reset button, helping me release muscle tension and relax my mind.",
         image="https://images.pexels.com/photos/6754013/pexels-photo-6754013.jpeg?auto=compress&cs=tinysrgb&w=1600",
         created_at=datetime(2022, 11, 5, 12, 15, 0)
     )
@@ -39,7 +39,7 @@ def seed_posts():
 
     willow2 = Post(
         user_id=2,
-        content="Living with this kind of crippling anxiety is no easy feat, but I'm committed to overcoming it.  I've started creating a worry-time journal. This journal allows me to express my anxieties and fears, putting them into perspective and freeing my mind from the burden. Meditation has also been instrumental in alleviating anxiety. The guided anxiety relief meditations provide a sense of peace and control over my thoughts. I'm determined to take small steps each day to conquer anxiety and live a more fulfilling life.",
+        content="Living with this kind of crippling anxiety is no easy feat, but I'm committed to overcoming it.  I've started creating a worry-time journal. This journal allows me to express my fears, putting them into perspective and freeing my mind from the burden. Meditation has also been instrumental in alleviating anxiety. Guided meditations provide a sense of peace and control over my thoughts. I'm determined to take small steps each day to live a more fulfilling life.",
         image="https://images.pexels.com/photos/2954199/pexels-photo-2954199.jpeg?auto=compress&cs=tinysrgb&w=1600",
         created_at=datetime(2022, 12, 20, 9, 0, 0)
     )
@@ -66,7 +66,7 @@ def seed_posts():
 
     bobbie4 = Post(
         user_id=3,
-        content="Productivity is something I strive for every day, and I've adopted several strategies to stay on track. Creating a daily to-do list is my go-to method for organizing my tasks and setting priorities. I find immense satisfaction in checking off items on my list, and it keeps me motivated to tackle even more. Time blocking has been another game-changer for me. Allocating specific time blocks for tasks helps me stay focused and prevents distractions from derailing my progress. Additionally, I've learned to minimize distractions by turning off notifications and creating a clutter-free workspace. Short breaks between tasks help me recharge and maintain productivity throughout the day. I've also started the practice of rewarding myself for accomplishing milestones, which keeps me motivated to reach my goals. Productivity is all about finding the right balance and establishing a rhythm that works best for me.",
+        content="Productivity is something I strive for every day, and I've adopted several strategies to stay on track. Creating a daily to-do list is my go-to method for organizing my tasks and setting priorities. I find immense satisfaction in checking off items on my list, and it keeps me motivated to tackle even more. Time blocking has been another game-changer for me. Allocating specific time blocks for tasks helps me stay focused and prevents distractions from derailing my progress.",
         image="https://images.pexels.com/photos/5717408/pexels-photo-5717408.jpeg?auto=compress&cs=tinysrgb&w=1600",
         created_at=datetime(2023, 2, 5, 16, 20, 0)
     )
