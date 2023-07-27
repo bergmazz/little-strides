@@ -37,5 +37,13 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'profilePic': self.profile_pic,
             'email': self.email,
+        }
+
+    def to_dict_w_routines(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'profilePic': self.profile_pic,
+            'email': self.email,
             'routines': [routine.to_dict() for routine in self.routines],
         }

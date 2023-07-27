@@ -39,13 +39,12 @@ class Habit(db.Model, UserMixin):
         progress = sum(checkin.completed for checkin in self.checkins)
         total_checkins = len(self.checkins)
         percent = (progress / total_checkins) * 100 if total_checkins else 0
-        return percent
+        return round(percent)
 
     def to_dict(self):
         return {
             'id': self.id,
             'routineId': self.routine_id,
-            'username': self.user.to_dict(),
             "description": self.description,
             'category': self.category,
             'streak': self.streak(),

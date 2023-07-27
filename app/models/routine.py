@@ -39,7 +39,7 @@ class Routine(db.Model, UserMixin):
 
         percent = (yes_past_week / checkins_past_week) * \
             100 if checkins_past_week else 0
-        return percent
+        return round(percent)
 
     def all_time(self):
         yes = 0
@@ -51,19 +51,18 @@ class Routine(db.Model, UserMixin):
                 if checkin.completed:
                     yes += 1
         percent = (yes / checkins_ever) * 100 if checkins_ever else 0
-        return percent
+        return round(percent)
 
     def to_dict(self):
-        user = self.user.to_dict()
-
+        # user = self.user.to_dict()
         return {
             'id': self.id,
             'userId': self.user_id,
-            'username': user.username,
+            # 'username': user.username,
             'name': self.rname,
             'coverImage': self.cover_image,
             'habits': [habit.to_dict() for habit in self.habits],
-            'pastWeek': self.past_week(),
-            'allTime': self.all_time(),
-            'topic': self.topic
+            'averagePastWeek': self.past_week(),
+            'averageCompletionAllTime': self.all_time(),
+            'mainTopic': self.topic
         }
