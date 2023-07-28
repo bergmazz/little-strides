@@ -51,14 +51,11 @@ class Habit(db.Model, UserMixin):
             'percent': self.percent()
         }
 
-    # def to_dict(self):
-    #     return {
-    #         'id': self.id,
-    #         'routineId': self.routine_id,
-    #         'username': self.user.to_dict(),
-    #         "description": self.description,
-    #         'category': self.category,
-    #     }
+    def to_simple_dict(self):
+        return {
+            "description": self.description,
+            'category': self.category,
+        }
 
     # def progress_to_dict(self):
     #     return {

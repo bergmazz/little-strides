@@ -158,12 +158,10 @@ def update_habit(routine_id, habit_id):
     if sorry:
         return sorry
 
-habit = Habit.query.get(habit_id)
+    habit = Habit.query.get(habit_id)
     whoops = not_found_not_yours(habit, current_user.id, 'Habit')
     if whoops:
         return whoops
-    if habit.routine_id != routine_id:
-        return jsonify(['error: Habit does not belong to the specified routine.']), 400
 
     form = HabitForm()
     form['routine_id'].data = routine_id
@@ -189,21 +187,16 @@ habit = Habit.query.get(habit_id)
 def delete_habit(routine_id, habit_id):
     """Delete a habit from the user's routine"""
     routine = Routine.query.get(routine_id)
-    if not routine:
-        return jsonify(['error: Routine not found.']), 404
-
-    if routine.user_id != current_user.id:
-        return jsonify(['error: Routine does not belong to the current user.']), 403
+    sorry = not_found_not_yours(routine, current_user.id, 'Routine')
+    if sorry:
+        return sorry
 
     habit = Habit.query.get(habit_id)
-    if not habit:
-        return jsonify(['error: Habit not found.']), 404
-
-    if habit.routine_id != routine_id:
-        return jsonify(['error: Habit does not belong to the specified routine.']), 400
+    whoops = not_found_not_yours(habit, current_user.id, 'Habit')
+    if whoops:
+        return whoops
 
     db.session.delete(habit)
     db.session.commit()
 
-    # Return a success message
     return jsonify({'message': 'Habit deleted successfully.'}), 200
