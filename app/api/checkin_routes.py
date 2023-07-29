@@ -9,12 +9,13 @@ from datetime import datetime
 checkins = Blueprint('checkins', __name__)
 
 def not_found_not_yours(habit, user_id):
-    habit_dict = habit.to_routine_dict()
-    habit_user = habit_dict['routine']['userId']
-    # print("------------------habit:", habit_dict)
-    # print("------------------habit routine: ", habit_dict['routine']['userId'])
+
     if not habit:
         return jsonify(['error: Habit not found.']), 404
+    # print("------------------habit:", habit_dict)
+    # print("------------------habit routine: ", habit_dict['routine']['userId'])
+    habit_dict = habit.to_routine_dict()
+    habit_user = habit_dict['routine']['userId']
     # print("------------------userid from routine:", habit_user)
     # print("------------------curr user id :", user_id)
     if habit_user != user_id:
@@ -38,8 +39,7 @@ def not_found_not_yours(habit, user_id):
 def create_habit(habit_id):
     """Check in for the day by habit"""
     habit = Habit.query.get(habit_id)
-    # print("------------------habit:", habit_dict)
-    # print("------------------habit routine: ", habit_dict['routine']['userId'])
+
     sorry = not_found_not_yours(habit, current_user.id)
     if sorry:
         return sorry
@@ -65,12 +65,11 @@ def create_habit(habit_id):
 def edit_checkin(habit_id):
     """Edit the check-in for the day by habit"""
     habit = Habit.query.get(habit_id)
-    sorry = not_found_not_yours(habit, current_user.id, 'habit')
+    sorry = not_found_not_yours(habit, current_user.id)
     if sorry:
         return sorry
 
     existing_checkin = Checkin.query.filter(
-        Checkin.user_id == current_user.id,
         Checkin.habit_id == habit_id,
         db.func.date(Checkin.created_at) == datetime.now().date()
     ).first()
@@ -91,12 +90,11 @@ def edit_checkin(habit_id):
 def delete_checkin(habit_id):
     """Delete the check-in for the day by habit"""
     habit = Habit.query.get(habit_id)
-    sorry = not_found_not_yours(habit, current_user.id, 'habit')
+    sorry = not_found_not_yours(habit, current_user.id)
     if sorry:
         return sorry
 
     existing_checkin = Checkin.query.filter(
-        Checkin.user_id == current_user.id,
         Checkin.habit_id == habit_id,
         db.func.date(Checkin.created_at) == datetime.now().date()
     ).first()
