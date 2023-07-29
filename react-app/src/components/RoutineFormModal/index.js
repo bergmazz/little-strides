@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import { a, b, c, d, e, f, g, h } from "./Steps"
 import { newRoutine } from "../../store/routine";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -14,7 +15,7 @@ function RoutineFormModal () {
     const [ errors, setErrors ] = useState( [] );
     const { closeModal } = useModal();
 
-    const totalSteps = 7;
+    const totalSteps = 8;
 
     const handleNextStep = () => {
         if ( currentStep < totalSteps ) {
@@ -53,29 +54,15 @@ function RoutineFormModal () {
             case 1:
                 return (
                     <div>
-                        {/* <Step1></Step1> */ }
-                        {/* <label>
-                            Routine Name
-                            <input
-                                type="text"
-                                value={ routineName }
-                                onChange={ ( e ) => setRoutineName( e.target.value ) }
-                                required
-                            />
-                        </label>
-                        <button type="button" onClick={ handleNextStep }>
-                            Next
-                        </button> */}
+                        {/* <a></a> */ }
                     </div>
                 ); case 2:
                 return (
                     <div>
-                        {/* <Step2></Step2> */ }
+                        {/* <b></b> */ }
                     </div>
                 );
         }
-
-
 
         return (
             <>
@@ -86,5 +73,6 @@ function RoutineFormModal () {
             </>
         );
     }
+}
 
-    export default RoutineFormModal;
+export default RoutineFormModal;
