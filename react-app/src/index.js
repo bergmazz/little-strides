@@ -2,10 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-
 import { ModalProvider, Modal } from "./context/Modal";
+import { ToastContainer } from "react-toastify";
+
 import configureStore from "./store";
 import * as sessionActions from "./store/session";
+import * as routineActions from "./store/routine";
+import * as habitActions from "./store/habit";
+import * as checkinActions from "./store/checkin";
+import * as postActions from "./store/post";
 import App from "./App";
 
 import "./index.css";
@@ -15,6 +20,10 @@ const store = configureStore();
 if (process.env.NODE_ENV !== "production") {
 	window.store = store;
 	window.sessionActions = sessionActions;
+	window.routineActions = routineActions;
+	window.habitActions = habitActions;
+	window.checkinActions = checkinActions;
+	window.postActions = postActions;
 }
 
 // Wrap the application with the Modal provider and render the Modal component
@@ -22,6 +31,7 @@ if (process.env.NODE_ENV !== "production") {
 // HTML elements on top of the all the other HTML elements:
 function Root() {
 	return (
+		<ToastContainer>
 		<ModalProvider>
 			<Provider store={store}>
 				<BrowserRouter>
@@ -29,7 +39,8 @@ function Root() {
 					<Modal />
 				</BrowserRouter>
 			</Provider>
-		</ModalProvider>
+			</ModalProvider>
+		</ToastContainer>
 	);
 }
 
