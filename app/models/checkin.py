@@ -16,6 +16,8 @@ class Checkin(db.Model, UserMixin):
     habit_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('habits.id')), nullable=False)
     completed = db.Column(db.Boolean, default=False)
+    # mood_rating = IntegerField('Mood Rating', validators=[Optional()])
+    # checkin_date = DateTimeField('Check-in Date', format='%Y-%m-%d %H:%M:%S', validators=[DataRequired()], default=datetime.utcnow)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

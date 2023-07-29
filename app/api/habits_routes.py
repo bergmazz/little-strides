@@ -3,7 +3,7 @@ from flask import Blueprint, jsonify, session, request
 from app.models import Habit
 # from .auth_routes import validation_errors_to_error_messages
 # from app.forms import RoutineForm, HabitForm
-from flask_login import current_user, login_required
+# from flask_login import current_user, login_required
 
 habits = Blueprint('habits', __name__)
 
