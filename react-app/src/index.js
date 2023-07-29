@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { ModalProvider, Modal } from "./context/Modal";
-import { ToastContainer } from "react-toastify";
+// import { ToastProvider, Toast } from "./context/Toast";
+// import { ToastContainer, toast } from "react-toastify";
 
 import configureStore from "./store";
 import * as sessionActions from "./store/session";
@@ -31,7 +32,7 @@ if (process.env.NODE_ENV !== "production") {
 // HTML elements on top of the all the other HTML elements:
 function Root() {
 	return (
-		<ToastContainer>
+		// <ToastProvider>
 		<ModalProvider>
 			<Provider store={store}>
 				<BrowserRouter>
@@ -40,7 +41,7 @@ function Root() {
 				</BrowserRouter>
 			</Provider>
 			</ModalProvider>
-		</ToastContainer>
+		//</ToastProvider>
 	);
 }
 
