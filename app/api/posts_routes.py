@@ -44,10 +44,24 @@ def create_post():
         return new_post.to_dict(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-
 # DELETE /api/posts/<post_id>
-# """Delete your own post"""
+@posts.route('/<int:post_id>', methods=['DELETE'])
+@login_required
+def delete_post(post_id):
+    """
+    Delete your own post
+    """
+    post = Post.query.get(post_id)
+    if not post:
+        return  jsonify(['error : Post not found']), 404
 
+    if post.user_id != current_user.id:
+        return jsonify(['error: post does not belong to the current user.']), 403
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return jsonify({'message': 'Post deleted successfully'}), 200
 
 # BONUS
 # PUT /api/posts/<post_id>
