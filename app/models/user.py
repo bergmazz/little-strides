@@ -38,6 +38,12 @@ class User(db.Model, UserMixin):
             'profilePic': self.profile_pic,
             'email': self.email,
         }
+    def to_simple_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'profilePic': self.profile_pic,
+        }
 
     def to_dict_w_routines(self):
         return {

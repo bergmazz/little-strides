@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from flask_wtf import FlaskForm
-from app.models import User, Routine, Habit, db
+from app.models import Routine, Habit, db
 from .auth_routes import validation_errors_to_error_messages
 from app.forms import RoutineForm, HabitForm
 from flask_login import current_user, login_required

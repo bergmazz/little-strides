@@ -22,12 +22,10 @@ class Post(db.Model, UserMixin):
         "Like", cascade="all, delete-orphan", lazy="joined", backref='post')
 
     def to_dict(self):
-        user = self.user.to_dict()
 
         return {
             'id': self.id,
-            'userId': self.user_id,
-            'username': user.username,
+            'user': self.user.to_simple_dict(),
             'image': self.image,
             'content': self.content
         }
