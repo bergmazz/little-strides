@@ -1,0 +1,4 @@
+const SET_ROUTINES = 'routine/SET_ROUTINES';
+const ADD_ROUTINE = 'routine/ADD_ROUTINE';
+const UPDATE_ROUTINE = 'routine/UPDATE_ROUTINE';
+const DELETE_ROUTINE = 'routine/DELETE_ROUTINE';
