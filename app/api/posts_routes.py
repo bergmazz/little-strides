@@ -26,6 +26,8 @@ def create_post():
     Create a new post
     """
     form = PostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         content = form.data['content']
         image = form.data['image']
