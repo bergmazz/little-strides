@@ -66,3 +66,13 @@ class Routine(db.Model, UserMixin):
             'averageCompletionAllTime': self.all_time(),
             'mainTopic': self.topic
         }
+
+    def to_simple_dict(self):
+        # user = self.user.to_dict()
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            # 'username': user.username,
+            'name': self.rname,
+            'mainTopic': self.topic
+        }

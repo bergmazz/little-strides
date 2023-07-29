@@ -63,7 +63,7 @@ class Habit(db.Model, UserMixin):
         return {
             "description": self.description,
             'category': self.category,
-            'routine': self.routine.to_dict()
+            'routine': self.routine.to_simple_dict()
         }
 
     # def progress_to_dict(self):

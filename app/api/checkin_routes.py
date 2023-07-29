@@ -8,12 +8,17 @@ from datetime import datetime
 
 checkins = Blueprint('checkins', __name__)
 
-def not_found_not_yours(obj, user_id, type_str):
-    if not obj:
-        return jsonify([f'error: {type_str} not found.']), 404
-
-    # if obj.user_id != user_id:
-    #     return jsonify([f'error: {type_str} does not belong to the current user.']), 403
+def not_found_not_yours(habit, user_id):
+    habit_dict = habit.to_routine_dict()
+    habit_user = habit_dict['routine']['userId']
+    # print("------------------habit:", habit_dict)
+    # print("------------------habit routine: ", habit_dict['routine']['userId'])
+    if not habit:
+        return jsonify(['error: Habit not found.']), 404
+    # print("------------------userid from routine:", habit_user)
+    # print("------------------curr user id :", user_id)
+    if habit_user != user_id:
+        return jsonify(['error: Habit does not belong to the current user.']), 403
 
     return None
 
@@ -33,15 +38,13 @@ def not_found_not_yours(obj, user_id, type_str):
 def create_habit(habit_id):
     """Check in for the day by habit"""
     habit = Habit.query.get(habit_id)
-    habit_dict = habit.to_routine_dict()
-
-    print("------------------habit:", habit_dict)
-    # sorry = not_found_not_yours(habit_dict, current_user.id, 'habit')
-    # if sorry:
-    #     return sorry
+    # print("------------------habit:", habit_dict)
+    # print("------------------habit routine: ", habit_dict['routine']['userId'])
+    sorry = not_found_not_yours(habit, current_user.id)
+    if sorry:
+        return sorry
 
     existing_checkin = Checkin.query.filter(
-        # Checkin.user_id == current_user.id,
         Checkin.habit_id == habit_id,
         db.func.date(Checkin.created_at) == datetime.now().date()
     ).first()
