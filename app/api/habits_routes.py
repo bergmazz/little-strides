@@ -123,7 +123,7 @@ system_habits = {
         ]
     }
 # GET /api/habits?topic=<topic>&topic=<topic>&topic=<topic>
-@habits.route('/suggest', methods=['GET'])
+@habits.route('', methods=['GET'])
 def get_suggested_habits():
     """Get a list of suggested habits by topic (up to three topics)"""
 

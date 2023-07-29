@@ -50,14 +50,10 @@ class Habit(db.Model, UserMixin):
             'streak': self.streak(),
             'percent': self.percent()
         }
-    def to_dict(self):
+    def to_simple_dict(self):
         return {
-            'id': self.id,
-            'routineId': self.routine_id,
             "description": self.description,
             'category': self.category,
-            'streak': self.streak(),
-            'percent': self.percent()
     }
     def to_routine_dict(self):
         return {

@@ -29,3 +29,10 @@ class Checkin(db.Model, UserMixin):
             "completed": self.completed,
             "date": self.created_at
         }
+
+
+    def to_simple_dict(self):
+        return {
+            "completed": self.completed,
+            "date": self.created_at
+        }
