@@ -1,15 +1,36 @@
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { authenticate } from "../../store/session";
+// import { Link, useHistory } from "react-router-dom";
 // import OpenModalButton from "../OpenModalButton";
-import UserRoutines from "./";
-
+// import UserRoutines from "./";
+import { fetchRoutines } from '../../store/routine';
 
 function UserProfile () {
-    const history = useHistory();
+
+    const dispatch = useDispatch();
     const currentUser = useSelector( state => state.session.user )
+    const routines = useSelector( state => state.routines )
+
+    useEffect( () => {
+        console.log( "---------------Inside useEffect" );
+        dispatch( authenticate() )
+        dispatch( fetchRoutines() );
+    }, [ dispatch ] );
+
+
     return (
-        <div className="user">
-            <UserRoutines{currentUser }></UserRoutines>
+        <div>
+            <h2>User Routines</h2>
+            { routines.map( ( routine ) => (
+                <div key={ routine.id }>
+                    <h2>{ "Hello,  " }{ currentUser.username }</h2>
+                    <h3>{ routine.rname }</h3>
+                    <p>Cover Image: { routine.cover_image }</p>
+                    <p>Topic: { routine.topic }</p>
+                    <p>Habits: { routine.habits }</p>
+                </div>
+            ) ) }
         </div>
     )
 }
