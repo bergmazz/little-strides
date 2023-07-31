@@ -10,16 +10,15 @@ function UserProfile () {
     console.log( "------ in user profile" );
     const dispatch = useDispatch();
     const currentUser = useSelector( state => state.session.user )
-    const routines = useSelector( state => state.routines )
+    const routines = useSelector( state => state.routine.routines )
     console.log( "------user:", currentUser );
 
     useEffect( () => {
-        console.log( 'Routines 1:', routines );
-        console.log( "---------------Inside useEffect" );
+        // console.log( "---------------Inside useEffect" );
         dispatch( fetchRoutines() );
-    }, [ dispatch, routines ] );
+    }, [ dispatch ] );
 
-    console.log( 'Routines 2:', routines );
+    console.log( 'Routinesssss:', routines );
 
     if ( !currentUser ) return (
         <div className='no-user'>
@@ -32,15 +31,24 @@ function UserProfile () {
 
     return (
         <div>
-            <h2>User Routines</h2>
+            <h2>{ "Hello,  " }{ currentUser.username }</h2>
+            <h2>Your Routines</h2>
             { routines ? (
                 routines.map( ( routine ) => (
                     <div key={ routine.id }>
-                        <h2>{ "Hello,  " }{ currentUser.username }</h2>
                         <h3>{ routine.rname }</h3>
-                        <p>Cover Image: { routine.cover_image }</p>
-                        <p>Topic: { routine.topic }</p>
-                        <p>Habits: { routine.habits }</p>
+                        <p>Cover Image: { routine.coverImage }</p>
+                        { routine.habits.map( ( habit ) => (
+                            <li key={ habit.id }>
+                                <strong>Category:</strong> { habit.category }
+                                <br />
+                                <strong>Description:</strong> { habit.description }
+                                <br />
+                                <strong>Completion Percentage:</strong> { habit.percent }%
+                                <br />
+                                <strong>Streak:</strong> { habit.streak }
+                            </li>
+                        ) ) }
                         {/* <OpenModalButton
                         className='edit-routine'
                         buttonText="Modify"

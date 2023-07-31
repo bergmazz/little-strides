@@ -40,13 +40,12 @@ export const fetchRoutines = () => async ( dispatch ) => {
         },
     } );
     const data = await response.json();
-    console.log( "-------GET USER ROUTINES DATA:", data )
+    // console.log( "-------GET USER ROUTINES DATA:", data )
     if ( response.ok ) {
-        console.log( "-------GET USER ROUTINES RESPONSE OK", )
-        const routines = await response.json();
-        console.log( "Routines:   ", routines )
+        // console.log( "-------GET USER ROUTINES RESPONSE OK", )
+        // console.log( "Routines:   ", data.Routines )
         dispatch( setRoutines( data.Routines ) );
-        return routines;
+        return data;
     }
 };
 
