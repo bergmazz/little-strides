@@ -40,8 +40,7 @@ export const fetchRoutines = () => async ( dispatch ) => {
         },
     } );
     const data = await response.json();
-
-    dispatch( setRoutines( data.Routines ) );
+    console.log( "-------GET USER ROUTINES DATA:", data )
     if ( response.ok ) {
         console.log( "-------GET USER ROUTINES RESPONSE OK", )
         const routines = await response.json();
