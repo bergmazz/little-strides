@@ -1,24 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { authenticate } from "../../store/session";
+
 import { Link, useHistory } from "react-router-dom";
 // import OpenModalButton from "../OpenModalButton";
 // import UserRoutines from "./";
 import { fetchRoutines } from '../../store/routine';
 
 function UserProfile () {
-    console.log( "user profile" );
+    console.log( "------ in user profile" );
     const dispatch = useDispatch();
     const currentUser = useSelector( state => state.session.user )
     const routines = useSelector( state => state.routines )
+    console.log( "------user:", currentUser );
 
     useEffect( () => {
-        console.log( 'Routines:', routines );
+        console.log( 'Routines 1:', routines );
         console.log( "---------------Inside useEffect" );
-        dispatch( authenticate() )
         dispatch( fetchRoutines() );
-    }, [ dispatch ] );
-    console.log( 'Routines:', routines );
+    }, [ dispatch, routines ] );
+
+    console.log( 'Routines 2:', routines );
 
     if ( !currentUser ) return (
         <div className='no-user'>
@@ -54,6 +55,7 @@ function UserProfile () {
                     </div>
                 ) ) ) : (
                 <p>no rotuines sry</p>
+
             ) }
         </div>
     )

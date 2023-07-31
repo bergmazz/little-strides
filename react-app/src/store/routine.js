@@ -34,7 +34,7 @@ export const getRoutine = ( routine ) => ( {
 
 //Thunks
 export const fetchRoutines = () => async ( dispatch ) => {
-    const response = await fetch( '/api/routines', {
+    const response = await fetch( '/api/routines/', {
         headers: {
             "Content-Type": "application/json",
         },
@@ -44,7 +44,7 @@ export const fetchRoutines = () => async ( dispatch ) => {
     if ( response.ok ) {
         console.log( "-------GET USER ROUTINES RESPONSE OK", )
         const routines = await response.json();
-        console.log( "Routines:======= ", routines )
+        console.log( "Routines:   ", routines )
         dispatch( setRoutines( data.Routines ) );
         return routines;
     }
