@@ -53,6 +53,7 @@ export const createRoutine = ( routine ) => async ( dispatch ) => {
     console.log( "---------routines", routine )
 
     const response = await fetch( '/api/routines/', {
+        method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },

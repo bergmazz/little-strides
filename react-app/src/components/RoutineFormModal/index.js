@@ -54,6 +54,7 @@ function RoutineFormModal () {
             case 1:
                 return (
                     <div>
+                        <p>hi!</p>
                         {/* <a></a> */ }
                     </div>
                 ); case 2:
@@ -62,17 +63,20 @@ function RoutineFormModal () {
                         {/* <b></b> */ }
                     </div>
                 );
+            default:
+                return ( <p>oops</p> );
         }
+    };
 
-        return (
+    return (
             <>
                 <h1>Create New Routine - Step { currentStep }</h1>
                 <form onSubmit={ handleSubmit }>
-                    { stepContent() }
+                { stepContent( currentStep ) }
                 </form>
             </>
-        );
-    }
+    );
 }
+
 
 export default RoutineFormModal;
