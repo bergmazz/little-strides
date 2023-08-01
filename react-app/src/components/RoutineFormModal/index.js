@@ -12,20 +12,28 @@ function RoutineFormModal () {
     const [ coverImage, setCoverImage ] = useState( "" );
     const [ selectedTopics, setSelectedTopics ] = useState( [] );
     const [ topTopic, setTopTopic ] = useState( [ "" ] );
+    const [ habits, setHabits ] = useState( [ "" ] );
+    const [ habitDetail, setHabitDetail ] = useState( [ "" ] );
     const [ errors, setErrors ] = useState( [] );
     const { closeModal } = useModal();
 
-    const totalSteps = 8;
+    const totalSteps = 7;
 
     const handleNextStep = () => {
         if ( currentStep < totalSteps ) {
             setCurrentStep( ( prevStep ) => prevStep + 1 );
+        }
+        if ( currentStep === 5 ) {
+            setCurrentStep( totalSteps );
         }
     };
 
     const handlePrevStep = () => {
         if ( currentStep > 1 ) {
             setCurrentStep( ( prevStep ) => prevStep - 1 );
+        }
+        if ( currentStep === 7 ) {
+            setCurrentStep( 5 );
         }
     };
 
@@ -54,13 +62,77 @@ function RoutineFormModal () {
             case 1:
                 return (
                     <div>
-                        <p>hi!</p>
-                        {/* <a></a> */ }
+                        {/* <Step1
+                            routineName={ routineName }
+                            setRoutineName={ setRoutineName }
+                            setCurrentStep={ setCurrentStep }
+                        /> */}
+                        <p>Set a name for the routine</p>
+                        <input
+                            type="text"
+                            value={ routineName }
+                            onChange={ ( e ) => setRoutineName( e.target.value ) }
+                        />
+                        <button type="button">
+                            help me build a routine
+                        </button>
+                        <button type="button" onClick={ () => { setCurrentStep( 5 ) } }>
+                            start from scratch
+                        </button>
                     </div>
                 ); case 2:
                 return (
                     <div>
-                        {/* <b></b> */ }
+                        <p>topics</p>
+                    </div>
+                );
+            case 3:
+                return (
+                    <div>
+                        <p>main topic</p>
+                    </div>
+                );
+            case 4:
+                return (
+                    <div>
+                        <p>suggested habits</p>
+
+                        <button type="button" onClick={ ( e ) => { setHabits( [ ...habits, e.target.value.desc, e.target.value.cat ] ) } }>
+                            lil plus sign
+                        </button>
+                    </div>
+                );
+            case 5:
+                return (
+                    <div>
+                        <p>edit/create habits</p>
+                        <p>{ habits }</p>
+                        <button type="button" onClick={ ( e ) => {
+                            setHabitDetail( [ e.target.value ] )
+                            setCurrentStep( 6 )
+                        } }>
+                            edit this one
+                        </button>
+
+                    </div>
+
+                );
+            case 6:
+                return (
+                    <div>
+                        <p>your habit</p>
+
+                    </div>
+                );
+            case 7:
+                return (
+                    <div>
+                        <p>choose cover image</p>
+                        <input
+                            type="text"
+                            value={ coverImage }
+                            onChange={ ( e ) => setCoverImage( e.target.value ) }
+                        />
                     </div>
                 );
             default:
@@ -79,7 +151,7 @@ function RoutineFormModal () {
                             &lt; Backward
                         </button>
                     ) }
-                    { currentStep !== totalSteps && (
+                    { currentStep !== totalSteps && currentStep !== 6 && (
                         <button type="button" onClick={ handleNextStep }>
                             Forward &gt;
                         </button>
