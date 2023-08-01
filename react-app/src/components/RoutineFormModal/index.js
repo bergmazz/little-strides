@@ -47,7 +47,7 @@ function RoutineFormModal () {
                     topic: topTopic,
                 } )
             );
-            if ( data && data[ 0 ].startsWith( "error" ) ) {
+            if ( Array.isArray( data ) ) {
                 setError( data[ 0 ] );
             } else {
                 closeModal();
