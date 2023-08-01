@@ -11,10 +11,10 @@ function RoutineFormModal () {
     const [ routineName, setRoutineName ] = useState( "" );
     const [ coverImage, setCoverImage ] = useState( "" );
     const [ selectedTopics, setSelectedTopics ] = useState( [] );
-    const [ topTopic, setTopTopic ] = useState( [ "" ] );
+    const [ topTopic, setTopTopic ] = useState( "" );
     const [ habits, setHabits ] = useState( [ "" ] );
     const [ habitDetail, setHabitDetail ] = useState( [ "" ] );
-    const [ errors, setErrors ] = useState( [] );
+    const [ error, setError ] = useState( [] );
     const { closeModal } = useModal();
 
     const totalSteps = 7;
@@ -42,18 +42,17 @@ function RoutineFormModal () {
         if ( currentStep === totalSteps ) {
             const data = await dispatch(
                 createRoutine( {
-                    name: routineName,
-                    coverImage: coverImage,
+                    rname: routineName,
+                    cover_image: coverImage,
                     topic: topTopic,
                 } )
             );
-            if ( data.errors ) {
-                setErrors( data.errors );
+            if ( data && data[ 0 ].startsWith( "error" ) ) {
+                setError( data[ 0 ] );
             } else {
                 closeModal();
             }
-        } else {
-            handleNextStep();
+
         }
     };
 
@@ -84,12 +83,30 @@ function RoutineFormModal () {
                 return (
                     <div>
                         <p>topics</p>
+
                     </div>
                 );
             case 3:
                 return (
                     <div>
                         <p>main topic</p>
+                        <select
+
+                            value={ topTopic }
+                            onChange={ ( e ) => setTopTopic( e.target.value ) }
+                            required
+                        >
+                            <option value=''>--Select a Topic--</option>
+                            <option value='anxiety'>Anxiety</option>
+                            <option value='relationships'>Relationships</option>
+                            <option value='exercise'>Exercise</option>
+                            <option value='stress'>Stress</option>
+                            <option value='wellness'>Wellness</option>
+                            <option value='sleep'>Sleep</option>
+                            <option value='depression'>Depression</option>
+                            <option value='productivity'>Productivity</option>
+                        </select>
+
                     </div>
                 );
             case 4:

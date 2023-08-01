@@ -51,18 +51,18 @@ export const fetchRoutines = () => async ( dispatch ) => {
 
 export const createRoutine = ( routine ) => async ( dispatch ) => {
     console.log( "---------routines", routine )
-
+    const { rname, cover_image, topic } = routine
     const response = await fetch( '/api/routines/', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify( {
-            routine
+            rname, cover_image, topic
         } )
     } );
     const data = await response.json();
-    // console.log( "-------GET USER ROUTINES DATA:", data )
+    console.log( "-------GET USER ROUTINES DATA:", data )
     if ( response.ok ) {
         // console.log( "-------GET USER ROUTINES RESPONSE OK", )
         // console.log( "Routines:   ", data.Routines )
