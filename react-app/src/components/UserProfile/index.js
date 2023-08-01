@@ -39,15 +39,12 @@ function UserProfile () {
                         <h3>{ routine.rname }</h3>
                         <p>Cover Image: { routine.coverImage }</p>
                         { routine.habits.map( ( habit ) => (
-                            <li key={ habit.id }>
-                                <strong>Category:</strong> { habit.category }
-                                <br />
-                                <strong>Description:</strong> { habit.description }
-                                <br />
-                                <strong>Completion Percentage:</strong> { habit.percent }%
-                                <br />
-                                <strong>Streak:</strong> { habit.streak }
-                            </li>
+                            <div key={ habit.id }>
+                                <h4>   { habit.description } </h4>
+                                <p>  { habit.percent } % </p>
+                                <p> { habit.streak }</p>
+                                <p>  { habit.category } </p>
+                            </div>
                         ) ) }
                         {/* <OpenModalButton
                         className='edit-routine'
@@ -62,8 +59,14 @@ function UserProfile () {
                     /> */}
                     </div>
                 ) ) ) : (
-                <p>no rotuines sry</p>
-
+                    <>
+                        <p>make a rotuine pal</p>
+                        {/* <OpenModalButton
+                        className='create-routine'
+                        buttonText="Modify"
+                        onItemClick={ closeMenu }
+                        modalComponent={ <RoutineFormModal routine={routine} /> }
+                    /> */}</>
             ) }
         </div>
     )
