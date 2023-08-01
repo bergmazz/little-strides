@@ -73,6 +73,19 @@ function RoutineFormModal () {
                 <h1>Create New Routine - Step { currentStep }</h1>
                 <form onSubmit={ handleSubmit }>
                 { stepContent( currentStep ) }
+                <div>
+                    { currentStep !== 1 && (
+                        <button type="button" onClick={ handlePrevStep }>
+                            &lt; Backward
+                        </button>
+                    ) }
+                    { currentStep !== totalSteps && (
+                        <button type="button" onClick={ handleNextStep }>
+                            Forward &gt;
+                        </button>
+                    ) }
+                    { currentStep === totalSteps && <button type="submit">Submit</button> }
+                </div>
                 </form>
             </>
     );
