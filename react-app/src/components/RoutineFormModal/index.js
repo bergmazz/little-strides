@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { a, b, c, d, e, f, g, h } from "./Steps"
-import { newRoutine } from "../../store/routine";
+import { createRoutine } from "../../store/routine";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./RoutineFormModal.css";
@@ -33,10 +33,10 @@ function RoutineFormModal () {
         e.preventDefault();
         if ( currentStep === totalSteps ) {
             const data = await dispatch(
-                createNewRoutine( {
+                createRoutine( {
                     name: routineName,
                     coverImage: coverImage,
-                    topics: selectedTopics,
+                    topic: topTopic,
                 } )
             );
             if ( data.errors ) {

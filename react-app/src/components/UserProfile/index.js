@@ -1,22 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link, useHistory } from "react-router-dom";
-// import OpenModalButton from "../OpenModalButton";
+import OpenModalButton from "../OpenModalButton";
+import RoutineFormModal from '../RoutineFormModal';
 // import UserRoutines from "./";
-import { fetchRoutines } from '../../store/routine';
+import { fetchRoutines, createRoutine } from '../../store/routine';
 
 function UserProfile () {
-    console.log( "------ in user profile" );
+    // console.log( "------ in user profile" );
     const dispatch = useDispatch();
     const currentUser = useSelector( state => state.session.user )
     const routines = useSelector( state => state.routine.routines )
-    console.log( "------user:", currentUser );
+    // console.log( "------user:", currentUser );
+    const [ showMenu, setShowMenu ] = useState( false );
+    const ulRef = useRef()
+
+    const closeMenu = ( e ) => {
+        if ( !ulRef.current.contains( e.target ) ) {
+            setShowMenu( false );
+        }
+    };
 
     useEffect( () => {
         // console.log( "---------------Inside useEffect" );
         dispatch( fetchRoutines() );
-    }, [ dispatch ] );
+
+        if ( !showMenu ) return;
+
+        closeMenu()
+        document.addEventListener( "click", closeMenu );
+
+        return () => document.removeEventListener( "click", closeMenu );
+
+    }, [ dispatch, showMenu ] );
 
     console.log( 'Routinesssss:', routines );
 
@@ -32,6 +49,12 @@ function UserProfile () {
     return (
         <div>
             <h2>{ "Hello,  " }{ currentUser.username }</h2>
+            <OpenModalButton
+                className='create-routine'
+                buttonText="New Routine"
+                onItemClick={ closeMenu }
+                modalComponent={ <RoutineFormModal /> }
+            />
             <h2>Your Routines</h2>
             { routines ? (
                 routines.map( ( routine ) => (
@@ -51,7 +74,7 @@ function UserProfile () {
                         buttonText="Modify"
                         onItemClick={ closeMenu }
                         modalComponent={ <RoutineFormModal routine={routine} /> }
-                    /> */}
+                        /> */}
                         {/* <OpenModalButton
                         className='kill-routine'
                         buttonText="Delete"
