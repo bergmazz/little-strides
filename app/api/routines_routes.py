@@ -5,7 +5,9 @@ from .auth_routes import validation_errors_to_error_messages
 from app.forms import RoutineForm, HabitForm
 from flask_login import current_user, login_required
 
+
 routines = Blueprint('routines', __name__)
+
 
 def not_found_not_yours(obj, user_id, type_str):
     if not obj:
@@ -20,8 +22,7 @@ def not_found_not_yours(obj, user_id, type_str):
 @routines.route('/', methods=['POST'])
 @login_required
 def create_routine():
-    """Create a new routine
-    -on frontend, this does not submit until after three habits have been entered in multi page form """
+    """Create a new routine """
     if len(current_user.routines) >= 3:
         return jsonify(['error : You cannot have more than 3 routines']), 400
 
@@ -54,11 +55,12 @@ def create_routine():
 
 # GET /api/routines
 @routines.route('/', methods=['GET'])
-@login_required
+# @login_required
 def get_reservations():
     """
     Get a list of routines owned by the user
     """
+    print("-------------", current_user)
     routines = [routine.to_dict(
     ) for routine in Routine.query.filter_by(user_id=current_user.id).all()]
 
