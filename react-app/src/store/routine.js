@@ -2,7 +2,7 @@
 const SET_ROUTINES = 'routine/SET_ROUTINES';
 const GET_ROUTINE = 'routine/GET_ROUTINE';
 const ADD_ROUTINE = 'routine/ADD_ROUTINE';
-// const UPDATE_ROUTINE = 'routine/UPDATE_ROUTINE';
+const UPDATE_ROUTINE = 'routine/UPDATE_ROUTINE';
 // const DELETE_ROUTINE = 'routine/DELETE_ROUTINE';
 
 //Action Creators
@@ -22,10 +22,10 @@ export const addRoutine = ( routine ) => ( {
     payload: routine,
 } );
 
-// export const updateRoutine = ( routine ) => ( {
-//     type: UPDATE_ROUTINE,
-//     payload: routine,
-// } );
+export const updateRoutine = ( routine ) => ( {
+    type: UPDATE_ROUTINE,
+    payload: routine,
+} );
 
 // export const deleteRoutine = ( routineId ) => ( {
 //     type: DELETE_ROUTINE,

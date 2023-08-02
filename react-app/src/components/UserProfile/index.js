@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-
 import { Link, useHistory } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import RoutineFormModal from '../RoutineFormModal';
+import RoutineEditForm from '../RoutineEditForm';
 // import UserRoutines from "./";
-import { fetchRoutines, createRoutine } from '../../store/routine';
-
+// import UserProgress from "./";
+import { fetchRoutines, createRoutine, updateRoutine } from '../../store/routine';
+import "./UserProfile.css"
 function UserProfile () {
     // console.log( "------ in user profile" );
     const dispatch = useDispatch();
@@ -58,23 +59,23 @@ function UserProfile () {
             <h2>Your Routines</h2>
             { routines ? (
                 routines.map( ( routine ) => (
-                    <div key={ routine.id }>
+                    <div className="routine-tile" key={ routine.id }>
+                        <img className="routine-img" src={ routine.coverImage } />
                         <h3>{ routine.name }</h3>
-                        <img src={ routine.coverImage } />
                         { routine.habits.map( ( habit ) => (
                             <div key={ habit.id }>
-                                <h4>   { habit.description } </h4>
-                                <p>  { habit.percent } % </p>
-                                <p> { habit.streak }</p>
-                                <p>  { habit.category } </p>
+                                <div className='habit-bubble'>   { habit.description } </div>
+                                {/* <p>  { habit.percent } % yes </p>
+                                <p> { habit.streak } days in a row</p>
+                                 <p>  { habit.category } </p> */}
                             </div>
                         ) ) }
-                        {/* <OpenModalButton
+                        <OpenModalButton
                         className='edit-routine'
                         buttonText="Modify"
                         onItemClick={ closeMenu }
-                        modalComponent={ <RoutineFormModal routine={routine} /> }
-                        /> */}
+                            modalComponent={ <RoutineEditForm existingRoutine={ routine } /> }
+                        />
                         {/* <OpenModalButton
                         className='kill-routine'
                         buttonText="Delete"
@@ -83,12 +84,12 @@ function UserProfile () {
                     </div>
                 ) ) ) : (
                     <>
-                        <p>make a rotuine pal</p>
+                        <p>make a routine pal</p>
                         {/* <OpenModalButton
                         className='create-routine'
                         buttonText="Modify"
                         onItemClick={ closeMenu }
-                        modalComponent={ <RoutineFormModal routine={routine} /> }
+                        modalComponent={ <RoutineFormModal /> }
                     /> */}</>
             ) }
         </div>

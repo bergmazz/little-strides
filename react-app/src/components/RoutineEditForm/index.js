@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 // import "./RoutineFormModal.css";
 
-function RoutineEditForm () {
+function RoutineEditForm ( { existingRoutine } ) {
+    console.log( "-------------existingRoutine edit form:", existingRoutine )
     const dispatch = useDispatch();
     const [ currentStep, setCurrentStep ] = useState( 1 );
     const [ routineName, setRoutineName ] = useState( "" );
@@ -16,6 +17,14 @@ function RoutineEditForm () {
     const [ habitDetail, setHabitDetail ] = useState( [ "" ] );
     const [ error, setError ] = useState( [] );
     const { closeModal } = useModal();
+
+    useEffect( () => {
+        setRoutineName( existingRoutine.name || "" );
+        setCoverImage( existingRoutine.coverImage || "" );
+        // setSelectedTopics( existingRoutine.selectedTopics || [] );
+        setTopTopic( existingRoutine.mainTopic || "" );
+        setHabits( existingRoutine.habits || [ "" ] );
+    }, [ existingRoutine ] );
 
     const totalSteps = 7;
 
@@ -73,10 +82,10 @@ function RoutineEditForm () {
                             onChange={ ( e ) => setRoutineName( e.target.value ) }
                         />
                         <button type="button">
-                            help me build a routine
+                            suggest some new habits
                         </button>
                         <button type="button" onClick={ () => { setCurrentStep( 5 ) } }>
-                            start from scratch
+                            edit my habits and write more
                         </button>
                     </div>
                 ); case 2:

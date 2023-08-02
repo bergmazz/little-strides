@@ -11,16 +11,18 @@ export function ModalProvider({ children }) {
   const [onModalClose, setOnModalClose] = useState(null);
 
   const closeModal = () => {
-    setModalContent(null); // clear the modal contents
     // If callback function is truthy, call the callback function and reset it
-    // to null:
-    // const shouldClose = window.confirm(
+    setModalContent( null ); // clear the modal contents // to null:
+    //TODO differientiate between submit and background click close
+      //so the latter has warning:
+
+     // const shouldClose = window.confirm(
     //   "Are you sure you want to exit? Your progress will not be saved."
     // );
     // if ( shouldClose ) {
     //   setModalContent( null ); // clear the modal contents
     // }
-    setModalContent( null ); // clear the modal contents
+
     if (typeof onModalClose === 'function') {
       setOnModalClose(null);
       onModalClose();
@@ -33,7 +35,6 @@ export function ModalProvider({ children }) {
     setModalContent, // function to set the React component to render inside modal
     setOnModalClose, // function to set the callback function called when modal is closing
     closeModal // function to close the modal
-
   };
 
   return (
