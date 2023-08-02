@@ -73,8 +73,8 @@ export const createRoutine = ( routine ) => async ( dispatch ) => {
 
 export const editRoutine = ( routine ) => async ( dispatch ) => {
     console.log( "---------routine PASSED INTO THUNK", routine )
-    const { rname, cover_image, topic } = routine
-    const response = await fetch( '/api/routines/', {
+    const { rname, cover_image, topic, id } = routine
+    const response = await fetch( `/api/routines/${ id }`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export const editRoutine = ( routine ) => async ( dispatch ) => {
     if ( response.ok ) {
         console.log( "-------EDIT ROUTINE  RESPONSE OK", )
         console.log( "Routines:   ", data.Routines )
-        dispatch( addRoutine( data ) );
+        dispatch( updateRoutine( data ) );
         return data;
     }
 };

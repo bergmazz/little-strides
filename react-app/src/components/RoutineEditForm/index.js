@@ -6,7 +6,7 @@ import { useModal } from "../../context/Modal";
 // import "./RoutineFormModal.css";
 
 function RoutineEditForm ( { existingRoutine } ) {
-    // console.log( "-------------existingRoutine edit form initial data:", existingRoutine )
+    console.log( "-------------existingRoutine edit form initial data:", existingRoutine )
     const dispatch = useDispatch();
     const [ currentStep, setCurrentStep ] = useState( 1 );
     const [ routineName, setRoutineName ] = useState( "" );
@@ -25,6 +25,8 @@ function RoutineEditForm ( { existingRoutine } ) {
         setTopTopic( existingRoutine.mainTopic.toLowerCase() || "" );
         setHabits( existingRoutine.habits || [ "" ] );
     }, [ existingRoutine ] );
+
+
 
     const totalSteps = 7;
 
@@ -54,6 +56,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                     rname: routineName,
                     cover_image: coverImage,
                     topic: topTopic,
+                    id: existingRoutine.id
                 } )
             );
             if ( Array.isArray( data ) ) {
@@ -122,31 +125,52 @@ function RoutineEditForm ( { existingRoutine } ) {
                     <div>
                         <p>suggested habits</p>
 
-                        <button type="button" onClick={ ( e ) => { setHabits( [ ...habits, e.target.value.desc, e.target.value.cat ] ) } }>
+                        {/* <button type="button" onClick={ ( e ) => { setHabits( [ ...habits, newHabit ] ) } }>
                             lil plus sign
-                        </button>
+                        </button> */}
                     </div>
                 );
             case 5:
                 return (
                     <div>
                         <p>edit/create habits</p>
-                        <p>{ habits }</p>
-                        <button type="button" onClick={ ( e ) => {
-                            setHabitDetail( [ e.target.value ] )
-                            setCurrentStep( 6 )
-                        } }>
-                            edit this one
-                        </button>
+                        { habits.map( ( habit, index ) => (
+                            <div key={ index }>
+                                <p>{ habit.description }</p>
+                                <p>{ habit.topic }</p>
+                                <button
+                                    type="button"
+                                    onClick={ ( e ) => {
+                                        setHabitDetail( [ { description: habit.description, topic: habit.category, id: habit.id } ] );
+                                        setCurrentStep( 6 )
+                                    } }
+                                >
+                                    edit pencil guy
+                                </button>
+                            </div>
+                        ) ) }
 
+                        <button
+                            type="button"
+                            onClick={ ( e ) => {
+                                setHabitDetail( [ { description: "", topic: "", id: null } ] );
+                                setCurrentStep( 6 )
+                            } }
+                        >
+                            lil plus sign
+                        </button>
                     </div>
 
                 );
             case 6:
+
                 return (
                     <div>
+                        { console.log( "-------------habitDetail:", habitDetail ) }
                         <p>your habit</p>
-
+                        <p>{ habitDetail[ 0 ].description }</p>
+                        <p>{ habitDetail[ 0 ].topic }</p>
+                        {/* <p>habitDetail[0].id</p> */ }
                     </div>
                 );
             case 7:
