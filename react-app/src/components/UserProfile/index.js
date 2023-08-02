@@ -59,7 +59,7 @@ function UserProfile () {
             { routines ? (
                 routines.map( ( routine ) => (
                     <div key={ routine.id }>
-                        <h3>{ routine.rname }</h3>
+                        <h3>{ routine.name }</h3>
                         <img src={ routine.coverImage } />
                         { routine.habits.map( ( habit ) => (
                             <div key={ habit.id }>

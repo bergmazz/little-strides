@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { createRoutine } from "../../store/routine";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import "./RoutineFormModal.css";
+// import "./RoutineFormModal.css";
 
-function RoutineFormModal () {
+function RoutineEditForm () {
     const dispatch = useDispatch();
     const [ currentStep, setCurrentStep ] = useState( 1 );
     const [ routineName, setRoutineName ] = useState( "" );
@@ -36,22 +36,8 @@ function RoutineFormModal () {
             setCurrentStep( 5 );
         }
     };
-    useEffect( () => {
-        const handleBeforeUnload = ( event ) => {
-            event.preventDefault();
-            event.returnValue = "";
-        };
-
-        window.addEventListener( "beforeunload", handleBeforeUnload );
-
-        return () => {
-            window.removeEventListener( "beforeunload", handleBeforeUnload );
-        };
-    }, [] );
-
 
     const handleSubmit = async ( e ) => {
-        e.stopPropagation();
         e.preventDefault();
         if ( currentStep === totalSteps ) {
             const data = await dispatch(
@@ -105,7 +91,6 @@ function RoutineFormModal () {
                     <div>
                         <p>main topic</p>
                         <select
-
                             value={ topTopic }
                             onChange={ ( e ) => setTopTopic( e.target.value ) }
                             required
@@ -172,9 +157,9 @@ function RoutineFormModal () {
     };
 
     return (
-            <>
-                <h1>Create New Routine - Step { currentStep }</h1>
-                <form onSubmit={ handleSubmit }>
+        <>
+            <h1>Create New Routine - Step { currentStep }</h1>
+            <form onSubmit={ handleSubmit }>
                 { stepContent( currentStep ) }
                 <div>
                     { currentStep !== 1 && (
@@ -189,10 +174,10 @@ function RoutineFormModal () {
                     ) }
                     { currentStep === totalSteps && <button type="submit">Submit</button> }
                 </div>
-                </form>
-            </>
+            </form>
+        </>
     );
 }
 
 
-export default RoutineFormModal;
+export default RoutineEditForm;

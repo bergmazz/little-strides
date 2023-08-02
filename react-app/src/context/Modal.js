@@ -14,6 +14,13 @@ export function ModalProvider({ children }) {
     setModalContent(null); // clear the modal contents
     // If callback function is truthy, call the callback function and reset it
     // to null:
+    // const shouldClose = window.confirm(
+    //   "Are you sure you want to exit? Your progress will not be saved."
+    // );
+    // if ( shouldClose ) {
+    //   setModalContent( null ); // clear the modal contents
+    // }
+    setModalContent( null ); // clear the modal contents
     if (typeof onModalClose === 'function') {
       setOnModalClose(null);
       onModalClose();
@@ -26,6 +33,7 @@ export function ModalProvider({ children }) {
     setModalContent, // function to set the React component to render inside modal
     setOnModalClose, // function to set the callback function called when modal is closing
     closeModal // function to close the modal
+
   };
 
   return (
@@ -40,6 +48,7 @@ export function ModalProvider({ children }) {
 
 export function Modal() {
   const { modalRef, modalContent, closeModal } = useContext(ModalContext);
+
   // If there is no div referenced by the modalRef or modalContent is not a
   // truthy value, render nothing:
   if (!modalRef || !modalRef.current || !modalContent) return null;
