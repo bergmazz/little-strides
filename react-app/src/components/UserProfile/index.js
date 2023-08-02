@@ -6,7 +6,7 @@ import RoutineFormModal from '../RoutineFormModal';
 import RoutineEditForm from '../RoutineEditForm';
 // import UserRoutines from "./";
 // import UserProgress from "./";
-import { fetchRoutines, createRoutine, updateRoutine } from '../../store/routine';
+import { fetchRoutines, createRoutine, editRoutine } from '../../store/routine';
 import "./UserProfile.css"
 function UserProfile () {
     // console.log( "------ in user profile" );
@@ -60,7 +60,7 @@ function UserProfile () {
             { routines ? (
                 routines.map( ( routine ) => (
                     <div className="routine-tile" key={ routine.id }>
-                        <img className="routine-img" src={ routine.coverImage } />
+                        <img className="routine-img" alt={ routine.name } src={ routine.coverImage } />
                         <h3>{ routine.name }</h3>
                         { routine.habits.map( ( habit ) => (
                             <div key={ habit.id }>
