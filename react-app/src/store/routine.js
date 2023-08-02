@@ -62,14 +62,37 @@ export const createRoutine = ( routine ) => async ( dispatch ) => {
         } )
     } );
     const data = await response.json();
-    // console.log( "-------GET USER ROUTINES THUNK FETCH DATA:", data )
+    // console.log( "-------POST ROUTINE THUNK FETCH DATA:", data )
     if ( response.ok ) {
-        // console.log( "-------GET USER ROUTINES RESPONSE OK", )
+        // console.log( "-------POST ROUTINE RESPONSE OK", )
         // console.log( "Routines:   ", data.Routines )
         dispatch( addRoutine( data ) );
         return data;
     }
 };
+
+export const editRoutine = ( routine ) => async ( dispatch ) => {
+    console.log( "---------routine PASSED INTO THUNK", routine )
+    const { rname, cover_image, topic } = routine
+    const response = await fetch( '/api/routines/', {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify( {
+            rname, cover_image, topic
+        } )
+    } );
+    const data = await response.json();
+    console.log( "-------EDIT ROUTINE THUNK FETCH DATA:", data )
+    if ( response.ok ) {
+        console.log( "-------EDIT ROUTINE  RESPONSE OK", )
+        console.log( "Routines:   ", data.Routines )
+        dispatch( addRoutine( data ) );
+        return data;
+    }
+};
+
 // Reducer
 const initialState = {
     routines: [],
@@ -83,13 +106,13 @@ const routineReducer = ( state = initialState, action ) => {
             return { ...state, routines: [ ...action.payload ] };
         case ADD_ROUTINE:
             return { ...state, routines: [ ...state.routines, action.payload ] };
-        // case UPDATE_ROUTINE:
-        //     return {
-        //         ...state,
-        //         routines: state.routines.map( ( routine ) =>
-        //             routine.id === action.payload.id ? action.payload : routine
-        //         ),
-        //     };
+        case UPDATE_ROUTINE:
+            return {
+                ...state,
+                routines: state.routines.map( ( routine ) =>
+                    routine.id === action.payload.id ? action.payload : routine
+                ),
+            };
         // case DELETE_ROUTINE:
         //     return {
         //         ...state,

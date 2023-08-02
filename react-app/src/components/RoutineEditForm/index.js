@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { a, b, c, d, e, f, g, h } from "./Steps"
-import { createRoutine } from "../../store/routine";
+import { editRoutine } from "../../store/routine";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 // import "./RoutineFormModal.css";
@@ -22,7 +22,7 @@ function RoutineEditForm ( { existingRoutine } ) {
         setRoutineName( existingRoutine.name || "" );
         setCoverImage( existingRoutine.coverImage || "" );
         // setSelectedTopics( existingRoutine.selectedTopics || [] );
-        setTopTopic( existingRoutine.mainTopic || "" );
+        setTopTopic( existingRoutine.mainTopic.toLowerCase() || "" );
         setHabits( existingRoutine.habits || [ "" ] );
     }, [ existingRoutine ] );
 
@@ -50,7 +50,7 @@ function RoutineEditForm ( { existingRoutine } ) {
         e.preventDefault();
         if ( currentStep === totalSteps ) {
             const data = await dispatch(
-                createRoutine( {
+                editRoutine( {
                     rname: routineName,
                     cover_image: coverImage,
                     topic: topTopic,

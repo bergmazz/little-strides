@@ -76,6 +76,7 @@ function UserProfile () {
                         onItemClick={ closeMenu }
                             modalComponent={ <RoutineEditForm existingRoutine={ routine } /> }
                         />
+                        <button>Delete</button>
                         {/* <OpenModalButton
                         className='kill-routine'
                         buttonText="Delete"
