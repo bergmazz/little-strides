@@ -32,18 +32,18 @@ function RoutineFormModal () {
         if ( currentStep > 1 ) {
             setCurrentStep( ( prevStep ) => prevStep - 1 );
         }
-        if ( currentStep === 7 ) {
+        if ( currentStep === totalSteps ) {
             setCurrentStep( 5 );
         }
     };
+
+//TODO add warning when you click on modal background, this only works when refreshing the page
     useEffect( () => {
         const handleBeforeUnload = ( event ) => {
             event.preventDefault();
             event.returnValue = "";
         };
-
         window.addEventListener( "beforeunload", handleBeforeUnload );
-
         return () => {
             window.removeEventListener( "beforeunload", handleBeforeUnload );
         };

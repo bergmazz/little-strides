@@ -15,6 +15,7 @@ function UserProfile () {
     const routines = useSelector( state => state.routine.routines )
     // console.log( "------user:", currentUser );
     const [ showMenu, setShowMenu ] = useState( false );
+    const [ showError, setShowError ] = useState( false );
     const ulRef = useRef()
 
     const closeMenu = ( e ) => {
@@ -36,6 +37,14 @@ function UserProfile () {
 
     }, [ dispatch, showMenu ] );
 
+    const handleNewRoutineClick = () => {
+        if ( routines.length >= 3 ) {
+            setShowError( true );
+        } else {
+            setShowError( false );
+            closeMenu
+        }
+    };
     console.log( 'Routinesssss:', routines );
 
     if ( !currentUser ) return (
@@ -51,11 +60,19 @@ function UserProfile () {
         <div>
             <h2>{ "Hello,  " }{ currentUser.username }</h2>
             <OpenModalButton
-                className='create-routine'
+                className="create-routine"
                 buttonText="New Routine"
-                onItemClick={ closeMenu }
+                onItemClick={ handleNewRoutineClick }
                 modalComponent={ <RoutineFormModal /> }
             />
+
+            { showError && (
+                <div className="error-popup">
+                    <p>You already have 3 routines. Please delete one to create another.</p>
+                    <button onClick={ () => setShowError( false ) }>Close</button>
+                </div>
+            ) }
+
             <h2>Your Routines</h2>
             { routines ? (
                 routines.map( ( routine ) => (

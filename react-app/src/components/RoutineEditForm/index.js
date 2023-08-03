@@ -26,7 +26,17 @@ function RoutineEditForm ( { existingRoutine } ) {
         setHabits( existingRoutine.habits || [ "" ] );
     }, [ existingRoutine ] );
 
-
+    //TODO add warning when you click on modal background, this only works when refreshing the page
+    useEffect( () => {
+        const handleBeforeUnload = ( event ) => {
+            event.preventDefault();
+            event.returnValue = "";
+        };
+        window.addEventListener( "beforeunload", handleBeforeUnload );
+        return () => {
+            window.removeEventListener( "beforeunload", handleBeforeUnload );
+        };
+    }, [] );
 
     const totalSteps = 7;
 
@@ -43,7 +53,7 @@ function RoutineEditForm ( { existingRoutine } ) {
         if ( currentStep > 1 ) {
             setCurrentStep( ( prevStep ) => prevStep - 1 );
         }
-        if ( currentStep === 7 ) {
+        if ( currentStep === totalSteps ) {
             setCurrentStep( 5 );
         }
     };
@@ -84,7 +94,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                             value={ routineName }
                             onChange={ ( e ) => setRoutineName( e.target.value ) }
                         />
-                        <button type="button">
+                        <button type="button" onClick={ () => { setCurrentStep( 2 ) } }>
                             suggest some new habits
                         </button>
                         <button type="button" onClick={ () => { setCurrentStep( 5 ) } }>
@@ -124,7 +134,6 @@ function RoutineEditForm ( { existingRoutine } ) {
                 return (
                     <div>
                         <p>suggested habits</p>
-
                         {/* <button type="button" onClick={ ( e ) => { setHabits( [ ...habits, newHabit ] ) } }>
                             lil plus sign
                         </button> */}
@@ -157,7 +166,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                                 setCurrentStep( 6 )
                             } }
                         >
-                            lil plus sign
+                            write a new habit
                         </button>
                     </div>
 
@@ -191,7 +200,7 @@ function RoutineEditForm ( { existingRoutine } ) {
 
     return (
         <>
-            <h1>Create New Routine - Step { currentStep }</h1>
+            <h1>Update My Routine - Step { currentStep }</h1>
             <form onSubmit={ handleSubmit }>
                 { stepContent( currentStep ) }
                 <div>
@@ -200,7 +209,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                             &lt; Backward
                         </button>
                     ) }
-                    { currentStep !== totalSteps && currentStep !== 6 && (
+                    { currentStep !== totalSteps && currentStep !== 6 && currentStep !== 1 && (
                         <button type="button" onClick={ handleNextStep }>
                             Forward &gt;
                         </button>
