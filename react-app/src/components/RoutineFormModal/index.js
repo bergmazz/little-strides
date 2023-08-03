@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./RoutineFormModal.css";
 
-function RoutineFormModal () {
+function RoutineFormModal ( { routines } ) {
+    const hasReachedLimit = routines && routines.length >= 3;
     const dispatch = useDispatch();
     const [ currentStep, setCurrentStep ] = useState( 1 );
     const [ routineName, setRoutineName ] = useState( "" );
@@ -172,7 +173,13 @@ function RoutineFormModal () {
     };
 
     return (
-            <>
+        <>
+            { hasReachedLimit ? (
+                <div className="error-popup">
+                    <p>You already have 3 routines. Please delete one to create another.</p>
+                </div>
+            ) : (
+                <div>
                 <h1>Create New Routine - Step { currentStep }</h1>
                 <form onSubmit={ handleSubmit }>
                 { stepContent( currentStep ) }
@@ -189,7 +196,10 @@ function RoutineFormModal () {
                     ) }
                     { currentStep === totalSteps && <button type="submit">Submit</button> }
                 </div>
-                </form>
+                        </form>
+                </div>
+            )
+            }
             </>
     );
 }

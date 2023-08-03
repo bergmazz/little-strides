@@ -6,7 +6,7 @@ import { useModal } from "../../context/Modal";
 // import "./RoutineFormModal.css";
 
 function RoutineEditForm ( { existingRoutine } ) {
-    console.log( "-------------existingRoutine edit form initial data:", existingRoutine )
+    // console.log( "-------------existingRoutine edit form initial data:", existingRoutine )
     const dispatch = useDispatch();
     const [ currentStep, setCurrentStep ] = useState( 1 );
     const [ routineName, setRoutineName ] = useState( "" );

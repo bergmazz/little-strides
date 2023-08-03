@@ -4,10 +4,13 @@ import { Link, useHistory } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import RoutineFormModal from '../RoutineFormModal';
 import RoutineEditForm from '../RoutineEditForm';
+import RoutineDeleteForm from '../DeleteRoutine';
 // import UserRoutines from "./";
 // import UserProgress from "./";
 import { fetchRoutines, createRoutine, editRoutine } from '../../store/routine';
 import "./UserProfile.css"
+
+
 function UserProfile () {
     // console.log( "------ in user profile" );
     const dispatch = useDispatch();
@@ -15,36 +18,32 @@ function UserProfile () {
     const routines = useSelector( state => state.routine.routines )
     // console.log( "------user:", currentUser );
     const [ showMenu, setShowMenu ] = useState( false );
-    const [ showError, setShowError ] = useState( false );
+
     const ulRef = useRef()
 
     const closeMenu = ( e ) => {
-        if ( !ulRef.current.contains( e.target ) ) {
+        if ( !ulRef.current?.contains( e.target ) ) {
             setShowMenu( false );
         }
     };
 
     useEffect( () => {
-        // console.log( "---------------Inside useEffect" );
         dispatch( fetchRoutines() );
+    }, [ dispatch ] );
 
-        if ( !showMenu ) return;
-
-        closeMenu()
-        document.addEventListener( "click", closeMenu );
-
-        return () => document.removeEventListener( "click", closeMenu );
-
-    }, [ dispatch, showMenu ] );
-
-    const handleNewRoutineClick = () => {
-        if ( routines.length >= 3 ) {
-            setShowError( true );
-        } else {
-            setShowError( false );
-            closeMenu
+    useEffect( () => {
+        // console.log( "---------------Inside useEffect" );
+        if ( showMenu ) {
+            const closeMenu = ( e ) => {
+                if ( !ulRef.current.contains( e.target ) ) {
+                    setShowMenu( false );
+                }
+            };
+            document.addEventListener( "click", closeMenu );
+            return () => document.removeEventListener( "click", closeMenu );
         }
-    };
+    }, [ showMenu ] );
+
     console.log( 'Routinesssss:', routines );
 
     if ( !currentUser ) return (
@@ -62,16 +61,9 @@ function UserProfile () {
             <OpenModalButton
                 className="create-routine"
                 buttonText="New Routine"
-                onItemClick={ handleNewRoutineClick }
-                modalComponent={ <RoutineFormModal /> }
+                onItemClick={ closeMenu }
+                modalComponent={ <RoutineFormModal routines={ routines } /> }
             />
-
-            { showError && (
-                <div className="error-popup">
-                    <p>You already have 3 routines. Please delete one to create another.</p>
-                    <button onClick={ () => setShowError( false ) }>Close</button>
-                </div>
-            ) }
 
             <h2>Your Routines</h2>
             { routines ? (
@@ -93,12 +85,11 @@ function UserProfile () {
                         onItemClick={ closeMenu }
                             modalComponent={ <RoutineEditForm existingRoutine={ routine } /> }
                         />
-                        <button>Delete</button>
-                        {/* <OpenModalButton
+                        <OpenModalButton
                         className='kill-routine'
                         buttonText="Delete"
-                        modalComponent={ <DeleteRoutine routine={ routine } /> }
-                    /> */}
+                            modalComponent={ <RoutineDeleteForm routineId={ routine.id } /> }
+                        />
                     </div>
                 ) ) ) : (
                     <>

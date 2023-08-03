@@ -3,7 +3,7 @@ const SET_ROUTINES = 'routine/SET_ROUTINES';
 const GET_ROUTINE = 'routine/GET_ROUTINE';
 const ADD_ROUTINE = 'routine/ADD_ROUTINE';
 const UPDATE_ROUTINE = 'routine/UPDATE_ROUTINE';
-// const DELETE_ROUTINE = 'routine/DELETE_ROUTINE';
+const DELETE_ROUTINE = 'routine/DELETE_ROUTINE';
 
 //Action Creators
 export const setRoutines = ( routines ) => ( {
@@ -27,10 +27,11 @@ export const updateRoutine = ( routine ) => ( {
     payload: routine,
 } );
 
-// export const deleteRoutine = ( routineId ) => ( {
-//     type: DELETE_ROUTINE,
-//     payload: routineId,
-// } );
+export const deleteRoutinebyId = ( routineId ) => ( {
+    type: DELETE_ROUTINE,
+    payload: routineId,
+} );
+
 
 //Thunks
 export const fetchRoutines = () => async ( dispatch ) => {
@@ -72,7 +73,7 @@ export const createRoutine = ( routine ) => async ( dispatch ) => {
 };
 
 export const editRoutine = ( routine ) => async ( dispatch ) => {
-    console.log( "---------routine PASSED INTO THUNK", routine )
+    // console.log( "---------routine PASSED INTO THUNK", routine )
     const { rname, cover_image, topic, id } = routine
     const response = await fetch( `/api/routines/${ id }`, {
         method: 'PUT',
@@ -84,14 +85,26 @@ export const editRoutine = ( routine ) => async ( dispatch ) => {
         } )
     } );
     const data = await response.json();
-    console.log( "-------EDIT ROUTINE THUNK FETCH DATA:", data )
+    // console.log( "-------EDIT ROUTINE THUNK FETCH DATA:", data )
     if ( response.ok ) {
-        console.log( "-------EDIT ROUTINE  RESPONSE OK", )
+        // console.log( "-------EDIT ROUTINE  RESPONSE OK", )
         console.log( "Routines:   ", data.Routines )
         dispatch( updateRoutine( data ) );
         return data;
     }
 };
+
+export const deleteRoutine = ( routineId ) => async ( dispatch ) => {
+    const response = await fetch( `/api/routines/${ routineId }`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    } )
+    if ( response.ok ) {
+        dispatch( deleteRoutine( routineId ) );
+    };
+}
 
 // Reducer
 const initialState = {
@@ -113,13 +126,13 @@ const routineReducer = ( state = initialState, action ) => {
                     routine.id === action.payload.id ? action.payload : routine
                 ),
             };
-        // case DELETE_ROUTINE:
-        //     return {
-        //         ...state,
-        //         routines: state.routines.filter(
-        //             ( routine ) => routine.id !== action.payload
-        //         ),
-            // };
+        case DELETE_ROUTINE:
+            return {
+                ...state,
+                routines: state.routines.filter(
+                    ( routine ) => routine.id !== action.payload
+                ),
+            };
         default:
             return state;
     }
