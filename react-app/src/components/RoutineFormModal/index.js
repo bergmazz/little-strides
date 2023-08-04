@@ -18,6 +18,17 @@ function RoutineFormModal ( { routines } ) {
     const [ error, setError ] = useState( [] );
     const { closeModal } = useModal();
 
+    const availableTopics = [
+        'Anxiety',
+        'Relationships',
+        'Exercise',
+        'Stress',
+        'Wellness',
+        'Sleep',
+        'Depression',
+        'Productivity',
+    ];
+
     const totalSteps = 7;
 
     const handleNextStep = () => {
@@ -49,6 +60,19 @@ function RoutineFormModal ( { routines } ) {
             window.removeEventListener( "beforeunload", handleBeforeUnload );
         };
     }, [] );
+
+    const handleSelectTopics = ( selectedTopic ) => {
+        if ( selectedTopics.includes( selectedTopic ) ) {
+            setSelectedTopics( selectedTopics.filter( ( topic ) => topic !== selectedTopic ) )
+        } else {
+            if ( selectedTopics.length < 3 ) {
+                setSelectedTopics( [
+                    ...selectedTopics,
+                    selectedTopic,
+                ] );
+            }
+        }
+    };
 
 
     const handleSubmit = async ( e ) => {
@@ -97,31 +121,37 @@ function RoutineFormModal ( { routines } ) {
                 ); case 2:
                 return (
                     <div>
-                        <p>topics</p>
-
+                        <p>Choose up to three topics:</p>
+                        <div className="topics-container">
+                            { availableTopics.map( ( topic ) => (
+                                <label key={ topic } className="topic-tile">
+                                    <input
+                                        type="checkbox"
+                                        value={ topic }
+                                        checked={ selectedTopics.includes( topic ) }
+                                        onChange={ () => handleSelectTopics( topic ) }
+                                    />
+                                    { topic }
+                                </label>
+                            ) ) }
+                        </div>
                     </div>
                 );
             case 3:
                 return (
                     <div>
-                        <p>main topic</p>
-                        <select
-
-                            value={ topTopic }
-                            onChange={ ( e ) => setTopTopic( e.target.value ) }
-                            required
-                        >
-                            <option value=''>--Select a Topic--</option>
-                            <option value='anxiety'>Anxiety</option>
-                            <option value='relationships'>Relationships</option>
-                            <option value='exercise'>Exercise</option>
-                            <option value='stress'>Stress</option>
-                            <option value='wellness'>Wellness</option>
-                            <option value='sleep'>Sleep</option>
-                            <option value='depression'>Depression</option>
-                            <option value='productivity'>Productivity</option>
-                        </select>
-
+                        <p>Choose Your Focus</p>
+                        { selectedTopics.map( ( topic ) => (
+                            <label key={ topic } className="big-topic-tile">
+                                <input
+                                    type="radio"
+                                    value={ topic }
+                                    checked={ topTopic == topic }
+                                    onChange={ () => setTopTopic( topic ) }
+                                />
+                                { topic }
+                            </label>
+                        ) ) }
                     </div>
                 );
             case 4:

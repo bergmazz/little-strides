@@ -53,8 +53,24 @@ export const allUserHabits = () => async ( dispatch ) => {
     }
 };
 
-export const suggestedHabits = () => async ( dispatch ) => {
-
+export const suggestedHabits = ( topics ) => async ( dispatch ) => {
+    //  GET / api / habits ? topic = <topic>&topic=<topic>&topic=<topic>
+    let url = "/api/habits"
+    if ( topics.length ) {
+        url += '?'
+        for ( let topic of topics ) {
+            url += `topic=${ topic }&`
+        }
+    }
+    const response = await fetch( url, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    } );
+    const data = await response.json();
+    if ( response.ok ) {
+        dispatch( setSuggestedHabits( data.suggested_habits ) );
+    }
 };
 
 export const createHabit = ( habit ) => async ( dispatch ) => {
