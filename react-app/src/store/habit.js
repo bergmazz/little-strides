@@ -31,12 +31,35 @@ export const updateHabit = ( habit ) => ( {
     payload: habit,
 } );
 
-export const deleteHabitbyId = ( habitId ) => ( {
+export const removeHabit = ( habitId ) => ( {
     type: DELETE_HABIT,
     payload: habitId,
 } );
 
 // Thunks
+export const currentUserHabits = () => async ( dispatch ) => {
+
+};
+
+export const allUserHabits = () => async ( dispatch ) => {
+
+};
+
+export const suggestedHabits = () => async ( dispatch ) => {
+
+};
+
+export const createHabit = ( habit ) => async ( dispatch ) => {
+
+};
+
+export const editHabit = ( habit ) => async ( dispatch ) => {
+
+};
+
+export const deleteHabit = ( habitId ) => async ( dispatch ) => {
+
+};
 
 
 // Reducer
