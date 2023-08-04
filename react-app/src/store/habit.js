@@ -59,7 +59,7 @@ export const suggestedHabits = ( topics ) => async ( dispatch ) => {
     if ( topics.length ) {
         url += '?'
         for ( let topic of topics ) {
-            url += `topic=${ topic }&`
+            url += `topic=${ topic.toLowerCase() }&`
         }
     }
     const response = await fetch( url, {

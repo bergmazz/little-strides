@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { a, b, c, d, e, f, g, h } from "./Steps"
 import { createRoutine } from "../../store/routine";
+import { suggestedHabits } from "../../store/habit";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./RoutineFormModal.css";
@@ -18,6 +19,8 @@ function RoutineFormModal ( { routines } ) {
     const [ error, setError ] = useState( [] );
     const { closeModal } = useModal();
 
+    const suggested = useSelector( ( state ) => state.habit.suggested );
+
     const availableTopics = [
         'Anxiety',
         'Relationships',
@@ -31,10 +34,20 @@ function RoutineFormModal ( { routines } ) {
 
     const totalSteps = 7;
 
+    useEffect( () => {
+        if ( currentStep === 3 && suggested ) {
+            dispatch( suggestedHabits( selectedTopics ) )
+        }
+    }, [ currentStep, suggested ] );
+
+
     const handleNextStep = () => {
         if ( currentStep < totalSteps ) {
             setCurrentStep( ( prevStep ) => prevStep + 1 );
         }
+        // if ( currentStep === 3 ) {
+        //     dispatch( suggestedHabits( selectedTopics ) );
+        // }
         if ( currentStep === 5 ) {
             setCurrentStep( totalSteps );
         }
