@@ -6,9 +6,10 @@ import { authenticate } from "./store/session";
 
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
-import UserProfile from "./components/UserProfile";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
+import UserProfile from "./components/UserProfile";
+import Community from "./components/Community";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path="/user">
             <UserProfile />
+          </Route>
+          <Route path="/community">
+            <Community />
           </Route>
         </Switch>
       )}

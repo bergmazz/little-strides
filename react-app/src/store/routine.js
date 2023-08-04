@@ -88,7 +88,7 @@ export const editRoutine = ( routine ) => async ( dispatch ) => {
     // console.log( "-------EDIT ROUTINE THUNK FETCH DATA:", data )
     if ( response.ok ) {
         // console.log( "-------EDIT ROUTINE  RESPONSE OK", )
-        console.log( "Routines:   ", data.Routines )
+        // console.log( "Routines:   ", data.Routines )
         dispatch( updateRoutine( data ) );
         return data;
     }

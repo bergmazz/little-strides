@@ -1,4 +1,4 @@
-const USER_HABITS = 'habit/USER_HABITS';
+// const USER_HABITS = 'habit/USER_HABITS';
 const ALL_HABITS = 'routine/ALL_HABITS';
 const SUGGESTED = 'routine/SUGGESTED';
 const ADD_HABIT = 'routine/ADD_HABIT';
@@ -6,10 +6,10 @@ const UPDATE_HABIT = 'routine/UPDATE_HABIT';
 const DELETE_HABIT = 'routine/DELETE_HABIT';
 
 // Action Creators
-export const setUserHabits = ( habits ) => ( {
-    type: USER_HABITS,
-    payload: habits,
-} );
+// export const setUserHabits = ( habits ) => ( {
+//     type: USER_HABITS,
+//     payload: habits,
+// } );
 
 export const setAllHabits = ( habits ) => ( {
     type: ALL_HABITS,
@@ -37,12 +37,20 @@ export const removeHabit = ( habitId ) => ( {
 } );
 
 // Thunks
-export const currentUserHabits = () => async ( dispatch ) => {
 
-};
+// export const currentUserHabits = () => async ( dispatch ) => {
+// };
 
 export const allUserHabits = () => async ( dispatch ) => {
-
+    const response = await fetch( '/api/habits/all', {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    } );
+    const data = await response.json();
+    if ( response.ok ) {
+        dispatch( setAllHabits( data.all_habits ) );
+    }
 };
 
 export const suggestedHabits = () => async ( dispatch ) => {
@@ -64,25 +72,25 @@ export const deleteHabit = ( habitId ) => async ( dispatch ) => {
 
 // Reducer
 const initialState = {
-    userHabits: [],
-    allHabits: [],
-    suggestedHabits: [],
+    all: [],
+    suggested: [],
+    user: [],
 };
 
 const habitReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case USER_HABITS:
-            return { ...state, userHabits: [ ...action.payload ] };
+        // case USER_HABITS:
+        //     return { ...state, userHabits: [ ...action.payload ] };
         case ALL_HABITS:
-            return { ...state, allHabits: [ ...action.payload ] };
+            return { ...state, all: [ ...action.payload ] };
         case SUGGESTED:
-            return { ...state, suggestedHabits: [ ...action.payload ] };
+            return { ...state, suggested: [ ...action.payload ] };
         case ADD_HABIT:
-            return { ...state, userHabits: [ ...state.userHabits, action.payload ] };
+            return { ...state, user: [ ...state.userHabits, action.payload ] };
         case UPDATE_HABIT:
             return {
                 ...state,
-                userHabits: state.userHabits.map( ( habit ) =>
+                user: state.userHabits.map( ( habit ) =>
                     habit.id === action.payload.id ? action.payload : habit
                 ),
             };
