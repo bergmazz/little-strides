@@ -62,7 +62,7 @@ function UserProfile () {
                 className="create-routine"
                 buttonText="New Routine"
                 onItemClick={ closeMenu }
-                modalComponent={ <RoutineFormModal routines={ routines } /> }
+                modalComponent={ <RoutineFormModal routines={ routines } showWarning={ true } /> }
             />
 
             <h2>Your Routines</h2>

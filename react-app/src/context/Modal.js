@@ -10,18 +10,21 @@ export function ModalProvider({ children }) {
   // callback function that will be called when modal is closing
   const [onModalClose, setOnModalClose] = useState(null);
 
-  const closeModal = () => {
+  const closeModal = ( showWarning = false ) => {
     // If callback function is truthy, call the callback function and reset it
-    setModalContent( null ); // clear the modal contents // to null:
     //TODO differientiate between submit and background click close
-      //so the latter has warning:
+    if ( showWarning ) {
+      const shouldClose = window.confirm(
+        "Are you sure you want to exit? Your progress will not be saved."
+      );
+      if ( !shouldClose ) {
+        return;
+      }
+      setModalContent( null ); // clear the modal contents
+    } else {
+      setModalContent( null ); // clear the modal contents
+    }
 
-     // const shouldClose = window.confirm(
-    //   "Are you sure you want to exit? Your progress will not be saved."
-    // );
-    // if ( shouldClose ) {
-    //   setModalContent( null ); // clear the modal contents
-    // }
 
     if (typeof onModalClose === 'function') {
       setOnModalClose(null);
@@ -48,16 +51,18 @@ export function ModalProvider({ children }) {
 }
 
 export function Modal() {
-  const { modalRef, modalContent, closeModal } = useContext(ModalContext);
-
+  const { modalRef, modalContent, closeModal } = useContext( ModalContext );
   // If there is no div referenced by the modalRef or modalContent is not a
   // truthy value, render nothing:
   if (!modalRef || !modalRef.current || !modalContent) return null;
 
+  const showCloseWarning =
+    modalContent.props && modalContent.props.showWarning;
+
   // Render the following component to the div referenced by the modalRef
   return ReactDOM.createPortal(
     <div id="modal">
-      <div id="modal-background" onClick={closeModal} />
+      <div id="modal-background" onClick={ () => closeModal( showCloseWarning ) } />
       <div id="modal-content">
         {modalContent}
       </div>

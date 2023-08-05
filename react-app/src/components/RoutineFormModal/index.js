@@ -18,6 +18,7 @@ function RoutineFormModal ( { routines } ) {
     const [ habitDetail, setHabitDetail ] = useState( [ "" ] );
     const [ error, setError ] = useState( [] );
     const { closeModal } = useModal();
+    const [ suggestedFetched, setSuggestedFetched ] = useState( false );
 
     const suggested = useSelector( ( state ) => state.habit.suggested );
 
@@ -35,19 +36,20 @@ function RoutineFormModal ( { routines } ) {
     const totalSteps = 7;
 
     useEffect( () => {
-        if ( currentStep === 3 && suggested ) {
-            dispatch( suggestedHabits( selectedTopics ) )
+        if ( currentStep === 3 && !suggestedFetched ) {
+            dispatch( suggestedHabits( selectedTopics ) );
+            setSuggestedFetched( true );
         }
-    }, [ currentStep, suggested, selectedTopics ] );
+        if ( currentStep !== 3 ) {
+            setSuggestedFetched( false );
+        }
+    }, [ dispatch, currentStep, suggestedFetched, selectedTopics ] );
 
 
     const handleNextStep = () => {
         if ( currentStep < totalSteps ) {
             setCurrentStep( ( prevStep ) => prevStep + 1 );
         }
-        // if ( currentStep === 3 ) {
-        //     dispatch( suggestedHabits( selectedTopics ) );
-        // }
         if ( currentStep === 5 ) {
             setCurrentStep( totalSteps );
         }
@@ -56,6 +58,9 @@ function RoutineFormModal ( { routines } ) {
     const handlePrevStep = () => {
         if ( currentStep > 1 ) {
             setCurrentStep( ( prevStep ) => prevStep - 1 );
+        }
+        if ( currentStep === 4 ) {
+            setCurrentStep( 2 );
         }
         if ( currentStep === totalSteps ) {
             setCurrentStep( 5 );
@@ -246,11 +251,16 @@ function RoutineFormModal ( { routines } ) {
                 <form onSubmit={ handleSubmit }>
                 { stepContent( currentStep ) }
                 <div>
-                    { currentStep !== 1 && (
+                                { currentStep !== 1 && currentStep !== 4 && (
                         <button type="button" onClick={ handlePrevStep }>
                             &lt; Backward
                         </button>
-                    ) }
+                                ) }
+                                { currentStep === 4 && (
+                                    <button type="button" onClick={ handlePrevStep }>
+                                        &lt; Pick New Topics
+                                    </button>
+                                ) }
                     { currentStep !== totalSteps && currentStep !== 6 && (
                         <button type="button" onClick={ handleNextStep }>
                             Forward &gt;
