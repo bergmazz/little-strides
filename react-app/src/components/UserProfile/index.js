@@ -16,6 +16,7 @@ function UserProfile () {
     const dispatch = useDispatch();
     const currentUser = useSelector( state => state.session.user )
     const routines = useSelector( state => state.routine.routines )
+    const habits = useSelector( state => state.habit.user )
     // console.log( "------user:", currentUser );
     const [ showMenu, setShowMenu ] = useState( false );
 
@@ -32,6 +33,11 @@ function UserProfile () {
     }, [ dispatch ] );
 
     useEffect( () => {
+        console.log( "Updated routines:", routines );
+        console.log( "Updated habits:", habits );
+    }, [ habits ] );
+
+    useEffect( () => {
         // console.log( "---------------Inside useEffect" );
         if ( showMenu ) {
             const closeMenu = ( e ) => {
@@ -44,7 +50,7 @@ function UserProfile () {
         }
     }, [ showMenu ] );
 
-    console.log( 'Routinesssss:', routines );
+    // console.log( 'Routinesssss:', routines );
 
     if ( !currentUser ) return (
         <div className='no-user'>
