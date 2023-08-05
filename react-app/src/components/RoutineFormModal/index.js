@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { a, b, c, d, e, f, g, h } from "./Steps"
 import { createRoutine } from "../../store/routine";
 import { suggestedHabits } from "../../store/habit";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./RoutineFormModal.css";
 
@@ -171,10 +171,11 @@ function RoutineFormModal ( { routines } ) {
                 return (
                     <div>
                         <p>suggested habits</p>
-
-                        <button type="button" onClick={ ( e ) => { setHabits( [ ...habits, e.target.value.desc, e.target.value.cat ] ) } }>
-                            lil plus sign
-                        </button>
+                        { suggested.map( ( habit ) => (
+                            <button type="button" onClick={ ( e ) => { setHabit( [ ...habits, e.target.value.desc, e.target.value.cat ] ) } }>
+                                { habit }
+                            </button>
+                        ) ) }
                     </div>
                 );
             case 5:
