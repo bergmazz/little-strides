@@ -11,7 +11,6 @@ function RoutineFormModal ( { routines } ) {
     const dispatch = useDispatch();
     const [ currentStep, setCurrentStep ] = useState( 1 );
     const [ routineName, setRoutineName ] = useState( "" );
-    const [ routineId, setRoutineId ] = useState( 0 );
     const [ coverImage, setCoverImage ] = useState( "" );
     const [ selectedTopics, setSelectedTopics ] = useState( [] );
     const [ topTopic, setTopTopic ] = useState( "" );
@@ -73,9 +72,6 @@ function RoutineFormModal ( { routines } ) {
 
 // this only works when refreshing the page - see showWarning in Modal.js for exit moda warning
     useEffect( () => {
-        // if ( habits.length < 3 ) {
-        //     deleteRoutinebyId(routineId)
-        // }
         const handleBeforeUnload = ( event ) => {
             event.preventDefault();
             event.returnValue = "";
@@ -99,26 +95,6 @@ function RoutineFormModal ( { routines } ) {
             }
         }
     };
-
-    // const makeRoutineId = async () => {
-    //     if ( routineId === 0 ) {
-    //         const data = await dispatch(
-    //             createRoutine( {
-    //                 rname: routineName,
-    //                 cover_image: "https://images.pexels.com/photos/8443211/pexels-photo-8443211.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    //                 topic: "wellness",
-    //             } )
-    //         );
-    //         if ( Array.isArray( data ) ) {
-    //             setError( data[ 0 ] );
-    //         }
-    //         if ( data.id ) {
-    //             setRoutineId( data.id )
-    //         }
-    //     }
-
-    // }
-
 
     const handleSubmit = async ( e ) => {
         e.stopPropagation();
@@ -178,6 +154,7 @@ function RoutineFormModal ( { routines } ) {
                         <button type="button" disabled={ !routineName } onClick={ () => {
                             // makeRoutineId()
                             setCurrentStep( 5 )
+                            setTopTopic( 'wellness' )
                         } }>
                             start from scratch
                         </button>
