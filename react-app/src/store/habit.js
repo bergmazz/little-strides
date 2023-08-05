@@ -88,7 +88,7 @@ export const createHabit = ( habit ) => async ( dispatch ) => {
     console.log( "-------POST HABIT THUNK FETCH DATA:", data )
     if ( response.ok ) {
         console.log( "-------POST HABIT RESPONSE OK", )
-        console.log( "Habits:   ", data.Habits )
+        console.log( "Habits:   ", data )
         dispatch( addHabit( data ) );
         return data;
     }
@@ -119,11 +119,11 @@ const habitReducer = ( state = initialState, action ) => {
         case SUGGESTED:
             return { ...state, suggested: [ ...action.payload ] };
         case ADD_HABIT:
-            return { ...state, user: [ ...state.userHabits, action.payload ] };
+            return { ...state, user: [ ...state.user, action.payload ] };
         case UPDATE_HABIT:
             return {
                 ...state,
-                user: state.userHabits.map( ( habit ) =>
+                user: state.user.map( ( habit ) =>
                     habit.id === action.payload.id ? action.payload : habit
                 ),
             };
