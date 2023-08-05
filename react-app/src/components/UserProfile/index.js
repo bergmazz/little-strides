@@ -33,11 +33,6 @@ function UserProfile () {
     }, [ dispatch ] );
 
     useEffect( () => {
-        console.log( "Updated routines:", routines );
-        console.log( "Updated habits:", habits );
-    }, [ habits ] );
-
-    useEffect( () => {
         // console.log( "---------------Inside useEffect" );
         if ( showMenu ) {
             const closeMenu = ( e ) => {

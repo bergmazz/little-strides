@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { a, b, c, d, e, f, g, h } from "./Steps"
-import { createRoutine, updateRoutine, deleteRoutinebyId } from "../../store/routine";
+import { fetchRoutines, createRoutine } from "../../store/routine";
 import { suggestedHabits, createHabit } from "../../store/habit";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -132,7 +132,9 @@ function RoutineFormModal ( { routines } ) {
                     topic: topTopic
                 } )
             );
-            if ( routine.id ) {
+            if ( !routine.id && Array.isArray( routine ) ) {
+                setError( routine[ 0 ] );
+            } else {
                 for ( let habit of habits ) {
                     const newHabit = await dispatch(
                     createHabit( {
@@ -142,10 +144,8 @@ function RoutineFormModal ( { routines } ) {
                     } ) )
                 }
             }
-            if ( Array.isArray( routine ) ) {
-                setError( routine[ 0 ] );
-            }
-                closeModal();
+            dispatch( fetchRoutines() );
+            closeModal();
             }
         else {
             setError( "please write a minimum of 3 habits" )
