@@ -123,15 +123,13 @@ function RoutineFormModal ( { routines } ) {
     const handleSubmit = async ( e ) => {
         e.stopPropagation();
         e.preventDefault();
-        // if ( habits.length < 3 && routineId ) {
-        //     dispatch( deleteRoutinebyId( routineId ) )
-        // }
-        if ( habits.length > 3 && currentStep === totalSteps ) {
+        console.log( habits )
+        if ( habits.length >= 3 && currentStep === totalSteps ) {
             const routine = await dispatch(
                 createRoutine( {
                     rname: routineName,
                     cover_image: coverImage,
-                    topic: topTopic,
+                    topic: topTopic
                 } )
             );
             if ( Array.isArray( routine ) ) {
@@ -208,9 +206,9 @@ function RoutineFormModal ( { routines } ) {
                             <label key={ topic } className="big-topic-tile">
                                 <input
                                     type="radio"
-                                    value={ topic }
-                                    checked={ topTopic === topic }
-                                    onChange={ () => setTopTopic( topic ) }
+                                    value={ topic.toLowerCase() }
+                                    checked={ topTopic === topic.toLowerCase() }
+                                    onChange={ () => setTopTopic( topic.toLowerCase() ) }
                                 />
                                 { topic }
                             </label>
@@ -320,7 +318,7 @@ function RoutineFormModal ( { routines } ) {
                                         &lt; Pick New Topics
                                     </button>
                                 ) }
-                                { currentStep !== totalSteps && currentStep !== 6 && currentStep !== 7 && (
+                                { currentStep !== 1 && currentStep !== totalSteps && currentStep !== 6 && currentStep !== 7 && (
                         <button type="button" onClick={ handleNextStep }>
                             Forward &gt;
                         </button>
