@@ -171,18 +171,16 @@ function RoutineFormModal ( { routines } ) {
                 return (
                     <div>
                         <p>suggested habits</p>
-                        { suggested.map( ( habit ) => {
+                        { suggested.map( ( habit, index ) => {
                             const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
                             return (
                                 <div>
                                     <button
-                                        key={ habitText }
-                                    // onClick={ () => {
-                                    ////not gunna work champ
-                                    //     setHabits( [ ...habits, habit ] );
-                                    // } }
-                                    // "category": {habitTopic}
-                                    // "description": {habitText}
+                                        key={ index }
+                                        onClick={ () => {
+                                            //not gunna work champ
+                                            setHabits( [ ...habits, { "category": habitTopic, "description": habitText } ] );
+                                        } }
                                     >
                                         { habitText }
                                     </button>
@@ -196,16 +194,16 @@ function RoutineFormModal ( { routines } ) {
                     <div>
                         <p>edit/create habits</p>
                         { habits.map( ( habit ) => {
-                            // const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
                             return (
                                 <div>
                                     <button
                                         key={ habit }
                                         onClick={ () => {
-                                            setHabitDetail( [ habitText, habitTopic ] );
+                                            setHabitDetail( [ habit.category, habit.description ] );
+                                            setCurrentStep( 6 )
                                         } }
                                     >
-                                        edit pencil guy
+                                        { habit.description } EDIT
                                     </button>
                                 </div>
                             );
