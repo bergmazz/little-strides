@@ -172,7 +172,7 @@ function RoutineFormModal ( { routines } ) {
                     <div>
                         <p>suggested habits</p>
                         { suggested.map( ( habit ) => (
-                            <button type="button" onClick={ ( e ) => { setHabit( [ ...habits, e.target.value.desc, e.target.value.cat ] ) } }>
+                            <button type="button" onClick={ ( e ) => { setHabits( [ ...habits, e.target.value.desc, e.target.value.cat ] ) } }>
                                 { habit }
                             </button>
                         ) ) }
