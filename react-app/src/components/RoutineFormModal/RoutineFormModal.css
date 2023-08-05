@@ -1,0 +1,21 @@
+.suggested-habit-button {
+  border: none;
+  background-color: #f0f0f0;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.suggested-habit-button.selected::before{
+  content: "-";
+}
+
+.suggested-habit-button::before {
+  content: "+";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}

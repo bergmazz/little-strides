@@ -96,6 +96,14 @@ function RoutineFormModal ( { routines } ) {
         }
     };
 
+    const handleSelectedHabits = ( habit ) => {
+        if ( habits.some( ( h ) => h.description === habit.description ) ) {
+            setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
+        } else {
+            setHabits( ( habits ) => [ ...habits, habit ] );
+        }
+    };
+
     const handleSubmit = async ( e ) => {
         e.stopPropagation();
         e.preventDefault();
@@ -204,13 +212,14 @@ function RoutineFormModal ( { routines } ) {
                             return (
                                 <div>
                                     <button
+                                        className={ `suggested-habit-button ${ habits.some( ( h ) => h.description === habitText ) ? "selected" : "" }` }
                                         key={ index }
                                         onClick={ () => {
-                                            //not gunna work champ
-                                            setHabits( [ ...habits, { "category": habitTopic, "description": habitText } ] );
+                                            handleSelectedHabits( { "category": habitTopic, "description": habitText } );
                                         } }
                                     >
                                         { habitText }
+                                        {/* { isSelected ? "-" : "+" } */ }
                                     </button>
                                 </div>
                             );
