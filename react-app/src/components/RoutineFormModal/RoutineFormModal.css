@@ -1,3 +1,11 @@
+.create-routine-container{
+    height: 80vh
+}
+.suggested{
+    max-height:60vh;
+    overflow-y: auto;
+}
+
 .suggested-habit-button {
   padding: 8px 12px;
   margin: 5px;

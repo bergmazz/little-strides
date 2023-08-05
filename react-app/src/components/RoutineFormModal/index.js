@@ -205,8 +205,9 @@ function RoutineFormModal ( { routines } ) {
                 );
             case 4:
                 return (
-                    <div>
+                    <div className="suggested-container">
                         <p>suggested habits</p>
+                        <div className="suggested">
                         { suggested.map( ( habit, index ) => {
                             const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
                             return (
@@ -219,11 +220,11 @@ function RoutineFormModal ( { routines } ) {
                                         } }
                                     >
                                         { habitText }
-                                        {/* { isSelected ? "-" : "+" } */ }
                                     </button>
                                 </div>
                             );
                         } ) }
+                    </div>
                     </div>
                 );
             case 5:
@@ -292,9 +293,9 @@ function RoutineFormModal ( { routines } ) {
                     <p>You already have 3 routines. Please delete one to create another.</p>
                 </div>
             ) : (
-                <div>
+                    <div className="create-routine-container">
                 <h1>Create New Routine - Step { currentStep }</h1>
-                <form onSubmit={ handleSubmit }>
+                        <form onSubmit={ handleSubmit }>
                 { stepContent( currentStep ) }
                 <div>
                                 { currentStep !== 1 && currentStep !== 4 && (
