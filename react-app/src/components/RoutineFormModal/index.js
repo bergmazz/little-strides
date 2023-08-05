@@ -132,19 +132,22 @@ function RoutineFormModal ( { routines } ) {
                     topic: topTopic
                 } )
             );
-            if ( Array.isArray( routine ) ) {
-                setError( routine[ 0 ] );
-            } else {
+            if ( routine.id ) {
                 for ( let habit of habits ) {
+                    const newHabit = await dispatch(
                     createHabit( {
                         routineId: routine.id,
                         description: habit.description,
                         category: habit.category
-                    } )
+                    } ) )
                 }
+            }
+            if ( Array.isArray( routine ) ) {
+                setError( routine[ 0 ] );
+            }
                 closeModal();
             }
-        } else {
+        else {
             setError( "please write a minimum of 3 habits" )
         }
     };
