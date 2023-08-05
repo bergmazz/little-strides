@@ -38,7 +38,7 @@ function RoutineFormModal ( { routines } ) {
         if ( currentStep === 3 && suggested ) {
             dispatch( suggestedHabits( selectedTopics ) )
         }
-    }, [ currentStep, suggested ] );
+    }, [ currentStep, suggested, selectedTopics ] );
 
 
     const handleNextStep = () => {
@@ -171,25 +171,45 @@ function RoutineFormModal ( { routines } ) {
                 return (
                     <div>
                         <p>suggested habits</p>
-                        { suggested.map( ( habit ) => (
-                            <button type="button" onClick={ ( e ) => { setHabits( [ ...habits, e.target.value.desc, e.target.value.cat ] ) } }>
-                                { habit }
-                            </button>
-                        ) ) }
+                        { suggested.map( ( habit ) => {
+                            const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
+                            return (
+                                <div>
+                                    <button
+                                        key={ habitText }
+                                    // onClick={ () => {
+                                    ////not gunna work champ
+                                    //     setHabits( [ ...habits, habit ] );
+                                    // } }
+                                    // "category": {habitTopic}
+                                    // "description": {habitText}
+                                    >
+                                        { habitText }
+                                    </button>
+                                </div>
+                            );
+                        } ) }
                     </div>
                 );
             case 5:
                 return (
                     <div>
                         <p>edit/create habits</p>
-                        <p>{ habits }</p>
-                        <button type="button" onClick={ ( e ) => {
-                            setHabitDetail( [ e.target.value ] )
-                            setCurrentStep( 6 )
-                        } }>
-                            edit this one
-                        </button>
-
+                        { habits.map( ( habit ) => {
+                            // const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
+                            return (
+                                <div>
+                                    <button
+                                        key={ habit }
+                                        onClick={ () => {
+                                            setHabitDetail( [ habitText, habitTopic ] );
+                                        } }
+                                    >
+                                        edit pencil guy
+                                    </button>
+                                </div>
+                            );
+                        } ) }
                     </div>
 
                 );

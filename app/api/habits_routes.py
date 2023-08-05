@@ -143,6 +143,7 @@ def get_suggested_habits():
     for topic in topicz:
         for category, habits in system_habits.items():
             if category == topic:
-                    suggested_habits.extend(habits)
+                for habit in habits:
+                    suggested_habits.append(f"{habit} !#*SPLIT {topic}")
 
     return jsonify({'suggested_habits': suggested_habits}), 200
