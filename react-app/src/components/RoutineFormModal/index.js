@@ -33,7 +33,7 @@ function RoutineFormModal ( { routines } ) {
         'Productivity',
     ];
 
-    const totalSteps = 7;
+    const totalSteps = 8;
 
     useEffect( () => {
         if ( currentStep === 3 && !suggestedFetched ) {
