@@ -14,7 +14,7 @@ function RoutineFormModal ( { routines } ) {
     const [ coverImage, setCoverImage ] = useState( "" );
     const [ selectedTopics, setSelectedTopics ] = useState( [] );
     const [ topTopic, setTopTopic ] = useState( "" );
-    const [ habits, setHabits ] = useState( [ "" ] );
+    const [ habits, setHabits ] = useState( [] );
     const [ habitDetail, setHabitDetail ] = useState( [ "" ] );
     const [ error, setError ] = useState( [] );
     const { closeModal } = useModal();
@@ -62,12 +62,15 @@ function RoutineFormModal ( { routines } ) {
         if ( currentStep === 4 ) {
             setCurrentStep( 2 );
         }
+        if ( currentStep === 7 ) {
+            setCurrentStep( 5 );
+        }
         if ( currentStep === totalSteps ) {
             setCurrentStep( 5 );
         }
     };
 
-//TODO add warning when you click on modal background, this only works when refreshing the page
+// this only works when refreshing the page - see showWarning in Modal.js for exit moda warning
     useEffect( () => {
         const handleBeforeUnload = ( event ) => {
             event.preventDefault();
@@ -91,7 +94,6 @@ function RoutineFormModal ( { routines } ) {
             }
         }
     };
-
 
     const handleSubmit = async ( e ) => {
         e.stopPropagation();
@@ -197,7 +199,7 @@ function RoutineFormModal ( { routines } ) {
             case 5:
                 return (
                     <div>
-                        <p>edit/create habits</p>
+                        <p>edit and create habits</p>
                         { habits.map( ( habit ) => {
                             return (
                                 <div>
@@ -213,17 +215,31 @@ function RoutineFormModal ( { routines } ) {
                                 </div>
                             );
                         } ) }
+                        <button
+                            onClick={ () => {
+                                setCurrentStep( 7 )
+                            } }
+                        >
+                            write new habit
+                        </button>
                     </div>
 
                 );
             case 6:
                 return (
                     <div>
-                        <p>your habit</p>
+                        <p>edit your habit</p>
 
                     </div>
                 );
             case 7:
+                return (
+                    <div>
+                        <p>create your habit</p>
+
+                    </div>
+                );
+            case 8:
                 return (
                     <div>
                         <p>choose cover image</p>
@@ -261,7 +277,7 @@ function RoutineFormModal ( { routines } ) {
                                         &lt; Pick New Topics
                                     </button>
                                 ) }
-                    { currentStep !== totalSteps && currentStep !== 6 && (
+                                { currentStep !== totalSteps && currentStep !== 6 && currentStep !== 7 && (
                         <button type="button" onClick={ handleNextStep }>
                             Forward &gt;
                         </button>
