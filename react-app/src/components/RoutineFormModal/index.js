@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { a, b, c, d, e, f, g, h } from "./Steps"
-import { createRoutine } from "../../store/routine";
-import { suggestedHabits } from "../../store/habit";
+import { createRoutine, updateRoutine, deleteRoutinebyId } from "../../store/routine";
+import { suggestedHabits, createHabit } from "../../store/habit";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./RoutineFormModal.css";
@@ -11,6 +11,7 @@ function RoutineFormModal ( { routines } ) {
     const dispatch = useDispatch();
     const [ currentStep, setCurrentStep ] = useState( 1 );
     const [ routineName, setRoutineName ] = useState( "" );
+    const [ routineId, setRoutineId ] = useState( 0 );
     const [ coverImage, setCoverImage ] = useState( "" );
     const [ selectedTopics, setSelectedTopics ] = useState( [] );
     const [ topTopic, setTopTopic ] = useState( "" );
@@ -72,12 +73,16 @@ function RoutineFormModal ( { routines } ) {
 
 // this only works when refreshing the page - see showWarning in Modal.js for exit moda warning
     useEffect( () => {
+        // if ( habits.length < 3 ) {
+        //     deleteRoutinebyId(routineId)
+        // }
         const handleBeforeUnload = ( event ) => {
             event.preventDefault();
             event.returnValue = "";
         };
         window.addEventListener( "beforeunload", handleBeforeUnload );
         return () => {
+
             window.removeEventListener( "beforeunload", handleBeforeUnload );
         };
     }, [] );
@@ -95,23 +100,54 @@ function RoutineFormModal ( { routines } ) {
         }
     };
 
+    // const makeRoutineId = async () => {
+    //     if ( routineId === 0 ) {
+    //         const data = await dispatch(
+    //             createRoutine( {
+    //                 rname: routineName,
+    //                 cover_image: "https://images.pexels.com/photos/8443211/pexels-photo-8443211.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    //                 topic: "wellness",
+    //             } )
+    //         );
+    //         if ( Array.isArray( data ) ) {
+    //             setError( data[ 0 ] );
+    //         }
+    //         if ( data.id ) {
+    //             setRoutineId( data.id )
+    //         }
+    //     }
+
+    // }
+
+
     const handleSubmit = async ( e ) => {
         e.stopPropagation();
         e.preventDefault();
-        if ( currentStep === totalSteps ) {
-            const data = await dispatch(
+        // if ( habits.length < 3 && routineId ) {
+        //     dispatch( deleteRoutinebyId( routineId ) )
+        // }
+        if ( habits.length > 3 && currentStep === totalSteps ) {
+            const routine = await dispatch(
                 createRoutine( {
                     rname: routineName,
                     cover_image: coverImage,
                     topic: topTopic,
                 } )
             );
-            if ( Array.isArray( data ) ) {
-                setError( data[ 0 ] );
+            if ( Array.isArray( routine ) ) {
+                setError( routine[ 0 ] );
             } else {
+                for ( let habit of habits ) {
+                    createHabit( {
+                        routineId: routine.id,
+                        description: habit.description,
+                        category: habit.category
+                    } )
+                }
                 closeModal();
             }
-
+        } else {
+            setError( "please write a minimum of 3 habits" )
         }
     };
 
@@ -131,10 +167,17 @@ function RoutineFormModal ( { routines } ) {
                             value={ routineName }
                             onChange={ ( e ) => setRoutineName( e.target.value ) }
                         />
-                        <button type="button">
+                        <button type="button" disabled={ !routineName } onClick={ () => {
+                            // makeRoutineId()
+                            setCurrentStep( 2 )
+                        } }>
                             help me build a routine
+
                         </button>
-                        <button type="button" onClick={ () => { setCurrentStep( 5 ) } }>
+                        <button type="button" disabled={ !routineName } onClick={ () => {
+                            // makeRoutineId()
+                            setCurrentStep( 5 )
+                        } }>
                             start from scratch
                         </button>
                     </div>
@@ -166,7 +209,7 @@ function RoutineFormModal ( { routines } ) {
                                 <input
                                     type="radio"
                                     value={ topic }
-                                    checked={ topTopic == topic }
+                                    checked={ topTopic === topic }
                                     onChange={ () => setTopTopic( topic ) }
                                 />
                                 { topic }

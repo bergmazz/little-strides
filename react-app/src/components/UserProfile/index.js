@@ -83,7 +83,7 @@ function UserProfile () {
                         className='edit-routine'
                         buttonText="Modify"
                         onItemClick={ closeMenu }
-                            modalComponent={ <RoutineEditForm existingRoutine={ routine } /> }
+                            modalComponent={ <RoutineEditForm existingRoutine={ routine } showWarning={ true } /> }
                         />
                         <OpenModalButton
                         className='kill-routine'

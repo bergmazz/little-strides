@@ -74,8 +74,24 @@ export const suggestedHabits = ( topics ) => async ( dispatch ) => {
 };
 
 export const createHabit = ( habit ) => async ( dispatch ) => {
-
-
+    const { routineId, description, category } = habit
+    const response = await fetch( `/api/routines/${ routineId }/habits`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify( {
+            description, category
+        } )
+    } );
+    const data = await response.json();
+    console.log( "-------POST HABIT THUNK FETCH DATA:", data )
+    if ( response.ok ) {
+        console.log( "-------POST HABIT RESPONSE OK", )
+        console.log( "Habits:   ", data.Habits )
+        dispatch( addHabit( data ) );
+        return data;
+    }
 };
 
 export const editHabit = ( habit ) => async ( dispatch ) => {
