@@ -231,13 +231,13 @@ function RoutineFormModal ( { routines } ) {
                 return (
                     <div>
                         <p>edit and create habits</p>
-                        { habits.map( ( habit ) => {
+                        { habits.map( ( habit, index ) => {
                             return (
                                 <div>
                                     <button
                                         key={ habit }
                                         onClick={ () => {
-                                            setHabitDetail( [ habit.category, habit.description ] );
+                                            setHabitDetail( [ habit.category, habit.description, index ] );
                                             setCurrentStep( 6 )
                                         } }
                                     >
@@ -260,7 +260,7 @@ function RoutineFormModal ( { routines } ) {
                 return (
                     <div>
                         <p>edit your habit</p>
-
+                        <button>{ habitDetail }</button>
                     </div>
                 );
             case 7:
