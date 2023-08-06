@@ -74,6 +74,7 @@ export const suggestedHabits = ( topics ) => async ( dispatch ) => {
 };
 
 export const createHabit = ( habit ) => async ( dispatch ) => {
+    console.log( "-----------data passed into create habit thunk", habit );
     const { routineId, description, category } = habit
     const response = await fetch( `/api/routines/${ routineId }/habits`, {
         method: 'POST',
@@ -95,7 +96,25 @@ export const createHabit = ( habit ) => async ( dispatch ) => {
 };
 
 export const editHabit = ( habit ) => async ( dispatch ) => {
-
+    console.log( "-----------data passed into edit habit thunk", habit );
+    const { routineId, habitId, description, category } = habit
+    const response = await fetch( `/api/routines/${ routineId }/habits/${ habitId }`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify( {
+            habit
+        } )
+    } );
+    const data = await response.json();
+    console.log( "-------PUT HABIT THUNK FETCH DATA:", data )
+    if ( response.ok ) {
+        console.log( "-------PUT HABIT RESPONSE OK", )
+        console.log( "Habits:   ", data )
+        dispatch( addHabit( data ) );
+        return data;
+    }
 };
 
 export const deleteHabit = ( habit ) => async ( dispatch ) => {

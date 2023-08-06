@@ -161,9 +161,9 @@ def update_habit(routine_id, habit_id):
         return sorry
 
     habit = Habit.query.get(habit_id)
-    whoops = not_found_not_yours(habit, current_user.id, 'Habit')
-    if whoops:
-        return whoops
+    # whoops = not_found_not_yours(habit, current_user.id, 'Habit')
+    # if whoops:
+    #     return whoops
 
     form = HabitForm()
     form['routine_id'].data = routine_id
