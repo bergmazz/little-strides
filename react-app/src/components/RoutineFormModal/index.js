@@ -15,6 +15,7 @@ function RoutineFormModal ( { routines } ) {
     const [ selectedTopics, setSelectedTopics ] = useState( [] );
     const [ topTopic, setTopTopic ] = useState( "" );
     const [ habits, setHabits ] = useState( [] );
+    const [ editMe, setEditMe ] = useState( {} );
     const [ habitDetail, setHabitDetail ] = useState( [ "" ] );
     const [ habitCat, setHabitCat ] = useState( [ "" ] );
     const [ error, setError ] = useState( [] );
@@ -97,10 +98,17 @@ function RoutineFormModal ( { routines } ) {
         }
     };
 
-    const handleSelectedHabits = ( habit ) => {
+    const handleSelectedHabits = ( habit, prevHabit = habit ) => {
         const { description, category } = habit;
         if ( habits.some( ( h ) => h.description === description ) ) {
             setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
+        } if ( habit !== prevHabit ) {
+            const existingHabitIndex = habits.findIndex( ( h ) => h.description === prevHabit.description );
+            if ( existingHabitIndex !== -1 ) {
+                const updatedHabits = [ ...habits ];
+                updatedHabits[ existingHabitIndex ] = { description, category };
+                setHabits( updatedHabits );
+            }
         } else {
             setHabits( ( habits ) => [ ...habits, { description, category } ] );
         }
@@ -246,8 +254,16 @@ function RoutineFormModal ( { routines } ) {
                                     > delete
                                     </button> */}
                                     <button
+                                        key={ habit.description }
+                                        onClick={ () => {
+                                            handleSelectedHabits( habit )
+                                        } }
+                                    > delete
+                                    </button>
+                                    <button
                                         key={ index }
                                         onClick={ () => {
+                                            setEditMe( habit )
                                             setHabitDetail( habit.description );
                                             setHabitCat( habit.category )
                                             setCurrentStep( 6 )
@@ -289,7 +305,8 @@ function RoutineFormModal ( { routines } ) {
                         </select>
                         <button
                             onClick={ () => {
-                                handleSelectedHabits( { "category": habitCat, "description": habitDetail } )
+                                const habit = { "category": habitCat, "description": habitDetail }
+                                handleSelectedHabits( habit, editMe )
                                 //some sool confetti or something animated when you commit
                                 // setHabitCat( "" )
                                 // setHabitDetail( "" )
@@ -385,6 +402,5 @@ function RoutineFormModal ( { routines } ) {
             </>
     );
 }
-
 
 export default RoutineFormModal;
