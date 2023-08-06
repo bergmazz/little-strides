@@ -98,8 +98,17 @@ export const editHabit = ( habit ) => async ( dispatch ) => {
 
 };
 
-export const deleteHabit = ( habitId ) => async ( dispatch ) => {
-
+export const deleteHabit = ( habit ) => async ( dispatch ) => {
+    const { routineId, habitId } = habit
+    const response = await fetch( ` / api / routines / ${ routineId } / habits/${ habitId }`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    } )
+    if ( response.ok ) {
+        dispatch( removeHabit( habitId ) );
+    };
 };
 
 

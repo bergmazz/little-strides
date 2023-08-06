@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { a, b, c, d, e, f, g, h } from "./Steps"
 import { fetchRoutines, createRoutine } from "../../store/routine";
-import { suggestedHabits, createHabit } from "../../store/habit";
+import { suggestedHabits, createHabit, deleteHabit } from "../../store/habit";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./RoutineFormModal.css";
@@ -237,14 +237,14 @@ function RoutineFormModal ( { routines } ) {
                             return (
                                 <div>
                                     <p>{ habit.description }</p>
-                                    <button
+                                    {/* //actual delete for edit, oops: */ }
+                                    {/* <button
                                         key={ habit.description }
                                         onClick={ () => {
-                                            dispatch()
-                                            setCurrentStep( 6 )
+                                            dispatch( deleteHabit( habit ) )
                                         } }
-                                    > pencil
-                                    </button>
+                                    > delete
+                                    </button> */}
                                     <button
                                         key={ index }
                                         onClick={ () => {
