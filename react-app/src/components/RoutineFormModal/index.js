@@ -16,6 +16,7 @@ function RoutineFormModal ( { routines } ) {
     const [ topTopic, setTopTopic ] = useState( "" );
     const [ habits, setHabits ] = useState( [] );
     const [ habitDetail, setHabitDetail ] = useState( [ "" ] );
+    const [ habitCat, setHabitCat ] = useState( [ "" ] );
     const [ error, setError ] = useState( [] );
     const { closeModal } = useModal();
     const [ suggestedFetched, setSuggestedFetched ] = useState( false );
@@ -97,10 +98,11 @@ function RoutineFormModal ( { routines } ) {
     };
 
     const handleSelectedHabits = ( habit ) => {
-        if ( habits.some( ( h ) => h.description === habit.description ) ) {
+        const { description, category } = habit;
+        if ( habits.some( ( h ) => h.description === description ) ) {
             setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
         } else {
-            setHabits( ( habits ) => [ ...habits, habit ] );
+            setHabits( ( habits ) => [ ...habits, { description, category } ] );
         }
     };
 
@@ -230,18 +232,27 @@ function RoutineFormModal ( { routines } ) {
             case 5:
                 return (
                     <div>
-                        <p>edit and create habits</p>
+                        <p>Own Your Habits</p>
                         { habits.map( ( habit, index ) => {
                             return (
                                 <div>
+                                    <p>{ habit.description }</p>
                                     <button
-                                        key={ habit }
+                                        key={ habit.description }
                                         onClick={ () => {
-                                            setHabitDetail( [ habit.category, habit.description, index ] );
+                                            dispatch()
                                             setCurrentStep( 6 )
                                         } }
-                                    >
-                                        { habit.description } EDIT
+                                    > pencil
+                                    </button>
+                                    <button
+                                        key={ index }
+                                        onClick={ () => {
+                                            setHabitDetail( habit.description );
+                                            setHabitCat( habit.category )
+                                            setCurrentStep( 6 )
+                                        } }
+                                    > pencil
                                     </button>
                                 </div>
                             );
@@ -260,13 +271,65 @@ function RoutineFormModal ( { routines } ) {
                 return (
                     <div>
                         <p>edit your habit</p>
-                        <button>{ habitDetail }</button>
+                        <textarea
+                            value={ habitDetail }
+                            onChange={ ( e ) =>
+                                setHabitDetail( e.target.value ) }
+                        />
+                        <select
+                            value={ habitCat }
+                            onChange={ ( e ) => setHabitCat( e.target.value ) }
+                        >
+                            <option value="">Select a category</option>
+                            { availableTopics.map( ( topic ) => (
+                                <option key={ topic } value={ topic.toLowerCase() }>
+                                    { topic }
+                                </option>
+                            ) ) }
+                        </select>
+                        <button
+                            onClick={ () => {
+                                handleSelectedHabits( { "category": habitCat, "description": habitDetail } )
+                                //some sool confetti or something animated when you commit
+                                // setHabitCat( "" )
+                                // setHabitDetail( "" )
+                                setCurrentStep( 5 )
+                            } }>
+                            Commit!
+                        </button>
                     </div>
                 );
             case 7:
                 return (
                     <div>
                         <p>create your habit</p>
+                        <input
+                            type="text"
+                            value={ habitDetail }
+                            onChange={ ( e ) =>
+                                setHabitDetail( e.target.value ) }
+                        />
+                        <select
+                            value={ habitCat }
+                            onChange={ ( e ) => setHabitCat( e.target.value ) }
+                        >
+                            <option value="">Select a category</option>
+                            { availableTopics.map( ( topic ) => (
+                                <option key={ topic } value={ topic.toLowerCase() }>
+                                    { topic }
+                                </option>
+                            ) ) }
+                        </select>
+                        <button
+                            onClick={ () => {
+                                handleSelectedHabits( { "category": habitCat, "description": habitDetail } )
+                                //some sool confetti or something animated when you commit
+                                // setHabitCat( "" )
+                                // setHabitDetail( "" )
+                                setCurrentStep( 5 )
+                            } }>
+                            Commit!
+                        </button>
 
                     </div>
                 );
