@@ -117,7 +117,6 @@ function RoutineEditForm ( { existingRoutine } ) {
 
     const handleEditHabits = ( habit, prevHabit = habit ) => {
         const { description, category } = habit;
-
         if ( habits.some( ( h ) => h.description === description ) ) {
             setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
         } if ( habit !== prevHabit ) {
@@ -149,7 +148,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                         const updatedHabit = await dispatch(
                             editHabit( {
                                 routineId: existingRoutine.id,
-                                habitId: habit.id,
+                                id: habit.id,
                                 description: habit.description,
                                 category: habit.category
                             } ) )
@@ -162,7 +161,6 @@ function RoutineEditForm ( { existingRoutine } ) {
                             } ) )
                     }
                 }
-
                 for ( let h of habitsToDelete ) {
                     const deletedHabit = await dispatch(
                         deleteHabit( h ) )
@@ -268,10 +266,10 @@ function RoutineEditForm ( { existingRoutine } ) {
                                 <div>
                                     <p>{ habit.description }</p>
                                     <button
-                                        key={ habit.description }
+                                        key={ index }
                                         onClick={ () => {
                                             setHabitsToDelete( [ ...habitsToDelete, habit ] )
-                                            handleSelectedHabits( habit )
+                                            setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
                                         } }
                                     > delete
                                     </button>
