@@ -25,15 +25,17 @@ function RoutineEditForm ( { existingRoutine } ) {
 
     const { closeModal } = useModal();
 
+    const suggested = useSelector( ( state ) => state.habit.suggested );
+    const userHabits = useSelector( ( state ) => state.habit.user );
+
     useEffect( () => {
         setRoutineName( existingRoutine.name || "" );
         setCoverImage( existingRoutine.coverImage || "" );
         // setSelectedTopics( existingRoutine.selectedTopics || [] );
         setTopTopic( existingRoutine.mainTopic.toLowerCase() || "" );
-        setHabits( existingRoutine.habits || [ "" ] );
+        setHabits( existingRoutine.habits || [] );
     }, [ existingRoutine ] );
 
-    const suggested = useSelector( ( state ) => state.habit.suggested );
 
     const availableTopics = [
         'Anxiety',
@@ -154,7 +156,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                             routineId: existingRoutine.id,
                             id: habit.id,
                             description: habit.description,
-                            category: habit.category
+                            category: habit.category.toLowerCase()
                         } ) )
                 }
                 for ( let habit of habits ) {
