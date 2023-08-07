@@ -121,10 +121,7 @@ export const deleteHabit = ( habit ) => async ( dispatch ) => {
     const { routineId, id } = habit
     const url = `/api/routines/${ routineId }/habits/${ id }`
     const response = await fetch( url, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        method: 'DELETE'
     } )
     if ( response.ok ) {
         dispatch( removeHabit( id ) );

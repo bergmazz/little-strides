@@ -19,6 +19,7 @@ function RoutineEditForm ( { existingRoutine } ) {
     const [ habitCat, setHabitCat ] = useState( [ "" ] );
     const [ suggestedFetched, setSuggestedFetched ] = useState( false );
     const [ habitsToDelete, setHabitsToDelete ] = useState( [] );
+    const [ habitsToEdit, setHabitsToEdit ] = useState( [] );
     const [ editMe, setEditMe ] = useState( {} );
     const [ error, setError ] = useState( [] );
 
@@ -143,16 +144,21 @@ function RoutineEditForm ( { existingRoutine } ) {
             if ( Array.isArray( routine ) ) {
                 setError( routine[ 0 ] );
             } else {
+                for ( let id of habitsToDelete ) {
+                    const deletedHabit = await dispatch(
+                        deleteHabit( { id: id, routineId: existingRoutine.id } ) )
+                }
+                for ( let habit of habitsToEdit ) {
+                    const updatedHabit = await dispatch(
+                        editHabit( {
+                            routineId: existingRoutine.id,
+                            id: habit.id,
+                            description: habit.description,
+                            category: habit.category
+                        } ) )
+                }
                 for ( let habit of habits ) {
-                    if ( habit.id ) {
-                        const updatedHabit = await dispatch(
-                            editHabit( {
-                                routineId: existingRoutine.id,
-                                id: habit.id,
-                                description: habit.description,
-                                category: habit.category
-                            } ) )
-                    } else {
+                    if ( !habit.id ) {
                         const newHabit = await dispatch(
                             createHabit( {
                                 routineId: routine.id,
@@ -160,10 +166,6 @@ function RoutineEditForm ( { existingRoutine } ) {
                                 category: habit.category
                             } ) )
                     }
-                }
-                for ( let h of habitsToDelete ) {
-                    const deletedHabit = await dispatch(
-                        deleteHabit( h ) )
                 }
             }
             dispatch( fetchRoutines() );
@@ -268,7 +270,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                                     <button
                                         key={ [ "delete", index ] }
                                         onClick={ () => {
-                                            setHabitsToDelete( [ ...habitsToDelete, habit ] )
+                                            setHabitsToDelete( [ ...habitsToDelete, habit.id ] )
                                             setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
                                         } }
                                     > delete
@@ -319,8 +321,9 @@ function RoutineEditForm ( { existingRoutine } ) {
                         </select>
                         <button
                             onClick={ () => {
-                                const habit = { "category": habitCat, "description": habitDetail }
+                                const habit = { "category": habitCat, "description": habitDetail, "id": editMe.id }
                                 handleEditHabits( habit, editMe )
+                                setHabitsToEdit( [ ...habitsToEdit, habit ] )
                                 //some sool confetti or something animated when you commit
                                 // setHabitCat( "" )
                                 // setHabitDetail( "" )
