@@ -134,6 +134,7 @@ function RoutineEditForm ( { existingRoutine } ) {
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
+// TO DO add more submit buttons so user doesn't have to click through every step to chnage the routine name etc
         if ( habits.length >= 3 && currentStep === totalSteps ) {
             const routine = await dispatch(
                 editRoutine( {

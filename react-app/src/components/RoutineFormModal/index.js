@@ -264,7 +264,7 @@ function RoutineFormModal ( { routines } ) {
                                     > delete
                                     </button> */}
                                     <button
-                                        key={ habit.description }
+                                        key={ [ index, habit.description ] }
                                         onClick={ () => {
                                             handleSelectedHabits( habit )
                                         } }
