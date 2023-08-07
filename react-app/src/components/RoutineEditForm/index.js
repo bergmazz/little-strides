@@ -266,7 +266,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                                 <div>
                                     <p>{ habit.description }</p>
                                     <button
-                                        key={ index }
+                                        key={ [ "delete", index ] }
                                         onClick={ () => {
                                             setHabitsToDelete( [ ...habitsToDelete, habit ] )
                                             setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );

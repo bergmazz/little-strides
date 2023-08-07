@@ -188,11 +188,13 @@ def update_habit(routine_id, habit_id):
 @login_required
 def delete_habit(routine_id, habit_id):
     """Delete a habit from the user's routine"""
+    print('in the dleete habit route')
     routine = Routine.query.get(routine_id)
+    print('routine:', routine)
     sorry = not_found_not_yours(routine, current_user.id, 'Routine')
     if sorry:
         return sorry
-
+    print('habit:', habit)
     habit = Habit.query.get(habit_id)
     whoops = not_found_not_yours(habit, current_user.id, 'Habit')
     if whoops:

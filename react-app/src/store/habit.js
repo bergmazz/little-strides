@@ -98,7 +98,8 @@ export const createHabit = ( habit ) => async ( dispatch ) => {
 export const editHabit = ( habit ) => async ( dispatch ) => {
     console.log( "-----------data passed into edit habit thunk", habit );
     const { routineId, id, description, category } = habit
-    const response = await fetch( `/api/routines/${ routineId }/habits/${ id }`, {
+    const url = `/api/routines/${ routineId }/habits/${ id }`
+    const response = await fetch( url, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
@@ -118,7 +119,8 @@ export const editHabit = ( habit ) => async ( dispatch ) => {
 export const deleteHabit = ( habit ) => async ( dispatch ) => {
     console.log( "-----------data passed into delete habit thunk", habit );
     const { routineId, id } = habit
-    const response = await fetch( ` / api / routines / ${ routineId } / habits/${ id }`, {
+    const url = `/api/routines/${ routineId }/habits/${ id }`
+    const response = await fetch( url, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
