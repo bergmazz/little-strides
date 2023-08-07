@@ -1,16 +1,31 @@
 from flask import Blueprint, jsonify, session, request
 # from flask_wtf import FlaskForm
-from app.models import Habit
+from app.models import Habit, Routine
 # from .auth_routes import validation_errors_to_error_messages
 # from app.forms import RoutineForm, HabitForm
-# from flask_login import current_user, login_required
+from flask_login import current_user, login_required
 
 habits = Blueprint('habits', __name__)
+
+
+# GET /api/habits/mine
+@login_required
+@habits.route('/mine', methods=['GET'])
+def my_habits():
+    """Get current user's habits """
+    habits = []
+    for routine in Routine.query.filter_by(user_id=current_user.id).all():
+        my_habits = Habit.query.filter_by(routine_id=routine.id)
+        for habit in my_habits:
+            habits.append(habit.to_simple_dict())
+
+    return jsonify({'my_habits': habits}), 200
+
 
 # GET /api/habits/all
 @habits.route('/all', methods=['GET'])
 def get_habits():
-    """Get all user habits sorted by category"""
+    """Get all of the users' habits sorted by category"""
     all_the_habits = Habit.query.all()
     all_habits = []
     for habit in all_the_habits:

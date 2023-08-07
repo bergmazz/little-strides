@@ -56,11 +56,11 @@ def create_routine():
 # GET /api/routines
 @routines.route('/', methods=['GET'])
 # @login_required
-def get_reservations():
+def get_routines():
     """
     Get a list of routines owned by the user
     """
-    print("-------------", current_user)
+    # print("-------------", current_user)
     routines = [routine.to_dict(
     ) for routine in Routine.query.filter_by(user_id=current_user.id).all()]
 

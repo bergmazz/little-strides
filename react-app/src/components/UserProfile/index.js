@@ -8,6 +8,7 @@ import RoutineDeleteForm from '../DeleteRoutine';
 // import UserRoutines from "./";
 // import UserProgress from "./";
 import { fetchRoutines, createRoutine, editRoutine } from '../../store/routine';
+import { currentUserHabits } from '../../store/habit';
 import "./UserProfile.css"
 
 
@@ -30,6 +31,7 @@ function UserProfile () {
 
     useEffect( () => {
         dispatch( fetchRoutines() );
+        dispatch( currentUserHabits() )
     }, [ dispatch ] );
 
     useEffect( () => {

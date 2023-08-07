@@ -1,4 +1,4 @@
-// const USER_HABITS = 'habit/USER_HABITS';
+const USER_HABITS = 'habit/USER_HABITS';
 const ALL_HABITS = 'routine/ALL_HABITS';
 const SUGGESTED = 'routine/SUGGESTED';
 const ADD_HABIT = 'routine/ADD_HABIT';
@@ -6,10 +6,10 @@ const UPDATE_HABIT = 'routine/UPDATE_HABIT';
 const DELETE_HABIT = 'routine/DELETE_HABIT';
 
 // Action Creators
-// export const setUserHabits = ( habits ) => ( {
-//     type: USER_HABITS,
-//     payload: habits,
-// } );
+export const setUserHabits = ( habits ) => ( {
+    type: USER_HABITS,
+    payload: habits,
+} );
 
 export const setAllHabits = ( habits ) => ( {
     type: ALL_HABITS,
@@ -38,8 +38,17 @@ export const removeHabit = ( habitId ) => ( {
 
 // Thunks
 
-// export const currentUserHabits = () => async ( dispatch ) => {
-// };
+export const currentUserHabits = () => async ( dispatch ) => {
+    const response = await fetch( '/api/habits/mine', {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    } );
+    const data = await response.json();
+    if ( response.ok ) {
+        dispatch( setUserHabits( data.my_habits ) );
+    }
+};
 
 export const allUserHabits = () => async ( dispatch ) => {
     const response = await fetch( '/api/habits/all', {
@@ -138,8 +147,8 @@ const initialState = {
 
 const habitReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        // case USER_HABITS:
-        //     return { ...state, userHabits: [ ...action.payload ] };
+        case USER_HABITS:
+            return { ...state, user: [ ...action.payload ] };
         case ALL_HABITS:
             return { ...state, all: [ ...action.payload ] };
         case SUGGESTED:
@@ -156,7 +165,7 @@ const habitReducer = ( state = initialState, action ) => {
         case DELETE_HABIT:
             return {
                 ...state,
-                userHabits: state.userHabits.filter( ( habit ) => habit.id !== action.payload ),
+                userHabits: state.user.filter( ( habit ) => habit.id !== action.payload ),
             };
         default:
             return state;
