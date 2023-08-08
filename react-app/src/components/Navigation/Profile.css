@@ -16,7 +16,7 @@
   top: 70px;
   right: 10px;
   background-color: white;
-  border: 1px solid #a07e7e;
+   box-shadow:6px 8px #F8F3FF;
   border-radius: 5px;
   padding: 10px;
   list-style: none;
