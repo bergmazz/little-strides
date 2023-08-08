@@ -377,11 +377,6 @@ function RoutineFormModal ( { routines } ) {
 
     return (
         <>
-            { hasReachedLimit ? (
-                <div className="error-popup">
-                    <p>You already have 3 routines. Please delete one to create another.</p>
-                </div>
-            ) : (
                     <div className="create-routine-container">
                 <h1>Create New Routine - Step { currentStep }</h1>
                         <form onSubmit={ handleSubmit }>
@@ -405,9 +400,7 @@ function RoutineFormModal ( { routines } ) {
                     { currentStep === totalSteps && <button type="submit">Submit</button> }
                 </div>
                         </form>
-                </div>
-            )
-            }
+            </div>
             </>
     );
 }

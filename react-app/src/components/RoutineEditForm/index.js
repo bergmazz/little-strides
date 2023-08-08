@@ -26,7 +26,7 @@ function RoutineEditForm ( { existingRoutine } ) {
     const { closeModal } = useModal();
 
     const suggested = useSelector( ( state ) => state.habit.suggested );
-    const userHabits = useSelector( ( state ) => state.habit.user );
+    // const userHabits = useSelector( ( state ) => state.habit.user );
 
     useEffect( () => {
         setRoutineName( existingRoutine.name || "" );
@@ -58,7 +58,6 @@ function RoutineEditForm ( { existingRoutine } ) {
         }
     }, [ dispatch, currentStep, suggestedFetched, selectedTopics ] );
 
-    //TODO add warning when you click on modal background, this only works when refreshing the page
     useEffect( () => {
         const handleBeforeUnload = ( event ) => {
             event.preventDefault();
@@ -73,6 +72,7 @@ function RoutineEditForm ( { existingRoutine } ) {
     const totalSteps = 8;
 
     const handleNextStep = () => {
+
         if ( currentStep < totalSteps ) {
             setCurrentStep( ( prevStep ) => prevStep + 1 );
         }

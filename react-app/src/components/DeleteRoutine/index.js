@@ -20,15 +20,16 @@ function RoutineDeleteForm ( { routineId } ) {
 
     return (
         <>
-            <h1>Delete Routine</h1>
             { error && <p>Error: { error }</p> }
-            <p>Are you sure you want to delete this routine?</p>
+            <h3>Are you sure you want to delete this routine?</h3>
             <button type="button" onClick={ handleDelete }>
                 Delete
             </button>
-            <button type="button" onClick={ closeModal }>
+            <p>Click out of this box to cancel</p>
+            {/* cancel button triggers the are you sure warning :( */ }
+            {/* <button type="button" onClick={ closeModal }>
                 Cancel
-            </button>
+            </button> */}
         </>
     );
 }

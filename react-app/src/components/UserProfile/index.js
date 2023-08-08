@@ -5,9 +5,10 @@ import OpenModalButton from "../OpenModalButton";
 import RoutineFormModal from '../RoutineFormModal';
 import RoutineEditForm from '../RoutineEditForm';
 import RoutineDeleteForm from '../DeleteRoutine';
+import ErrorModal from '../ErrorModal';
 // import UserRoutines from "./";
 // import UserProgress from "./";
-import { fetchRoutines, createRoutine, editRoutine } from '../../store/routine';
+import { fetchRoutines } from '../../store/routine';
 import { currentUserHabits } from '../../store/habit';
 import "./UserProfile.css"
 
@@ -17,9 +18,11 @@ function UserProfile () {
     const dispatch = useDispatch();
     const currentUser = useSelector( state => state.session.user )
     const routines = useSelector( state => state.routine.routines )
-    const habits = useSelector( state => state.habit.user )
+    const hasReachedLimit = routines.length >= 3;
+    // const habits = useSelector( state => state.habit.user )
     // console.log( "------user:", currentUser );
     const [ showMenu, setShowMenu ] = useState( false );
+
 
     const ulRef = useRef()
 
@@ -31,17 +34,12 @@ function UserProfile () {
 
     useEffect( () => {
         dispatch( fetchRoutines() );
-        dispatch( currentUserHabits() )
+        // dispatch( currentUserHabits() )
     }, [ dispatch ] );
 
     useEffect( () => {
         // console.log( "---------------Inside useEffect" );
         if ( showMenu ) {
-            const closeMenu = ( e ) => {
-                if ( !ulRef.current.contains( e.target ) ) {
-                    setShowMenu( false );
-                }
-            };
             document.addEventListener( "click", closeMenu );
             return () => document.removeEventListener( "click", closeMenu );
         }
@@ -61,12 +59,21 @@ function UserProfile () {
     return (
         <div>
             <h2>{ "Hello,  " }{ currentUser.username }</h2>
-            <OpenModalButton
-                className="create-routine"
-                buttonText="New Routine"
-                onItemClick={ closeMenu }
-                modalComponent={ <RoutineFormModal routines={ routines } showWarning={ true } /> }
-            />
+            { hasReachedLimit ? (
+                <OpenModalButton
+                    className="can't-create-routine"
+                    buttonText="New Routine"
+                    onItemClick={ closeMenu }
+                    modalComponent={ <ErrorModal message={ "You already have 3 routines. Please delete one to create another." } showWarning={ false } /> }
+                />
+            ) : (
+                    <OpenModalButton
+                        className="create-routine"
+                        buttonText="New Routine"
+                        onItemClick={ closeMenu }
+                        modalComponent={ <RoutineFormModal routines={ routines } showWarning={ true } /> }
+                    />
+            ) }
 
             <h2>Your Routines</h2>
             { routines ? (
@@ -91,7 +98,7 @@ function UserProfile () {
                         <OpenModalButton
                         className='kill-routine'
                         buttonText="Delete"
-                            modalComponent={ <RoutineDeleteForm routineId={ routine.id } /> }
+                            modalComponent={ <RoutineDeleteForm routineId={ routine.id } showWarning={ false } /> }
                         />
                     </div>
                 ) ) ) : (
