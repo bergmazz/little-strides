@@ -1,5 +1,5 @@
 /* .routine-tile{
-
+    transition: box-shadow 0.3s ease-in-out;
 } */
 
 .routine-img{
@@ -7,12 +7,26 @@ height: 175px;
 width: 250px;
 border-radius: 4px;
 object-fit: cover;
-     /* border: solid lightgray thin;
-     margin: 10px;
-     box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
-    transition: box-shadow 0.3s ease-in-out; */
 }
 
+.userprof button {
+  font-family: bobbyJones, Animatic SC, Helvetica cursive;
+  font-size: 17px;
+  width:170px;
+  height: 60px;
+    color: white;
+    background-color: #680416;
+     box-shadow:5px 6px #E8DEF8;
+       /* box-shadow:6px 8px #F8F3FF; */
+}
+
+.userprof h1{
+    font-size: 40px;
+}
 /* .habbit-bubble{
 
 } */
+
+
+  /* font-family: Jost, Futura, Helvetica, Arial, sans-serif;
+  font-family: bobbyJones, Animatic SC, Helvetica cursive; */

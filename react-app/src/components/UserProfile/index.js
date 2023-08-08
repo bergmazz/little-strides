@@ -9,7 +9,8 @@ import ErrorModal from '../ErrorModal';
 // import UserRoutines from "./";
 // import UserProgress from "./";
 import { fetchRoutines } from '../../store/routine';
-import { currentUserHabits } from '../../store/habit';
+// import { currentUserHabits } from '../../store/habit';
+import waveSvgUp from "./57.svg"
 import "./UserProfile.css"
 
 
@@ -50,18 +51,18 @@ function UserProfile () {
     if ( !currentUser ) return (
         <div className='no-user'>
             <h1 className='no-user'>Sorry, you need to log in</h1>
-            <Link to="/login" className="page-login-link">
+            {/* <Link to="/login" className="page-login-link">
                 <button className="login-signup-button" type="submit">Login</button>
-            </Link>
+            </Link> */}
         </div>
     )
 
     return (
-        <div>
-            <h2>{ "Hello,  " }{ currentUser.username }</h2>
+        <div className='userprof'>
+            <h1>{ "Hi,  " }{ currentUser.username }{ "!" }</h1>
             { hasReachedLimit ? (
                 <OpenModalButton
-                    className="can't-create-routine"
+                    className="create-routine"
                     buttonText="New Routine"
                     onItemClick={ closeMenu }
                     modalComponent={ <ErrorModal message={ "You already have 3 routines. Please delete one to create another." } showWarning={ false } /> }
@@ -75,7 +76,11 @@ function UserProfile () {
                     />
             ) }
 
-            <h2>Your Routines</h2>
+            <div className="wave-2">
+                <img src={ waveSvgUp } alt="Wave" />
+            </div>
+
+            <h1>Mange your routines</h1>
             { routines ? (
                 routines.map( ( routine ) => (
                     <div className="routine-tile" key={ routine.id }>
@@ -83,7 +88,9 @@ function UserProfile () {
                         <h3>{ routine.name }</h3>
                         { routine.habits.map( ( habit ) => (
                             <div key={ habit.id }>
-                                <div className='habit-bubble'>   { habit.description } </div>
+                                <div className='habit-bubble'>
+                                    { habit.description }
+                                </div>
                                 {/* <p>  { habit.percent } % yes </p>
                                 <p> { habit.streak } days in a row</p>
                                  <p>  { habit.category } </p> */}
@@ -98,6 +105,11 @@ function UserProfile () {
                         <OpenModalButton
                         className='kill-routine'
                         buttonText="Delete"
+                            modalComponent={ <RoutineDeleteForm routineId={ routine.id } showWarning={ false } /> }
+                        />
+                        <OpenModalButton
+                            className='checkin'
+                            buttonText="Check In"
                             modalComponent={ <RoutineDeleteForm routineId={ routine.id } showWarning={ false } /> }
                         />
                     </div>
