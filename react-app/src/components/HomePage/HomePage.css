@@ -1,5 +1,6 @@
 .wave-1{
 /* background-image: url( '52.svg' ); */
-width: 100%;
-padding:0%;
+width: 100vw;
+padding:0;
+margin: 0;
 }

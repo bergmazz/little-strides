@@ -5,3 +5,15 @@
 .hidden {
   display: none;
 }
+
+.white-logo{
+  height:150px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  background-color: #680416;
+}

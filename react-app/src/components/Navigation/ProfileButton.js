@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { NavLink } from 'react-router-dom';
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import smiley from './smiley.png';
+import "./Profile.css"
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -39,14 +42,25 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      {/* <button onClick={openMenu}>
+       <i className="fas fa-user-circle" />
+      </button> */}
+      <img src={ smiley } alt="smiley face" onClick={ openMenu } className="happy-user" />
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
+            {/* <li>{user.username}</li>
+            <li>{ user.email }</li> */}
+            <li className="name">Hello, { user.username }!</li>
+            <li className="user-link">
+              <NavLink to="/user">My Routines</NavLink>
+            </li>
+            <li className="progress-link">
+              <NavLink to="/user">My Progress</NavLink>
+            </li>
+            <li className="community-link">
+              <NavLink to="/community">My Community</NavLink>
+            </li>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>

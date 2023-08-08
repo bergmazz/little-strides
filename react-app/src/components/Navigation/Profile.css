@@ -1,0 +1,44 @@
+.happy-user{
+    position: absolute;
+  background: none;
+  border: none;
+  right: 10px;
+  top: 15px;
+  /* font-size: 2rem; */
+  cursor: pointer;
+    width: 100px;
+}
+
+.profile-dropdown {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  top: 70px;
+  right: 10px;
+  background-color: white;
+  border: 1px solid #a07e7e;
+  border-radius: 5px;
+  padding: 10px;
+  list-style: none;
+  z-index: 5;
+  text-align: center;
+}
+
+.profile-dropdown.hidden {
+  display: none;
+}
+
+
+.profile-dropdown a {
+  text-decoration: none;
+  /* color: */
+}
+
+.logout-button {
+  margin-top: 5px;
+  cursor: pointer;
+  background-color: #461f51;
+  color: white;
+  font-size: 15px;
+  padding: 6px 10px;
+}
