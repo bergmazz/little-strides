@@ -6,3 +6,10 @@ button{
         cursor: pointer;
           border-radius: 20px;
 }
+
+@font-face {
+  font-family: bobbyJones;
+  src: url('./font/BobbyJonesSoft.otf') format("opentype");
+  /* font-weight: 300 800; */
+  font-style: normal;
+}

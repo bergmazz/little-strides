@@ -4,3 +4,8 @@ width: 100vw;
 padding:0;
 margin: 0;
 }
+
+.homepage-container h1 {
+  font-family: 'Jost', Futura, Helvetica, Arial, sans-serif;
+
+}

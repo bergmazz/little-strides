@@ -18,6 +18,7 @@ nav {
   background-color: #680416;
 }
 
-/* li{
-  font-family: 'Schoolbell', cursive;
-} */
+li{
+  font-family: bobbyJones;
+  margin: 5px;
+}
