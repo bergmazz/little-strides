@@ -88,12 +88,14 @@ function UserProfile () {
 
                         <div className="routine-section" key={ routine.id }>
                             <div className="routine-tile">
-                        <img className="routine-img" alt={ routine.name } src={ routine.coverImage } />
-                        <h3>{ routine.name }</h3>
+                                <div className="routine-img">
+                                    <img alt={ routine.name } src={ routine.coverImage } />
+                                    <h1>{ routine.name }</h1>
+                                </div>
                         { routine.habits.map( ( habit ) => (
                             <div key={ habit.id }>
-                                <div className='habit-bubble'>
-                                    { habit.description }
+                                <div className='bubble'>
+                                    <p>{ habit.description }</p>
                                 </div>
                                 {/* <p>  { habit.percent } % yes </p>
                                 <p> { habit.streak } days in a row</p>
