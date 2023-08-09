@@ -6,17 +6,17 @@ margin: 0;
 }
 
 .slogan{
-    margin: 5% 7%  0% 7%
+    margin: 45px 85px 0px 85px;
 }
 
 .slogan h1 {
   /* font-family: 'Jost', Futura, Helvetica, Arial, sans-serif; */
-  font-size:60px;
+  font-size:55px;
     margin: 10px 0px 0px 0px;
 }
 
 .slogan h4 {
   /* font-family: 'Jost', Futura, Helvetica, Arial, sans-serif; */
-    font-size:30px;
+    font-size:25px;
         margin: 30px 0px 0px 0px;
 }

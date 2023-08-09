@@ -59,6 +59,7 @@ function UserProfile () {
 
     return (
         <div className='userprof'>
+            <div className='usersec1'>
             <h1>{ "Hi,  " }{ currentUser.username }{ "!" }</h1>
             { hasReachedLimit ? (
                 <OpenModalButton
@@ -66,7 +67,7 @@ function UserProfile () {
                     buttonText="New Routine"
                     onItemClick={ closeMenu }
                     modalComponent={ <ErrorModal message={ "You already have 3 routines. Please delete one to create another." } showWarning={ false } /> }
-                />
+                    />
             ) : (
                     <OpenModalButton
                         className="create-routine"
@@ -74,16 +75,19 @@ function UserProfile () {
                         onItemClick={ closeMenu }
                         modalComponent={ <RoutineFormModal routines={ routines } showWarning={ true } /> }
                     />
-            ) }
+                ) }
+            </div>
 
             <div className="wave-2">
                 <img src={ waveSvgUp } alt="Wave" />
             </div>
-
+            <div className='usersec2'>
             <h1>Mange your routines</h1>
             { routines ? (
-                routines.map( ( routine ) => (
-                    <div className="routine-tile" key={ routine.id }>
+                    routines.map( ( routine ) => (
+
+                        <div className="routine-section" key={ routine.id }>
+                            <div className="routine-tile">
                         <img className="routine-img" alt={ routine.name } src={ routine.coverImage } />
                         <h3>{ routine.name }</h3>
                         { routine.habits.map( ( habit ) => (
@@ -96,6 +100,8 @@ function UserProfile () {
                                  <p>  { habit.category } </p> */}
                             </div>
                         ) ) }
+                            </div>
+                            <div className="routine-buttons">
                         <OpenModalButton
                         className='edit-routine'
                         buttonText="Modify"
@@ -110,8 +116,10 @@ function UserProfile () {
                         <OpenModalButton
                             className='checkin'
                             buttonText="Check In"
-                            modalComponent={ <RoutineDeleteForm routineId={ routine.id } showWarning={ false } /> }
-                        />
+                                    onItemClick={ closeMenu }
+                                    modalComponent={ <ErrorModal message={ "Coming soon." } showWarning={ false } /> }
+                                />
+                            </div>
                     </div>
                 ) ) ) : (
                     <>
@@ -122,7 +130,8 @@ function UserProfile () {
                         onItemClick={ closeMenu }
                         modalComponent={ <RoutineFormModal /> }
                     /> */}</>
-            ) }
+                ) }
+            </div>
         </div>
     )
 }
