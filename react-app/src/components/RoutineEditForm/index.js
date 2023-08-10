@@ -132,6 +132,9 @@ function RoutineEditForm ( { existingRoutine } ) {
         }
     };
 
+    function isImgUrl ( url ) {
+        return /\.(jpg|jpeg|png|webp|avif|gif)$/.test( url )
+    }
     const handleSubmit = async ( e ) => {
         e.preventDefault();
 // TO DO add more submit buttons so user doesn't have to click through every step to chnage the routine name etc
@@ -388,6 +391,9 @@ function RoutineEditForm ( { existingRoutine } ) {
                             value={ coverImage }
                             onChange={ ( e ) => setCoverImage( e.target.value ) }
                         />
+                        { coverImage && !isImgUrl( coverImage ) && (
+                            <p>Please provide a valid image URL containing 'jpg', 'jpeg', or 'png'.</p>
+                        ) }
                     </div>
                 );
             default:

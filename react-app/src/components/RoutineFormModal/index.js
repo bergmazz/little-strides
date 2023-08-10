@@ -121,17 +121,27 @@ function RoutineFormModal ( { routines } ) {
     };
 
     function isImgUrl ( url ) {
-        return /\.(jpg|jpeg|png|webp|avif|gif)$/.test( url )
-    }
+        try {
+            // const parsedUrl = new URL( url );
+            const allowedExtensions = [ "jpg", "jpeg", "png", "webp", "avif", "gif" ];
+            // console.log( "img valid", parsedUrl )
+            // console.log( url.split( "." ).pop().toLowerCase() )
+            const fileExtension = url.split( "." ).pop().toLowerCase();
+            console.log( "img vvvvvvalid", fileExtension )
+            return allowedExtensions.includes( fileExtension );
+        } catch ( error ) {
+            return false;
+        }
+    };
 
     const handleSubmit = async ( e ) => {
         e.stopPropagation();
         e.preventDefault();
         console.log( habits )
-        if ( currentStep === totalSteps ) {
-            let i = isImgUrl( coverImage )
-            if ( !i ) return
-        }
+        // if ( currentStep === totalSteps ) {
+        //     let i = isImgUrl( coverImage )
+        //     if ( !i ) return
+        // }
         if ( habits.length >= 3 && currentStep === totalSteps ) {
             const routine = await dispatch(
                 createRoutine( {
