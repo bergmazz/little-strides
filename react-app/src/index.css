@@ -8,6 +8,7 @@ button{
           border:none;
                     font-family:  bobbyJones, Animatic SC, Helvetica cursive;
                     font-size: 18px;
+                    padding: 5px 15px;
 }
 
 @font-face {
@@ -15,6 +16,12 @@ button{
   src: url('./font/BobbyJonesSoft.otf') format("opentype");
   /* font-weight: 300 800; */
   font-style: normal;
+}
+
+input {
+font-family: Jost, Futura, Helvetica, Arial, sans-serif;
+border-radius:20px;
+padding: 5px 20px;
 }
 
 h1{

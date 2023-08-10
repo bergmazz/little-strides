@@ -15,8 +15,8 @@ function LoginFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log( "---------email", email )
-    console.log( "---------passwor", password )
+    // console.log( "---------email", email )
+    // console.log( "---------passwor", password )
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
@@ -32,12 +32,10 @@ function LoginFormModal() {
     // };
     const data = dispatch( login( 'demo@aa.io', 'password' ) );
     // const data = await dispatch( login( demoUserCredentials.email, demoUserCredentials.password ) );
-
-    if ( data ) {
-      setErrors( data );
-    } else {
-      closeModal();
-    }
+    // if ( data ) {
+    //   setErrors( data );
+    // } else {
+    closeModal();
   };
 
   return (
@@ -51,18 +49,18 @@ function LoginFormModal() {
           } ) }
         </ul>
         <label>
-          Email
           <input
             type="text"
-            value={email}
+            value={ email }
+            placeholder="email"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
         <label>
-          Password
           <input
             type="password"
+            placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
