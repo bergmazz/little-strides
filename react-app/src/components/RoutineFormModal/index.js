@@ -79,6 +79,9 @@ function RoutineFormModal ( { routines } ) {
         if ( currentStep === 4 ) {
             setCurrentStep( 2 );
         }
+        if ( currentStep === 5 && !habits && !selectedTopics ) {
+            setCurrentStep( 2 );
+        }
         if ( currentStep === 7 ) {
             setCurrentStep( 5 );
         }
@@ -202,14 +205,13 @@ function RoutineFormModal ( { routines } ) {
                         <div className={ routineName.length > 35 ? "char-count-red" : "char-count" }>
                             { routineName.length } / 35 characters
                         </div>
-                        <button type="button" disabled={ !routineName || routineName.length > 35 } onClick={ () => {
+                        <button className="help" type="button" disabled={ !routineName || routineName.length > 35 } onClick={ () => {
                             // makeRoutineId()
                             setCurrentStep( 2 )
                         } }>
                             help me build a routine
-
                         </button>
-                        <button type="button" disabled={ !routineName || routineName.length > 35 } onClick={ () => {
+                        <button className="go" type="button" disabled={ !routineName || routineName.length > 35 } onClick={ () => {
                             // makeRoutineId()
                             setCurrentStep( 5 )
                             setTopTopic( 'wellness' )
@@ -392,8 +394,15 @@ function RoutineFormModal ( { routines } ) {
                 );
             case 8:
                 return (
-                    <div>
+                    <div className="covers">
                         <p>choose cover image</p>
+                        {/* <img className="cover" src="" onClick={ () => { setCoverImage( "" ) } } /> */ }
+                        <img className="cover1" src="https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" ) } } />
+                        <img className="cover2" src="https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" ) } } />
+                        <img className="cover3" src="  https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" onClick={ () => { setCoverImage( "  https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" ) } } />
+                        <img className="cover4" src="https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg" ) } } />
+                        <img className="cover5" src="  https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" onClick={ () => { setCoverImage( "  https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" ) } } />
+                        <img className="cover6" src="https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" ) } } />
                         <input
                             type="text"
                             value={ coverImage }
@@ -413,13 +422,13 @@ function RoutineFormModal ( { routines } ) {
     return (
         <>
                     <div className="create-routine-container">
-                <h1>Create New Routine - Step { currentStep }</h1>
+                {/* <h1>Create New Routine - Step { currentStep }</h1> */ }
                         <form onSubmit={ handleSubmit }>
-                { stepContent( currentStep ) }
-                <div>
+                    <div className="step-content"> { stepContent( currentStep ) }</div>
+                    <div className="button-container">
                         { currentStep !== 1 && currentStep !== 4 && currentStep !== totalSteps && (
-                        <button type="button" onClick={ handlePrevStep }>
-                            &lt; Backward
+                            <button className="left" type="button" onClick={ handlePrevStep }>
+                                &lt; Back it Up
                         </button>
                                 ) }
                                 { currentStep === 4 && (
@@ -428,14 +437,14 @@ function RoutineFormModal ( { routines } ) {
                                     </button>
                                 ) }
                                 { currentStep !== 1 && currentStep !== totalSteps && currentStep !== 6 && currentStep !== 7 && (
-                        <button type="button" onClick={ handleNextStep }>
-                            Forward &gt;
+                            <button className="right" type="button" onClick={ handleNextStep }>
+                                Onward &gt;
                         </button>
                         ) }
-                        { currentStep === totalSteps && <button type="button" onClick={ () => setCurrentStep( 1 ) }>
+                        { currentStep === totalSteps && <button className="right" type="button" onClick={ () => setCurrentStep( 1 ) }>
                             &lt; Change Routine Name
                         </button> }
-                        { currentStep === totalSteps && habits.length < 3 && <button type="button" onClick={ () => setCurrentStep( 5 ) }>
+                        { currentStep === totalSteps && habits.length < 3 && <button className="rightish" type="button" onClick={ () => setCurrentStep( 5 ) }>
                             &lt; Set at least 3 habits to submit
                         </button> }
                         { currentStep === totalSteps && <button type="submit" disabled={ !coverImage || habits.length < 3 }>Submit</button> }

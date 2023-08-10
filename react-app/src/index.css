@@ -6,6 +6,8 @@ button{
         cursor: pointer;
           border-radius: 20px;
           border:none;
+                    font-family:  bobbyJones, Animatic SC, Helvetica cursive;
+                    font-size: 18px;
 }
 
 @font-face {

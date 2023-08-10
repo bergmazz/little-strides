@@ -61,6 +61,7 @@ function UserProfile () {
         <div className='userprof'>
             <div className='usersec1'>
             <h1>{ "Hi,  " }{ currentUser.username }{ "!" }</h1>
+
             { hasReachedLimit ? (
                 <OpenModalButton
                     className="create-routine"
@@ -82,7 +83,11 @@ function UserProfile () {
                 <img src={ waveSvgUp } alt="Wave" />
             </div>
             <div className='usersec2'>
-            <h1>Mange your routines</h1>
+                { routines && routines.length > 0 ? (
+                    <h1>Manage your routines</h1>
+                ) : (
+                    <h1>Get started, create a routine.</h1>
+                ) }
             { routines ? (
                     routines.map( ( routine ) => (
 
