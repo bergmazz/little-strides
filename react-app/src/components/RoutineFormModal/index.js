@@ -120,10 +120,18 @@ function RoutineFormModal ( { routines } ) {
         }
     };
 
+    function isImgUrl ( url ) {
+        return /\.(jpg|jpeg|png|webp|avif|gif)$/.test( url )
+    }
+
     const handleSubmit = async ( e ) => {
         e.stopPropagation();
         e.preventDefault();
         console.log( habits )
+        if ( currentStep === totalSteps ) {
+            let i = isImgUrl( coverImage )
+            if ( !i ) return
+        }
         if ( habits.length >= 3 && currentStep === totalSteps ) {
             const routine = await dispatch(
                 createRoutine( {
@@ -227,24 +235,24 @@ function RoutineFormModal ( { routines } ) {
                     <div className="suggested-container">
                         <p>suggested habits</p>
                         <div className="suggested">
-                        { suggested.map( ( habit, index ) => {
-                            const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
-                            return (
-                                <div>
-                                    <button
-                                        className={ `suggested-habit-button ${ habits.some( ( h ) => h.description === habitText ) ? "selected" : "" }` }
-                                        key={ index }
-                                        onClick={ () => {
-                                            let habit = { "category": habitTopic, "description": habitText }
-                                            handleSelectedHabits( habit );
-                                        } }
-                                    >
-                                        { habitText }
-                                    </button>
-                                </div>
-                            );
-                        } ) }
-                    </div>
+                            { suggested.map( ( habit, index ) => {
+                                const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
+                                return (
+                                    <div>
+                                        <button
+                                            className={ `suggested-habit-button ${ habits.some( ( h ) => h.description === habitText ) ? "selected" : "" }` }
+                                            key={ index }
+                                            onClick={ () => {
+                                                let habit = { "category": habitTopic, "description": habitText }
+                                                handleSelectedHabits( habit );
+                                            } }
+                                        >
+                                            { habitText }
+                                        </button>
+                                    </div>
+                                );
+                            } ) }
+                        </div>
                     </div>
                 );
             case 5:
@@ -366,8 +374,12 @@ function RoutineFormModal ( { routines } ) {
                         <input
                             type="text"
                             value={ coverImage }
-                            onChange={ ( e ) => setCoverImage( e.target.value ) }
+                            onChange={ ( e ) => setCoverImage( e.target.value )
+                            }
                         />
+                        { coverImage && !isImgUrl( coverImage ) && (
+                            <p>Please provide a valid image URL containing 'jpg', 'jpeg', or 'png'.</p>
+                        ) }
                     </div>
                 );
             default:
@@ -403,7 +415,7 @@ function RoutineFormModal ( { routines } ) {
                         { currentStep === totalSteps && habits.length < 3 && <button type="button" onClick={ () => setCurrentStep( 5 ) }>
                             &lt; Set at least 3 habits to submit
                         </button> }
-                        { currentStep === totalSteps && <button type="submit" disabled={ !coverImage && habits.length < 3 }>Submit</button> }
+                        { currentStep === totalSteps && <button type="submit" disabled={ !coverImage || habits.length < 3 }>Submit</button> }
 
                 </div>
                         </form>
