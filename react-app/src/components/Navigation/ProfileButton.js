@@ -53,13 +53,13 @@ function ProfileButton ( { user } ) {
             <li>{ user.email }</li> */}
             <li className="name">Hello, { user.username }!</li>
             <li className="user-link">
-              <NavLink to="/user">My Routines</NavLink>
+              <NavLink to="/user" onClick={ closeMenu }>My Routines</NavLink>
             </li>
             <li className="progress-link">
-              <NavLink to="/user">My Progress</NavLink>
+              <NavLink to="/user" onClick={ closeMenu }>My Progress</NavLink>
             </li>
             <li className="community-link">
-              <NavLink to="/community">My Community</NavLink>
+              <NavLink to="/community" onClick={ closeMenu }>My Community</NavLink>
             </li>
             <li>
               <button onClick={handleLogout}>Log Out</button>

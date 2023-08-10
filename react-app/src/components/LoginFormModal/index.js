@@ -15,6 +15,8 @@ function LoginFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log( "---------email", email )
+    console.log( "---------passwor", password )
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
@@ -24,12 +26,13 @@ function LoginFormModal() {
   };
 
   const handleDemoUserLogin = async () => {
-    const demoUserCredentials = {
-      email: "demo@aa.io",
-      password: "password",
-    };
+    // const demoUserCredentials = {
+    //   email: "demo@aa.io",
+    //   password: "password",
+    // };
+    const data = dispatch( login( 'demo@aa.io', 'password' ) );
+    // const data = await dispatch( login( demoUserCredentials.email, demoUserCredentials.password ) );
 
-    const data = await dispatch( login( demoUserCredentials.email, demoUserCredentials.password ) );
     if ( data ) {
       setErrors( data );
     } else {
@@ -42,9 +45,10 @@ function LoginFormModal() {
       <h1>Hello there! Welcome back.</h1>
       <form onSubmit={handleSubmit}>
         <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
+          { errors.map( ( error, idx ) => {
+            let parts = error.split( ":" );
+            return <li key={ idx }>{ parts[ 1 ] }</li>;
+          } ) }
         </ul>
         <label>
           Email
