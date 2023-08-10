@@ -358,7 +358,11 @@ function RoutineEditForm ( { existingRoutine } ) {
                                 </option>
                             ) ) }
                         </select>
+                        <div className={ habitDetail.length > 75 ? "char-count-red" : "char-count" }>
+                            { habitDetail.length } / 75 characters
+                        </div>
                         <button
+                            disabled={ !habitCat || !habitDetail || habitDetail.length > 75 }
                             onClick={ () => {
                                 handleSelectedHabits( { "category": habitCat, "description": habitDetail } )
                                 //some sool confetti or something animated when you commit
