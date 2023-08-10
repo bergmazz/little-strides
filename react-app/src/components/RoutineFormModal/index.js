@@ -395,7 +395,10 @@ function RoutineFormModal ( { routines } ) {
             case 8:
                 return (
                     <div className="covers">
-                        <p>choose cover image</p>
+                        <h2>Choose cover image</h2>
+                        { !isValidURL( coverImage ) && coverImage.length > 5 && (
+                            <p>Or please provide a valid image URL starting with http:// or https:// and ending with png, jpg, jpeg, gif, or svg.</p>
+                        ) }
                         {/* <img className="cover" src="" onClick={ () => { setCoverImage( "" ) } } /> */ }
                         <img className="cover1" src="https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" ) } } />
                         <img className="cover2" src="https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" ) } } />
@@ -409,13 +412,11 @@ function RoutineFormModal ( { routines } ) {
                             onChange={ ( e ) => setCoverImage( e.target.value )
                             }
                         />
-                        { !isValidURL( coverImage ) && coverImage.length > 5 && (
-                            <p>Please provide a valid image URL starting with http:// or https:// and ending with png, jpg, jpeg, gif, or svg.</p>
-                        ) }
+
                     </div>
                 );
             default:
-                return ( <p>oops</p> );
+                return ( <p>oops, step not found</p> );
         }
     };
 

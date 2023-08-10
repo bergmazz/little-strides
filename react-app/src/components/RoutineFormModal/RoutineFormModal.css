@@ -53,6 +53,7 @@ margin: 5% 10%
 object-fit: cover;
   width:235px;
   height: 155px;
+  cursor:pointer;
 }
 
 /* .step-container{
