@@ -13,7 +13,7 @@ function Navigation({ isLoaded }){
 			<NavLink exact to="/"><img className="white-logo" src={ whiteLogo } alt="logo to home" /></NavLink>
 			{isLoaded && (
 				<div>
-					<ProfileButton user={sessionUser} />
+					<ProfileButton user={ sessionUser } />
 				</div>
 			)}
 		</nav>

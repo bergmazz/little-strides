@@ -8,13 +8,13 @@ import SignupFormModal from "../SignupFormModal";
 import smiley from './smiley.png';
 import "./Profile.css"
 
-function ProfileButton({ user }) {
+function ProfileButton ( { user } ) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
   const openMenu = () => {
-    if (showMenu) return;
+    if ( showMenu ) return;
     setShowMenu(true);
   };
 
