@@ -19,7 +19,7 @@ function SignupFormModal() {
 			if ( profilePic === "" ) {
 				setProfilePic( "https://media.istockphoto.com/id/1343130293/photo/happy-smiley-face-emoticon-on-white-background.jpg" )
 			}
-			const data = await dispatch( signUp( username, email, password, profilePic ) );
+			const data = await dispatch( signUp( username, email, password ) );
 			if (data) {
 				setErrors(data);
 			} else {
