@@ -4,23 +4,23 @@ from sqlalchemy.sql import text
 
 def seed_routines():
     demo1 = Routine(
-        user_id=1, rname="My Daily Routine", cover_image="https://images.pexels.com/photos/12988318/pexels-photo-12988318.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        user_id=1, rname="My Daily Routine", cover_image="https://images.pexels.com/photos/12988318/pexels-photo-12988318.jpeg",
         topic="Depression"
     )
     demo2 = Routine(
-        user_id=1, rname="Meditations", cover_image="https://images.pexels.com/photos/3150250/pexels-photo-3150250.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        user_id=1, rname="Meditations", cover_image="https://images.pexels.com/photos/3150250/pexels-photo-3150250.jpeg",
         topic="Wellnes"
     )
     demo3 = Routine(
-        user_id=1, rname="Not Sure", cover_image="https://media.istockphoto.com/id/91520053/photo/senior-man-shrugging-shoulders.jpg?b=1&s=612x612&w=0&k=20&c=oVQsSJ5ukgkqKcrjjZi26DmKm-swwjIzL0b2DAF_u9Q=",
+        user_id=1, rname="Not Sure", cover_image="https://media.istockphoto.com/id/91520053/photo/senior-man-shrugging-shoulders.jpg",
         topic="Stress"
     )
     willow1 = Routine(
-        user_id=2, rname="On the  Daily", cover_image="https://images.pexels.com/photos/552783/pexels-photo-552783.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        user_id=2, rname="On the  Daily", cover_image="https://images.pexels.com/photos/552783/pexels-photo-552783.jpeg",
         topic="Anxiety"
     )
     bobbie1 = Routine(
-        user_id=3, rname="My Daily Routine", cover_image="https://images.pexels.com/photos/54512/pexels-photo-54512.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        user_id=3, rname="My Daily Routine", cover_image="https://images.pexels.com/photos/54512/pexels-photo-54512.jpeg",
         topic="Grief"
     )
     bobbie2 = Routine(
