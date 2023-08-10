@@ -69,9 +69,6 @@ function RoutineFormModal ( { routines } ) {
         if ( currentStep === 7 ) {
             setCurrentStep( 5 );
         }
-        if ( currentStep === totalSteps ) {
-            setCurrentStep( 5 );
-        }
     };
 
 // this only works when refreshing the page - see showWarning in Modal.js for exit moda warning
@@ -171,14 +168,17 @@ function RoutineFormModal ( { routines } ) {
                             value={ routineName }
                             onChange={ ( e ) => setRoutineName( e.target.value ) }
                         />
-                        <button type="button" disabled={ !routineName } onClick={ () => {
+                        <div className={ routineName.length > 35 ? "char-count-red" : "char-count" }>
+                            { routineName.length } / 35 characters
+                        </div>
+                        <button type="button" disabled={ !routineName || routineName.length > 35 } onClick={ () => {
                             // makeRoutineId()
                             setCurrentStep( 2 )
                         } }>
                             help me build a routine
 
                         </button>
-                        <button type="button" disabled={ !routineName } onClick={ () => {
+                        <button type="button" disabled={ !routineName || routineName.length > 35 } onClick={ () => {
                             // makeRoutineId()
                             setCurrentStep( 5 )
                             setTopTopic( 'wellness' )
@@ -255,14 +255,6 @@ function RoutineFormModal ( { routines } ) {
                             return (
                                 <div>
                                     <p>{ habit.description }</p>
-                                    {/* //actual delete for edit, oops: */ }
-                                    {/* <button
-                                        key={ habit.description }
-                                        onClick={ () => {
-                                            dispatch( deleteHabit( habit ) )
-                                        } }
-                                    > delete
-                                    </button> */}
                                     <button
                                         key={ [ index, habit.description ] }
                                         onClick={ () => {
@@ -390,7 +382,7 @@ function RoutineFormModal ( { routines } ) {
                         <form onSubmit={ handleSubmit }>
                 { stepContent( currentStep ) }
                 <div>
-                                { currentStep !== 1 && currentStep !== 4 && (
+                        { currentStep !== 1 && currentStep !== 4 && currentStep !== totalSteps && (
                         <button type="button" onClick={ handlePrevStep }>
                             &lt; Backward
                         </button>
@@ -404,8 +396,15 @@ function RoutineFormModal ( { routines } ) {
                         <button type="button" onClick={ handleNextStep }>
                             Forward &gt;
                         </button>
-                    ) }
-                    { currentStep === totalSteps && <button type="submit">Submit</button> }
+                        ) }
+                        { currentStep === totalSteps && <button type="button" onClick={ () => setCurrentStep( 1 ) }>
+                            &lt; Change Routine Name
+                        </button> }
+                        { currentStep === totalSteps && habits.length < 3 && <button type="button" onClick={ () => setCurrentStep( 5 ) }>
+                            &lt; Set at least 3 habits to submit
+                        </button> }
+                        { currentStep === totalSteps && <button type="submit" disabled={ !coverImage && habits.length < 3 }>Submit</button> }
+
                 </div>
                         </form>
             </div>
