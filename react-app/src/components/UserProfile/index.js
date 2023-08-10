@@ -92,6 +92,7 @@ function UserProfile () {
                                     <img alt={ routine.name } src={ routine.coverImage } />
                                     <h1>{ routine.name }</h1>
                                 </div>
+                                <div className="habittext">
                         { routine.habits.map( ( habit ) => (
                             <div key={ habit.id }>
                                 <div className='bubble'>
@@ -102,6 +103,7 @@ function UserProfile () {
                                  <p>  { habit.category } </p> */}
                             </div>
                         ) ) }
+                                </div>
                             </div>
                             <div className="routine-buttons">
                         <OpenModalButton

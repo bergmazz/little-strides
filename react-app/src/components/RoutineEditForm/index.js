@@ -132,9 +132,20 @@ function RoutineEditForm ( { existingRoutine } ) {
         }
     };
 
-    function isImgUrl ( url ) {
-        return /\.(jpg|jpeg|png|webp|avif|gif)$/.test( url )
-    }
+    const isValidURL = ( url ) => {
+        const pattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg))$/i;
+        return pattern.test( url );
+    };
+
+    const validateImage = ( url, onSuccess, onError ) => {
+        const img = new Image();
+
+        img.onload = onSuccess;
+        img.onerror = onError;
+
+        img.src = url;
+    };
+
     const handleSubmit = async ( e ) => {
         e.preventDefault();
 // TO DO add more submit buttons so user doesn't have to click through every step to chnage the routine name etc
@@ -391,8 +402,8 @@ function RoutineEditForm ( { existingRoutine } ) {
                             value={ coverImage }
                             onChange={ ( e ) => setCoverImage( e.target.value ) }
                         />
-                        { coverImage && !isImgUrl( coverImage ) && (
-                            <p>Please provide a valid image URL containing 'jpg', 'jpeg', or 'png'.</p>
+                        { !isValidURL( coverImage ) && coverImage.length > 5 && (
+                            <p>Please provide a valid image URL starting with http:// or https:// and ending with png, jpg, jpeg, gif, or svg.</p>
                         ) }
                     </div>
                 );

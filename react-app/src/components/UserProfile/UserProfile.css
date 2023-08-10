@@ -45,6 +45,7 @@ z-index: 8;
 }
 
 .routine-img{
+          margin-top: 20px;
     width: 80%;
     display: column;
     /* justify-content: center;
@@ -59,15 +60,17 @@ object-fit: cover;
 }
 .routine-tile h1{
 font-size:30px;
-    margin: 20px 80px 40px 80px;
+    margin: 40px 80px 40px 80px;
 }
 
-
+.habittext {
+        margin-bottom: 80px;
+}
 
 .routine-buttons{
     display:flex;
     flex-direction: column;
-    margin:40px;
+    margin:160px 80px 40px 80px;
 }
 .routine-buttons button{
     margin:20px;

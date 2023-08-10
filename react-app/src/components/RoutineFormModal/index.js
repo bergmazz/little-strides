@@ -23,6 +23,19 @@ function RoutineFormModal ( { routines } ) {
 
     const { closeModal } = useModal();
 
+    const resetForm = () => {
+        // setCurrentStep( 1 );
+        setRoutineName( "" );
+        setCoverImage( "" );
+        setSelectedTopics( [] );
+        setTopTopic( "" );
+        setHabits( [] );
+        setHabitDetail( [] );
+        setHabitCat( [] );
+        setSuggestedFetched( false );
+        setError( [] );
+        setEditMe( {} );
+    };
 
     const suggested = useSelector( ( state ) => state.habit.suggested );
 
@@ -120,24 +133,24 @@ function RoutineFormModal ( { routines } ) {
         }
     };
 
-    function isImgUrl ( url ) {
-        try {
-            // const parsedUrl = new URL( url );
-            const allowedExtensions = [ "jpg", "jpeg", "png", "webp", "avif", "gif" ];
-            // console.log( "img valid", parsedUrl )
-            // console.log( url.split( "." ).pop().toLowerCase() )
-            const fileExtension = url.split( "." ).pop().toLowerCase();
-            console.log( "img vvvvvvalid", fileExtension )
-            return allowedExtensions.includes( fileExtension );
-        } catch ( error ) {
-            return false;
-        }
+    const isValidURL = ( url ) => {
+        const pattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg))$/i;
+        return pattern.test( url );
+    };
+
+    const validateImage = ( url, onSuccess, onError ) => {
+        const img = new Image();
+
+        img.onload = onSuccess;
+        img.onerror = onError;
+
+        img.src = url;
     };
 
     const handleSubmit = async ( e ) => {
         e.stopPropagation();
         e.preventDefault();
-        console.log( habits )
+        // console.log( habits )
         // if ( currentStep === totalSteps ) {
         //     let i = isImgUrl( coverImage )
         //     if ( !i ) return
@@ -387,8 +400,8 @@ function RoutineFormModal ( { routines } ) {
                             onChange={ ( e ) => setCoverImage( e.target.value )
                             }
                         />
-                        { coverImage && !isImgUrl( coverImage ) && (
-                            <p>Please provide a valid image URL containing 'jpg', 'jpeg', or 'png'.</p>
+                        { !isValidURL( coverImage ) && coverImage.length > 5 && (
+                            <p>Please provide a valid image URL starting with http:// or https:// and ending with png, jpg, jpeg, gif, or svg.</p>
                         ) }
                     </div>
                 );

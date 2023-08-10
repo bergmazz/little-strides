@@ -19,9 +19,9 @@
 //                 <div key={ routine.id }>
 //                     <h2>{ "Hello,  " }{ currentUser.username }</h2>
 //                     <h3>{ routine.rname }</h3>
-//                     <p>Cover Image: { routine.cover_image }</p>
-//                     <p>Topic: { routine.topic }</p>
-//                     <p>Habits: { routine.habits }</p>
+//                     <p>Cover Image</p>
+//                     <p>Topic</p>
+//                     <p>Habits</p>
 //                 </div>
 //             ) ) }
 //         </div>
