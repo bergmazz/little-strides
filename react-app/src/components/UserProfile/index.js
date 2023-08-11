@@ -34,9 +34,10 @@ function UserProfile () {
     };
 
     useEffect( () => {
+        console.log( currentUser )
         dispatch( fetchRoutines() );
         // dispatch( currentUserHabits() )
-    }, [ dispatch ] );
+    }, [ dispatch, currentUser ] );
 
     useEffect( () => {
         // console.log( "---------------Inside useEffect" );
