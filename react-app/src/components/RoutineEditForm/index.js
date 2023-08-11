@@ -403,9 +403,9 @@ function RoutineEditForm ( { existingRoutine } ) {
                         {/* <img className="cover" src="" onClick={ () => { setCoverImage( "" ) } } /> */ }
                         <img className="cover1" src="https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" ) } } />
                         <img className="cover2" src="https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" ) } } />
-                        <img className="cover3" src="  https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" onClick={ () => { setCoverImage( "  https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" ) } } />
+                        <img className="cover3" src="https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" onClick={ () => { setCoverImage( "  https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" ) } } />
                         <img className="cover4" src="https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg" ) } } />
-                        <img className="cover5" src="  https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" onClick={ () => { setCoverImage( "  https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" ) } } />
+                        <img className="cover5" src="https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" onClick={ () => { setCoverImage( "  https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" ) } } />
                         <img className="cover6" src="https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" ) } } />
                         <input
                             type="text"

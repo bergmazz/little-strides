@@ -12,7 +12,7 @@ def seed_routines():
         topic="Wellnes"
     )
     demo3 = Routine(
-        user_id=1, rname="Not Sure", cover_image="https://media.istockphoto.com/id/91520053/photo/senior-man-shrugging-shoulders.jpg",
+        user_id=1, rname="Not Sure", cover_image="https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg",
         topic="Stress"
     )
     willow1 = Routine(
