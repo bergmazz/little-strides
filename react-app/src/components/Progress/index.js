@@ -61,17 +61,18 @@ function Progress () {
     return (
         <div className='userprof'>
             <div className='usersec1'>
-                <h1>{ "Making some strides!" }</h1>
+                <h1>***FEATURE IN PROGRESS!***</h1>
+                <h1>Making some strides!</h1>
+                <h4>Here's a breakdown of "yes" repsonses by routines</h4>
                 <div>
                     { routines.map( ( routine ) => (
                         <div className="routine-section" key={ routine.id }>
-                            <div className="routine-tile">
-                                <div className="routine-img">
-                                    <img alt={ routine.name } src={ routine.coverImage } />
+                            {/* <div className="routine-tile"> */ }
+                            <div >
                                     <h1>{ routine.name }</h1>
-                                    <h4>{ routine.averagePastWeek }% last week</h4>
-                                    <h4>{ routine.averageCompletionAllTime }% all time</h4>
-                                </div>
+                                <h4>You completed { routine.averagePastWeek }% of habits checking in last week</h4>
+                                <h4>Your all time track record for this routine is at { routine.averageCompletionAllTime }% right now</h4>
+
                             </div>
                         </div>
                     ) ) }
@@ -83,7 +84,7 @@ function Progress () {
             </div>
             <div className='usersec2'>
                 { routines && routines.length > 0 ? (
-                    <h1>Your Pogress</h1>
+                    <h1>Pogress per habit</h1>
                 ) : (
                     <h1>Get started, create a routine.</h1>
                 ) }
