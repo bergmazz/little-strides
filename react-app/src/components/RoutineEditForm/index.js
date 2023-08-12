@@ -209,10 +209,13 @@ function RoutineEditForm ( { existingRoutine } ) {
                             value={ routineName }
                             onChange={ ( e ) => setRoutineName( e.target.value ) }
                         />
-                        <button type="button" onClick={ () => { setCurrentStep( 2 ) } }>
+                        <div className={ routineName.length > 35 || routineName.length < 4 ? "char-count-red" : "char-count" }>
+                            { routineName.length } / 35 characters
+                        </div>
+                        <button type="button" disabled={ !routineName || routineName.length > 35 || routineName.length < 4 } onClick={ () => { setCurrentStep( 2 ) } }>
                             suggest some new habits
                         </button>
-                        <button type="button" disabled={ !routineName } onClick={ () => { setCurrentStep( 5 ) } }>
+                        <button type="button" disabled={ !routineName || routineName.length > 35 || routineName.length < 4 } onClick={ () => { setCurrentStep( 5 ) } }>
                             edit my habits and write more
                         </button>
                     </div>
