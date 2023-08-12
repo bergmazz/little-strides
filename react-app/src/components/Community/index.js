@@ -15,40 +15,62 @@ function Community () {
         dispatch( allUserHabits() );
     }, [ dispatch ] );
 
-    // const addToRoutine = ( habitId, routineId ) => {
-    //     dispatch( createHabit( habitId, routineId ) );
+
+    // const handleSelectedHabit = ( habit, routine ) => {
+    //     const { description, category } = habit;
+    //     const newHabit = await dispatch(
+    //         createHabit( {
+    //             routineId: routine.id,
+    //             description: habit.description,
+    //             category: habit.category
+    //         } ) )
     // };
+
+
 
     return (
         <div>
-
+            <h1>***FEATURE IN PROGRESS!***</h1>
             <h2>Your Feed</h2>
             <p>some posts</p>
 
             <h2>Community Habits</h2>
             { communityHabits ? (
-                communityHabits.map( ( habit ) => (
-                    <div className="habit-tile" key={ habit.id }>
-                        <p>{ habit.description }</p>
-                        {/* { routines ? (
-                            routines.map( ( routine ) => (
+                // communityHabits.map( ( habit ) => (
+                //     <div className="habit-tile" key={ habit.id }>
+                //         <p>{ habit.description }</p>
+                //         { routines ? (
+                //             routines.map( ( routine ) => (
+                //                 <button
+                //                     className='add-habit-to-routine'
+                //                     onClick={ () => {
+                //                         addToRoutine( habit.id, routine.id );
+                //                     } }
+                //                 >
+                //                     Add to { routine.name }
+                //                 </button>
+                //             ) )
+                <div className="suggested">
+                    { communityHabits.map( ( habit, index ) => {
+                        // const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
+                        return (
+                            <div>
                                 <button
-                                    className='add-habit-to-routine'
-                                    onClick={ () => {
-                                        addToRoutine( habit.id, routine.id );
-                                    } }
+                                    // className={ `suggested-habit-button ${ habits.some( ( h ) => h.description === habitText ) ? "selected" : "" }` }
+                                    key={ index }
+                                    // onClick={ () => {
+                                    //     let habit = { "category": habitTopic, "description": habitText }
+                                    //     handleSelectedHabit( habit, routine );
+                                    // } }
                                 >
-                                    Add to { routine.name }
+                                    { habit.description }
                                 </button>
-                            ) )
-                        ) : (
-                            <button>
-                                Log in to add to routine
-                            </button>
-                        ) } */}
+                            </div>
+                        );
+                    } ) }
+                </div>
 
-                    </div>
-                ) )
+
             ) : (
                 <p>No habits found in the community.</p>
             ) }
