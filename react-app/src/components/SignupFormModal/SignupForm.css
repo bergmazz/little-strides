@@ -1,0 +1,28 @@
+
+.signup{
+    width:40vw;
+    margin:auto;
+}
+
+.signup input {
+    width: 80%;
+    margin: 10px 5px;
+}
+
+.signup h2{
+    font-size: 55px;
+    margin: 40px 0px 20px 0px ;
+}
+.signup button{
+    margin: 50px 30%;
+}
+
+.char-count-red-email{
+        margin-left: 130px;
+          font-size: 12px;
+  color: #888;
+}
+
+.signup div{
+    margin-left: 220px;
+}

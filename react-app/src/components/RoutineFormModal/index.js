@@ -10,7 +10,7 @@ function RoutineFormModal ( { routines } ) {
     const hasReachedLimit = routines && routines.length >= 3;
     const dispatch = useDispatch();
     const [ currentStep, setCurrentStep ] = useState( 1 );
-    const [ routineName, setRoutineName ] = useState( "" );
+    const [ routineName, setRoutineName ] = useState( "My Daily Routine" );
     const [ coverImage, setCoverImage ] = useState( "" );
     const [ selectedTopics, setSelectedTopics ] = useState( [] );
     const [ topTopic, setTopTopic ] = useState( "" );
@@ -202,7 +202,7 @@ function RoutineFormModal ( { routines } ) {
                             value={ routineName }
                             onChange={ ( e ) => setRoutineName( e.target.value ) }
                         />
-                        <div className={ routineName.length > 35 ? "char-count-red" : "char-count" }>
+                        <div className={ routineName.length > 35 || routineName.length < 4 ? "char-count-red" : "char-count" }>
                             { routineName.length } / 35 characters
                         </div>
                         <button className="help" type="button" disabled={ !routineName || routineName.length > 35 } onClick={ () => {

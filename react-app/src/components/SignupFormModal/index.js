@@ -25,6 +25,7 @@ function SignupFormModal() {
 			} else {
 				closeModal();
 			}
+
 		} else {
 			setErrors([
 				"Confirm Password field must be the same as the Password field",
@@ -33,8 +34,8 @@ function SignupFormModal() {
 	};
 
 	return (
-		<>
-			<h1>Sign Up</h1>
+		<div className="signup">
+			<h2>Nice to Meet You!</h2>
 			<form onSubmit={handleSubmit}>
 				<ul>
 					{ errors.map( ( error, idx ) => {
@@ -51,6 +52,21 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				{ email.length > 300 ? (
+					<p className={ "char-count-red" }>
+						that's pretty long
+					</p>
+				) : (
+					email.length > 3 && ( !email.includes( "@" ) || !email.includes( "." ) ) ? (
+						<p className={ "char-count-red-email" }>
+							hmm, that doesn't look like an email...... could I get an "@" and a "." in there?
+						</p>
+					) : (
+						<div className={ "char-count" }>
+							just to log in with
+						</div>
+					)
+				) }
 				<label>
 					<input
 						type="text"
@@ -60,6 +76,9 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				<div className={ username.length > 20 || username.length < 4 ? "char-count-red" : "char-count" }>
+					{ username.length } / 20 characters
+				</div>
 				<label>
 					<input
 						type="password"
@@ -69,6 +88,9 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				<div className={ password.length > 24 || password.length < 8 ? "char-count-red" : "char-count" }>
+					{ password.length } / 24 characters
+				</div>
 				<label>
 					<input
 						type="password"
@@ -78,18 +100,30 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				{ password !== confirmPassword &&
+					<div className={ confirmPassword.length > 7 ? "char-count-red" : "char-count" }>
+						not matching.... yet
+					</div>
+				}
+				{ confirmPassword.length > 7 && password === confirmPassword &&
+					<div className={ "char-count" }>
+						we have a match!
+					</div>
+				}
 				{/* <label>
 					<input
 						type="text"
 						value={ profilePic }
 						placeholder="url for profile pic (optional)"
 						onChange={ ( e ) => setProfilePic( e.target.value ) }
-						required
 					/>
 				</label> */}
-				<button type="submit">Sign Up</button>
+				<button disabled={
+					password !== confirmPassword || password.length > 24 || password.length < 8 ||
+					username.length > 20 || username.length < 4 || ( !email.includes( "@" ) || !email.includes( "." ) )
+				} type="submit">Sign Up</button>
 			</form>
-		</>
+		</div>
 	);
 }
 
