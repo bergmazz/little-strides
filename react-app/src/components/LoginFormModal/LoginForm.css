@@ -1,5 +1,5 @@
 #modal-content:has(.login){
-    background-color: #F8F3FF;
+    /* background-color: #F8F3FF; */
     width: 60vw;
     height: 75vh;
             box-shadow: 7px 9px #350079;
@@ -21,7 +21,7 @@
     height: 30px;
     margin: 15px 0;
         box-shadow: 5px 6px #350079;
-        border:none;
+     border: 1px solid  #E8DEF8;
         font-size: 16px;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .login input:focus {
-    outline: 2px solid  #E8DEF8;
+    outline: 2px solid  #CDAEFF
 }
 
 
