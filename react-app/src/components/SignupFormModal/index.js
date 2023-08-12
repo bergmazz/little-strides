@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
 import "./SignupForm.css";
@@ -13,6 +14,8 @@ function SignupFormModal() {
 	const [ errors, setErrors ] = useState( [] );
 	const [ profilePic, setProfilePic ] = useState( "" );
 	const { closeModal } = useModal();
+	const history = useHistory();
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if ( password === confirmPassword ) {
@@ -23,6 +26,7 @@ function SignupFormModal() {
 			if (data) {
 				setErrors(data);
 			} else {
+				history.push( "/user" );
 				closeModal();
 			}
 

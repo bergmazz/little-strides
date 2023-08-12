@@ -59,7 +59,7 @@ function ProfileButton ( { user } ) {
               <NavLink to="/user" onClick={ closeMenu }>My Routines</NavLink>
             </li>
             <li className="progress-link">
-              <NavLink to="/user" onClick={ closeMenu }>My Progress</NavLink>
+              <NavLink to="/progress" onClick={ closeMenu }>My Progress</NavLink>
             </li>
             <li className="community-link">
               <NavLink to="/community" onClick={ closeMenu }>My Community</NavLink>

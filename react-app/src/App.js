@@ -9,6 +9,7 @@ import HomePage from "./components/HomePage";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import UserProfile from "./components/UserProfile";
+import Progress from "./components/Progress"
 import Community from "./components/Community";
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path="/community">
             <Community />
+          </Route>
+          <Route path="/progress">
+            <Progress />
           </Route>
         </Switch>
       )}
