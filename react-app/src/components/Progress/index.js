@@ -61,14 +61,21 @@ function Progress () {
     return (
         <div className='userprof'>
             <div className='usersec1'>
-                <h1>{ "Hi,  " }{ currentUser.username }{ "!" }</h1>
-                { routines ? (
-                    <div>
-                    </div>
-                ) : (
-                    <div>
-                    </div>
-                ) }
+                <h1>{ "Making some strides!" }</h1>
+                <div>
+                    { routines.map( ( routine ) => (
+                        <div className="routine-section" key={ routine.id }>
+                            <div className="routine-tile">
+                                <div className="routine-img">
+                                    <img alt={ routine.name } src={ routine.coverImage } />
+                                    <h1>{ routine.name }</h1>
+                                    <h4>{ routine.averagePastWeek }% last week</h4>
+                                    <h4>{ routine.averageCompletionAllTime }% all time</h4>
+                                </div>
+                            </div>
+                        </div>
+                    ) ) }
+                </div>
             </div>
 
             <div className="wave-2">
@@ -80,7 +87,7 @@ function Progress () {
                 ) : (
                     <h1>Get started, create a routine.</h1>
                 ) }
-                { routines ? (
+                { routines && routines.length > 0 ? (
                     routines.map( ( routine ) => (
 
                         <div className="routine-section" key={ routine.id }>
@@ -95,25 +102,15 @@ function Progress () {
                                             <div className='bubble'>
                                                 <p>{ habit.description }</p>
                                             </div>
-                                            {/* <p>  { habit.percent } % yes </p>
+                                            <p>  { habit.percent } % yes </p>
                                 <p> { habit.streak } days in a row</p>
-                                 <p>  { habit.category } </p> */}
+                                            <p>  { habit.category } </p>
                                         </div>
                                     ) ) }
                                 </div>
                             </div>
                             <div className="routine-buttons">
-                                <OpenModalButton
-                                    className='edit-routine'
-                                    buttonText="Modify"
-                                    onItemClick={ closeMenu }
-                                    modalComponent={ <RoutineEditForm existingRoutine={ routine } showWarning={ true } /> }
-                                />
-                                <OpenModalButton
-                                    className='kill-routine'
-                                    buttonText="Delete"
-                                    modalComponent={ <RoutineDeleteForm routineId={ routine.id } showWarning={ false } /> }
-                                />
+
                                 <OpenModalButton
                                     className='checkin'
                                     buttonText="Check In"
