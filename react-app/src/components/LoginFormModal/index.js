@@ -43,8 +43,8 @@ function LoginFormModal() {
   };
 
   return (
-    <>
-      <h1>Hello there! Welcome back.</h1>
+    <div className="login">
+      <h2>Hello there! Welcome back.</h2>
       <form onSubmit={handleSubmit}>
         <ul>
           { errors.map( ( error, idx ) => {
@@ -70,15 +70,20 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
-        <button type="button" onClick={ handleDemoUserLogin }>Try out Demo User</button>
+        <button className="blue" type="submit">Log In</button>
+        <button className="orange" type="button" onClick={ handleDemoUserLogin }>Try out Demo User</button>
+        {/* <button className="yellow"> */ }
         <OpenModalButton
-          buttonText="I'm new here"
           onItemClick={ closeModal }
+          buttonText={ "I'm new here" }
+          // style={ { color: '#E3A72F' } }
           modalComponent={ <SignupFormModal /> }
         />
+        {/* I'm new here */ }
+        {/* </button> */ }
+
       </form>
-    </>
+    </div>
   );
 }
 
