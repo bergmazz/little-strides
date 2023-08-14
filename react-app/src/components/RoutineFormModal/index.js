@@ -284,16 +284,17 @@ function RoutineFormModal ( { routines } ) {
                 return (
                     <div>
                         <p>Own Your Habits</p>
+                        <div className="habitss">
                         { habits.map( ( habit, index ) => {
                             return (
-                                <div>
+                                <div className="row">
                                     <p>{ habit.description }</p>
                                     <button
                                         key={ [ index, habit.description ] }
                                         onClick={ () => {
                                             handleSelectedHabits( habit )
                                         } }
-                                    > delete
+                                    > trash can
                                     </button>
                                     <button
                                         key={ index }
@@ -303,12 +304,14 @@ function RoutineFormModal ( { routines } ) {
                                             setHabitCat( habit.category )
                                             setCurrentStep( 6 )
                                         } }
-                                    > pencil
+                                    > pencil icon
                                     </button>
                                 </div>
                             );
                         } ) }
+                        </div>
                         <button
+                            className="newhabit"
                             onClick={ () => {
                                 setHabitCat( "" )
                                 setHabitDetail( "" )

@@ -203,7 +203,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                             setRoutineName={ setRoutineName }
                             setCurrentStep={ setCurrentStep }
                         /> */}
-                        <p>Set a name for the routine</p>
+                        <h1>Set a name for the routine</h1>
                         <input
                             type="text"
                             value={ routineName }
@@ -222,7 +222,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                 ); case 2:
                 return (
                     <div>
-                        <p>Choose up to three topics:</p>
+                        <h1>Choose up to three topics:</h1>
                         <div className="topics-container">
                             { availableTopics.map( ( topic ) => (
                                 <label key={ topic } className="topic-tile">
@@ -241,7 +241,7 @@ function RoutineEditForm ( { existingRoutine } ) {
             case 3:
                 return (
                     <div>
-                        <p>Choose Your Focus</p>
+                        <h1>Choose Your Focus</h1>
                         { selectedTopics.map( ( topic ) => (
                             <label key={ topic } className="big-topic-tile">
                                 <input
@@ -258,7 +258,7 @@ function RoutineEditForm ( { existingRoutine } ) {
             case 4:
                 return (
                     <div className="suggested-container">
-                        <p>suggested habits</p>
+                        <h1>suggested habits</h1>
                         <div className="suggested">
                             { suggested.map( ( habit, index ) => {
                                 const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
@@ -282,10 +282,11 @@ function RoutineEditForm ( { existingRoutine } ) {
             case 5:
                 return (
                     <div>
-                        <p>Own Your Habits</p>
+                        <h1>Own Your Habits</h1>
+                        <div className="habitss">
                         { habits.map( ( habit, index ) => {
                             return (
-                                <div>
+                                <div className="row">
                                     <p>{ habit.description }</p>
                                     <button
                                         key={ [ "delete", index ] }
@@ -293,7 +294,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                                             setHabitsToDelete( [ ...habitsToDelete, habit.id ] )
                                             setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
                                         } }
-                                    > delete
+                                    > trash can
                                     </button>
                                     <button
                                         key={ index }
@@ -303,11 +304,12 @@ function RoutineEditForm ( { existingRoutine } ) {
                                             setHabitCat( habit.category )
                                             setCurrentStep( 6 )
                                         } }
-                                    > pencil
+                                    > pencil icon
                                     </button>
                                 </div>
                             );
                         } ) }
+                        </div>
                         <button
                             onClick={ () => {
                                 setHabitCat( "" )
@@ -323,7 +325,7 @@ function RoutineEditForm ( { existingRoutine } ) {
             case 6:
                 return (
                     <div>
-                        <p>edit your habit</p>
+                        <h1>edit your habit</h1>
                         <textarea
                             value={ habitDetail }
                             onChange={ ( e ) =>
@@ -360,7 +362,7 @@ function RoutineEditForm ( { existingRoutine } ) {
             case 7:
                 return (
                     <div>
-                        <p>create your habit</p>
+                        <h1>create your habit</h1>
                         <input
                             type="text"
                             value={ habitDetail }

@@ -69,6 +69,17 @@ object-fit: cover;
 
 }
 
+.habitss{
+    max-height:60vh;
+    overflow-y: auto;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /* .button-container button{
 
 } */
