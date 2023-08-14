@@ -51,7 +51,7 @@ function UserProfile () {
 
     if ( !currentUser ) return (
         <div className='no-user'>
-            <h1 className='no-user'>.              .....how did you get here?</h1>
+            <h1 className='no-user'>.              .....how did you get here? Hold tight for sec.</h1>
             {/* <Link to="/login" className="page-login-link">
                 <button className="login-signup-button" type="submit">Login</button>
             </Link> */}

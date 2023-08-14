@@ -39,15 +39,17 @@
 
 .name{
 color:  #461f51;
+  font-size: 18px;
 }
 .logout-button {
   margin-top: 5px;
+  margin-bottom: 5px;
   cursor: pointer;
   background-color: white;
   color: #CDAEFF;
-  box-shadow: 4px 5px  #461f51;
-  font-size: 15px;
-  padding: 6px 10px;
+  box-shadow: 2px 3px  #461f51;
+  font-size: 18px;
+  padding: 8px 8px;
 }
 
 .blue-text{
@@ -63,4 +65,15 @@ color:  #461f51;
 .yellow-text{
     color: #E3A72F;
      /* box-shadow:5px 6px #058789; */
+}
+
+.logged-out {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logged-out button{
+  background-color:white;
+  width: 100px;
+  margin:3px 0px;
 }
