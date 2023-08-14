@@ -56,16 +56,16 @@ function ProfileButton ( { user } ) {
             <li>{ user.email }</li> */}
             <li className="name">Hello, { user.username }!</li>
             <li className="user-link">
-              <NavLink to="/user" onClick={ closeMenu }>My Routines</NavLink>
+              <NavLink to="/user" className="orange-text" onClick={ closeMenu }>My Routines</NavLink>
             </li>
             <li className="progress-link">
-              <NavLink to="/progress" onClick={ closeMenu }>My Progress</NavLink>
+              <NavLink to="/progress" className="blue-text" onClick={ closeMenu }>My Progress</NavLink>
             </li>
             <li className="community-link">
-              <NavLink to="/community" onClick={ closeMenu }>My Community</NavLink>
+              <NavLink to="/community" className="yellow-text" onClick={ closeMenu }>My Community</NavLink>
             </li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button className="logout-button" onClick={ handleLogout }>Sign Out</button>
             </li>
           </>
         ) : (

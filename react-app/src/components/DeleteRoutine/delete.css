@@ -1,0 +1,14 @@
+.delete h3{
+ margin: 50px
+}
+.delete button{
+     margin: 0px 50px
+}
+
+.delete p{
+ margin: 50px
+}
+
+.delete{
+    justify-content: center
+}

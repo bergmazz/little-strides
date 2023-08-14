@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { fetchRoutines, deleteRoutine } from "../../store/routine";
+import "./delete.css"
 
 function RoutineDeleteForm ( { routineId } ) {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function RoutineDeleteForm ( { routineId } ) {
     };
 
     return (
-        <>
+        <div className="delete">
             { error && <p>Error: { error }</p> }
             <h3>Are you sure you want to delete this routine?</h3>
             <button type="button" onClick={ handleDelete }>
@@ -30,7 +31,7 @@ function RoutineDeleteForm ( { routineId } ) {
             {/* <button type="button" onClick={ closeModal }>
                 Cancel
             </button> */}
-        </>
+        </div>
     );
 }
 

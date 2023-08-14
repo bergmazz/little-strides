@@ -37,11 +37,30 @@
   /* color: */
 }
 
+.name{
+color:  #461f51;
+}
 .logout-button {
   margin-top: 5px;
   cursor: pointer;
-  background-color: #461f51;
-  color: white;
+  background-color: white;
+  color: #CDAEFF;
+  box-shadow: 4px 5px  #461f51;
   font-size: 15px;
   padding: 6px 10px;
+}
+
+.blue-text{
+    color:#058789;
+     /* box-shadow:5px 6px #D54B1A; */
+}
+
+.orange-text{
+    color:#D54B1A;
+     /* box-shadow:5px 6px#E3A72F; */
+}
+
+.yellow-text{
+    color: #E3A72F;
+     /* box-shadow:5px 6px #058789; */
 }
