@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Step1 } from "./Steps"
+import { Step1, Step2 } from "./Steps"
 import { fetchRoutines, createRoutine } from "../../store/routine";
 import { suggestedHabits, createHabit } from "../../store/habit";
 import { useDispatch, useSelector } from "react-redux";
@@ -101,19 +101,6 @@ function RoutineFormModal ( { routines } ) {
         };
     }, [] );
 
-    const handleSelectTopics = ( selectedTopic ) => {
-        if ( selectedTopics.includes( selectedTopic ) ) {
-            setSelectedTopics( selectedTopics.filter( ( topic ) => topic !== selectedTopic ) )
-        } else {
-            if ( selectedTopics.length < 3 ) {
-                setSelectedTopics( [
-                    ...selectedTopics,
-                    selectedTopic,
-                ] );
-            }
-        }
-    };
-
     const handleSelectedHabits = ( habit ) => {
         const { description, category } = habit;
         if ( habits.some( ( h ) => h.description === description ) ) {
@@ -202,20 +189,11 @@ function RoutineFormModal ( { routines } ) {
                 ); case 2:
                 return (
                     <div>
-                        <p>Choose up to three topics:</p>
-                        <div className="topics-container">
-                            { availableTopics.map( ( topic ) => (
-                                <label key={ topic } className="topic-tile">
-                                    <input
-                                        type="checkbox"
-                                        value={ topic }
-                                        checked={ selectedTopics.includes( topic ) }
-                                        onChange={ () => handleSelectTopics( topic ) }
-                                    />
-                                    { topic }
-                                </label>
-                            ) ) }
-                        </div>
+                        <Step2
+                            availableTopics={ availableTopics }
+                            selectedTopics={ selectedTopics }
+                            setSelectedTopics={ setSelectedTopics }
+                        />
                     </div>
                 );
             case 3:

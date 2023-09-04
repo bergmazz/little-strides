@@ -1,8 +1,8 @@
 export { default as Step1 } from "./a";
-// import Step2 from "./b";
-// import Step3 from "./c";
-// import Step4 from "./d";
-// import Step5 from "./e";
-// import Step6 from "./f";
-// import Step7 from "./g";
-// import Step8 from "./h";
+export { default as Step2 } from "./b";
+// export { default as Step3} from "./c";
+// export { default as Step4} from "./d";
+// export { default as Step5} from "./e";
+//export { default as Step6} from "./f";
+// export { default as Step7} from "./g";
+// export { default as Step8} from "./h";
