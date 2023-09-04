@@ -5,7 +5,6 @@ import { suggestedHabits, createHabit } from "../../store/habit";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./RoutineFormModal.css";
-import { image1, image2, image3, image4, image5, image6 } from "./Covers";
 
 function RoutineFormModal ( { routines } ) {
     const hasReachedLimit = routines && routines.length >= 3;
@@ -109,28 +108,9 @@ function RoutineFormModal ( { routines } ) {
         }
     };
 
-    const isValidURL = ( url ) => {
-        const pattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg))$/i;
-        return pattern.test( url );
-    };
-
-    const validateImage = ( url, onSuccess, onError ) => {
-        const img = new Image();
-
-        img.onload = onSuccess;
-        img.onerror = onError;
-
-        img.src = url;
-    };
-
     const handleSubmit = async ( e ) => {
         e.stopPropagation();
         e.preventDefault();
-        // console.log( habits )
-        // if ( currentStep === totalSteps ) {
-        //     let i = isImgUrl( coverImage )
-        //     if ( !i ) return
-        // }
         if ( habits.length >= 3 && currentStep === totalSteps ) {
             const routine = await dispatch(
                 createRoutine( {
@@ -235,64 +215,26 @@ function RoutineFormModal ( { routines } ) {
             case 7:
                 return (
                     <div>
-                        <p>create your habit</p>
-                        <input
-                            type="text"
-                            value={ habitDetail }
-                            onChange={ ( e ) =>
-                                setHabitDetail( e.target.value ) }
+                        <Step7
+                            habitDetail={ habitDetail }
+                            setHabitDetail={ setHabitDetail }
+                            habitCat={ habitCat }
+                            setHabitCat={ habitCat }
+                            availableTopics={ availableTopics }
+                            setCurrentStep={ setCurrentStep }
+                            habits={ habits }
+                            setHabits={ setHabits }
+                            handleSelectedHabits={ handleSelectedHabits }
                         />
-                        <select
-                            value={ habitCat }
-                            onChange={ ( e ) => setHabitCat( e.target.value ) }
-                        >
-                            <option value="">Select a category</option>
-                            { availableTopics.map( ( topic ) => (
-                                <option key={ topic } value={ topic.toLowerCase() }>
-                                    { topic }
-                                </option>
-                            ) ) }
-                        </select>
-                        <div className={ habitDetail.length > 75 ? "char-count-red" : "char-count" }>
-                            { habitDetail.length } / 75 characters
-                        </div>
-                        <button
-                            disabled={ !habitCat || !habitDetail || habitDetail.length > 75 }
-                            onClick={ () => {
-                                handleSelectedHabits( { "category": habitCat, "description": habitDetail } )
-                                //some sool confetti or something animated when you commit
-                                // setHabitCat( "" )
-                                // setHabitDetail( "" )
-                                setCurrentStep( 5 )
-                            } }>
-                            Commit!
-                        </button>
-
                     </div>
                 );
             case 8:
                 return (
-                    <div className="covers">
-                        <h2>Choose cover image</h2>
-                        { !isValidURL( coverImage ) && coverImage.length > 5 && (
-                            <p>Or please provide a valid image URL starting with http:// or https:// and ending with png, jpg, jpeg, gif, or svg.</p>
-                        ) }
-                        {/* <img className="cover" src="" onClick={ () => { setCoverImage( "" ) } } /> */ }
-                        <div className="covers-imgs">
-                        <img className="cover1" src={ image1 } onClick={ () => { setCoverImage( "https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" ) } } />
-                        <img className="cover2" src={ image2 } onClick={ () => { setCoverImage( "https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" ) } } />
-                            <img className="cover3" src={ image3 } onClick={ () => { setCoverImage( "https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" ) } } />
-                        <img className="cover4" src={ image4 } onClick={ () => { setCoverImage( "https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg" ) } } />
-                            <img className="cover5" src={ image5 } onClick={ () => { setCoverImage( "https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" ) } } />
-                        <img className="cover6" src={ image6 } onClick={ () => { setCoverImage( "https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" ) } } />
-                        </div>
-                        <input
-                            type="text"
-                            value={ coverImage }
-                            onChange={ ( e ) => setCoverImage( e.target.value )
-                            }
+                    <div>
+                        <Step8
+                            coverImage={ coverImage }
+                            setCoverImage={ setCoverImage }
                         />
-
                     </div>
                 );
             default:
@@ -302,10 +244,12 @@ function RoutineFormModal ( { routines } ) {
 
     return (
         <>
-                    <div className="create-routine-container">
+            <div className="create-routine-container">
                 {/* <h1>Create New Routine - Step { currentStep }</h1> */ }
-                        <form onSubmit={ handleSubmit }>
+                <form onSubmit={ handleSubmit }>
+
                     <div className="step-content"> { stepContent( currentStep ) }</div>
+
                     <div className="button-container">
                         { currentStep !== 1 && currentStep !== 4 && currentStep !== totalSteps && (
                             <button className="left" type="button" onClick={ handlePrevStep }>
