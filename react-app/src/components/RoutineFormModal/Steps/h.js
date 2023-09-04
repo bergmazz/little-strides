@@ -1,5 +1,5 @@
 import React from "react";
-import { image1, image2, image3, image4, image5, image6 } from "./Covers";
+import { image1, image2, image3, image4, image5, image6 } from "../Covers";
 
 function Step8 ( { coverImage, setCoverImage } ) {
 
