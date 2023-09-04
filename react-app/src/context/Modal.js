@@ -11,8 +11,7 @@ export function ModalProvider({ children }) {
   const [onModalClose, setOnModalClose] = useState(null);
 
   const closeModal = ( showWarning = false ) => {
-    // If callback function is truthy, call the callback function and reset it
-    //TODO differientiate between submit and background click close
+
     if ( showWarning ) {
       const shouldClose = window.confirm(
         "Are you sure you want to exit? Your progress will not be saved."
