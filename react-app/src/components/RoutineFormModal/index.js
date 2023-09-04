@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { a, b, c, d, e, f, g, h } from "./Steps"
+import { Step1 } from "./Steps"
 import { fetchRoutines, createRoutine } from "../../store/routine";
 import { suggestedHabits, createHabit } from "../../store/habit";
 import { useDispatch, useSelector } from "react-redux";
@@ -191,33 +191,12 @@ function RoutineFormModal ( { routines } ) {
             case 1:
                 return (
                     <div>
-                        {/* <Step1
+                        <Step1
                             routineName={ routineName }
                             setRoutineName={ setRoutineName }
                             setCurrentStep={ setCurrentStep }
-                        /> */}
-                        <p>Set a name for the routine</p>
-                        <input
-                            type="text"
-                            value={ routineName }
-                            onChange={ ( e ) => setRoutineName( e.target.value ) }
+                            setTopTopic={ setTopTopic }
                         />
-                        <div className={ routineName.length > 35 || routineName.length < 4 ? "char-count-red" : "char-count" }>
-                            { routineName.length } / 35 characters
-                        </div>
-                        <button className="help" type="button" disabled={ !routineName || routineName.length > 35 || routineName.length < 4 } onClick={ () => {
-                            // makeRoutineId()
-                            setCurrentStep( 2 )
-                        } }>
-                            help me build a routine
-                        </button>
-                        <button className="go" type="button" disabled={ !routineName || routineName.length > 35 || routineName.length < 4 } onClick={ () => {
-                            // makeRoutineId()
-                            setCurrentStep( 5 )
-                            setTopTopic( 'wellness' )
-                        } }>
-                            start from scratch
-                        </button>
                     </div>
                 ); case 2:
                 return (
