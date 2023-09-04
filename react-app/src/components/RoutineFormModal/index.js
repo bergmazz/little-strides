@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Step1, Step2 } from "./Steps"
+import { Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 } from "./Steps"
 import { fetchRoutines, createRoutine } from "../../store/routine";
 import { suggestedHabits, createHabit } from "../../store/habit";
 import { useDispatch, useSelector } from "react-redux";
@@ -96,7 +96,6 @@ function RoutineFormModal ( { routines } ) {
         };
         window.addEventListener( "beforeunload", handleBeforeUnload );
         return () => {
-
             window.removeEventListener( "beforeunload", handleBeforeUnload );
         };
     }, [] );
@@ -107,20 +106,6 @@ function RoutineFormModal ( { routines } ) {
             setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
         } else {
             setHabits( ( habits ) => [ ...habits, { description, category } ] );
-        }
-    };
-
-    const handleEditHabits = ( habit, prevHabit = habit ) => {
-        const { description, category } = habit;
-        if ( habits.some( ( h ) => h.description === description ) ) {
-            setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
-        } if ( habit !== prevHabit ) {
-            const existingHabitIndex = habits.findIndex( ( h ) => h.description === prevHabit.description );
-            if ( existingHabitIndex !== -1 ) {
-                const updatedHabits = [ ...habits ];
-                updatedHabits[ existingHabitIndex ] = { description, category };
-                setHabits( updatedHabits );
-            }
         }
     };
 
@@ -199,121 +184,53 @@ function RoutineFormModal ( { routines } ) {
             case 3:
                 return (
                     <div>
-                        <p>Choose Your Focus</p>
-                        { selectedTopics.map( ( topic ) => (
-                            <label key={ topic } className="big-topic-tile">
-                                <input
-                                    type="radio"
-                                    value={ topic.toLowerCase() }
-                                    checked={ topTopic === topic.toLowerCase() }
-                                    onChange={ () => setTopTopic( topic.toLowerCase() ) }
-                                />
-                                { topic }
-                            </label>
-                        ) ) }
+                        <Step3
+                            selectedTopics={ selectedTopics }
+                            topTopic={ topTopic }
+                            setTopTopic={ setTopTopic }
+                        />
                     </div>
                 );
             case 4:
                 return (
-                    <div className="suggested-container">
-                        <p>suggested habits</p>
-                        <div className="suggested">
-                            { suggested.map( ( habit, index ) => {
-                                const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
-                                return (
-                                    <div>
-                                        <button
-                                            className={ `suggested-habit-button ${ habits.some( ( h ) => h.description === habitText ) ? "selected" : "" }` }
-                                            key={ index }
-                                            onClick={ () => {
-                                                let habit = { "category": habitTopic, "description": habitText }
-                                                handleSelectedHabits( habit );
-                                            } }
-                                        >
-                                            { habitText }
-                                        </button>
-                                    </div>
-                                );
-                            } ) }
-                        </div>
+                    <div>
+                        <Step4
+                            suggested={ suggested }
+                            habits={ habits }
+                            handleSelectedHabits={ handleSelectedHabits }
+                        />
                     </div>
                 );
             case 5:
                 return (
                     <div>
-                        <p>Own Your Habits</p>
-                        <div className="habitss">
-                        { habits.map( ( habit, index ) => {
-                            return (
-                                <div className="row">
-                                    <p>{ habit.description }</p>
-                                    <button
-                                        key={ [ index, habit.description ] }
-                                        onClick={ () => {
-                                            handleSelectedHabits( habit )
-                                        } }
-                                    > trash can
-                                    </button>
-                                    <button
-                                        key={ index }
-                                        onClick={ () => {
-                                            setEditMe( habit )
-                                            setHabitDetail( habit.description );
-                                            setHabitCat( habit.category )
-                                            setCurrentStep( 6 )
-                                        } }
-                                    > pencil icon
-                                    </button>
-                                </div>
-                            );
-                        } ) }
-                        </div>
-                        <button
-                            className="newhabit"
-                            onClick={ () => {
-                                setHabitCat( "" )
-                                setHabitDetail( "" )
-                                setCurrentStep( 7 )
-                            } }
-                        >
-                            write new habit
-                        </button>
+                        <Step5
+                            habits={ habits }
+                            handleSelectedHabits={ handleSelectedHabits }
+                            setEditMe={ setEditMe }
+                            setHabitDetail={ setHabitDetail }
+                            setHabitCat={ setHabitCat }
+                            setCurrentStep={ setCurrentStep }
+                        />
                     </div>
 
                 );
             case 6:
                 return (
                     <div>
-                        <p>edit your habit</p>
-                        <textarea
-                            value={ habitDetail }
-                            onChange={ ( e ) =>
-                                setHabitDetail( e.target.value ) }
+                        <Step6
+                            habitDetail={ habitDetail }
+                            setHabitDetail={ setHabitDetail }
+                            habitCat={ habitCat }
+                            setHabitCat={ habitCat }
+                            availableTopics={ availableTopics }
+                            setCurrentStep={ setCurrentStep }
+                            habits={ habits }
+                            setHabits={ setHabits }
+                            editMe={ editMe }
                         />
-                        <select
-                            value={ habitCat.toLowerCase() }
-                            onChange={ ( e ) => setHabitCat( e.target.value ) }
-                        >
-                            { availableTopics.map( ( topic ) => (
-                                <option key={ topic } value={ topic.toLowerCase() }>
-                                    { topic }
-                                </option>
-                            ) ) }
-                        </select>
-                        <div className={ habitDetail.length > 75 ? "char-count-red" : "char-count" }>
-                            { habitDetail.length } / 75 characters
-                        </div>
-                        <button
-                            disabled={ !habitCat || !habitDetail || habitDetail.length > 75 }
-                            onClick={ () => {
-                                const habit = { "category": habitCat, "description": habitDetail }
-                                handleEditHabits( habit, editMe )
-                                //some sool confetti or something animated when you commit
-                                setCurrentStep( 5 )
-                            } }>
-                            Commit!
-                        </button>
                     </div>
+
                 );
             case 7:
                 return (
