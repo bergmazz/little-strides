@@ -7,7 +7,6 @@ import { useModal } from "../../context/Modal";
 import "./RoutineFormModal.css";
 
 function RoutineFormModal ( { routines } ) {
-    const hasReachedLimit = routines && routines.length >= 3;
     const dispatch = useDispatch();
     const [ currentStep, setCurrentStep ] = useState( 1 );
     const [ routineName, setRoutineName ] = useState( "My Daily Routine" );
@@ -219,7 +218,7 @@ function RoutineFormModal ( { routines } ) {
                             habitDetail={ habitDetail }
                             setHabitDetail={ setHabitDetail }
                             habitCat={ habitCat }
-                            setHabitCat={ habitCat }
+                            setHabitCat={ setHabitCat }
                             availableTopics={ availableTopics }
                             setCurrentStep={ setCurrentStep }
                             habits={ habits }

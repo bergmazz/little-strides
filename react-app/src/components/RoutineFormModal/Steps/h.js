@@ -8,14 +8,14 @@ function Step8 ( { coverImage, setCoverImage } ) {
         return pattern.test( url );
     };
 
-    const validateImage = ( url, onSuccess, onError ) => {
-        const img = new Image();
+    // const validateImage = ( url, onSuccess, onError ) => {
+    //     const img = new Image();
 
-        img.onload = onSuccess;
-        img.onerror = onError;
+    //     img.onload = onSuccess;
+    //     img.onerror = onError;
 
-        img.src = url;
-    };
+    //     img.src = url;
+    // };
 
     return (
         <div className="covers">
