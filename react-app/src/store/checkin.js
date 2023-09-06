@@ -22,3 +22,15 @@ export const deleteCheckin = ( checkinId ) => ( {
     type: DELETE_CHECKIN,
     payload: checkinId,
 } );
+
+
+//Thunks
+
+// GET / api / habit / checkin
+// or GET / api / habit / checkin ? topic =, <topic>
+
+//POST api / habit / checkin / <habit_id>
+
+//PUT /api/habit/checkin/<habit_id>
+
+//DELETE /api/habit/checkin/<habit_id>

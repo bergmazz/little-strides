@@ -11,7 +11,7 @@ import * as sessionActions from "./store/session";
 import * as routineActions from "./store/routine";
 import * as habitActions from "./store/habit";
 // import * as checkinActions from "./store/checkin";
-// import * as postActions from "./store/post";
+import * as postActions from "./store/post";
 import App from "./App";
 
 import "./index.css";
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV !== "production") {
 	window.routineActions = routineActions;
 	window.habitActions = habitActions;
 	// window.checkinActions = checkinActions;
-	// window.postActions = postActions;
+	window.postActions = postActions;
 }
 
 // Wrap the application with the Modal provider and render the Modal component

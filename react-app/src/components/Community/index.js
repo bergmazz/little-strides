@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import { allUserHabits, createHabit } from '../../store/habit';
+import { fetchPosts } from '../../store/post';
 
 // import './Community.css';
 
@@ -10,9 +11,10 @@ function Community () {
     // const currentUser = useSelector( ( state ) => state.session.user );
     // const routines = useSelector( state => state.routine.routines )
     const communityHabits = useSelector( ( state ) => state.habit.all );
-
+    const communityPost = useSelector( ( state ) => state.post.all );
     useEffect( () => {
         dispatch( allUserHabits() );
+        dispatch( fetchPosts() );
     }, [ dispatch ] );
 
 
@@ -27,12 +29,29 @@ function Community () {
     // };
 
 
-
     return (
         <div>
             <h1>***FEATURE IN PROGRESS!***</h1>
             <h2>Your Feed</h2>
             <p>some posts</p>
+            { communityPosts ? (
+                <div className="suggested">
+                    { communityPosts.map( ( post, index ) => {
+                        return (
+                            <div>
+                                <p
+                                    key={ index }
+                                >
+                                    { post.content }
+                                </p>
+                            </div>
+                        );
+                    } ) }
+                </div>
+            ) : (
+                <p>No posts, whoops.</p>
+            ) }
+
 
             <h2>Community Habits</h2>
             { communityHabits ? (
