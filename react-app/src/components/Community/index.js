@@ -38,10 +38,11 @@ function Community () {
                     { communityPosts.map( ( post, index ) => {
                         return (
                             <div className='post-tile' key={ index }>
-                                <p>
-                                    {/* { post.user } */ }
+                                <p className="post-user">
+                                    { post.user.username }
                                 </p>
-                                <p>
+                                <img className="post-img" src={ post.image } />
+                                <p className="post-content">
                                     { post.content }
                                 </p>
 
