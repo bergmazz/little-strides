@@ -249,7 +249,7 @@ function RoutineFormModal ( { routines } ) {
 
                     <div className="step-content"> { stepContent( currentStep ) }</div>
 
-                    <div className="button-container">
+                    <div className="button-container button-container-bottom">
                         { currentStep !== 1 && currentStep !== 4 && currentStep !== totalSteps && (
                             <button className="left" type="button" onClick={ handlePrevStep }>
                                 &lt; Back it Up

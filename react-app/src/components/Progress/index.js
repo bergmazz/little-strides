@@ -72,7 +72,6 @@ function Progress () {
                                     <h1>{ routine.name }</h1>
                                 <h4>You completed { routine.averagePastWeek }% of habits checking in last week</h4>
                                 <h4>Your all time track record for this routine is at { routine.averageCompletionAllTime }% right now</h4>
-
                             </div>
                         </div>
                     ) ) }

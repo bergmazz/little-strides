@@ -12,6 +12,8 @@ function Step1 ( { routineName, setRoutineName, setTopTopic, setCurrentStep } ) 
             <div className={ routineName.length > 35 || routineName.length < 4 ? "char-count-red" : "char-count" }>
                 { routineName.length } / 35 characters
             </div>
+
+            <div className="start-button-container">
             <button className="help" type="button" disabled={ !routineName || routineName.length > 35 || routineName.length < 4 } onClick={ () => {
                 // makeRoutineId()
                 setCurrentStep( 2 )
@@ -24,7 +26,8 @@ function Step1 ( { routineName, setRoutineName, setTopTopic, setCurrentStep } ) 
                 setTopTopic( 'wellness' )
             } }>
                 start from scratch
-            </button>
+                </button>
+            </div>
         </div>
     );
 }
