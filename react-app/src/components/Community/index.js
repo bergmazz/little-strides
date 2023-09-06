@@ -11,7 +11,7 @@ function Community () {
     // const currentUser = useSelector( ( state ) => state.session.user );
     // const routines = useSelector( state => state.routine.routines )
     const communityHabits = useSelector( ( state ) => state.habit.all );
-    const communityPost = useSelector( ( state ) => state.post.all );
+    const communityPosts = useSelector( ( state ) => state.post.all );
     useEffect( () => {
         dispatch( allUserHabits() );
         dispatch( fetchPosts() );
@@ -33,17 +33,18 @@ function Community () {
         <div>
             <h1>***FEATURE IN PROGRESS!***</h1>
             <h2>Your Feed</h2>
-            <p>some posts</p>
             { communityPosts ? (
-                <div className="suggested">
+                <div className="posts-container">
                     { communityPosts.map( ( post, index ) => {
                         return (
-                            <div>
-                                <p
-                                    key={ index }
-                                >
+                            <div className='post-tile' key={ index }>
+                                <p>
+                                    {/* { post.user } */ }
+                                </p>
+                                <p>
                                     { post.content }
                                 </p>
+
                             </div>
                         );
                     } ) }

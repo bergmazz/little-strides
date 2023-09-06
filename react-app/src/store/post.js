@@ -16,17 +16,18 @@ export const setPosts = ( posts ) => ( {
 //Thunks
 export const fetchPosts = () => async ( dispatch ) => {
     // GET / api / posts
-    const response = await fetch( '/api/posts/', {
+    console.log( "-------IN GET POSTS THUNKAROONI" )
+    const response = await fetch( '/api/posts', {
         headers: {
             "Content-Type": "application/json",
         },
     } );
     const data = await response.json();
-    // console.log( "-------GET POSTS DATA:", data )
+    console.log( "-------GET POSTS DATA:", data )
     if ( response.ok ) {
-        // console.log( "-------GET POSTS RESPONSE OK", )
-        // console.log( "Posts:   ", data.Posts )
-        dispatch( setPosts( data.Posts ) );
+        console.log( "-------GET POSTS RESPONSE OK", )
+        console.log( "Posts:   ", data.posts )
+        dispatch( setPosts( data.posts ) );
         return data;
     }
 };
