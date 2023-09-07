@@ -29,10 +29,11 @@ export const addCheckin = ( checkin ) => ( {
 // GET / api / habit / checkin
 // or GET / api / habit / checkin ? topic =, <topic>
 
-export const createCheckin = ( checkin ) => async ( dispatch ) => {
+export const createCheckin = ( habit_id, bool ) => async ( dispatch ) => {
   //POST api / habit / checkin / <habit_id>
+
     console.log( "---------checkin PASSED INTO THUNK", checkin )
-    // const { rname, cover_image, topic } = checkin
+    // const { habit_id, bool } = checkin
 
     const response = await fetch( `api/habit/checkin/ ${ habit_id }`, {
         method: 'POST',
@@ -40,7 +41,7 @@ export const createCheckin = ( checkin ) => async ( dispatch ) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify( {
-            // rname, cover_image, topic
+            bool
         } )
     } );
     const data = await response.json();
@@ -64,17 +65,16 @@ const initialState = {
 
 const checkinReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
+        // case SET_CHECKINS:
+        //     return {
+        //         ...state,
+        //         checkins: action.payload,
+        //     };
         case ADD_CHECKIN:
             return {
                 ...state,
                 checkins: [ ...state.today, action.payload ],
             };
-        case SET_CHECKINS:
-            return {
-                ...state,
-                checkins: action.payload,
-            };
-
         default:
             return state;
     }
