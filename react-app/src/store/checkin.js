@@ -31,17 +31,16 @@ export const addCheckin = ( checkin ) => ( {
 
 export const createCheckin = ( habit_id, bool ) => async ( dispatch ) => {
   //POST api / habit / checkin / <habit_id>
-
-    console.log( "---------checkin PASSED INTO THUNK", checkin )
+    console.log( "---------checkin PASSED INTO THUNK", habit_id, bool )
     // const { habit_id, bool } = checkin
 
-    const response = await fetch( `api/habit/checkin/ ${ habit_id }`, {
+    const response = await fetch( `api/habit/checkin/${ habit_id }`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify( {
-            bool
+            "completed": bool
         } )
     } );
     const data = await response.json();

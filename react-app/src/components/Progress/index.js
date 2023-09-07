@@ -6,6 +6,7 @@ import OpenModalButton from "../OpenModalButton";
 import RoutineEditForm from '../RoutineEditForm';
 import RoutineDeleteForm from '../DeleteRoutine';
 import ErrorModal from '../ErrorModal';
+import CheckinFormModal from '../CheckInModal'
 // import UserRoutines from "./";
 // import UserProgress from "./";
 import { fetchRoutines } from '../../store/routine';
@@ -19,7 +20,6 @@ function Progress () {
     const dispatch = useDispatch();
     const currentUser = useSelector( state => state.session.user )
     const routines = useSelector( state => state.routine.routines )
-    const hasReachedLimit = routines.length >= 3;
     // const habits = useSelector( state => state.habit.user )
     // console.log( "------user:", currentUser );
     const [ showMenu, setShowMenu ] = useState( false );
@@ -116,7 +116,8 @@ function Progress () {
                                     className='checkin'
                                     buttonText="Check In"
                                     onItemClick={ closeMenu }
-                                    modalComponent={ <ErrorModal message={ "Coming soon." } showWarning={ false } /> }
+                                    // modalComponent={ <ErrorModal message={ "Coming soon." } showWarning={ false } /> }
+                                    modalComponent={ <CheckinFormModal habits={ routine.habits } showWarning={ false } /> }
                                 />
                             </div>
                         </div>
