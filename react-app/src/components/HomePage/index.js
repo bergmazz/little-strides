@@ -18,9 +18,9 @@ const HomePage = () => {
     return (
         <div className="homepage-container">
             <div className="slogan">
-                <h1>We form habits, then our habits form us.</h1>
-                {/* <h1>We form habits, </h1>
-                <h1>then our habits form us.</h1> */}
+                {/* <h1>We form habits, then our habits form us.</h1> */ }
+                <h1>We form habits, </h1>
+                <h1>then our habits form us.</h1>
                 <h4>Commit to a routine, check in daily, and watch your life change. </h4>
             </div>
             <div className="wave-1">
@@ -28,6 +28,10 @@ const HomePage = () => {
             </div>
             { communityPosts ? (
                 <div className="posts-container">
+                    <div className="write">
+                        <p>Join the Discussion</p>
+                        <button>pencil icon</button>
+                    </div>
                     { communityPosts.map( ( post, index ) => {
                         return (
                             <div className='post-tile' key={ index }>

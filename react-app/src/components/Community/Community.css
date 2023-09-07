@@ -1,5 +1,13 @@
-.post-tile{
+.posts-container{
+    width: 80%;
+    margin: auto;
+}
 
+.post-tile{
+       box-shadow: 7px 9px #350079;
+       margin: 70px;
+       padding:30px;
+       border-radius: 20px;
 }
 
 /* .post-user{
@@ -7,8 +15,10 @@
 } */
 
 .post-img{
- height: 100px;
- width: 100px;
+ height: 195px;
+ width: 255px;
+ border-radius: 20px;
+   object-fit: cover;
 }
 
 /* .post-content{
