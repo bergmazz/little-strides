@@ -2,21 +2,25 @@
 /* background-image: url( '52.svg' ); */
 width: 100vw;
 padding:0;
-margin: 0;
+margin: -120px 0 0 0;
+position:relative;
+z-index: 3;
 }
 
 .slogan{
     margin: 45px 85px 0px 85px;
+    position:relative;
+    z-index: 4;
 }
 
 .slogan h1 {
   /* font-family: 'Jost', Futura, Helvetica, Arial, sans-serif; */
-  font-size:55px;
+  font-size:45px;
     margin: 10px 0px 0px 0px;
 }
 
 .slogan h4 {
   /* font-family: 'Jost', Futura, Helvetica, Arial, sans-serif; */
-    font-size:25px;
+    font-size:20px;
         margin: 30px 0px 0px 0px;
 }

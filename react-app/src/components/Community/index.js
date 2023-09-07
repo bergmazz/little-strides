@@ -4,7 +4,7 @@ import OpenModalButton from '../OpenModalButton';
 import { allUserHabits, createHabit } from '../../store/habit';
 import { fetchPosts } from '../../store/post';
 
-// import './Community.css';
+import './Community.css';
 
 function Community () {
     const dispatch = useDispatch();
@@ -16,7 +16,6 @@ function Community () {
         dispatch( allUserHabits() );
         dispatch( fetchPosts() );
     }, [ dispatch ] );
-
 
     // const handleSelectedHabit = ( habit, routine ) => {
     //     const { description, category } = habit;
@@ -38,14 +37,14 @@ function Community () {
                     { communityPosts.map( ( post, index ) => {
                         return (
                             <div className='post-tile' key={ index }>
-                                <p className="post-user">
-                                    { post.user.username }
-                                </p>
+
                                 <img className="post-img" src={ post.image } />
                                 <p className="post-content">
                                     { post.content }
                                 </p>
-
+                                <p className="post-user">
+                                    - { post.user.username }
+                                </p>
                             </div>
                         );
                     } ) }
@@ -75,7 +74,7 @@ function Community () {
                     { communityHabits.map( ( habit, index ) => {
                         // const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
                         return (
-                            <div>
+                            <div className='community-habits' >
                                 <button
                                     // className={ `suggested-habit-button ${ habits.some( ( h ) => h.description === habitText ) ? "selected" : "" }` }
                                     key={ index }
