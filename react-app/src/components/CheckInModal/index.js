@@ -8,9 +8,9 @@ import "./CheckInModal.css";
 function CheckinFormModal ( { habits } ) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
-
+    let habitz = habits
     const handleSubmit = async () => {
-        habits.map( ( habit ) => (
+        habitz.map( ( habit ) => (
             dispatch( createCheckin( habit.id, habit.completed ) )
         ) )
         dispatch( fetchRoutines() );
@@ -20,9 +20,11 @@ function CheckinFormModal ( { habits } ) {
     return (
         <div className="checkin-form-container">
             <h2>How did your routine go today? Did you do this one?</h2>
-            { habits.map( ( habit ) => (
-                <div key={ habit.id }>
-                    <div className='bubble'>
+
+            <div className="habitsss">
+                { habitz.map( ( habit ) => (
+                    <div key={ habit.id } className="checkin-tile ">
+                        <div className='desc'>
                         <p>{ habit.description }</p>
                     </div>
                     <div className="checkin-options">
@@ -31,9 +33,10 @@ function CheckinFormModal ( { habits } ) {
             </div>
                 </div>
             ) ) }
-
+            </div>
             <button onClick={ handleSubmit }>Submit</button>
         </div>
+
     );
 }
 

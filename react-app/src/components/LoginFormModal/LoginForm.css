@@ -1,13 +1,14 @@
 #modal-content:has(.login){
     /* background-color: #F8F3FF; */
-    width: 60vw;
-    height: 75vh;
+    width: 65%;
+    min-height: 75vh;
+    max-height: 95vh;
             box-shadow: 7px 9px #350079;
 }
 
 .login{
-    width:40vw;
-    margin: 70px auto;
+    width:500px;
+    margin: 10% auto;
        display: grid;
     place-items: center;
 
@@ -19,10 +20,10 @@
 .login input {
     width: 85%;
     height: 30px;
-    margin: 15px 0;
+    margin: 1em 0;
         box-shadow: 5px 6px #350079;
      border: 1px solid  #E8DEF8;
-        font-size: 16px;
+        font-size: 1em;
 }
 
 .login input::placeholder{
@@ -35,17 +36,18 @@
 
 
 .login h2{
-    font-size: 55px;
+    font-size: 2.5em;
     margin: 0px;
     text-align: center;
     color: #350079;
 }
 .login button{
-    margin: 15px;
-      font-size: 18px;
-  width:280px;
-  height: 60px;
+    margin: 1em auto;
+      font-size: 1.2em;
+  width:80%;
+  height: 3em;
   background-color: white;
+  display: block;
 }
 
 .login button:not(.blue):not(.orange) {
