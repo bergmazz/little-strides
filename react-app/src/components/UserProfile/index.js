@@ -115,7 +115,8 @@ function UserProfile () {
                             <div className="routine-buttons">
                         <OpenModalButton
                         className='edit-routine'
-                        buttonText="Modify"
+                                    buttonText="Modify"
+
                         onItemClick={ closeMenu }
                             modalComponent={ <RoutineEditForm existingRoutine={ routine } showWarning={ true } /> }
                         />
