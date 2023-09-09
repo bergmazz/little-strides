@@ -1,4 +1,6 @@
 import React from "react";
+import pencil from "./pencilonly.svg"
+import trash from "./trash.svg"
 
 function Step5 ( { habits, handleSelectedHabits, setEditMe, setHabitDetail, setHabitCat, setCurrentStep } ) {
 
@@ -11,23 +13,52 @@ function Step5 ( { habits, handleSelectedHabits, setEditMe, setHabitDetail, setH
                     return (
                         <div className="row">
                             <p>{ habit.description }</p>
+                            <div className="editdeletebutt">
+                                <button
+                                    key={ index }
+                                    onClick={ () => {
+                                        setEditMe( habit )
+                                        setHabitDetail( habit.description );
+                                        setHabitCat( habit.category )
+                                        setCurrentStep( 6 )
+                                    } }
+                                > edit
+                                </button>
                             <button
                                 key={ [ index, habit.description ] }
                                 onClick={ () => {
                                     handleSelectedHabits( habit )
                                 } }
-                            > trash can
+                                > delete
                             </button>
-                            <button
-                                key={ index }
+                            </div>
+                            {/* <div className="edit"
                                 onClick={ () => {
                                     setEditMe( habit )
                                     setHabitDetail( habit.description );
                                     setHabitCat( habit.category )
                                     setCurrentStep( 6 )
+                                } }>
+                                <image
+                                    key={ index }
+                                    src={ pencil }
+                                    alt="pencil"
+                                />
+                            </div>
+                            <div
+                                clasName="delete-habit"
+                                key={ [ index, habit.description ] }
+                                onClick={ () => {
+                                    handleSelectedHabits( habit )
                                 } }
-                            > pencil icon
-                            </button>
+                            >
+                                <image
+                                    src={ trash }
+                                    alt="trash"
+                                />
+                            </div> */}
+
+
                         </div>
                     );
                 } ) }</div>

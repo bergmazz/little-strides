@@ -1,3 +1,12 @@
+
+#modal-content:has(.create-routine-container){
+    /* background-color: #F8F3FF; */
+    /* width: 45%; */
+    /* min-height: 55vh;
+    max-height: 75vh; */
+            box-shadow: 7px 9px #350079;
+}
+
 .create-routine-container{
     height: 80vh;
       display: flex;
@@ -15,33 +24,48 @@ margin: 5% 10%;
 flex-grow: 1;
 }
 
+.start input{
+  width: 90%;
+    height: 30px;
+    margin: 1em auto;
+        box-shadow: 5px 6px #350079;
+     border: 1px solid  #E8DEF8;
+        font-size: 1em;
+}
+.start input:focus {
+    outline: 2px solid  #CDAEFF;
+}
+.start button{
+    margin: 1em auto;
+    background-color: white;
+    box-shadow:  5px 6px#350079;
+}
+.start button:hover{
+    box-shadow:  5px 6px#CDAEFF
+}
+.start-button-container{
+  /* position: absolute;
+      display: flex;
+  justify-content: space-evenly; */
+         display: flex;
+        justify-content: center;
+    align-items: center;
+}
+.help{
+height: 250px;
+width: 250px;
+}
+
+.go{
+height: 250px;
+width: 250px;
+}
+
 .selected{
     /* color: #E3A72F; */
      box-shadow:5px 6px #058789 !important;
 }
-.suggested{
-    max-height:50vh;
-    overflow-y: auto;
-}
 
-.suggested-habit-button {
-  padding: 8px 12px;
-  margin: 5px;
-  font-size: 16px;
-  font-family: Jost
-}
-
-.suggested-habit-button.selected::before{
-  content: "-";
-}
-
-.suggested-habit-button::before {
-  content: "+";
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  margin-right: 5px;
-}
 
 .char-count {
   font-size: 12px;
@@ -101,12 +125,13 @@ flex-grow: 1;
   padding:20px;
 }
 
+/* "own your habits" page */
 .habitss{
-    max-height:60vh;
+    max-height:55vh;
     overflow-y: auto;
 }
 .existing{
-    height:50vh;
+    height:45vh;
     overflow-y: auto;
 }
 .newhabit{
@@ -121,26 +146,6 @@ flex-grow: 1;
     align-items: center;
 }
 
-
-.start-button-container{
-  position: absolute;
-  /* bottom: 0 ;
-  left: 0;
-  right: 0; */
-    /* margin:50px; */
-      display: flex;
-  justify-content: space-evenly;
-}
-
-.help{
-height: 200px;
-width: 200px;
-}
-
-.go{
-height: 200px;
-width: 200px;
-}
 
 .topics-container{
     display: flex;
@@ -193,4 +198,32 @@ margin: 1%;
   width: auto;
   height: auto;
   display: block;
+}
+
+.suggested{
+    max-height:50vh;
+    overflow-y: auto;
+}
+
+.suggested-habit-button {
+  padding: 8px 12px;
+  margin: 5px;
+  font-size: 16px;
+  font-family: Jost
+}
+
+.suggested-habit-button.selected::before{
+  content: "-";
+}
+
+.suggested-habit-button::before {
+  content: "+";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.editdeletebutt button{
+ margin: 3px
 }

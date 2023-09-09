@@ -122,7 +122,7 @@ function UserProfile () {
                         <OpenModalButton
                         className='kill-routine'
                         buttonText="Delete"
-                            modalComponent={ <RoutineDeleteForm routineId={ routine.id } showWarning={ false } /> }
+                                    modalComponent={ <RoutineDeleteForm routine={ routine } showWarning={ false } /> }
                         />
                         <OpenModalButton
                             className='checkin'
