@@ -8,7 +8,8 @@ import "./CheckInModal.css";
 function CheckinFormModal ( { habits } ) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
-
+    const [ submitted, setSubmitted ] = useState( false )
+    const [ yesPercentage, setYesPercentage ] = useState( 0 );
     const [ selectedAnswers, setSelectedAnswers ] = useState(
         habits.map( () => ( { completed: null } ) )
     );
@@ -30,13 +31,32 @@ function CheckinFormModal ( { habits } ) {
                 const completed = selectedAnswers[ index ].completed;
                 dispatch( createCheckin( habit.id, completed ) );
             } );
+
+            const totalResponses = selectedAnswers.length;
+            const yesResponses = selectedAnswers.filter( ( answer ) => answer.completed === 1 ).length;
+            const percentage = ( yesResponses / totalResponses ) * 100;
+            setYesPercentage( percentage );
+
             dispatch( fetchRoutines() );
-            closeModal()
+            setSubmitted( true )
+            // closeModal()
         }
     };
 
     return (
         <div className="checkin-form-container">
+            { submitted ? (
+                <div>
+                    <h1>You're making strides!</h1>
+                    <h4>"Yes" Responses Today:</h4>
+                    <h1>{ yesPercentage.toFixed( 2 ) }%</h1>
+                    {/* <h4>"Yes" Responses Last Week:</h4> */ }
+                    {/* <h1>{ habits.averagePastWeek }</h1> */ }
+                    <button onClick={ closeModal }>exit</button>
+
+                </div>
+            ) : (
+                <div>
             <h2>How did your routine go today? </h2>
             <div className="habit-steps-container">
                 { habits.map( ( habit, index ) => (
@@ -64,6 +84,9 @@ function CheckinFormModal ( { habits } ) {
             <div className="sub">
                 <button onClick={ handleSubmit }>Submit</button>
             </div>
+        </div>
+            )
+            }
         </div>
 
     );
