@@ -6,6 +6,7 @@ function Step5 ( { habits, handleSelectedHabits, setEditMe, setHabitDetail, setH
         <div>
             <h1>Own Your Habits</h1>
             <div className="habitss">
+                <div className="existing">
                 { habits.map( ( habit, index ) => {
                     return (
                         <div className="row">
@@ -29,7 +30,7 @@ function Step5 ( { habits, handleSelectedHabits, setEditMe, setHabitDetail, setH
                             </button>
                         </div>
                     );
-                } ) }
+                } ) }</div>
             </div>
             <button
                 className="newhabit"

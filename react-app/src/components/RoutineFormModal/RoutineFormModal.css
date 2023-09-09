@@ -15,8 +15,6 @@ margin: 5% 10%;
 flex-grow: 1;
 }
 
-
-
 .selected{
     /* color: #E3A72F; */
      box-shadow:5px 6px #058789 !important;
@@ -106,6 +104,15 @@ flex-grow: 1;
 .habitss{
     max-height:60vh;
     overflow-y: auto;
+}
+.existing{
+    height:50vh;
+    overflow-y: auto;
+}
+.newhabit{
+       display: flex;
+        justify-content: center;
+    align-items: center;
 }
 
 .row {
