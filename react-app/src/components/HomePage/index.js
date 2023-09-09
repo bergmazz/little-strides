@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 // import waveSvg from "./52.svg"
 // import waveSvg from "./56.svg"
@@ -9,16 +9,28 @@ import pencil from "./pencil-pen.svg"
 import { fetchPosts } from '../../store/post';
 import "./HomePage.css"
 import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal"
 import ErrorModal from '../ErrorModal';
 
 const HomePage = () => {
     const dispatch = useDispatch();
+
     const communityPosts = useSelector( ( state ) => state.post.all );
+    const currentUser = useSelector( state => state.session.user )
+
+    const ulRef = useRef()
 
     useEffect( () => {
         dispatch( fetchPosts() );
     }, [ dispatch ] );
 
+    const [ showMenu, setShowMenu ] = useState( false );
+
+    const closeMenu = ( e ) => {
+        if ( !ulRef.current?.contains( e.target ) ) {
+            setShowMenu( false );
+        }
+    };
 
     return (
         <div className="homepage-container">
@@ -31,13 +43,23 @@ const HomePage = () => {
             <div className="home-background-container">
             <div className="wave-1">
                 <img src={ waveSvg } alt="Wave" />
-            </div>
+                </div>
+                { !currentUser && (
+                    <div className="logbutt">
+                        <OpenModalButton
+                            buttonText="Log In To"
+                            onItemClick={ closeMenu }
+                            modalComponent={ <LoginFormModal /> }
+                        /></div>
+                ) }
             { communityPosts ? (
                     <div className="home-posts-container">
+
                         <div
                             className="write"
                             onClick={ () => window.alert( "Posts coming soon" ) }
                         >
+
                         <p>Join the Discussion</p>
                             {/* <OpenModalButton
                             modalComponent={ <ErrorModal
@@ -48,7 +70,8 @@ const HomePage = () => {
                             /> }
                         /> */}
                             <img className="pencil" src={ pencil } alt="Pencil Icon" />
-                    </div>
+                        </div>
+
                     { communityPosts.map( ( post, index ) => {
                         return (
                             <div className='home-post-tile' key={ index }>

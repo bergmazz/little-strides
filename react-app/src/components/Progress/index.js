@@ -23,8 +23,6 @@ function Progress () {
     // const habits = useSelector( state => state.habit.user )
     // console.log( "------user:", currentUser );
     const [ showMenu, setShowMenu ] = useState( false );
-
-
     const ulRef = useRef()
 
     const closeMenu = ( e ) => {

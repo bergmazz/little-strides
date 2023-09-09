@@ -4,7 +4,7 @@ import { editRoutine, fetchRoutines } from "../../store/routine";
 import { suggestedHabits, createHabit, editHabit, deleteHabit } from "../../store/habit";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-// import "./RoutineFormModal.css";
+import "./RoutineEdit.css";
 
 function RoutineEditForm ( { existingRoutine } ) {
     // console.log( "-------------existingRoutine edit form initial data:", existingRoutine )
@@ -197,13 +197,13 @@ function RoutineEditForm ( { existingRoutine } ) {
         switch ( currentStep ) {
             case 1:
                 return (
-                    <div>
+                    <div className="page1">
                         {/* <Step1
                             routineName={ routineName }
                             setRoutineName={ setRoutineName }
                             setCurrentStep={ setCurrentStep }
                         /> */}
-                        <h1>Set a name for the routine</h1>
+                        <h1>Update your routine's name, if you wish</h1>
                         <input
                             type="text"
                             value={ routineName }

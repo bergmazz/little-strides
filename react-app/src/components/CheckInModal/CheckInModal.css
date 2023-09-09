@@ -54,7 +54,7 @@
 .sub{
          margin: 6%;
                  display: flex;
-        justify-content: center;
+        -content: center;
 }
 
 .sub button{
