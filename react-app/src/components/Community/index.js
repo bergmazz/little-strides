@@ -76,8 +76,7 @@ function Community () {
                     { communityPosts.map( ( post, index ) => {
                         return (
                             <div className='post-tile' key={ index }>
-
-                                <img className="post-img" src={ post.image } />
+                                { post.image && <img className="post-img" src={ post.image } /> }
                                 <p className="post-content">
                                     { post.content }
                                 </p>
