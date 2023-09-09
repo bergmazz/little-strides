@@ -104,12 +104,13 @@ function Progress () {
                                 <div className="habittext">
                                     { routine.habits.map( ( habit ) => (
                                         <div key={ habit.id }>
-                                            <div className='bubble'>
-                                                <p>{ habit.description }</p>
-                                            </div>
+                                            {/* <div className='bubble'> */ }
+
+                                            <h3> - { habit.description }</h3>
+                                            {/* </div> */ }
                                             <p>  { habit.percent } % yes all time</p>
-                                            <p> You have completed this habit { habit.streak } checkins in a row</p>
-                                            <p>  { habit.category } </p>
+                                            <p> You've completed this habit { habit.streak } checkins in a row</p>
+                                            <p>  This habit is working on your { habit.category } </p>
                                         </div>
                                     ) ) }
                                 </div>

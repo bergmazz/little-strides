@@ -28,7 +28,7 @@
   cursor: pointer;
 }
 
-.topic-button.{
+.topic-button.chosen {
   box-shadow: 4px 6px #058789;
 }
 
