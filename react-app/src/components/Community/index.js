@@ -17,6 +17,9 @@ function Community () {
         dispatch( fetchPosts() );
     }, [ dispatch ] );
 
+
+    const [ selectedTopics, setSelectedTopics ] = useState( [] );
+
     // const handleSelectedHabit = ( habit, routine ) => {
     //     const { description, category } = habit;
     //     const newHabit = await dispatch(
@@ -27,11 +30,47 @@ function Community () {
     //         } ) )
     // };
 
+    const availableTopics = [
+        'Anxiety',
+        'Relationships',
+        'Exercise',
+        'Stress',
+        'Wellness',
+        'Sleep',
+        'Depression',
+        'Productivity',
+    ];
+
+    const handleSelectTopics = ( selectedTopic ) => {
+        if ( selectedTopics.includes( selectedTopic ) ) {
+            setSelectedTopics( selectedTopics.filter( ( topic ) => topic !== selectedTopic ) )
+        } else {
+            if ( selectedTopics.length < 3 ) {
+                setSelectedTopics( [
+                    ...selectedTopics,
+                    selectedTopic,
+                ] );
+            }
+        }
+    };
 
     return (
-        <div>
-            <h1>***FEATURE IN PROGRESS!***</h1>
-            <h2>Your Feed</h2>
+        <div className='community-container'>
+            {/* <h1>***FEATURE IN PROGRESS!***</h1> */ }
+            <h2 className="feed">Your Feed</h2>
+
+            <div className="topics-feed-container">
+                { availableTopics.map( ( topic ) => (
+                    <button
+                        key={ topic }
+                        className={ `topic-button ${ selectedTopics.includes( topic ) ? 'chosen' : '' }` }
+                        onClick={ () => handleSelectTopics( topic ) }
+                    >
+                        { topic }
+                    </button>
+                ) ) }
+            </div>
+
             { communityPosts ? (
                 <div className="posts-container">
                     { communityPosts.map( ( post, index ) => {

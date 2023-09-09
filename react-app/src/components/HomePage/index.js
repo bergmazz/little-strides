@@ -19,6 +19,7 @@ const HomePage = () => {
         dispatch( fetchPosts() );
     }, [ dispatch ] );
 
+
     return (
         <div className="homepage-container">
             <div className="slogan">
