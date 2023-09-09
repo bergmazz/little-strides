@@ -16,19 +16,28 @@ function Step3 ( { selectedTopics, setTopTopic, topTopic } ) {
 
     return (
         <div className="top-topic-container">
-            <p>Choose Your Focus</p>
+            <h1>Choose Your Focus:</h1>
             { selectedTopics.map( ( topic ) => (
-                <button
-                    key={ topic }
-                    value={ topic.toLowerCase() }
-                    className={ `big-topic-button ${ topTopic === topic ? "selected" : "" }` }
-                    onClick={ () => setTopTopic( topic.toLowerCase() ) }
-                >
-                    <img
-                        src={ topicImages[ topic.toLowerCase() ] }
-                        alt={ topic }
+                // <button
+                //     key={ topic }
+                //     value={ topic.toLowerCase() }
+                //     className={ `big-topic-button ${ topTopic === topic ? "selected" : "" }` }
+                //     onClick={ () => setTopTopic( topic.toLowerCase() ) }
+                // >
+                //     <img
+                //         src={ topicImages[ topic.toLowerCase() ] }
+                //         alt={ topic }
+                //     />
+                // </button>
+                <label key={ topic } className="big-topic-tile">
+                    <input
+                        type="radio"
+                        value={ topic.toLowerCase() }
+                        checked={ topTopic === topic.toLowerCase() }
+                        onChange={ () => setTopTopic( topic.toLowerCase() ) }
                     />
-                </button>
+                    { topic }
+                </label>
             ) ) }
         </div>
     );

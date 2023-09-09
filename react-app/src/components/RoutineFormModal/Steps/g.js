@@ -3,7 +3,7 @@ import React from "react";
 function Step7 ( { habitDetail, setHabitDetail, habitCat, setHabitCat, availableTopics, setCurrentStep, handleSelectedHabits } ) {
     return (
         <div>
-            <p>create your habit</p>
+            <h1>Create a Habit</h1>
             <input
                 type="text"
                 value={ habitDetail }

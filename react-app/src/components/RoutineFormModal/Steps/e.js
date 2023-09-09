@@ -4,7 +4,7 @@ function Step5 ( { habits, handleSelectedHabits, setEditMe, setHabitDetail, setH
 
     return (
         <div>
-            <p>Own Your Habits</p>
+            <h1>Own Your Habits</h1>
             <div className="habitss">
                 { habits.map( ( habit, index ) => {
                     return (

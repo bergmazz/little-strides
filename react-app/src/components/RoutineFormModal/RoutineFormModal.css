@@ -2,6 +2,10 @@
     height: 80vh;
       display: flex;
   flex-direction: column;
+align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 90%;
 }
 
 form{
@@ -11,12 +15,14 @@ margin: 5% 10%;
 flex-grow: 1;
 }
 
+
+
 .selected{
     /* color: #E3A72F; */
-     box-shadow:5px 6px #058789;
+     box-shadow:5px 6px #058789 !important;
 }
 .suggested{
-    max-height:60vh;
+    max-height:50vh;
     overflow-y: auto;
 }
 
@@ -78,7 +84,7 @@ flex-grow: 1;
 }
 
 .step-container{
-  margin-bottom: 80px;
+  margin-bottom: 120px;
 }
 
 .button-container{

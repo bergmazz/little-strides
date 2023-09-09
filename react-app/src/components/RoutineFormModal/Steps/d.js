@@ -4,7 +4,7 @@ function Step4 ( { suggested, habits, handleSelectedHabits } ) {
 
     return (
         <div className="suggested-container">
-            <p>suggested habits</p>
+            <h1>Suggested Habits</h1>
             <div className="suggested">
                 { suggested.map( ( habit, index ) => {
                     const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );

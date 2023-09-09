@@ -18,7 +18,7 @@ function Step6 ( { editMe, habitDetail, setHabitDetail, habitCat, setHabitCat, a
 
     return (
         <div>
-            <p>edit your habit</p>
+            <h1>Edit Your Habit</h1>
             <textarea
                 value={ habitDetail }
                 onChange={ ( e ) =>

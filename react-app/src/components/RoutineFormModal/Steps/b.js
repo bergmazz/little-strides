@@ -28,7 +28,7 @@ function Step2 ( { availableTopics, selectedTopics, setSelectedTopics } ) {
     };
     return (
         <div>
-            <p>Choose up to three topics:</p>
+            <h1>Choose up to three topics:</h1>
             <div className="topics-container">
                 { availableTopics.map( ( topic ) => (
                     <button

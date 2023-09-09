@@ -3,7 +3,7 @@ import React from "react";
 function Step1 ( { routineName, setRoutineName, setTopTopic, setCurrentStep } ) {
     return (
         <div>
-            <p>Set a name for the routine</p>
+            <h1>Set a name for the routine</h1>
             <input
                 type="text"
                 value={ routineName }
