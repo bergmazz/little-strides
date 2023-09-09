@@ -1,20 +1,42 @@
-
+#modal-content:has(.signup){
+    /* background-color: #F8F3FF; */
+    width: 65%;
+    min-height: 75vh;
+    max-height: 95vh;
+            box-shadow: 7px 9px #350079;
+}
 .signup{
-    width:40vw;
+    width:60vw;
     margin:auto;
 }
 
+.signup input::placeholder{
+        color: #CDAEFF
+}
+
+.signup input:focus {
+    outline: 2px solid  #CDAEFF
+}
 .signup input {
-    width: 80%;
-    margin: 10px 5px;
+    width: 90%;
+    margin: 1em auto;
+            box-shadow: 5px 6px #350079;
+         border: 1px solid  #E8DEF8;
+             font-size: 1em;
 }
 
 .signup h2{
-    font-size: 55px;
-    margin: 40px 0px 20px 0px ;
+  font-size: 2.6em;
+     margin: 1em auto;
+       text-align: center;
+       color: #350079;
 }
 .signup button{
-    margin: 50px 30%;
+    /* margin: 50px 30%; */
+        margin: 1em auto;
+      font-size: 1.2em;
+        display: block;
+        height: 3em;
 }
 
 .char-count-red-email{
@@ -23,6 +45,6 @@
   color: #888;
 }
 
-.signup div{
+/* .signup div{
     margin-left: 220px;
-}
+} */

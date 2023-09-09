@@ -9,18 +9,17 @@
 .login{
     width:500px;
     margin: 10% auto;
-       display: grid;
+    display: grid;
     place-items: center;
-
 }
 
      /* display: flex;
     justify-content: center; Horizontal centering
     align-items: center; Vertical centering */
 .login input {
-    width: 85%;
+    width: 90%;
     height: 30px;
-    margin: 1em 0;
+    margin: 1em auto;
         box-shadow: 5px 6px #350079;
      border: 1px solid  #E8DEF8;
         font-size: 1em;
@@ -36,8 +35,8 @@
 
 
 .login h2{
-    font-size: 2.5em;
-    margin: 0px;
+    font-size: 2.6em;
+    margin: 0px auto;
     text-align: center;
     color: #350079;
 }
