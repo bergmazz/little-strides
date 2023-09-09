@@ -29,7 +29,8 @@
   font-size: 2.6em;
      margin: 1em auto;
        text-align: center;
-       color: #350079;
+color:#350079;
+       /* color:#680416; */
 }
 .signup button{
     /* margin: 50px 30%; */
@@ -37,6 +38,10 @@
       font-size: 1.2em;
         display: block;
         height: 3em;
+          color: #E3A72F;
+     box-shadow:5px 6px #058789;
+     background-color: white;
+     padding:0px 10%;
 }
 
 .char-count-red-email{

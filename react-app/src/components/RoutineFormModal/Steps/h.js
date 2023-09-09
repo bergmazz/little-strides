@@ -23,6 +23,7 @@ function Step8 ( { coverImage, setCoverImage } ) {
         setSelectedImage( image );
     };
 
+
     return (
         <div className="covers">
             <h2>Choose cover image</h2>

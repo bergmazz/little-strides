@@ -1,4 +1,5 @@
 import React from "react";
+import { anxiety, relationships, exercise, wellness, stress, sleep, depression, productivity } from "../Topics";
 
 function Step2 ( { availableTopics, selectedTopics, setSelectedTopics } ) {
 
@@ -15,20 +16,31 @@ function Step2 ( { availableTopics, selectedTopics, setSelectedTopics } ) {
         }
     };
 
+    const topicImages = {
+        anxiety: anxiety,
+        relationships: relationships,
+        exercise: exercise,
+        wellness: wellness,
+        stress: stress,
+        sleep: sleep,
+        depression: depression,
+        productivity: productivity,
+    };
     return (
         <div>
             <p>Choose up to three topics:</p>
             <div className="topics-container">
                 { availableTopics.map( ( topic ) => (
-                    <label key={ topic } className="topic-tile">
-                        <input
-                            type="checkbox"
-                            value={ topic }
-                            checked={ selectedTopics.includes( topic ) }
-                            onChange={ () => handleSelectTopics( topic ) }
+                    <button
+                        key={ topic }
+                        className={ `topic-button ${ selectedTopics.includes( topic ) ? "selected" : "" }` }
+                        onClick={ () => handleSelectTopics( topic ) }
+                    >
+                        <img
+                            src={ topicImages[ topic.toLowerCase() ] }
+                            alt={ topic }
                         />
-                        { topic }
-                    </label>
+                    </button>
                 ) ) }
             </div>
         </div>

@@ -201,7 +201,7 @@ function RoutineFormModal ( { routines } ) {
                             habitDetail={ habitDetail }
                             setHabitDetail={ setHabitDetail }
                             habitCat={ habitCat }
-                            setHabitCat={ habitCat }
+                            setHabitCat={ setHabitCat }
                             availableTopics={ availableTopics }
                             setCurrentStep={ setCurrentStep }
                             habits={ habits }
