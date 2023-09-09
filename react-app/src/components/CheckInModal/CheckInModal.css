@@ -1,16 +1,62 @@
-/* .checkin-form-container{
+#modal-content:has(.checkin-form-container){
+    /* background-color: #F8F3FF; */
+    width: 45%;
+    /* min-height: 55vh;
+    max-height: 75vh; */
+            box-shadow: 7px 9px #350079;
+}
 
-} */
+.checkin-form-container{
+ padding: 5%;
+}
 
+.checkin-form-container h2{
+ font-size: 2em;
+       display: flex;
+        justify-content: center;
+    align-items: center;
+}
+.habit-steps-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.checkin-step {
+  flex: 0 0 auto;
+  width: 70%;
+  margin-right: 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+}
 .habitsss{
     max-height:60vh;
     overflow-y: auto;
 }
 
-/* .desc{
+.desc{
+        display: flex;
+        justify-content: center;
+    align-items: center;
+}
 
-} */
+.checkin-options{
+        display: flex;
+          flex-direction: column;
+}
 
-/* .checkin-options{
+.checkin-options button{
+          margin: 3%;
+}
 
-} */
+.sub{
+         margin: 6%;
+                 display: flex;
+        justify-content: center;
+}
+
+.sub button{
+          font-size: 1.5em;
+}

@@ -34,8 +34,10 @@ function Progress () {
     };
 
     useEffect( () => {
-        console.log( currentUser )
-        dispatch( fetchRoutines() );
+        if ( currentUser ) {
+            dispatch( fetchRoutines() );
+        }
+
         // dispatch( currentUserHabits() )
     }, [ dispatch, currentUser ] );
 
@@ -57,21 +59,23 @@ function Progress () {
             </Link> */}
         </div>
     )
+    // const isAlreadyCheckedIn = routines.some( ( routine ) => routine.checkedIn );
+
 
     return (
         <div className='userprof'>
             <div className='usersec1'>
-                <h1>***FEATURE IN PROGRESS!***</h1>
+                {/* <h1>***FEATURE IN PROGRESS!***</h1> */ }
                 <h1>Making some strides!</h1>
-                <h4>Here's a breakdown of "yes" repsonses by routines</h4>
+                {/* <h4>Here's a breakdown of "yes" repsonses by routines</h4> */ }
                 <div>
                     { routines.map( ( routine ) => (
                         <div className="routine-section" key={ routine.id }>
                             {/* <div className="routine-tile"> */ }
                             <div >
                                     <h1>{ routine.name }</h1>
-                                <h4>You completed { routine.averagePastWeek }% of habits checking in last week</h4>
-                                <h4>Your all time track record for this routine is at { routine.averageCompletionAllTime }% right now</h4>
+                                <h4>You completed { routine.averagePastWeek }% of habits in this routine checking in last week</h4>
+                                <h4>Your all time track record for this routine is at { routine.averageCompletionAllTime }% </h4>
 
                             </div>
                         </div>
@@ -103,14 +107,30 @@ function Progress () {
                                             <div className='bubble'>
                                                 <p>{ habit.description }</p>
                                             </div>
-                                            <p>  { habit.percent } % yes </p>
-                                <p> { habit.streak } days in a row</p>
+                                            <p>  { habit.percent } % yes all time</p>
+                                            <p> You have completed this habit { habit.streak } checkins in a row</p>
                                             <p>  { habit.category } </p>
                                         </div>
                                     ) ) }
                                 </div>
                             </div>
                             <div className="routine-buttons">
+
+                                {/* { routine.checkedIn ? (
+                                    <button
+                                        className="edit-checkin"
+                                        onClick={ () => window.alert( "Edit coming soon" ) }
+                                    >
+                                        Edit Check In
+                                    </button>
+                                ) : (
+                                        <OpenModalButton
+                                        className="checkin"
+                                        buttonText="Check In"
+                                        onItemClick={ closeMenu }
+                                        modalComponent={ <CheckinFormModal habits={ routine.habits } showWarning={ false } /> }
+                                    />
+                                ) } */}
 
                                 <OpenModalButton
                                     className='checkin'

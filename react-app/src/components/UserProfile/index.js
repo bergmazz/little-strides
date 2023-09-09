@@ -6,6 +6,7 @@ import RoutineFormModal from '../RoutineFormModal';
 import RoutineEditForm from '../RoutineEditForm';
 import RoutineDeleteForm from '../DeleteRoutine';
 import ErrorModal from '../ErrorModal';
+import CheckinFormModal from '../CheckInModal'
 // import UserRoutines from "./";
 // import UserProgress from "./";
 import { fetchRoutines } from '../../store/routine';
@@ -127,7 +128,8 @@ function UserProfile () {
                             className='checkin'
                             buttonText="Check In"
                                     onItemClick={ closeMenu }
-                                    modalComponent={ <ErrorModal message={ "Coming soon." } showWarning={ false } /> }
+                                    modalComponent={ <CheckinFormModal habits={ routine.habits } showWarning={ false } /> }
+                                    // modalComponent={ <ErrorModal message={ "Coming soon." } showWarning={ false } /> }
                                 />
                             </div>
                     </div>
