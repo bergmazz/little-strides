@@ -3,9 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 // import waveSvg from "./52.svg"
 // import waveSvg from "./56.svg"
 // import waveSvg from "./wave.svg"
-import waveSvg from "./wav2.svg"
+// import waveSvg from "./wav2.svg"
+import waveSvg from "./redbottom.svg"
+import pencil from "./pencil-pen.svg"
 import { fetchPosts } from '../../store/post';
 import "./HomePage.css"
+import OpenModalButton from "../OpenModalButton";
+import ErrorModal from '../ErrorModal';
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -23,33 +27,47 @@ const HomePage = () => {
                 <h1>then our habits form us.</h1>
                 <h4>Commit to a routine, check in daily, and watch your life change. </h4>
             </div>
+            <div className="home-background-container">
             <div className="wave-1">
                 <img src={ waveSvg } alt="Wave" />
             </div>
             { communityPosts ? (
-                <div className="posts-container">
-                    <div className="write">
+                    <div className="home-posts-container">
+                        <div
+                            className="write"
+                            onClick={ () => window.alert( "Posts coming soon" ) }
+                        >
                         <p>Join the Discussion</p>
-                        <button>pencil icon</button>
+                            {/* <OpenModalButton
+                            modalComponent={ <ErrorModal
+                                message={ "Coming soon." }
+                                showWarning={ false }
+                                buttonText="write"
+                            // buttonText={ <i className="far fa-pen-to-square"></i> }
+                            /> }
+                        /> */}
+                            <img className="pencil" src={ pencil } alt="Pencil Icon" />
                     </div>
                     { communityPosts.map( ( post, index ) => {
                         return (
-                            <div className='post-tile' key={ index }>
+                            <div className='home-post-tile' key={ index }>
 
                                 <img className="post-img" src={ post.image } />
-                                <p className="post-content">
+                                <p className="home-post-content">
                                     { post.content }
                                 </p>
-                                <p className="post-user">
+                                <p className="home-post-user">
                                     - { post.user.username }
                                 </p>
                             </div>
                         );
                     } ) }
-                </div>
+                    </div>
+
             ) : (
                 <p>No posts, whoops.</p>
             ) }
+        </div>
         </div>
     )
 }
