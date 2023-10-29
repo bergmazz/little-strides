@@ -14,7 +14,6 @@ import { fetchRoutines } from '../../store/routine';
 import waveSvgUpp from "./54.svg"
 import "./Progress.css"
 
-
 function Progress () {
     // console.log( "------ in user profile" );
     const dispatch = useDispatch();
@@ -23,7 +22,6 @@ function Progress () {
     // const habits = useSelector( state => state.habit.user )
     // console.log( "------user:", currentUser );
     const [ showMenu, setShowMenu ] = useState( false );
-
 
     const ulRef = useRef()
 
@@ -60,7 +58,8 @@ function Progress () {
         </div>
     )
     // const isAlreadyCheckedIn = routines.some( ( routine ) => routine.checkedIn );
-
+    const BadgeShapes = [ 'star', 'shield', 'scalloped-circle' ];
+    let badgeShapeIndex = 0;
 
     return (
         <div className='userprof'>
@@ -76,7 +75,29 @@ function Progress () {
                                     <h1>{ routine.name }</h1>
                                 <h4>You completed { routine.averagePastWeek }% of habits in this routine checking in last week</h4>
                                 <h4>Your all time track record for this routine is at { routine.averageCompletionAllTime }% </h4>
+                                <div className="habitbadges">
+                                    { routine.habits.map( ( habit ) => {
+                                        const shouldDisplayBadge = habit.streak > 1;
+                                        const badgeShape = shouldDisplayBadge ? BadgeShapes[ badgeShapeIndex ] : '';
+                                        badgeShapeIndex = ( badgeShapeIndex + 1 ) % BadgeShapes.length;
+                                        return (
+                                            <div key={ habit.id } className={ `habit ${ badgeShape }` }>
+                                                { shouldDisplayBadge && (
 
+                                                    <div className={ `streak-badge ${ badgeShape }` }>
+                                                        {/* <i class="fa-solid fa-shield"></i> */ }
+                                                        {/* <i class="fa-solid fa-badge"></i> */ }
+                                                        <span className="fa-stack">
+
+                                                            <i className="fas fa-star fa-stack-2x"></i>
+                                                            <i className="fas fa-stack-1x streak-number">{ habit.streak }</i>
+                                                        </span>
+                                                    </div>
+                                                ) }
+                                            </div>
+                                        );
+                                    } ) }
+                                </div>
                             </div>
                         </div>
                     ) ) }
@@ -105,13 +126,13 @@ function Progress () {
                                     { routine.habits.map( ( habit ) => (
                                         <div key={ habit.id }>
                                             {/* <div className='bubble'> */ }
-
                                             <h3> - { habit.description }</h3>
                                             {/* </div> */ }
                                             <p>  { habit.percent } % yes all time</p>
                                             <p> You've completed this habit { habit.streak } checkins in a row</p>
                                             <p>  This habit is working on your { habit.category } </p>
                                         </div>
+
                                     ) ) }
                                 </div>
                             </div>

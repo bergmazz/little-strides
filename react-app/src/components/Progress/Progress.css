@@ -13,3 +13,23 @@
 .routine-section h1{
     font-size: 2em;
 }
+
+.habitbadges{
+    display: row
+}
+
+.streak-number{
+ color: white;
+font-family: Jost, Futura, Helvetica, Arial, sans-serif;
+}
+.star {
+  background-color: #CDAEFF;
+}
+
+.shield {
+  background-color: #E3A72F;
+}
+
+.scalloped-circle {
+  background-color: #058789;
+}
