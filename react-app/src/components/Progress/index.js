@@ -92,7 +92,7 @@ function Progress () {
                                                         ) }
                                                         { badgeShape === 'shield' && (
                                                             <span className="fa-stack">
-                                                                <i className="fas fa-shield fa-stack-2x"></i>
+                                                                <i className="fas fa-heart fa-stack-2x"></i>
                                                                 <i className="fas fa-stack-1x streak-number">{ habit.streak }</i>
                                                             </span>
                                                         ) }
