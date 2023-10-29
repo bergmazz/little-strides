@@ -15,21 +15,25 @@
 }
 
 .habitbadges{
-    display: row
+    display: flex;
+    font-size: 2.5em;
 }
 
 .streak-number{
  color: white;
 font-family: Jost, Futura, Helvetica, Arial, sans-serif;
-}
-/* .star {
-  background-color: #CDAEFF;
+    font-size: .7em;
 }
 
-.shield {
-  background-color: #E3A72F;
+.fa-star {
+ color: #CDAEFF;
 }
 
-.scalloped-circle {
-  background-color: #058789;
-} */
+/* .shield { */
+.fa-heart{
+color: #E3A72F;
+}
+
+.fa-certificate {
+color: #058789;
+}

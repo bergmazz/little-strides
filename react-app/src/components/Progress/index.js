@@ -72,9 +72,7 @@ function Progress () {
                         <div className="routine-section" key={ routine.id }>
                             {/* <div className="routine-tile"> */ }
                             <div >
-                                    <h1>{ routine.name }</h1>
-                                <h4>You completed { routine.averagePastWeek }% of habits in this routine checking in last week</h4>
-                                <h4>Your all time track record for this routine is at { routine.averageCompletionAllTime }% </h4>
+                                <h1>{ routine.name }</h1>
                                 <div className="habitbadges">
                                     { routine.habits.map( ( habit ) => {
                                         const shouldDisplayBadge = habit.streak > 1;
@@ -108,6 +106,10 @@ function Progress () {
                                         );
                                     } ) }
                                 </div>
+
+                                <h4>You completed { routine.averagePastWeek }% of habits in this routine checking in last week</h4>
+                                <h4>Your all time track record for this routine is at { routine.averageCompletionAllTime }% </h4>
+
                             </div >
                         </div >
                     ) )
