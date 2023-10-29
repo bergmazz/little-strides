@@ -83,26 +83,37 @@ function Progress () {
                                         return (
                                             <div key={ habit.id } className={ `habit ${ badgeShape }` }>
                                                 { shouldDisplayBadge && (
-
                                                     <div className={ `streak-badge ${ badgeShape }` }>
-                                                        {/* <i class="fa-solid fa-shield"></i> */ }
-                                                        {/* <i class="fa-solid fa-badge"></i> */ }
-                                                        <span className="fa-stack">
-
-                                                            <i className="fas fa-star fa-stack-2x"></i>
-                                                            <i className="fas fa-stack-1x streak-number">{ habit.streak }</i>
-                                                        </span>
+                                                        { badgeShape === 'star' && (
+                                                            <span className="fa-stack">
+                                                                <i className="fas fa-star fa-stack-2x"></i>
+                                                                <i className="fas fa-stack-1x streak-number">{ habit.streak }</i>
+                                                            </span>
+                                                        ) }
+                                                        { badgeShape === 'shield' && (
+                                                            <span className="fa-stack">
+                                                                <i className="fas fa-shield fa-stack-2x"></i>
+                                                                <i className="fas fa-stack-1x streak-number">{ habit.streak }</i>
+                                                            </span>
+                                                        ) }
+                                                        { badgeShape === 'scalloped-circle' && (
+                                                            <span className="fa-stack">
+                                                                <i className="fas fa-certificate fa-stack-2x"></i>
+                                                                <i className="fas fa-stack-1x streak-number">{ habit.streak }</i>
+                                                            </span>
+                                                        ) }
                                                     </div>
                                                 ) }
                                             </div>
                                         );
                                     } ) }
                                 </div>
-                            </div>
-                        </div>
-                    ) ) }
-                </div>
-            </div>
+                            </div >
+                        </div >
+                    ) )
+                    }
+                </div >
+            </div >
 
             <div className="wave-2">
                 <img src={ waveSvgUpp } alt="Wave" />
