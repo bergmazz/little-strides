@@ -53,6 +53,22 @@ class Routine(db.Model, UserMixin):
         percent = (yes / checkins_ever) * 100 if checkins_ever else 0
         return round(percent)
 
+    def today(self):
+        end_date = datetime.utcnow()
+        start_date = end_date - timedelta(days=1)
+        yes_today = 0
+        checkins_today = 0
+
+        for habit in self.habits:
+            for checkin in habit.checkins:
+                if checkin.created_at >= start_date and checkin.created_at <= end_date:
+                    checkins_today += 1
+                    if checkin.completed:
+                        yes_today += 1
+
+        percent = (yes_today / checkins_today) * 100 if checkins_today else 0
+        return round(percent)
+
     def to_dict(self):
         # user = self.user.to_dict()
         return {
@@ -64,6 +80,7 @@ class Routine(db.Model, UserMixin):
             'habits': [habit.to_dict() for habit in self.habits],
             'averagePastWeek': self.past_week(),
             'averageCompletionAllTime': self.all_time(),
+            'averageToday': self.today(),
             'mainTopic': self.topic
         }
 

@@ -73,6 +73,8 @@ function Progress () {
                             {/* <div className="routine-tile"> */ }
                             <div >
                                 <h1>{ routine.name }</h1>
+                                <h1> { routine.averageCompletionAllTime }% yes all time </h1>
+
                                 <div className="habitbadges">
                                     { routine.habits.map( ( habit ) => {
                                         const shouldDisplayBadge = habit.streak > 1;
@@ -106,14 +108,29 @@ function Progress () {
                                         );
                                     } ) }
                                 </div>
+                                <h1>{ routine.averageToday }% for today's habits</h1>
+                                <h4>{ routine.averagePastWeek }% average in the past week</h4>
 
-                                <h4>You completed { routine.averagePastWeek }% of habits in this routine checking in last week</h4>
-                                <h4>Your all time track record for this routine is at { routine.averageCompletionAllTime }% </h4>
+                                <div className="habit-descriptions">
+                                    { routine.habits.map( ( habit ) => {
+                                        return (
+                                            <div key={ habit.id }>
+                                                { habit.streak > 1 && (
+                                                    <p>
+                                                        <i className="fas fa-fire"></i>
+                                                        { ` ${ habit.description } ${ habit.streak } days in a row` }
+                                                    </p>
+                                                ) }
+                                            </div>
+                                        );
+                                    } ) }
+                                </div>
 
                             </div >
                         </div >
                     ) )
                     }
+
                 </div >
             </div >
 
