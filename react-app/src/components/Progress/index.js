@@ -12,6 +12,10 @@ import CheckinFormModal from '../CheckInModal'
 import { fetchRoutines } from '../../store/routine';
 // import { currentUserHabits } from '../../store/habit';
 import waveSvgUpp from "./54.svg"
+import waveSvg from "./52.svg"
+// import waveSvg from "./56.svg"
+// import waveSvg from "./wave.svg"
+// import waveSvg from "./wav2.svg"
 import "./Progress.css"
 
 function Progress () {
@@ -65,13 +69,24 @@ function Progress () {
         <div className='userprof'>
             <div className='usersec1'>
                 {/* <h1>***FEATURE IN PROGRESS!***</h1> */ }
-                <h1>Making some strides!</h1>
+                <h1>Real change happens slowly, over time. Progress, not perfection.</h1>
                 {/* <h4>Here's a breakdown of "yes" repsonses by routines</h4> */ }
-                <div>
+            </div >
+
+            <div className="wave-2">
+                <img src={ waveSvgUpp } alt="Wave" />
+            </div>
+            <div className='usersec2'>
+                { routines && routines.length > 0 ? (
+                    <h1>Making some strides!</h1>
+                ) : (
+                    <h1>Get started, create a routine.</h1>
+                ) }
+                <div className='progress-container'>
                     { routines.map( ( routine ) => (
-                        <div className="routine-section" key={ routine.id }>
+                        <div className="routine-progress" key={ routine.id }>
                             {/* <div className="routine-tile"> */ }
-                            <div >
+                            <div className='progress'>
                                 <h1>{ routine.name }</h1>
                                 <h1> { routine.averageCompletionAllTime }% yes all time </h1>
 
@@ -130,19 +145,14 @@ function Progress () {
                         </div >
                     ) )
                     }
+                </div>
 
-                </div >
-            </div >
+            </div>
 
             <div className="wave-2">
-                <img src={ waveSvgUpp } alt="Wave" />
+                <img src={ waveSvg } alt="Wave" />
             </div>
-            <div className='usersec2'>
-                { routines && routines.length > 0 ? (
-                    <h1>Pogress per habit</h1>
-                ) : (
-                    <h1>Get started, create a routine.</h1>
-                ) }
+
                 { routines && routines.length > 0 ? (
                     routines.map( ( routine ) => (
 
@@ -168,7 +178,7 @@ function Progress () {
                             </div>
                             <div className="routine-buttons">
 
-                                {/* { routine.checkedIn ? (
+                                { routine.averageToday > 0 ? (
                                     <button
                                         className="edit-checkin"
                                         onClick={ () => window.alert( "Edit coming soon" ) }
@@ -182,15 +192,15 @@ function Progress () {
                                         onItemClick={ closeMenu }
                                         modalComponent={ <CheckinFormModal habits={ routine.habits } showWarning={ false } /> }
                                     />
-                                ) } */}
+                                ) }
 
-                                <OpenModalButton
+                                {/* <OpenModalButton
                                     className='checkin'
                                     buttonText="Check In"
                                     onItemClick={ closeMenu }
                                     // modalComponent={ <ErrorModal message={ "Coming soon." } showWarning={ false } /> }
                                     modalComponent={ <CheckinFormModal habits={ routine.habits } showWarning={ false } /> }
-                                />
+                                /> */}
                             </div>
                         </div>
                     ) ) ) : (
@@ -202,8 +212,7 @@ function Progress () {
                         onItemClick={ closeMenu }
                         modalComponent={ <RoutineFormModal /> }
                     /> */}</>
-                ) }
-            </div>
+            ) }
         </div>
     )
 }

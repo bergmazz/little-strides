@@ -10,7 +10,28 @@
     align-items: center;
 } */
 
-.routine-section h1{
+.progress-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .progress{
+        justify-content: center;
+    align-items: center;
+} */
+
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+
+.routine-progress {
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.routine-progress h1{
     font-size: 2em;
 }
 
