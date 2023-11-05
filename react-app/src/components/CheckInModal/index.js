@@ -24,7 +24,6 @@ function CheckinFormModal ( { habits } ) {
         const hasNullAnswers = selectedAnswers.some( ( answer ) => answer.completed === null );
 
         if ( hasNullAnswers ) {
-            // Display an error message or take any other action
             alert( "Please answer all questions before submitting." );
         } else {
             habits.forEach( ( habit, index ) => {
@@ -52,8 +51,7 @@ function CheckinFormModal ( { habits } ) {
                     <h1>{ yesPercentage.toFixed( 2 ) }%</h1>
                     {/* <h4>"Yes" Responses Last Week:</h4> */ }
                     {/* <h1>{ habits.averagePastWeek }</h1> */ }
-                    <button onClick={ closeModal }>exit</button>
-
+                    {/* <button onClick={ closeModal }>exit</button> */ }
                 </div>
             ) : (
                 <div>
