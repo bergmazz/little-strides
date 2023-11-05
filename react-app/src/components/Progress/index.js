@@ -67,29 +67,29 @@ function Progress () {
 
     return (
         <div className='userprof'>
-            <div className='usersec1'>
-                {/* <h1>***FEATURE IN PROGRESS!***</h1> */ }
-                <h1>Real change happens slowly, over time. Progress, not perfection.</h1>
-                {/* <h4>Here's a breakdown of "yes" repsonses by routines</h4> */ }
+            <div className='usersecc1'>
+                {/* <h1>Progress, not perfection</h1> */ }
+                <h1>Real change happens over time. Progress, not perfection </h1>
             </div >
 
             <div className="wave-2">
                 <img src={ waveSvgUpp } alt="Wave" />
             </div>
             <div className='usersec2'>
-                { routines && routines.length > 0 ? (
-                    <h1>Making some strides!</h1>
+                {/* { routines && routines.length > 0 ? (
+                    <h2>Making some strides!</h2>
                 ) : (
-                    <h1>Get started, create a routine.</h1>
-                ) }
+                        <h2>Get started, create a routine.</h2>
+                ) } */}
                 <div className='progress-container'>
                     { routines.map( ( routine ) => (
                         <div className="routine-progress" key={ routine.id }>
                             {/* <div className="routine-tile"> */ }
                             <div className='progress'>
                                 <h1>{ routine.name }</h1>
-                                <h1> { routine.averageCompletionAllTime }% yes all time </h1>
 
+                                <h1 className='bigg' > { routine.averageCompletionAllTime }% yes all time </h1>
+                                <h2>Making some strides!</h2>
                                 <div className="habitbadges">
                                     { routine.habits.map( ( habit ) => {
                                         const shouldDisplayBadge = habit.streak > 1;
@@ -123,7 +123,7 @@ function Progress () {
                                         );
                                     } ) }
                                 </div>
-                                <h1>{ routine.averageToday }% for today's habits</h1>
+                                <h1 className='biggish'>{ routine.averageToday }% for today's habits</h1>
                                 <h4>{ routine.averagePastWeek }% average in the past week</h4>
 
                                 <div className="habit-descriptions">
@@ -133,7 +133,7 @@ function Progress () {
                                                 { habit.streak > 1 && (
                                                     <p>
                                                         <i className="fas fa-fire"></i>
-                                                        { ` ${ habit.description } ${ habit.streak } days in a row` }
+                                                        { ` ${ habit.description } ${ habit.streak } check ins in a row` }
                                                     </p>
                                                 ) }
                                             </div>
@@ -179,12 +179,20 @@ function Progress () {
                             <div className="routine-buttons">
 
                                 { routine.averageToday > 0 ? (
-                                    <button
-                                        className="edit-checkin"
-                                        onClick={ () => window.alert( "Edit coming soon" ) }
-                                    >
-                                        Edit Check In
-                                    </button>
+                                    // <OpenModalButton
+                                    //     className='checkin'
+                                    //     buttonText="Check In"
+                                    //     onItemClick={ closeMenu }
+                                    //     // modalComponent={ <ErrorModal message={ "Coming soon." } showWarning={ false } /> }
+                                    //     modalComponent={ <CheckinFormModal habits={ routine.habits } showWarning={ false } /> }
+                                    // />
+                                    <OpenModalButton
+                                        className="create-routine"
+                                        buttonText="Check In"
+                                        onItemClick={ closeMenu }
+                                        modalComponent={ <ErrorModal message={ "You already checked in today!" } showWarning={ false } /> }
+                                    />
+
                                 ) : (
                                         <OpenModalButton
                                         className="checkin"
@@ -194,13 +202,7 @@ function Progress () {
                                     />
                                 ) }
 
-                                {/* <OpenModalButton
-                                    className='checkin'
-                                    buttonText="Check In"
-                                    onItemClick={ closeMenu }
-                                    // modalComponent={ <ErrorModal message={ "Coming soon." } showWarning={ false } /> }
-                                    modalComponent={ <CheckinFormModal habits={ routine.habits } showWarning={ false } /> }
-                                /> */}
+
                             </div>
                         </div>
                     ) ) ) : (

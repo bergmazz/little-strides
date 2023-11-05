@@ -11,9 +11,9 @@ export function ModalProvider({ children }) {
   const [onModalClose, setOnModalClose] = useState(null);
 
   const closeModal = ( showWarning = false ) => {
-
+    let shouldClose = null
     if ( showWarning ) {
-      const shouldClose = window.confirm(
+      shouldClose = window.confirm(
         "Are you sure you want to exit? Your progress will not be saved."
       );
       if ( !shouldClose ) {
