@@ -12,8 +12,8 @@ import CheckinFormModal from '../CheckInModal'
 import { fetchRoutines } from '../../store/routine';
 // import { currentUserHabits } from '../../store/habit';
 import waveSvgUpp from "./54.svg"
-import waveSvg from "./52.svg"
-// import waveSvg from "./56.svg"
+// import waveSvg from "./52.svg"
+import waveSvg from "./56.svg"
 // import waveSvg from "./wave.svg"
 // import waveSvg from "./wav2.svg"
 import "./Progress.css"
@@ -67,10 +67,9 @@ function Progress () {
 
     return (
         <div className='userprof'>
-            <div className='usersecc1'>
-                {/* <h1>Progress, not perfection</h1> */ }
+            {/* <div className='usersecc1'>
                 <h1>Real change happens over time. Progress, not perfection </h1>
-            </div >
+            </div > */}
 
             <div className="wave-2">
                 <img src={ waveSvgUpp } alt="Wave" />

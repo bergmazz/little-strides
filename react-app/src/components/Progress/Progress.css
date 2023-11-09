@@ -1,15 +1,12 @@
-.habittext p{
-       /* display: flex;
-        justify-content: center;
-    align-items: center; */
+/* .habittext p{
     margin-left:6%;
-}
+} */
 
-.usersecc1{
+/* .usersecc1{
     position: relative;
     z-index:2;
     margin: 100px 85px 0 85px;
-}
+} */
 /* .habittext h3{
        display: flex;
         justify-content: center;
@@ -31,41 +28,3 @@
   /* display: flex;
   flex-direction: column;
   align-items: center; */
-
-.routine-progress {
-  width: 80%;
-  margin: auto;
-  text-align: left;
-}
-
-.routine-progress h1{
-    font-size: 2em;
-}
-
-.habitbadges{
-    display: flex;
-    font-size: 2.5em;
-}
-
-.streak-number{
- color: white;
-font-family: Jost, Futura, Helvetica, Arial, sans-serif;
-    font-size: .7em;
-}
-
-.fa-star {
- color: #CDAEFF;
-}
-
-/* .shield { */
-.fa-heart{
-color: #E3A72F;
-}
-
-.fa-certificate {
-color: #058789;
-}
-
-.fa-fire{
-      color:#D54B1A;
-}
