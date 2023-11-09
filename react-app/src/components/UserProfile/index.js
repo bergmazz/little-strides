@@ -29,6 +29,7 @@ function UserProfile () {
     let badgeShapeIndex = 0;
 
     const ulRef = useRef()
+    const progressSectionRef = useRef();
 
     const closeMenu = ( e ) => {
         if ( !ulRef.current?.contains( e.target ) ) {
@@ -61,6 +62,21 @@ function UserProfile () {
         </div>
     )
 
+    const scrollToProgressSection = () => {
+        const element = progressSectionRef.current;
+
+        if ( element ) {
+            element.scrollIntoView( { behavior: 'smooth' } );
+        }
+    };
+
+    // FOR THE PROGRESS NAV LINK
+    if ( window.location.hash === "#progress" ) {
+        // scroll to the "progress-section" when the component mounts
+        scrollToProgressSection();
+    }
+
+
     return (
         <div className='userprof'>
             <div className='usersec1'>
@@ -86,6 +102,8 @@ function UserProfile () {
             <div className="wave-2">
                 <img src={ waveSvgUp } alt="Wave" />
             </div>
+
+            <div id="progress" ref={ progressSectionRef }></div>
             <div className='usersec2'>
                 {/* <div className='user-progress'>
                     <UserProgress />
@@ -163,7 +181,7 @@ function UserProfile () {
                 <img src={ waveSvg } alt="Wave" />
             </div>
 
-            <div className="usersec3">
+            <div className="usersec3" id="routine-section">
                 { routines && routines.length > 0 ? (
                     <h1>Manage your routines</h1>
                 ) : (
@@ -224,6 +242,7 @@ function UserProfile () {
                     /> */}</>
                 ) }
             </div>
+
         </div>
     )
 }
