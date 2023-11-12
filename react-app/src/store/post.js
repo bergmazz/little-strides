@@ -1,9 +1,8 @@
 //Action Types
 const SET_POSTS = 'post/SET_POSTS';
 const ADD_POST = 'post/ADD_POST';
-// const DELETE_POST = 'post/DELETE_POST';
+const DELETE_POST = 'post/DELETE_POST';
 // // const UPDATE_POST = 'post/UPDATE_POST';
-
 
 // Action Creators
 export const setPosts = ( posts ) => ( {
@@ -16,6 +15,10 @@ export const addPost = ( post ) => ( {
     payload: post,
 } );
 
+export const deletePostById = ( postId ) => ( {
+    type: DELETE_POST,
+    payload: postId,
+} );
 
 
 
@@ -65,6 +68,17 @@ export const post = ( content, image ) => async ( dispatch ) => {
 };
 
 //DELETE / api / posts / <post_id>
+export const deletePost = ( postId ) => async ( dispatch ) => {
+    const response = await fetch( `/api/posts/${ postId }`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    } )
+    if ( response.ok ) {
+        dispatch( deletePostById( postId ) );
+    };
+}
 
 //BONUS: PUT / api / posts / <post_id>
 
@@ -80,11 +94,11 @@ const postReducer = ( state = initialState, action ) => {
             return { ...state, all: [ ...action.payload ] };
         case ADD_POST:
             return { ...state, all: [ ...state.all, action.payload ] };
-        // case DELETE_POST:
-        //     return {
-        //         ...state,
-        //         all: state.all.filter( ( post ) => post.id !== action.payload ),
-        //     };
+        case DELETE_POST:
+            return {
+                ...state,
+                all: state.all.filter( ( post ) => post.id !== action.payload ),
+            };
         default:
             return state;
     }
