@@ -6,4 +6,5 @@ from wtforms.validators import DataRequired, URL, Length
 class PostForm(FlaskForm):
     content = StringField('content', validators=[
         DataRequired(), Length(max=750)])
-    image = StringField('image', validators=[URL()])
+    # image = StringField('image', validators=[URL()])
+    image = StringField('image')

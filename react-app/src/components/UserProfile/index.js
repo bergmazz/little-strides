@@ -111,8 +111,6 @@ function UserProfile () {
                 </div> */}
                 <Element name="progress-section">
                 </Element>
-
-
                 <div className='progress-container'>
                     { routines.map( ( routine ) => (
                         <div className="routine-progress" key={ routine.id }>

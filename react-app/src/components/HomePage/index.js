@@ -10,6 +10,7 @@ import { fetchPosts } from '../../store/post';
 import "./HomePage.css"
 import OpenModalButton from "../OpenModalButton";
 import ErrorModal from '../ErrorModal';
+import PostForm from "../PostForm";
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -36,17 +37,16 @@ const HomePage = () => {
                     <div className="home-posts-container">
                         <div
                             className="write"
-                            onClick={ () => window.alert( "Posts coming soon" ) }
+                            // onClick={ () => window.alert( "Posts coming soon" ) }
                         >
                         <p>Join the Discussion</p>
-                            {/* <OpenModalButton
-                            modalComponent={ <ErrorModal
-                                message={ "Coming soon." }
+                            <OpenModalButton
+                                modalComponent={ <PostForm
                                 showWarning={ false }
                                 buttonText="write"
                             // buttonText={ <i className="far fa-pen-to-square"></i> }
                             /> }
-                        /> */}
+                            />
                             <img className="pencil" src={ pencil } alt="Pencil Icon" />
                     </div>
                     { communityPosts.map( ( post, index ) => {
