@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { Element } from 'react-scroll';
 import OpenModalButton from "../OpenModalButton";
 import RoutineFormModal from '../RoutineFormModal';
 import RoutineEditForm from '../RoutineEditForm';
@@ -29,7 +30,7 @@ function UserProfile () {
     let badgeShapeIndex = 0;
 
     const ulRef = useRef()
-    const progressSectionRef = useRef();
+    // const progressSectionRef = useRef();
 
     const closeMenu = ( e ) => {
         if ( !ulRef.current?.contains( e.target ) ) {
@@ -62,19 +63,19 @@ function UserProfile () {
         </div>
     )
 
-    const scrollToProgressSection = () => {
-        const element = progressSectionRef.current;
+    // const scrollToProgressSection = () => {
+    //     const element = progressSectionRef.current;
 
-        if ( element ) {
-            element.scrollIntoView( { behavior: 'smooth' } );
-        }
-    };
+    //     if ( element ) {
+    //         element.scrollIntoView( { behavior: 'smooth' } );
+    //     }
+    // };
 
-    // FOR THE PROGRESS NAV LINK
-    if ( window.location.hash === "#progress" ) {
-        // scroll to the "progress-section" when the component mounts
-        scrollToProgressSection();
-    }
+    // // FOR THE PROGRESS NAV LINK
+    // if ( window.location.hash === "#progress" ) {
+    //     // scroll to the "progress-section" when the component mounts
+    //     scrollToProgressSection();
+    // }
 
 
     return (
@@ -103,11 +104,13 @@ function UserProfile () {
                 <img src={ waveSvgUp } alt="Wave" />
             </div>
 
-            <div id="progress" ref={ progressSectionRef }></div>
+            {/* <div id="progress" ref={ progressSectionRef }></div> */ }
             <div className='usersec2'>
                 {/* <div className='user-progress'>
                     <UserProgress />
                 </div> */}
+                <Element name="progress-section">
+                </Element>
 
 
                 <div className='progress-container'>
