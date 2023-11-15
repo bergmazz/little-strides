@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { Element } from 'react-scroll';
+import { Link, useHistory, useLocation } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import RoutineFormModal from '../RoutineFormModal';
 import RoutineEditForm from '../RoutineEditForm';
@@ -11,7 +10,6 @@ import CheckinFormModal from '../CheckInModal'
 // import UserRoutines from "./";
 // import UserProgress from "./";
 import { fetchRoutines } from '../../store/routine';
-// import { currentUserHabits } from '../../store/habit';
 import waveSvgUp from "./57.svg"
 import waveSvg from "./52.svg"
 import "./UserProfile.css"
@@ -19,6 +17,7 @@ import "./UserProfile.css"
 
 function UserProfile () {
     // console.log( "------ in user profile" );
+    const location = useLocation()
     const dispatch = useDispatch();
     const currentUser = useSelector( state => state.session.user )
     const routines = useSelector( state => state.routine.routines )
@@ -32,17 +31,19 @@ function UserProfile () {
     const ulRef = useRef()
     // const progressSectionRef = useRef();
 
-    const closeMenu = ( e ) => {
-        if ( !ulRef.current?.contains( e.target ) ) {
-            setShowMenu( false );
-        }
-    };
-
     useEffect( () => {
         console.log( currentUser )
         dispatch( fetchRoutines() );
         // dispatch( currentUserHabits() )
     }, [ dispatch, currentUser ] );
+
+
+
+    const closeMenu = ( e ) => {
+        if ( !ulRef.current?.contains( e.target ) ) {
+            setShowMenu( false );
+        }
+    };
 
     useEffect( () => {
         // console.log( "---------------Inside useEffect" );
@@ -54,6 +55,17 @@ function UserProfile () {
 
     // console.log( 'Routinesssss:', routines );
 
+    let elem = document.getElementById( location.hash.slice( 1 ) );
+    // console.log( "elemmmmmmmmmmmment", elem )
+    // If location.hash is not present or element not found
+    if ( !elem ) {
+        elem = document.documentElement || document.body;
+    }
+
+    useEffect( () => {
+        elem.scrollIntoView( { behavior: "smooth", offset: -50 } );
+    }, [ elem ] );
+
     if ( !currentUser ) return (
         <div className='no-user'>
             <h1 className='no-user'>.       .        .   .. ....   ....  ..  .....Hold tight for sec.</h1>
@@ -62,21 +74,6 @@ function UserProfile () {
             </Link> */}
         </div>
     )
-
-    // const scrollToProgressSection = () => {
-    //     const element = progressSectionRef.current;
-
-    //     if ( element ) {
-    //         element.scrollIntoView( { behavior: 'smooth' } );
-    //     }
-    // };
-
-    // // FOR THE PROGRESS NAV LINK
-    // if ( window.location.hash === "#progress" ) {
-    //     // scroll to the "progress-section" when the component mounts
-    //     scrollToProgressSection();
-    // }
-
 
     return (
         <div className='userprof'>
@@ -104,14 +101,9 @@ function UserProfile () {
                 <img src={ waveSvgUp } alt="Wave" />
             </div>
 
-            {/* <div id="progress" ref={ progressSectionRef }></div> */ }
             <div className='usersec2'>
-                {/* <div className='user-progress'>
-                    <UserProgress />
-                </div> */}
-                <Element name="progress-section">
-                </Element>
-                <div className='progress-container'>
+
+                <div className='progress-container' id="progress">
                     { routines.map( ( routine ) => (
                         <div className="routine-progress" key={ routine.id }>
                             {/* <div className="routine-tile"> */ }

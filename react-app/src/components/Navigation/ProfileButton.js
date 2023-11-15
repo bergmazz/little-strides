@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, useHistory } from 'react-router-dom';
-import { Link } from 'react-scroll';
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
@@ -60,18 +59,7 @@ function ProfileButton ( { user } ) {
               <NavLink to="/user" className="orange-text" onClick={ closeMenu }>My Routines</NavLink>
             </li>
             <li className="progress-link">
-              {/* <NavLink to="/user#progress" className="blue-text" onClick={ closeMenu }>My Progress</NavLink> */ }
-              <Link
-                to="progress-section"
-                spy={ true }
-                smooth={ true }
-                offset={ -70 }
-                duration={ 500 }
-                className="blue-text"
-                onClick={ closeMenu }
-              >
-                My Progress
-              </Link>
+              <NavLink to="/user#progress" className="blue-text" onClick={ closeMenu }>My Progress</NavLink>
             </li>
             <li className="community-link">
               <NavLink to="/community" className="yellow-text" onClick={ closeMenu }>My Community</NavLink>
