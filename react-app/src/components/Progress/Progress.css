@@ -1,15 +1,30 @@
-.habittext p{
-       /* display: flex;
-        justify-content: center;
-    align-items: center; */
+/* .habittext p{
     margin-left:6%;
-}
+} */
+
+/* .usersecc1{
+    position: relative;
+    z-index:2;
+    margin: 100px 85px 0 85px;
+} */
 /* .habittext h3{
        display: flex;
         justify-content: center;
     align-items: center;
 } */
 
-.routine-section h1{
-    font-size: 2em;
-}
+/* .progress-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* .progress{
+        justify-content: center;
+    align-items: center;
+} */
+
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */

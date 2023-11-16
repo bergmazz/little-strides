@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { fetchRoutines, deleteRoutine } from "../../store/routine";
+import { fetchPosts, deletePost } from "../../store/post";
 import "./delete.css"
 
-function RoutineDeleteForm ( { routine } ) {
+function PostDeleteForm ( { post } ) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const [ error, setError ] = useState( null );
 
     const handleDelete = async () => {
-        const data = await dispatch( deleteRoutine( routine.id ) );
+        const data = await dispatch( deletePost( post.id ) );
         if ( Array.isArray( data ) ) {
             setError( data[ 0 ] );
         } else {
-            dispatch( fetchRoutines() );
+            dispatch( fetchPosts() );
             closeModal();
         }
     };
@@ -22,17 +22,17 @@ function RoutineDeleteForm ( { routine } ) {
     return (
         <div className="delete">
             { error && <p>Error: { error }</p> }
-            <h3>{ `Are you sure you want to delete ${ routine.name }?` }</h3>
+            <h3>{ `Are you sure you want to delete your post?` }</h3>
             <button type="button" onClick={ handleDelete }>
                 Delete
             </button>
-            {/* <p>(Click outside of this box to cancel)</p> */ }
+            <p>(Click outside of this box to cancel)</p>
             {/* cancel button triggers the are you sure warning :( */ }
-            <button type="submit" onClick={ closeModal }>
+            {/* <button type="button" onClick={ closeModal }>
                 Cancel
-            </button>
+            </button> */}
         </div>
     );
 }
 
-export default RoutineDeleteForm;
+export default PostDeleteForm;

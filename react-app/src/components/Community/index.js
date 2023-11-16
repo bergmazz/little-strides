@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import { allUserHabits, createHabit } from '../../store/habit';
 import { fetchPosts } from '../../store/post';
+import { anxiety, relationships, exercise, wellness, stress, sleep, depression, productivity } from "../RoutineFormModal/Topics";
 
 import './Community.css';
 
@@ -40,6 +41,17 @@ function Community () {
         'Depression',
         'Productivity',
     ];
+
+    const topicImages = {
+        anxiety: anxiety,
+        relationships: relationships,
+        exercise: exercise,
+        wellness: wellness,
+        stress: stress,
+        sleep: sleep,
+        depression: depression,
+        productivity: productivity,
+    };
 
     const handleSelectTopics = ( selectedTopic ) => {
         if ( selectedTopics.includes( selectedTopic ) ) {
@@ -92,34 +104,34 @@ function Community () {
             ) }
 
 
-            <h2>Community Habits</h2>
+            <h2>Browse Other's Habits by Topic</h2>
+
+            <div>
+                <div className="topics-container-one-row">
+                    { availableTopics.map( ( topic ) => (
+                        <button
+                            key={ topic }
+                            className={ `topic-button ${ selectedTopics.includes( topic ) ? "selected" : "" }` }
+                            onClick={ () => handleSelectTopics( topic ) }
+                        >
+                            <img
+                                src={ topicImages[ topic.toLowerCase() ] }
+                                alt={ topic }
+                            />
+                        </button>
+                    ) ) }
+                </div>
+            </div>
+
             { communityHabits ? (
-                // communityHabits.map( ( habit ) => (
-                //     <div className="habit-tile" key={ habit.id }>
-                //         <p>{ habit.description }</p>
-                //         { routines ? (
-                //             routines.map( ( routine ) => (
-                //                 <button
-                //                     className='add-habit-to-routine'
-                //                     onClick={ () => {
-                //                         addToRoutine( habit.id, routine.id );
-                //                     } }
-                //                 >
-                //                     Add to { routine.name }
-                //                 </button>
-                //             ) )
-                <div className="suggested">
+                <div className="community-habit-steps-container">
                     { communityHabits.map( ( habit, index ) => {
+                        if ( selectedTopics.includes( habit.topic ) )
                         // const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
                         return (
                             <div className='community-habits' >
                                 <button
-                                    // className={ `suggested-habit-button ${ habits.some( ( h ) => h.description === habitText ) ? "selected" : "" }` }
                                     key={ index }
-                                    // onClick={ () => {
-                                    //     let habit = { "category": habitTopic, "description": habitText }
-                                    //     handleSelectedHabit( habit, routine );
-                                    // } }
                                 >
                                     { habit.description }
                                 </button>

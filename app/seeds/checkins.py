@@ -6,13 +6,16 @@ from datetime import datetime, timedelta
 
 def seed_checkins():
     per_habit = 15
+    completion_probability = 0.85
+
     for i in range(1, 42):
         start = datetime.now() - timedelta(days=1)
 
         for e in range(1, per_habit):
             checkin_date = start - timedelta(days=per_habit - e)
+            # completed = random.choice([True, False])
+            completed = random.random() < completion_probability
 
-            completed = random.choice([True, False])
             checkin = Checkin(habit_id=i,
                             completed=completed, created_at=checkin_date)
             db.session.add(checkin)

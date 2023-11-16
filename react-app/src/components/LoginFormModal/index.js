@@ -9,11 +9,12 @@ import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
   const history = useHistory();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [ errors, setErrors ] = useState( [] );
 
   const handleSubmit = async (e) => {
     e.preventDefault();

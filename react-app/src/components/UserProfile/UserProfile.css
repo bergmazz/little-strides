@@ -20,17 +20,60 @@
 }
 .userprof h1{
     font-size: 45px;
-    margin: 50px 0;
+    margin: 60px 0 10px 0;
 }
 
 .wave-2{
-margin-top: -60px;
+margin-top: -40px;
 z-index: 8;
 }
+
 .usersec2{
     z-index:2;
     margin: -100px 85px 0px 85px;
 }
+
+
+.routine-progress {
+  width: 80%;
+  margin: auto;
+  text-align: left;
+}
+
+.routine-progress h1{
+    font-size: 1.7em;
+}
+
+.habitbadges{
+    display: flex;
+    font-size: 2em;
+}
+
+.streak-number{
+ color: white;
+font-family: Jost, Futura, Helvetica, Arial, sans-serif;
+    font-size: .7em;
+}
+
+.fa-star {
+ color: #CDAEFF;
+}
+
+/* .shield { */
+.fa-heart{
+color: #E3A72F;
+}
+
+.fa-certificate {
+color: #058789;
+}
+
+.fa-fire{
+      color:#D54B1A;
+}
+
+
+
 
 .routine-section{
     margin:40px;
