@@ -15,8 +15,7 @@ function PostForm () {
 
     const [ errors, setErrors ] = useState( "" );
     const [ text, setText ] = useState( "" );
-    const [ image, setImage ] = useState( null );
-    // const [ file, setFile ] = useState();
+    const [ image, setImage ] = useState( "" );
 
     // const handleFileChange = async ( e ) => {
     //     e.preventDefault();
@@ -28,7 +27,7 @@ function PostForm () {
     const handleSubmit = async ( e ) => {
         e.preventDefault();
         // console.log( "---------text", text )
-        // console.log( "---------image", image )
+        console.log( "---------image handlesubmit", image )
         const data = await dispatch( post( text, image ) );
         if ( data ) {
             setErrors( data );
@@ -59,12 +58,23 @@ function PostForm () {
 
             <div className="post-image-container" >
                 <div className="progress-snapshot" >
+                    {/* { image && (
+                        <div>
+                            <img
+                                alt="not found"
+                                src={ URL.createObjectURL( image ) }
+                            />
+                            <br />
+                            <button onClick={ () => setImage( "" ) }>Remove</button>
+                        </div>
+                    ) } */}
+
                 </div>
             </div>
 
             <div className="upload-pic-button">
                 {/* <input type="file" onChange={ handleFileChange } /> */ }
-                <input type="file" value={ image } onChange={ ( e ) => setImage( URL.createObjectURL( e.target.files[ 0 ] ) ) } />
+                <input type="file" onChange={ ( e ) => setImage( URL.createObjectURL( e.target.files[ 0 ] ) ) } />
                 {/* <button >cloud</button> */ }
                 <p>Share a snapshot of your progress or upload a photo</p>
             </div>
