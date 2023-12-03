@@ -16,6 +16,14 @@ function PostForm () {
     const [ errors, setErrors ] = useState( "" );
     const [ text, setText ] = useState( "" );
     const [ image, setImage ] = useState( null );
+    // const [ file, setFile ] = useState();
+
+    // const handleFileChange = async ( e ) => {
+    //     e.preventDefault();
+    //     console.log( "fileeeee in handleleChange", e.target.files );
+    //     setImage( URL.createObjectURL( e.target.files[ 0 ] ) );
+    //     console.group( "the image now?", image )
+    // }
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
@@ -55,7 +63,9 @@ function PostForm () {
             </div>
 
             <div className="upload-pic-button">
-                <button >cloud</button>
+                {/* <input type="file" onChange={ handleFileChange } /> */ }
+                <input type="file" value={ image } onChange={ ( e ) => setImage( URL.createObjectURL( e.target.files[ 0 ] ) ) } />
+                {/* <button >cloud</button> */ }
                 <p>Share a snapshot of your progress or upload a photo</p>
             </div>
             {/* <ul>
