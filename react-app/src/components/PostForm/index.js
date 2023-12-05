@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
@@ -17,12 +17,18 @@ function PostForm () {
     const [ text, setText ] = useState( "" );
     const [ image, setImage ] = useState( "" );
 
-    // const handleFileChange = async ( e ) => {
-    //     e.preventDefault();
-    //     console.log( "fileeeee in handleChange", e.target.files );
-    //     setImage( URL.createObjectURL( e.target.files[ 0 ] ) );
-    //     console.group( "the image now?", image )
-    // }
+    const fileInputRef = useRef( null );
+
+    const handleFileChange = ( e ) => {
+        const file = e.target.files[ 0 ];
+        if ( file ) {
+            setImage( URL.createObjectURL( file ) );
+        }
+    };
+
+    const handleButtonClick = () => {
+        fileInputRef.current.click();
+    };
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
@@ -45,14 +51,15 @@ function PostForm () {
     return (
         <div className="post-form-container" >
 
+            <div className="post-grid">
             <div className="writing-container" >
 
-                <div className="user-blurb" >
+                    {/* <div className="user-blurb" >
                     { currentUser.username }
-                </div>
+                </div> */}
 
                 <input
-                    type="text"
+                        type="text-area"
                     value={ text }
                     placeholder="start typing....."
                     onChange={ ( e ) =>
@@ -80,8 +87,21 @@ function PostForm () {
 
             <div className="upload-pic-button">
                 {/* <input type="file" onChange={ handleFileChange } /> */ }
-                <input type="file" onChange={ ( e ) => setImage( URL.createObjectURL( e.target.files[ 0 ] ) ) } />
-                {/* <button >cloud</button> */ }
+                    {/* <input type="file" onChange={ ( e ) => setImage( URL.createObjectURL( e.target.files[ 0 ] ) ) } /> */ }
+                    {/* <button >cloud</button> */ }
+                    {/* <i className="fas fa-regular fa-cloud-arrow-up"></i> */ }
+
+                    <input
+                        type="file"
+                        ref={ fileInputRef }
+                        style={ { display: "none" } }
+                        onChange={ handleFileChange }
+                    />
+
+                    <button type="button" onClick={ handleButtonClick }>
+                        <i className="fa-regular fa-cloud-arrow-up"></i>
+                    </button>
+
                 <p>Share a snapshot of your progress or upload a photo</p>
             </div>
             {/* <ul>
@@ -90,6 +110,8 @@ function PostForm () {
                     return <li key={ idx }>{ parts[ 1 ] }</li>;
                 } ) }
             </ul> */}
+            </div>
+
             <div className="share-button">
                 <button type="submit" onClick={ handleSubmit }>Share With the Community</button>
             </div>

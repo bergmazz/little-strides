@@ -1,0 +1,62 @@
+#modal-content:has(.post-form-container){
+    /* background-color: #F8F3FF; */
+    width: 45%;
+    /* min-height: 55vh;
+    max-height: 75vh; */
+            box-shadow: 7px 9px #350079;
+}
+.post-form-container{
+      flex-direction: column;
+         display: flex;
+        justify-content: center;
+    align-items: center;
+    margin: 3em;
+}
+
+.writing-container{
+    grid-area: wc;
+     display: flex;
+    align-items: flex-start;
+}
+
+.writing-container input{
+        height: 100%;
+        width:80%;
+        resize:none;
+            /* text-align: left;
+            vertical-align: top; */
+}
+
+/* .writing-container input::placeholder {
+    text-align: top-left;
+} */
+
+.post-image-container{
+        grid-area: pi;
+}
+
+.upload-pic-button{
+            grid-area: up;
+}
+.upload-pic-button{
+            grid-area: up;
+}
+
+.post-grid{
+    display: grid;
+grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  grid-template-areas:
+    "wc wc wc pi pi"
+    "wc wc wc pi pi"
+    "wc wc wc up up";
+}
+
+
+.share-button button{
+    margin: 1em auto;
+font-size: 1.5em;
+  background-color: white;
+  display: block;
+     box-shadow:5px 6px #D54B1A;
+}
