@@ -19,7 +19,7 @@ function PostForm () {
 
     // const handleFileChange = async ( e ) => {
     //     e.preventDefault();
-    //     console.log( "fileeeee in handleleChange", e.target.files );
+    //     console.log( "fileeeee in handleChange", e.target.files );
     //     setImage( URL.createObjectURL( e.target.files[ 0 ] ) );
     //     console.group( "the image now?", image )
     // }
@@ -28,12 +28,17 @@ function PostForm () {
         e.preventDefault();
         // console.log( "---------text", text )
         console.log( "---------image handlesubmit", image )
-        const data = await dispatch( post( text, image ) );
-        if ( data ) {
+        // if ( image.length < 1 ) {
+        //     setImage( null )
+        // }
+        const data = dispatch( post( text, image ) );
+        // console.log( "handlesubmit data:", data )
+        if ( !data.text ) {
             setErrors( data );
+            console.error( "Error submitting post:", errors );
         } else {
+            closeModal();
             history.push( "/community" );
-            closeModal()
         }
     };
 
@@ -58,16 +63,17 @@ function PostForm () {
 
             <div className="post-image-container" >
                 <div className="progress-snapshot" >
-                    {/* { image && (
+                    { image && (
                         <div>
                             <img
                                 alt="not found"
-                                src={ URL.createObjectURL( image ) }
+                                src={ image }
+                                className="post-img"
                             />
                             <br />
                             <button onClick={ () => setImage( "" ) }>Remove</button>
                         </div>
-                    ) } */}
+                    ) }
 
                 </div>
             </div>
