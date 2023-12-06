@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-
+import cloud from "./cloud.svg"
 import { post } from "../../store/post";
 import "./PostForm.css";
 
@@ -51,7 +51,6 @@ function PostForm () {
 
     return (
         <div className="post-form-container" >
-            <i className="fa-solid fa-cloud-arrow-up"></i>
             <div className="post-grid">
                 <div className="writing-container" >
                     {/* <div className="user-blurb" >
@@ -97,7 +96,7 @@ function PostForm () {
                     />
 
                     <button type="button" onClick={ handleButtonClick }>
-                        <i class="fas fa-cloud-arrow-up"></i>
+                        <img className="upload" src={ cloud } alt="Upload Cloud" />
                         {/* <i className="fas fa-regular fa-cloud-arrow-up"></i>  */ }
                     </button>
 
