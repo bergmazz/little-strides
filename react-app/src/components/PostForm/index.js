@@ -15,7 +15,7 @@ function PostForm () {
 
     const [ errors, setErrors ] = useState( "" );
     const [ text, setText ] = useState( "" );
-    const [ image, setImage ] = useState( "" );
+    const [ image, setImage ] = useState();
 
     const fileInputRef = useRef( null );
 
@@ -62,7 +62,9 @@ function PostForm () {
                     onChange={ ( e ) =>
                         setText( e.target.value ) }
                 />
-
+                    <div className={ text.length > 750 || text.length < 4 ? "valid char-count-red" : "valid char-count" }>
+                        { text.length } / 750 characters
+                    </div>
             </div>
 
             <div className="post-image-container" >
@@ -73,14 +75,13 @@ function PostForm () {
                                 alt="not found"
                                 src={ image }
                                 className="post-img"
-                            />
-                            <br />
-                            <button onClick={ () => setImage( "" ) }>Remove</button>
-                        </div>
+                                />
+                            </div>
                     ) }
 
                 </div>
             </div>
+
 
             <div className="upload-pic-button">
                 {/* <input type="file" onChange={ handleFileChange } /> */ }
@@ -95,12 +96,16 @@ function PostForm () {
                         onChange={ handleFileChange }
                     />
 
+                    <div>
                     <button type="button" onClick={ handleButtonClick }>
                         <img className="upload" src={ cloud } alt="Upload Cloud" />
                         {/* <i className="fas fa-regular fa-cloud-arrow-up"></i>  */ }
-                    </button>
-
-                <p>Share a snapshot of your progress or upload a photo</p>
+                        </button>
+                        { image && (
+                            <button className="kill" onClick={ () => setImage( "" ) }>Remove</button>
+                        ) }
+                    </div>
+                    <p>Share a snapshot of your progress or upload a photo</p>
             </div>
             {/* <ul>
                 { errors.map( ( error, idx ) => {

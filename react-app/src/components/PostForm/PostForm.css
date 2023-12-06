@@ -16,18 +16,23 @@
 .writing-container{
     grid-area: wc;
      display: flex;
-    align-items: flex-start;
+     flex-direction:column;
+    /* align-items: flex-start; */
 }
 
 .writing-container textarea {
     align-self: flex-start;
-    height: 80%;
+    height: 70%;
     width: 70%;
     resize: none;
         border-radius: 20px;
     padding: 2em;
     font-family: Jost, Futura, Helvetica, Arial, sans-serif;
     font-size: 1em;
+}
+
+.valid{
+ margin-top: 1em;
 }
 
 .post-image-container{
@@ -37,10 +42,10 @@
 .upload-pic-button{
             grid-area: up;
 }
-.upload-pic-button{
-            grid-area: up;
-}
 
+.kill{
+    margin-left: 1em;
+}
 .post-grid{
     display: grid;
 grid-template-columns: repeat(5, 1fr);
