@@ -19,17 +19,16 @@
     align-items: flex-start;
 }
 
-.writing-container input{
-        height: 100%;
-        width:80%;
-        resize:none;
-            /* text-align: left;
-            vertical-align: top; */
+.writing-container textarea {
+    align-self: flex-start;
+    height: 80%;
+    width: 70%;
+    resize: none;
+        border-radius: 20px;
+    padding: 2em;
+    font-family: Jost, Futura, Helvetica, Arial, sans-serif;
+    font-size: 1em;
 }
-
-/* .writing-container input::placeholder {
-    text-align: top-left;
-} */
 
 .post-image-container{
         grid-area: pi;

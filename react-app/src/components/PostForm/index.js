@@ -34,15 +34,16 @@ function PostForm () {
         e.preventDefault();
         // console.log( "---------text", text )
         console.log( "---------image handlesubmit", image )
-        // if ( image.length < 1 ) {
-        //     setImage( null )
-        // }
-        const data = dispatch( post( text, image ) );
+        if ( image.length < 1 ) {
+            setImage( null )
+        }
+
         // console.log( "handlesubmit data:", data )
-        if ( !data.text ) {
-            setErrors( data );
+        if ( !text ) {
+            setErrors( "write something, silly" );
             console.error( "Error submitting post:", errors );
         } else {
+            const data = dispatch( post( text, image ) );
             closeModal();
             history.push( "/community" );
         }
@@ -50,16 +51,13 @@ function PostForm () {
 
     return (
         <div className="post-form-container" >
-
+            <i className="fa-solid fa-cloud-arrow-up"></i>
             <div className="post-grid">
-            <div className="writing-container" >
-
+                <div className="writing-container" >
                     {/* <div className="user-blurb" >
                     { currentUser.username }
                 </div> */}
-
-                <input
-                        type="text-area"
+                    <textarea
                     value={ text }
                     placeholder="start typing....."
                     onChange={ ( e ) =>
@@ -99,7 +97,8 @@ function PostForm () {
                     />
 
                     <button type="button" onClick={ handleButtonClick }>
-                        <i className="fa-regular fa-cloud-arrow-up"></i>
+                        <i class="fas fa-cloud-arrow-up"></i>
+                        {/* <i className="fas fa-regular fa-cloud-arrow-up"></i>  */ }
                     </button>
 
                 <p>Share a snapshot of your progress or upload a photo</p>

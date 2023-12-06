@@ -64,12 +64,10 @@ const HomePage = () => {
                         <p>Join the Discussion</p>
                             <OpenModalButton
                                 modalComponent={ <PostForm
-                                showWarning={ false }
-                                buttonText="write"
-                            // buttonText={ <i className="far fa-pen-to-square"></i> }
-                            /> }
+                                    showWarning={ false }
+                                /> }
+                                buttonText={ <img className="pencil" src={ pencil } alt="Pencil Icon" /> }
                             />
-                            <img className="pencil" src={ pencil } alt="Pencil Icon" />
                         </div>
 
                     { communityPosts.map( ( post, index ) => {
