@@ -258,13 +258,73 @@ margin-left: 2em;
   flex-direction:column;
 }
 .write-edit-habit textarea {
-    height: 70%;
-    width: 70%;
     resize: none;
-        border-radius: 20px;
+    height: 3vh;
+        border-radius: 15px;
     padding: 2em;
     font-family: Jost, Futura, Helvetica, Arial, sans-serif;
     font-size: 1em;
+    margin-bottom: .5em;
+}
+
+.silly{
+  margin-bottom: 2em;
+}
+
+/* .write-edit-habit select{
+text-align: center;
+        border-radius: 10px;
+        font-family: Jost, Futura, Helvetica, Arial, sans-serif;
+            font-size: 1em;
+            padding:5px;
+        margin-top: 1.5em;
+}
+
+.write-edit-habit select option{
+text-align: center;
+        font-family: Jost, Futura, Helvetica, Arial, sans-serif;
+            font-size: 1em;
+} */
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+      text-align: center;
+}
+
+.selected-option{
+    text-align: center;
+        border-radius: 10px;
+        border: 1px solid black;
+        font-family: Jost, Futura, Helvetica, Arial, sans-serif;
+            font-size: 1em;
+            padding:5px;
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-color: white;
+  z-index: 1;
+}
+
+.options div {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.commit{
+       display: flex;
+    background-color: white;
+    color: #E3A72F;
+       box-shadow:  5px 6px #058789;
+       font-size: 1.5em;
+       margin: 3em auto;
 }
 
 /* step 8 */

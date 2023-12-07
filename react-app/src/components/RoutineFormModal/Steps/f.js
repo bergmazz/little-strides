@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Step6 ( { editMe, habitDetail, setHabitDetail, habitCat, setHabitCat, availableTopics, setCurrentStep, habits, setHabits } ) {
+
+    const [ isDropdownOpen, setDropdownOpen ] = useState( false );
 
     const handleEditHabits = ( habit, prevHabit = habit ) => {
         const { description, category } = habit;
@@ -19,13 +21,17 @@ function Step6 ( { editMe, habitDetail, setHabitDetail, habitCat, setHabitCat, a
     return (
         <div className="write-edit-habit">
             <h2>Your Habit</h2>
-            <h3>Make it say something about who you want to be.</h3>
+            <h3>In a few words, say something about who you want to be.</h3>
             <textarea
                 value={ habitDetail }
                 onChange={ ( e ) =>
                     setHabitDetail( e.target.value ) }
             />
-            <select
+            <div className={ habitDetail.length > 100 ? "silly char-count-red" : "silly char-count" }>
+                { habitDetail.length } / 100 characters
+            </div>
+
+            {/* <select
                 value={ habitCat.toLowerCase() }
                 onChange={ ( e ) => setHabitCat( e.target.value ) }
             >
@@ -34,12 +40,36 @@ function Step6 ( { editMe, habitDetail, setHabitDetail, habitCat, setHabitCat, a
                         { topic }
                     </option>
                 ) ) }
-            </select>
-            <div className={ habitDetail.length > 75 ? "char-count-red" : "char-count" }>
-                { habitDetail.length } / 75 characters
+            </select> */}
+            <h3 >If you had to categorize it (you do), what does this help with?</h3>
+            <div className="custom-dropdown">
+                <div
+                    className={ `selected-option ${ isDropdownOpen ? 'open' : '' }` }
+                    onClick={ () => setDropdownOpen( !isDropdownOpen ) }
+                >
+                    { habitCat || 'Select an option' }
+                </div>
+                { isDropdownOpen && (
+                    <div className="options">
+                        { availableTopics.map( ( topic ) => (
+                            <div
+                                key={ topic.toLowerCase() }
+                                onClick={ () => {
+                                    setHabitCat( topic.toLowerCase() );
+                                    setDropdownOpen( false );
+                                } }
+                            >
+                                { topic.toLowerCase() }
+                            </div>
+                        ) ) }
+                    </div>
+                ) }
             </div>
+
+
             <button
-                disabled={ !habitCat || !habitDetail || habitDetail.length > 75 }
+                className="commit"
+                disabled={ !habitCat || !habitDetail || habitDetail.length > 100 }
                 onClick={ () => {
                     const habit = { "category": habitCat, "description": habitDetail }
                     handleEditHabits( habit, editMe )
