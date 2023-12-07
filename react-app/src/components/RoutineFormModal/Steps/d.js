@@ -1,15 +1,26 @@
 import React from "react";
 
-function Step4 ( { suggested, habits, handleSelectedHabits } ) {
+function Step4 ( { selectedTopics, suggested, habits, handleSelectedHabits } ) {
+    const generateHeaderText = () => {
+        if ( selectedTopics.length === 1 ) {
+            return `For ${ selectedTopics[ 0 ] }`;
+        } else if ( selectedTopics.length === 2 ) {
+            return `For ${ selectedTopics.join( " and " ) }`;
+        } else if ( selectedTopics.length === 3 ) {
+            return `For ${ selectedTopics.slice( 0, -1 ).join( ", " ) }, and ${ selectedTopics.slice( -1 ) }`;
+        } else {
+            return "For Selected Topics";
+        }
+    };
 
     return (
         <div className="suggested-container">
-            <h1>Suggested Habits</h1>
+            <h2>{ generateHeaderText() }</h2>
             <div className="suggested">
                 { suggested.map( ( habit, index ) => {
                     const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
                     return (
-                        <div>
+
                             <button
                                 className={ `suggested-habit-button ${ habits.some( ( h ) => h.description === habitText ) ? "selected" : "" }` }
                                 key={ index }
@@ -20,7 +31,7 @@ function Step4 ( { suggested, habits, handleSelectedHabits } ) {
                             >
                                 { habitText }
                             </button>
-                        </div>
+
                     );
                 } ) }
             </div>

@@ -177,6 +177,7 @@ function RoutineFormModal ( { routines } ) {
                             suggested={ suggested }
                             habits={ habits }
                             handleSelectedHabits={ handleSelectedHabits }
+                            selectedTopics={ selectedTopics }
                         />
                     </div>
                 );

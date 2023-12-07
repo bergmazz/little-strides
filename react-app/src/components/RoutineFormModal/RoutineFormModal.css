@@ -162,21 +162,39 @@ margin: 1%;
   cursor: pointer;
 }
 
-  /* .top-topic-container button{
-margin: 1%;
-  padding: 0;
-  position: relative;
-  overflow: hidden;
-  border: none;
-  background: none;
-  cursor: pointer;
-} */
-
 .top-topic-container img{
   max-width: 100%;
   max-height: 100%;
   width: auto;
   height: auto;
+}
+
+/* step 4 */
+.suggested{
+    max-height:50vh;
+    overflow-y: auto;
+        display: inline-block;
+        text-align:center;
+
+}
+
+.suggested-habit-button {
+  padding: 8px 12px;
+  margin: 5px;
+  font-size: .9em;
+  font-family: Jost
+}
+
+.suggested-habit-button.selected::before{
+  content: "-";
+}
+
+.suggested-habit-button::before {
+  content: "+";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
 }
 
 /* step 8 */
@@ -233,29 +251,7 @@ margin: 1%;
 }
 
 
-.suggested{
-    max-height:50vh;
-    overflow-y: auto;
-}
 
-.suggested-habit-button {
-  padding: 8px 12px;
-  margin: 5px;
-  font-size: 16px;
-  font-family: Jost
-}
-
-.suggested-habit-button.selected::before{
-  content: "-";
-}
-
-.suggested-habit-button::before {
-  content: "+";
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  margin-right: 5px;
-}
 
 .editdeletebutt button{
  margin: 3px
