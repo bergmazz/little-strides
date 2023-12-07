@@ -170,12 +170,14 @@ margin: 1%;
 }
 
 /* step 4 */
+.suggested-container h3{
+  font-size:1.35em;
+}
 .suggested{
-    max-height:50vh;
+    max-height:40vh;
     overflow-y: auto;
         display: inline-block;
         text-align:center;
-
 }
 
 .suggested-habit-button {
@@ -196,6 +198,56 @@ margin: 1%;
   height: 15px;
   margin-right: 5px;
 }
+
+/* step 5 "own your habits" page */
+.habitss{
+    max-height:55vh;
+    overflow-y: auto;
+}
+.existing{
+    height:45vh;
+    overflow-y: auto;
+}
+.newhabit{
+       display: flex;
+        justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ background-color: #EFEFEF;
+ border-radius: 25px;
+text-align: center;
+margin-bottom: 10px;
+}
+.deletebutt{
+  margin-left: 1.5em;
+}
+.row p{
+margin-left: 2em;
+}
+
+.category{
+   background-color: white;
+ border-radius: 25px;
+ padding: .2em 1em;
+ margin-left:2em;
+}
+
+
+.editbutt{
+  display: flex;
+  flex-direction: row;
+  margin-right: 1.5em;
+}
+.editdeletebutt button{
+ margin: 3px;
+}
+
+
 
 /* step 8 */
 .covers-imgs {
@@ -224,35 +276,4 @@ margin: 1%;
 .covers input{
   width: 95%;
   margin: auto;
-}
-
-
-
-
-/* "own your habits" page */
-.habitss{
-    max-height:55vh;
-    overflow-y: auto;
-}
-.existing{
-    height:45vh;
-    overflow-y: auto;
-}
-.newhabit{
-       display: flex;
-        justify-content: center;
-    align-items: center;
-}
-
-.row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-
-
-.editdeletebutt button{
- margin: 3px
 }

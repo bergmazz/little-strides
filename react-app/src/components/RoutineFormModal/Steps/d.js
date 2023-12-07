@@ -16,6 +16,7 @@ function Step4 ( { selectedTopics, suggested, habits, handleSelectedHabits } ) {
     return (
         <div className="suggested-container">
             <h2>{ generateHeaderText() }</h2>
+            <h3>Add suggested habits to your routine or move on to write your own</h3>
             <div className="suggested">
                 { suggested.map( ( habit, index ) => {
                     const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );

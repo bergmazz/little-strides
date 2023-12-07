@@ -6,14 +6,26 @@ function Step5 ( { habits, handleSelectedHabits, setEditMe, setHabitDetail, setH
 
     return (
         <div>
-            <h1>Own Your Habits</h1>
+            <h2>Own Your Habits</h2>
+            <h3>Make these your own! Edit to better align with your goals.</h3>
             <div className="habitss">
                 <div className="existing">
                 { habits.map( ( habit, index ) => {
                     return (
                         <div className="row">
+                            <button
+                                className="deletebutt"
+                                key={ [ index, habit.description ] }
+                                onClick={ () => {
+                                    handleSelectedHabits( habit )
+                                } }
+                            >
+                                <img src={ trash } alt="delete"></img>
+                            </button>
                             <p>{ habit.description }</p>
-                            <div className="editdeletebutt">
+
+                            <div className="editbutt">
+                                <div className="category">{ habit.category }</div>
                                 <button
                                     key={ index }
                                     onClick={ () => {
@@ -22,41 +34,11 @@ function Step5 ( { habits, handleSelectedHabits, setEditMe, setHabitDetail, setH
                                         setHabitCat( habit.category )
                                         setCurrentStep( 6 )
                                     } }
-                                > edit
+                                >
+                                    <img src={ pencil } alt="edit"></img>
                                 </button>
-                            <button
-                                key={ [ index, habit.description ] }
-                                onClick={ () => {
-                                    handleSelectedHabits( habit )
-                                } }
-                                > delete
-                            </button>
+
                             </div>
-                            {/* <div className="edit"
-                                onClick={ () => {
-                                    setEditMe( habit )
-                                    setHabitDetail( habit.description );
-                                    setHabitCat( habit.category )
-                                    setCurrentStep( 6 )
-                                } }>
-                                <image
-                                    key={ index }
-                                    src={ pencil }
-                                    alt="pencil"
-                                />
-                            </div>
-                            <div
-                                clasName="delete-habit"
-                                key={ [ index, habit.description ] }
-                                onClick={ () => {
-                                    handleSelectedHabits( habit )
-                                } }
-                            >
-                                <image
-                                    src={ trash }
-                                    alt="trash"
-                                />
-                            </div> */}
 
 
                         </div>
