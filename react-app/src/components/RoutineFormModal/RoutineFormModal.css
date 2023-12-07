@@ -257,7 +257,7 @@ margin-left: 2em;
  margin: 3px;
 }
 
-/* step 6 edit habit */
+/* step 6 edit habit (and step 7 write habit uses same css) */
 .write-edit-habit{
   display:flex;
   flex-direction:column;

@@ -234,6 +234,7 @@ function RoutineFormModal ( { routines } ) {
                         <Step8
                             coverImage={ coverImage }
                             setCoverImage={ setCoverImage }
+                            routineName={ routineName }
                         />
                     </div>
                 );
@@ -272,7 +273,10 @@ function RoutineFormModal ( { routines } ) {
                         { currentStep === totalSteps && habits.length < 3 && <button className="rightish" type="button" onClick={ () => setCurrentStep( 5 ) }>
                             &lt; Set at least 3 habits to submit
                         </button> }
-                        { currentStep === totalSteps && <button type="submit" disabled={ !coverImage || habits.length < 3 }>Submit</button> }
+                        { currentStep === totalSteps && habits.length >= 3 && <button className="rightish" type="button" onClick={ () => setCurrentStep( 5 ) }>
+                            &lt; Back to edit them habits
+                        </button> }
+                        { currentStep === totalSteps && <button type="submit" disabled={ !coverImage || habits.length < 3 }>Submit!!!</button> }
 
                 </div>
                         </form>
