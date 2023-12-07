@@ -205,13 +205,19 @@ margin: 1%;
     overflow-y: auto;
 }
 .existing{
-    height:45vh;
+    height:40vh;
     overflow-y: auto;
 }
 .newhabit{
        display: flex;
-        justify-content: center;
-    align-items: center;
+        /* justify-content: center; */
+    /* align-items: center; */
+    /* those mfs ^ did nothing */
+    background-color: white;
+    color: #E3A72F;
+       box-shadow:  5px 6px #058789;
+       font-size: 1.5em;
+       margin: 20px auto;
 }
 
 .row {
@@ -237,7 +243,6 @@ margin-left: 2em;
  margin-left:2em;
 }
 
-
 .editbutt{
   display: flex;
   flex-direction: row;
@@ -247,7 +252,20 @@ margin-left: 2em;
  margin: 3px;
 }
 
-
+/* step 6 edit habit */
+.write-edit-habit{
+  display:flex;
+  flex-direction:column;
+}
+.write-edit-habit textarea {
+    height: 70%;
+    width: 70%;
+    resize: none;
+        border-radius: 20px;
+    padding: 2em;
+    font-family: Jost, Futura, Helvetica, Arial, sans-serif;
+    font-size: 1em;
+}
 
 /* step 8 */
 .covers-imgs {
