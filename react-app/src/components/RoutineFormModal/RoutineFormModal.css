@@ -17,6 +17,18 @@ align-items: center;
   max-width: 90%;
 }
 
+.create-routine-container h2{
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.create-routine-container h3{
+  margin-top:0;
+  font-size: 1.75em;
+    text-align: center;
+}
+
 form{
     width: 80%;
     margin: auto;
@@ -24,6 +36,25 @@ margin: 5% 10%;
 flex-grow: 1;
 }
 
+.step-container{
+  margin-bottom: 120px;
+}
+.button-container{
+  display: flex;
+  justify-content: space-between;
+  /* width: 100%; */
+    /* position:relative; */
+}
+.button-container-bottom {
+    position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin:50px;
+  padding:20px;
+}
+
+/* step 1 */
 .start input{
   width: 90%;
     height: 30px;
@@ -61,11 +92,11 @@ height: 250px;
 width: 250px;
 }
 
+/* reused lotssssssss of places */
 .selected{
     /* color: #E3A72F; */
      box-shadow:5px 6px #058789 !important;
 }
-
 
 .char-count {
   font-size: 12px;
@@ -77,6 +108,78 @@ width: 250px;
   color: red;
 }
 
+/* step 2 */
+.topics-container{
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.topics-container button{
+flex-basis: 20%;
+margin: 1%;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.topics-container img{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+/* step 3 */
+.top-topic-container{
+    display: flex;
+    flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+.bigtopic-tiles {
+  display: flex;
+  margin-top: 10%;
+ flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.big-topic-button{
+  width:30%;
+  border-radius: 8px;
+    flex: 0 0 30%;
+    margin: 1%;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+  /* .top-topic-container button{
+margin: 1%;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background: none;
+  cursor: pointer;
+} */
+
+.top-topic-container img{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+/* step 8 */
 .covers-imgs {
   display: flex;
   flex-wrap: wrap;
@@ -105,25 +208,8 @@ width: 250px;
   margin: auto;
 }
 
-.step-container{
-  margin-bottom: 120px;
-}
 
-.button-container{
-  display: flex;
-  justify-content: space-between;
-  /* width: 100%; */
-    /* position:relative; */
-}
 
-.button-container-bottom {
-    position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin:50px;
-  padding:20px;
-}
 
 /* "own your habits" page */
 .habitss{
@@ -146,59 +232,6 @@ width: 250px;
     align-items: center;
 }
 
-
-.topics-container{
-    display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.topics-container button{
-flex-basis: 20%;
-margin: 1%;
-  padding: 0;
-  position: relative;
-  overflow: hidden;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-.topics-container img{
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  display: block;
-}
-
-.top-topic-container{
-    display: flex;
-align-items: center;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 90%;
-}
-
-  .top-topic-container button{
-flex-basis: 30%;
-margin: 1%;
-  padding: 0;
-  position: relative;
-  overflow: hidden;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-.top-topic-container button.selected {
- box-shadow:5px 6px #058789;
-}
-.top-topic-container img{
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  display: block;
-}
 
 .suggested{
     max-height:50vh;

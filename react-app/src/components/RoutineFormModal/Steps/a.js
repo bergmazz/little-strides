@@ -3,7 +3,8 @@ import React from "react";
 function Step1 ( { routineName, setRoutineName, setTopTopic, setCurrentStep } ) {
     return (
         <div className="start">
-            <h1>Set a name for the routine</h1>
+            <h2>The New You Starts Here</h2>
+            <h3>Let's name this routine:</h3>
             <input
                 type="text"
                 value={ routineName }

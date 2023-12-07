@@ -12,7 +12,7 @@ function RoutineFormModal ( { routines } ) {
     const [ routineName, setRoutineName ] = useState( "My Daily Routine" );
     const [ coverImage, setCoverImage ] = useState( "" );
     const [ selectedTopics, setSelectedTopics ] = useState( [] );
-    const [ topTopic, setTopTopic ] = useState( "" );
+    const [ topTopic, setTopTopic ] = useState( selectedTopics[ 0 ] );
     const [ habits, setHabits ] = useState( [] );
     const [ habitDetail, setHabitDetail ] = useState( [ "" ] );
     const [ habitCat, setHabitCat ] = useState( [ "" ] );
