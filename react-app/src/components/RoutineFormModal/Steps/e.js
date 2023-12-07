@@ -7,7 +7,7 @@ function Step5 ( { habits, handleSelectedHabits, setEditMe, setHabitDetail, setH
     return (
         <div>
             <h2>Own Your Habits</h2>
-            <h3>Make these your own! Edit to better align with your goals.</h3>
+            <h3>Edit to your heart's content. Align these with your goals.</h3>
             <div className="habitss">
                 <div className="existing">
                 { habits.map( ( habit, index ) => {
@@ -48,9 +48,11 @@ function Step5 ( { habits, handleSelectedHabits, setEditMe, setHabitDetail, setH
             <button
                 className="newhabit"
                 onClick={ () => {
+                    console.log( 'Before setting habitCat, habitDetail, and setCurrentStep' );
                     setHabitCat( "" )
                     setHabitDetail( "" )
                     setCurrentStep( 7 )
+                    console.log( 'After setting habitCat, habitDetail, and setCurrentStep' );
                 } }
             >
                 write new habit

@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Step7 ( { habitDetail, setHabitDetail, habitCat, setHabitCat, availableTopics, setCurrentStep, handleSelectedHabits } ) {
+    const [ isDropdownOpen, setDropdownOpen ] = useState( false );
+
     return (
-        <div>
-            <h1>Create a Habit</h1>
-            <input
-                type="text"
+        <div className="write-edit-habit">
+            <h2>Your Habit</h2>
+            <h3>In a few words, say something about who you want to be.</h3>
+            <textarea
                 value={ habitDetail }
                 onChange={ ( e ) =>
                     setHabitDetail( e.target.value ) }
             />
-            <select
+            <div className={ habitDetail.length > 100 || habitDetail.length < 3 ? "silly char-count-red" : "silly char-count" }>
+                { habitDetail.length } / 100 characters
+            </div>
+
+            {/* <select
                 value={ habitCat }
                 onChange={ ( e ) => setHabitCat( e.target.value ) }
             >
@@ -20,17 +26,40 @@ function Step7 ( { habitDetail, setHabitDetail, habitCat, setHabitCat, available
                         { topic }
                     </option>
                 ) ) }
-            </select>
-            <div className={ habitDetail.length > 75 ? "char-count-red" : "char-count" }>
-                { habitDetail.length } / 75 characters
+            </select> */}
+            <h3>If you had to categorize it (you do), what does this help with?</h3>
+            <div className="custom-dropdown">
+                <div
+                    className={ `selected-option ${ isDropdownOpen ? "open" : "" }` }
+                    onClick={ () => setDropdownOpen( !isDropdownOpen ) }
+                >
+                    { habitCat ? habitCat : "Select a category" }
+                </div>
+
+                { isDropdownOpen && (
+                    <div className="options">
+                        { availableTopics.map( ( topic ) => (
+                            <div
+                                key={ topic.toLowerCase() }
+                                onClick={ () => {
+                                    setHabitCat( topic.toLowerCase() );
+                                    setDropdownOpen( false );
+                                } }
+                            >
+                                { topic.toLowerCase() }
+                            </div>
+                        ) ) }
+                    </div>
+                ) }
             </div>
+
+
             <button
-                disabled={ !habitCat || !habitDetail || habitDetail.length > 75 }
+                className="commit"
+                disabled={ !habitCat || !habitDetail || habitDetail.length > 100 }
                 onClick={ () => {
                     handleSelectedHabits( { "category": habitCat, "description": habitDetail } )
                     //some sool confetti or something animated when you commit
-                    // setHabitCat( "" )
-                    // setHabitDetail( "" )
                     setCurrentStep( 5 )
                 } }>
                 Commit!

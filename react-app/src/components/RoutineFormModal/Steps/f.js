@@ -27,7 +27,7 @@ function Step6 ( { editMe, habitDetail, setHabitDetail, habitCat, setHabitCat, a
                 onChange={ ( e ) =>
                     setHabitDetail( e.target.value ) }
             />
-            <div className={ habitDetail.length > 100 ? "silly char-count-red" : "silly char-count" }>
+            <div className={ habitDetail.length > 100 || habitDetail.length < 3 ? "silly char-count-red" : "silly char-count" }>
                 { habitDetail.length } / 100 characters
             </div>
 

@@ -38,12 +38,14 @@ flex-grow: 1;
 
 .step-container{
   margin-bottom: 120px;
+
 }
 .button-container{
   display: flex;
   justify-content: space-between;
   /* width: 100%; */
     /* position:relative; */
+
 }
 .button-container-bottom {
     position: absolute;
@@ -52,6 +54,7 @@ flex-grow: 1;
   right: 0;
   margin:50px;
   padding:20px;
+
 }
 
 /* step 1 */
@@ -205,7 +208,7 @@ margin: 1%;
     overflow-y: auto;
 }
 .existing{
-    height:40vh;
+    max-height:36vh;
     overflow-y: auto;
 }
 .newhabit{
@@ -217,7 +220,9 @@ margin: 1%;
     color: #E3A72F;
        box-shadow:  5px 6px #058789;
        font-size: 1.5em;
-       margin: 20px auto;
+       margin: 10px auto;
+       cursor: pointer;
+
 }
 
 .row {
