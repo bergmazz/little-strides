@@ -34,7 +34,7 @@ function PostForm () {
         e.preventDefault();
         // console.log( "---------text", text )
         console.log( "---------image handlesubmit", image )
-        if ( image.length < 1 ) {
+        if ( !image || image.length < 1 || image === "" ) {
             setImage( null )
         }
 
