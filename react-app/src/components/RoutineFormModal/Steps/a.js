@@ -5,7 +5,7 @@ import pencilpaper from "./pencilpaper.svg"
 function Step1 ( { routineName, setRoutineName, setTopTopic, setCurrentStep } ) {
     return (
         <div className="start">
-            <h2>The New You Starts Here</h2>
+            <h2 className="newyou">The New You Starts Here</h2>
             <h3>Give this routine a name, pamper it, buy it some flowers</h3>
             <input
                 type="text"
@@ -22,7 +22,7 @@ function Step1 ( { routineName, setRoutineName, setTopTopic, setCurrentStep } ) 
                 setCurrentStep( 2 )
                 } }>
                     <img src={ path }></img>
-                    help me build a routine
+                    <h5>help me build a routine</h5>
                     <p>I'd love some suggestions</p>
             </button>
             <button className="go" type="button" disabled={ !routineName || routineName.length > 35 || routineName.length < 4 } onClick={ () => {
@@ -31,7 +31,7 @@ function Step1 ( { routineName, setRoutineName, setTopTopic, setCurrentStep } ) 
                 setTopTopic( 'wellness' )
                 } }>
                     <img src={ pencilpaper }></img>
-                    start from scratch
+                    <h5>write habits on my own</h5>
                     <p>A blank slate works just fine!</p>
                 </button>
             </div>
