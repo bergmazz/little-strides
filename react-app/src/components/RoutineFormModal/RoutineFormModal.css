@@ -1,25 +1,40 @@
 
 #modal-content:has(.create-routine-container){
-    /* background-color: #F8F3FF; */
-    /* width: 45%; */
-    /* min-height: 55vh;
-    max-height: 75vh; */
             box-shadow: 7px 9px #350079;
 }
 
 .create-routine-container{
-    height: 90vh;
+    max-height: 90vh;
+    height:85vh;
       display: flex;
   flex-direction: column;
 align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: center;
   margin: 0 auto;
-  max-width: 90%;
+  max-width: 95%;
 }
 
+/* reused lotssssssss of places */
+.selected{
+    /* color: #E3A72F; */
+     box-shadow:5px 6px #058789 !important;
+}
+
+.char-count {
+  font-size: 12px;
+  color: #888;
+}
+
+.char-count-red {
+  font-size: 12px;
+  color: red;
+}
+
+/* general h2/h3 rules */
 .create-routine-container h2{
   font-size: 2.5em;
-  margin-bottom: 10px;
+  margin: 10px;
   text-align: center;
 }
 
@@ -27,7 +42,6 @@ align-items: center;
   margin-top:0;
   font-size: 1.6em;
     text-align: center;
-      /* white-space: nowrap; */
 }
 @media (max-width: 1024px) {
   .create-routine-container h3 {
@@ -50,20 +64,20 @@ form{
     width: 85%;
     margin: auto;
 margin: 5% 10%;
-flex-grow: 1;
 }
 
 .step-container{
   margin-bottom: 120px;
   padding-bottom: 120px;
+  max-height: 90%;
+  overflow-y:scroll;
 }
 
 .button-container{
   display: flex;
   justify-content: space-between;
-  /* width: 100%; */
-    /* position:relative; */
       z-index: 2;
+      max-height:10%;
 }
 
 .button-container-bottom {
@@ -78,7 +92,7 @@ flex-grow: 1;
 
 /* step 1 */
 .start input{
-  width: 90%;
+  width: 95%;
     height: 30px;
     margin: 1em auto;
         box-shadow: 5px 6px #350079;
@@ -92,42 +106,30 @@ flex-grow: 1;
     margin: 1em auto;
     background-color: white;
     box-shadow:  5px 6px#350079;
+    max-width: 100%;
+  max-height: 100%;
+  width: 45%;
+  height: 80%;
+  display:flex;
+  flex-direction: column;
+ align-items: center;
+ padding: 1em 0;
 }
+
+.start p{
+  margin:5px;
+}
+
 .start button:hover{
     box-shadow:  5px 6px#CDAEFF
 }
 .start-button-container{
-  /* position: absolute;
-      display: flex;
-  justify-content: space-evenly; */
          display: flex;
         justify-content: center;
     align-items: center;
 }
-.help{
-height: 10em;
-width: 11em;
-}
-
-.go{
-height: 10em;
-width: 11em;
-}
-
-/* reused lotssssssss of places */
-.selected{
-    /* color: #E3A72F; */
-     box-shadow:5px 6px #058789 !important;
-}
-
-.char-count {
-  font-size: 12px;
-  color: #888;
-}
-
-.char-count-red {
-  font-size: 12px;
-  color: red;
+.go img{  /* this has to be here because this icon is smaller than the .help icon for visual balance */
+  margin: 9px 0;
 }
 
 /* step 2 */

@@ -1,10 +1,12 @@
 import React from "react";
+import path from "./path.svg"
+import pencilpaper from "./pencilpaper.svg"
 
 function Step1 ( { routineName, setRoutineName, setTopTopic, setCurrentStep } ) {
     return (
         <div className="start">
             <h2>The New You Starts Here</h2>
-            <h3>Let's name this routine:</h3>
+            <h3>Give this routine a name, pamper it, buy it some flowers</h3>
             <input
                 type="text"
                 value={ routineName }
@@ -18,15 +20,19 @@ function Step1 ( { routineName, setRoutineName, setTopTopic, setCurrentStep } ) 
             <button className="help" type="button" disabled={ !routineName || routineName.length > 35 || routineName.length < 4 } onClick={ () => {
                 // makeRoutineId()
                 setCurrentStep( 2 )
-            } }>
-                help me build a routine
+                } }>
+                    <img src={ path }></img>
+                    help me build a routine
+                    <p>I'd love some suggestions</p>
             </button>
             <button className="go" type="button" disabled={ !routineName || routineName.length > 35 || routineName.length < 4 } onClick={ () => {
                 // makeRoutineId()
                 setCurrentStep( 5 )
                 setTopTopic( 'wellness' )
-            } }>
-                start from scratch
+                } }>
+                    <img src={ pencilpaper }></img>
+                    start from scratch
+                    <p>A blank slate works just fine!</p>
                 </button>
             </div>
         </div>

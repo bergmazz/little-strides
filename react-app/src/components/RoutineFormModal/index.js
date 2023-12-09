@@ -244,7 +244,6 @@ function RoutineFormModal ( { routines } ) {
     };
 
     return (
-        <>
             <div className="create-routine-container">
                 {/* <h1>Create New Routine - Step { currentStep }</h1> */ }
                 <form onSubmit={ handleSubmit }>
@@ -280,8 +279,7 @@ function RoutineFormModal ( { routines } ) {
 
                 </div>
                         </form>
-            </div>
-            </>
+        </div>
     );
 }
 
