@@ -49,16 +49,24 @@ function CheckinFormModal ( { habits } ) {
         makeMyCarousel();
     }, [ currentCardIndex ] );
 
+    useEffect( () => {
+        dispatch( fetchRoutines() );
+    }, [ submitted ] )
     // carousel tutorial:
     // https://github.khronos.org/siggraph2012course/CanvasCSSAndWebGL/demos/3dtransforms/docs/carousel.html
     const makeMyCarousel = () => {
         const numberOfCards = habits.length;
         const containerWidth = document.querySelector( ".habit-steps-container" ).offsetWidth;
-        const cardSizeFactor = 0.7;
-        const cardSize = Math.min( containerWidth / numberOfCards * cardSizeFactor, 500 );
 
+        let cardSize = Math.min( containerWidth / numberOfCards, containerWidth * 0.8 ) * 1.4;
+        if ( numberOfCards > 10 ) {
+            cardSize = Math.min( containerWidth / ( numberOfCards ), containerWidth * 0.8 );
+        }
+        if ( numberOfCards > 20 ) {
+            cardSize = containerWidth * 0.1;
+        }
         const tz = Math.round(
-            ( cardSize / 2 ) / Math.tan( ( Math.PI / numberOfCards ) / 2 ) * 1.8
+            ( cardSize / 2 ) / Math.tan( ( Math.PI / numberOfCards ) / 2 )
         );
 
         const carousel = document.querySelector( ".habit-steps-container" );
