@@ -32,12 +32,11 @@ function UserProfile () {
     // const progressSectionRef = useRef();
 
     useEffect( () => {
-        console.log( currentUser )
-        dispatch( fetchRoutines() );
-        // dispatch( currentUserHabits() )
+        if ( currentUser ) {
+            dispatch( fetchRoutines() );
+        }
     }, [ dispatch, currentUser ] );
-
-
+    // console.log( 'Routinesssss:', routines );
 
     const closeMenu = ( e ) => {
         if ( !ulRef.current?.contains( e.target ) ) {
@@ -46,17 +45,18 @@ function UserProfile () {
     };
 
     useEffect( () => {
-        // console.log( "---------------Inside useEffect" );
+        // console.log( "---------------Inside showmenu  useEffect" );
         if ( showMenu ) {
             document.addEventListener( "click", closeMenu );
             return () => document.removeEventListener( "click", closeMenu );
         }
     }, [ showMenu ] );
 
-    // console.log( 'Routinesssss:', routines );
 
+    // for the progress scroll - goes to /user#progress
     let elem = document.getElementById( location.hash.slice( 1 ) );
     // console.log( "elemmmmmmmmmmmment", elem )
+
     // If location.hash is not present or element not found
     if ( !elem ) {
         elem = document.documentElement || document.body;
@@ -66,6 +66,7 @@ function UserProfile () {
         elem.scrollIntoView( { behavior: "smooth", offset: -50 } );
     }, [ elem ] );
 
+    //loading message when currentuser hasn't processed
     if ( !currentUser ) return (
         <div className='no-user'>
             <h1 className='no-user'>.       .        .   .. ....   ....  ..  .....Hold tight for sec.</h1>

@@ -13,11 +13,14 @@ function CheckinFormModal ( { habits } ) {
     const [ selectedAnswers, setSelectedAnswers ] = useState(
         habits.map( () => ( { completed: null } ) )
     );
+    const [ currentCardIndex, setCurrentCardIndex ] = useState( 0 );
 
     const handleAnswerClick = ( index, completed ) => {
         const updatedAnswers = [ ...selectedAnswers ];
         updatedAnswers[ index ].completed = completed;
         setSelectedAnswers( updatedAnswers );
+        // Rotate to the next card
+        setCurrentCardIndex( ( prevIndex ) => ( prevIndex + 1 ) % habits.length );
     };
 
     const handleSubmit = async () => {
@@ -42,10 +45,50 @@ function CheckinFormModal ( { habits } ) {
         }
     };
 
+    useEffect( () => {
+        makeMyCarousel();
+    }, [ currentCardIndex ] );
+
+    // carousel tutorial:
+    // https://github.khronos.org/siggraph2012course/CanvasCSSAndWebGL/demos/3dtransforms/docs/carousel.html
+    const makeMyCarousel = () => {
+        const numberOfCards = habits.length;
+        const containerWidth = document.querySelector( ".habit-steps-container" ).offsetWidth;
+        const cardSizeFactor = 0.7;
+        const cardSize = Math.min( containerWidth / numberOfCards * cardSizeFactor, 500 );
+
+        const tz = Math.round(
+            ( cardSize / 2 ) / Math.tan( ( Math.PI / numberOfCards ) / 2 ) * 1.8
+        );
+
+        const carousel = document.querySelector( ".habit-steps-container" );
+
+        if ( carousel ) {
+            const cards = carousel.getElementsByClassName( "checkin-step" );
+
+            for ( let i = 0; i < numberOfCards; i++ ) {
+                console.log( "currentcardindex---------", currentCardIndex )
+                console.log( "i value in loop---------", i )
+                console.log( "cards[i]---------", cards[ i ] )
+                const rotation = ( 360 / numberOfCards ) * ( i - currentCardIndex );
+                //Makes da circle
+                const transformValue = `rotateY(${ rotation }deg) translateZ(${ tz }px)`;
+                cards[ i ].style.transform = transformValue;
+
+                if ( i === currentCardIndex ) {
+                    cards[ i ].classList.add( "current" );
+                } else {
+                    cards[ i ].classList.remove( "current" );
+                }
+
+            }
+        }
+    };
+
     return (
-        <div className="checkin-form-container">
+        <div className="pointlesscompilingthing">
             { submitted ? (
-                <div>
+                <div className="checkin-confirmation">
                     <h1>You're making strides!</h1>
                     <h4>"Yes" Responses Today:</h4>
                     <h1>{ yesPercentage.toFixed( 2 ) }%</h1>
@@ -54,7 +97,7 @@ function CheckinFormModal ( { habits } ) {
                     {/* <button onClick={ closeModal }>exit</button> */ }
                 </div>
             ) : (
-                <div>
+                    <div className="checkin-form-container">
             <h2>How did your routine go today? </h2>
             <div className="habit-steps-container">
                 { habits.map( ( habit, index ) => (
@@ -66,19 +109,22 @@ function CheckinFormModal ( { habits } ) {
                             <button
                                 onClick={ () => handleAnswerClick( index, 1 ) }
                                 className={ selectedAnswers[ index ].completed === 1 ? "selected" : "" }
+                                disabled={ index !== currentCardIndex }
                             >
                                 Yes
                             </button>
                             <button
                                 onClick={ () => handleAnswerClick( index, 0 ) }
                                 className={ selectedAnswers[ index ].completed === 0 ? "selected" : "" }
+                                disabled={ index !== currentCardIndex }
                             >
                                 Not Today
                             </button>
             </div>
                     </div>
                 ) ) }
-            </div>
+                        </div>
+
             <div className="sub">
                 <button onClick={ handleSubmit }>Submit</button>
             </div>
