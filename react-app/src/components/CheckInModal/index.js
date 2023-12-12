@@ -58,15 +58,16 @@ function CheckinFormModal ( { habits } ) {
         const numberOfCards = habits.length;
         const containerWidth = document.querySelector( ".habit-steps-container" ).offsetWidth;
 
-        let cardSize = Math.min( containerWidth / numberOfCards, containerWidth * 0.8 ) * 1.4;
+        let cardSize = Math.min( containerWidth / numberOfCards - 1, containerWidth * 0.5 ) * 1.2;
         if ( numberOfCards > 10 ) {
-            cardSize = Math.min( containerWidth / ( numberOfCards ), containerWidth * 0.8 );
+            cardSize = containerWidth * 0.15
         }
         if ( numberOfCards > 20 ) {
-            cardSize = containerWidth * 0.1;
+            cardSize = containerWidth * 0.11
         }
+
         const tz = Math.round(
-            ( cardSize / 2 ) / Math.tan( ( Math.PI / numberOfCards ) / 2 )
+            ( cardSize / 2 ) / Math.tan( ( Math.PI / numberOfCards ) )
         );
 
         const carousel = document.querySelector( ".habit-steps-container" );
@@ -75,9 +76,9 @@ function CheckinFormModal ( { habits } ) {
             const cards = carousel.getElementsByClassName( "checkin-step" );
 
             for ( let i = 0; i < numberOfCards; i++ ) {
-                console.log( "currentcardindex---------", currentCardIndex )
-                console.log( "i value in loop---------", i )
-                console.log( "cards[i]---------", cards[ i ] )
+                // console.log( "currentcardindex---------", currentCardIndex )
+                // console.log( "i value in loop---------", i )
+                // console.log( "cards[i]---------", cards[ i ] )
                 const rotation = ( 360 / numberOfCards ) * ( i - currentCardIndex );
                 //Makes da circle
                 const transformValue = `rotateY(${ rotation }deg) translateZ(${ tz }px)`;
@@ -89,6 +90,7 @@ function CheckinFormModal ( { habits } ) {
                     cards[ i ].classList.remove( "current" );
                 }
 
+                // cards[ i ].style.width = `${ cardSize }px`
             }
         }
     };

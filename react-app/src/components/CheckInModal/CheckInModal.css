@@ -1,20 +1,20 @@
 #modal-content:has(.checkin-form-container){
-    min-width:55%;
     height:75vh;
             box-shadow: 7px 9px #350079;
-
+                min-width:35vw;
+    max-width: 90vw;
+    width:fit-content;
 }
 
 .checkin-form-container{
- /* width: 90%; */
-  padding: 5%;
+  padding: 3%;
  perspective: 1000px;
     display: flex;
     flex-direction: column;
 }
 
 .checkin-form-container h2{
- font-size: 2em;
+ font-size: 2.5em;
  text-align: center;
 }
 
@@ -37,7 +37,7 @@ display: flex;
 .checkin-step {
     display: block;
   position: absolute;
-  margin:8vh 0 0 0;
+  margin:9vh 0 0 0;
   padding: 16px;
   border: 1px solid #ddd;
   border-radius: 20px;
@@ -48,8 +48,9 @@ display: flex;
   transition: transform 1s ease, opacity 0.8s ease;
   opacity: 0.6;
   z-index:2;
-  max-width:90%;
-  margin-right:10px;
+  max-height: 30vh;
+  width: 5vw;
+  max-width:20vw;
 }
 
 .checkin-step.current {
@@ -58,14 +59,15 @@ display: flex;
 }
 
 .desc{
-  /* min-height: 3em;
-  line-height: 1em; */
+  height: 100px;
+  font-size: 12px;
         display: flex;
         justify-content: center;
     align-items: center;
     text-align:center;
      overflow-wrap: break-word;
   max-width: 15ch;
+  margin:auto;
 }
 
 .checkin-options{
@@ -85,5 +87,5 @@ display: flex;
 }
 
 .sub button{
-          font-size: 1.5em;
+          font-size: 1.8em;
 }
