@@ -24,9 +24,13 @@
 #modal-content {
   position: absolute;
   background-color:white;
-  width: 70vw;
+  /* width: 70vw; */
     border-radius: 20px;
       justify-content: center;
   align-items: center;
     margin:auto;
+}
+
+#modal-content:not(:has(.checkin-form-container)) {
+  width: 70vw;
 }

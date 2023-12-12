@@ -58,9 +58,9 @@ function CheckinFormModal ( { habits } ) {
         const numberOfCards = habits.length;
         const containerWidth = document.querySelector( ".habit-steps-container" ).offsetWidth;
 
-        let cardSize = Math.min( containerWidth / numberOfCards - 1, containerWidth * 0.5 ) * 1.2;
+        let cardSize = Math.min( containerWidth / numberOfCards, containerWidth * 0.5 ) * 1.4;
         if ( numberOfCards > 10 ) {
-            cardSize = containerWidth * 0.15
+            cardSize = containerWidth * 0.21
         }
         if ( numberOfCards > 20 ) {
             cardSize = containerWidth * 0.11
@@ -89,7 +89,6 @@ function CheckinFormModal ( { habits } ) {
                 } else {
                     cards[ i ].classList.remove( "current" );
                 }
-
                 // cards[ i ].style.width = `${ cardSize }px`
             }
         }
