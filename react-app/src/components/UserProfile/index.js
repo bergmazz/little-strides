@@ -220,8 +220,16 @@ function UserProfile () {
                             className='checkin'
                             buttonText="Check In"
                                     onItemClick={ closeMenu }
-                                    modalComponent={ <CheckinFormModal habits={ routine.habits } showWarning={ false } /> }
-                                    // modalComponent={ <ErrorModal message={ "Coming soon." } showWarning={ false } /> }
+                                    modalComponent={
+                                        routine.averageToday > 0 ? (
+                                            <ErrorModal
+                                                message={ "You have already checked in today." }
+                                                showWarning={ false }
+                                            />
+                                        ) : (
+                                            <CheckinFormModal habits={ routine.habits } showWarning={ false } />
+                                        )
+                                    }
                                 />
                             </div>
                     </div>

@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, session, request
 from flask_wtf import FlaskForm
-from app.models import Routine, Habit, db
+from app.models import Routine, Habit, Checkin, db
 from .auth_routes import validation_errors_to_error_messages
 from app.forms import RoutineForm, HabitForm
 from flask_login import current_user, login_required
-
+from datetime import datetime
 
 routines = Blueprint('routines', __name__)
 
@@ -203,3 +203,41 @@ def delete_habit(routine_id, habit_id):
     db.session.commit()
 
     return jsonify({'message': 'Habit deleted successfully.'}), 200
+
+
+# CHECK IN REFACTOR
+# POST api/routines/<routine_id>/checkin
+@routines.route('/<int:routine_id>/checkin', methods=['POST'])
+@login_required
+def create_routine_checkin(routine_id):
+    """Check in for the day for all habits in a routine"""
+    routine = Routine.query.get(routine_id)
+    sorry = not_found_not_yours(routine, current_user.id, 'Routine')
+    if sorry:
+        return sorry
+
+    existing_checkin = Checkin.query.filter(
+        Checkin.routine_id == routine_id,
+        db.func.date(Checkin.created_at) == datetime.now().date()
+    ).first()
+
+    if existing_checkin:
+        return jsonify(['error: You already checked-in for this routine today.']), 400
+
+    data = request.json
+    checkins = data.get('checkins', [])
+
+    if not isinstance(checkins, list):
+        return jsonify(['error: Invalid format for checkins.']), 400
+
+    for checkin in checkins:
+        habit_id = checkin.get('habit_id')
+        completed = checkin.get('completed', False)
+
+        habit = Habit.query.get(habit_id)
+        if habit and habit.routine_id == routine_id:
+            new_checkin = Checkin(habit_id=habit.id, completed=completed)
+            db.session.add(new_checkin)
+
+    db.session.commit()
+    return jsonify({'message': 'Check-ins created successfully.'}), 200

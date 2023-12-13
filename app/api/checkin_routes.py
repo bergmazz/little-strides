@@ -52,7 +52,8 @@ def get_user_checkins():
     return jsonify({'checkins': checkinz}), 200
 
 
-
+# REFACTORED TO CHECK IN FOR WHOLE ROUTINE AT ONCE DUE TO SLOW UPDATE ON FRONTEND DISPATCHING PER HABIT-
+# SEE ROUTINE ROUTES FILE FOR THE ACTIVE CHECKIN API ROUTE IN USE ON FRONTEND
 # POST api/habit/checkin/<habit_id>
 @checkins.route('/<int:habit_id>', methods=['POST'])
 @login_required
