@@ -13,7 +13,9 @@ function Step6 ( { editMe, habitDetail, setHabitDetail, habitCat, setHabitCat, a
 
         if ( habits.some( ( h ) => h.description === description ) ) {
             setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
-        } if ( habit !== prevHabit ) {
+        }
+
+        if ( habit !== prevHabit ) {
             const existingHabitIndex = habits.findIndex( ( h ) => h.description === prevHabit.description );
             if ( existingHabitIndex !== -1 ) {
                 const updatedHabits = [ ...habits ];
@@ -21,7 +23,21 @@ function Step6 ( { editMe, habitDetail, setHabitDetail, habitCat, setHabitCat, a
                 setHabits( updatedHabits );
             }
         }
+
     };
+
+    const handleCommit = () => {
+        let habit;
+        if ( editMe.id ) {
+            habit = { "category": habitCat, "description": habitDetail, "id": editMe.id };
+            setHabitsToEdit( [ ...habitsToEdit, habit ] );
+        } else {
+            habit = { "category": habitCat, "description": habitDetail };
+        }
+        handleEditHabits( habit, editMe );
+        setCurrentStep( 5 );
+    };
+
 
     return (
         <div className="write-edit-habit">
@@ -64,18 +80,8 @@ function Step6 ( { editMe, habitDetail, setHabitDetail, habitCat, setHabitCat, a
             <button
                 className="commit"
                 disabled={ !habitCat || !habitDetail || habitDetail.length > 100 }
-                onClick={ () => {
-                    let habit;
-                    if ( editMe.id ) {
-                        setHabitsToEdit( [ ...habitsToEdit, habit ] )
-                        habit = { "category": habitCat, "description": habitDetail, "id": editMe.id }
-                    } else {
-                        habit = { "category": habitCat, "description": habitDetail }
-                    }
-                    handleEditHabits( habit, editMe )
-                    //some sool confetti or something animated when you commit
-                    setCurrentStep( 5 )
-                } }>
+                onClick={ handleCommit }
+            >
                 Commit!
             </button>
         </div>

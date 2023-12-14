@@ -32,7 +32,7 @@ function RoutineEditForm ( { existingRoutine } ) {
     useEffect( () => {
         setRoutineName( existingRoutine.name || "" );
         setCoverImage( existingRoutine.coverImage || "" );
-        setSelectedTopics( [ existingRoutine.mainTopic.toLowerCase() ] || [] );
+        // setSelectedTopics( [ existingRoutine.mainTopic.toLowerCase() ] || [] );
         setTopTopic( existingRoutine.mainTopic.toLowerCase() || "" );
         setHabits( existingRoutine.habits || [] );
     }, [ existingRoutine ] );
@@ -100,18 +100,18 @@ function RoutineEditForm ( { existingRoutine } ) {
 
     const handleSelectedHabits = ( habit ) => {
         const { description, category } = habit;
+
+        if ( habits.length >= 15 && !habits.some( ( h ) => h.description === description ) ) {
+            alert( "You can only add up to 15 habits." );
+            return;
+        }
+
         if ( habits.some( ( h ) => h.description === description ) ) {
-            setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
+            setHabits( ( habits ) => habits.filter( ( h ) => h.description !== description ) );
         } else {
             setHabits( ( habits ) => [ ...habits, { description, category } ] );
         }
     };
-
-    const isValidURL = ( url ) => {
-        const pattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg))$/i;
-        return pattern.test( url );
-    };
-
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
@@ -128,28 +128,46 @@ function RoutineEditForm ( { existingRoutine } ) {
             if ( !routine.id && Array.isArray( routine ) ) {
                 setError( routine[ 0 ] );
             } else {
-                for ( let id of habitsToDelete ) {
-                    const deletedHabit = await dispatch(
-                        deleteHabit( { id: id, routineId: existingRoutine.id } ) )
+                if ( habitsToDelete.length ) {
+                    for ( let id of habitsToDelete ) {
+                        const deletedHabit = await dispatch(
+                            deleteHabit( { id: id, routineId: existingRoutine.id } ) )
+                    }
+                    setHabitsToDelete( [] )
                 }
-                for ( let habit of habitsToEdit ) {
-                    const updatedHabit = await dispatch(
-                        editHabit( {
-                            routineId: existingRoutine.id,
-                            id: habit.id,
-                            description: habit.description,
-                            category: habit.category.toLowerCase()
-                        } ) )
+                if ( habitsToEdit.length ) {
+                    for ( let habit of habitsToEdit ) {
+                        console.log( "habits in habitsToEdit", habitsToEdit )
+                        const updatedHabit = await dispatch(
+                            editHabit( {
+                                routineId: existingRoutine.id,
+                                id: habit.id,
+                                description: habit.description,
+                                category: habit.category.toLowerCase()
+                            } ) )
+                    }
+                    // setHabitsToEdit( [] )
                 }
-                for ( let habit of habits ) {
-                    if ( !habit.id ) {
+
+                const existingDescriptions = existingRoutine.habits.map( ( h ) => h.description );
+                let newHabits = habits.filter(
+                    ( h ) => !existingDescriptions.includes( h.description )
+                );
+                newHabits = newHabits.filter(
+                    ( h ) => !habitsToEdit.some( ( editedHabit ) => editedHabit.description === h.description )
+                );
+                setHabitsToEdit( [] )
+                console.log( "Habits:", habits );
+                console.log( "New Habits:", newHabits );
+                for ( let habit of newHabits ) {
+                // if ( !habit.id ) {
                         const newHabit = await dispatch(
                             createHabit( {
                                 routineId: routine.id,
                                 description: habit.description,
                                 category: habit.category
                             } ) )
-                    }
+                    // }
                 }
             }
             dispatch( fetchRoutines() );

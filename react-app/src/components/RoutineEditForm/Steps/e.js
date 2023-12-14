@@ -50,6 +50,10 @@ function Step5 ( { habits, handleSelectedHabits, setEditMe, setHabitDetail, setH
                 className="newhabit"
                 onClick={ () => {
                     // console.log( 'Before setting habitCat, habitDetail, and setCurrentStep' );
+                    if ( habits.length >= 15 ) {
+                        alert( "You can only add up to 15 habits." );
+                        return;
+                    }
                     setHabitCat( "" )
                     setHabitDetail( "" )
                     setCurrentStep( 7 )
