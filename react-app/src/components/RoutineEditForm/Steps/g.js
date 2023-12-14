@@ -53,8 +53,18 @@ function Step7 ( { habitDetail, setHabitDetail, habitCat, setHabitCat, available
                     }, 2000 );
                 } }>
                 Commit!
+                { confetti && (
+                    <div className="confetti-container">
+                        { Array.from( { length: 50 } ).map( ( _, index ) => (
+                            <div
+                                key={ index }
+                                className="confetti"
+                            />
+                        ) ) }
+                    </div>
+                ) }
             </button>
-            { confetti && <div className="confetti" /> }
+
 
         </div>
     );
