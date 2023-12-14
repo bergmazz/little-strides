@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { a, b, c, d, e, f, g, h } from "./Steps"
+import { Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 } from "./Steps"
 import { editRoutine, fetchRoutines } from "../../store/routine";
 import { suggestedHabits, createHabit, editHabit, deleteHabit } from "../../store/habit";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,16 +22,17 @@ function RoutineEditForm ( { existingRoutine } ) {
     const [ habitsToEdit, setHabitsToEdit ] = useState( [] );
     const [ editMe, setEditMe ] = useState( {} );
     const [ error, setError ] = useState( [] );
-
-    const { closeModal } = useModal();
+    const [ confetti, setConfetti ] = useState( false )
 
     const suggested = useSelector( ( state ) => state.habit.suggested );
     // const userHabits = useSelector( ( state ) => state.habit.user );
 
+    const { closeModal } = useModal();
+
     useEffect( () => {
         setRoutineName( existingRoutine.name || "" );
         setCoverImage( existingRoutine.coverImage || "" );
-        // setSelectedTopics( existingRoutine.selectedTopics || [] );
+        setSelectedTopics( [ existingRoutine.mainTopic.toLowerCase() ] || [] );
         setTopTopic( existingRoutine.mainTopic.toLowerCase() || "" );
         setHabits( existingRoutine.habits || [] );
     }, [ existingRoutine ] );
@@ -58,6 +59,9 @@ function RoutineEditForm ( { existingRoutine } ) {
         }
     }, [ dispatch, currentStep, suggestedFetched, selectedTopics ] );
 
+    const totalSteps = 8;
+
+    // this only works when refreshing the page - see showWarning in Modal.js for exit modal warning
     useEffect( () => {
         const handleBeforeUnload = ( event ) => {
             event.preventDefault();
@@ -68,8 +72,6 @@ function RoutineEditForm ( { existingRoutine } ) {
             window.removeEventListener( "beforeunload", handleBeforeUnload );
         };
     }, [] );
-
-    const totalSteps = 8;
 
     const handleNextStep = () => {
 
@@ -96,19 +98,6 @@ function RoutineEditForm ( { existingRoutine } ) {
         }
     };
 
-    const handleSelectTopics = ( selectedTopic ) => {
-        if ( selectedTopics.includes( selectedTopic ) ) {
-            setSelectedTopics( selectedTopics.filter( ( topic ) => topic !== selectedTopic ) )
-        } else {
-            if ( selectedTopics.length < 3 ) {
-                setSelectedTopics( [
-                    ...selectedTopics,
-                    selectedTopic,
-                ] );
-            }
-        }
-    };
-
     const handleSelectedHabits = ( habit ) => {
         const { description, category } = habit;
         if ( habits.some( ( h ) => h.description === description ) ) {
@@ -118,33 +107,11 @@ function RoutineEditForm ( { existingRoutine } ) {
         }
     };
 
-    const handleEditHabits = ( habit, prevHabit = habit ) => {
-        const { description, category } = habit;
-        if ( habits.some( ( h ) => h.description === description ) ) {
-            setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
-        } if ( habit !== prevHabit ) {
-            const existingHabitIndex = habits.findIndex( ( h ) => h.description === prevHabit.description );
-            if ( existingHabitIndex !== -1 ) {
-                const updatedHabits = [ ...habits ];
-                updatedHabits[ existingHabitIndex ] = habit;
-                setHabits( updatedHabits );
-            }
-        }
-    };
-
     const isValidURL = ( url ) => {
         const pattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg))$/i;
         return pattern.test( url );
     };
 
-    const validateImage = ( url, onSuccess, onError ) => {
-        const img = new Image();
-
-        img.onload = onSuccess;
-        img.onerror = onError;
-
-        img.src = url;
-    };
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
@@ -158,7 +125,7 @@ function RoutineEditForm ( { existingRoutine } ) {
                     id: existingRoutine.id
                 } )
             );
-            if ( Array.isArray( routine ) ) {
+            if ( !routine.id && Array.isArray( routine ) ) {
                 setError( routine[ 0 ] );
             } else {
                 for ( let id of habitsToDelete ) {
@@ -197,229 +164,198 @@ function RoutineEditForm ( { existingRoutine } ) {
         switch ( currentStep ) {
             case 1:
                 return (
-                    <div className="page1">
-                        {/* <Step1
+                    <div>
+                        <Step1
                             routineName={ routineName }
                             setRoutineName={ setRoutineName }
                             setCurrentStep={ setCurrentStep }
-                        /> */}
-                        <h1>Update your routine's name, if you wish</h1>
-                        <input
-                            type="text"
-                            value={ routineName }
-                            onChange={ ( e ) => setRoutineName( e.target.value ) }
+                            setTopTopic={ setTopTopic }
                         />
-                        <div className={ routineName.length > 35 || routineName.length < 4 ? "char-count-red" : "char-count" }>
-                            { routineName.length } / 35 characters
-                        </div>
-                        <button type="button" disabled={ !routineName || routineName.length > 35 || routineName.length < 4 } onClick={ () => { setCurrentStep( 2 ) } }>
-                            suggest some new habits
-                        </button>
-                        <button type="button" disabled={ !routineName || routineName.length > 35 || routineName.length < 4 } onClick={ () => { setCurrentStep( 5 ) } }>
-                            edit my habits and write more
-                        </button>
                     </div>
                 ); case 2:
                 return (
                     <div>
-                        <h1>Choose up to three topics:</h1>
-                        <div className="topics-container">
-                            { availableTopics.map( ( topic ) => (
-                                <label key={ topic } className="topic-tile">
-                                    <input
-                                        type="checkbox"
-                                        value={ topic }
-                                        checked={ selectedTopics.includes( topic ) }
-                                        onChange={ () => handleSelectTopics( topic ) }
-                                    />
-                                    { topic }
-                                </label>
-                            ) ) }
-                        </div>
+                        <Step2
+                            availableTopics={ availableTopics }
+                            selectedTopics={ selectedTopics }
+                            setSelectedTopics={ setSelectedTopics }
+                        />
                     </div>
                 );
             case 3:
                 return (
                     <div>
-                        <h1>Choose Your Focus</h1>
-                        { selectedTopics.map( ( topic ) => (
-                            <label key={ topic } className="big-topic-tile">
-                                <input
-                                    type="radio"
-                                    value={ topic.toLowerCase() }
-                                    checked={ topTopic === topic.toLowerCase() }
-                                    onChange={ () => setTopTopic( topic.toLowerCase() ) }
-                                />
-                                { topic }
-                            </label>
-                        ) ) }
+                        <Step3
+                            selectedTopics={ selectedTopics }
+                            topTopic={ topTopic }
+                            setTopTopic={ setTopTopic }
+                        />
                     </div>
                 );
             case 4:
                 return (
-                    <div className="suggested-container">
-                        <h1>suggested habits</h1>
-                        <div className="suggested">
-                            { suggested.map( ( habit, index ) => {
-                                const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
-                                return (
-                                    <div>
-                                        <button
-                                            className={ `suggested-habit-button ${ habits.some( ( h ) => h.description === habitText ) ? "selected" : "" }` }
-                                            key={ index }
-                                            onClick={ () => {
-                                                handleSelectedHabits( { "category": habitTopic, "description": habitText } );
-                                            } }
-                                        >
-                                            { habitText }
-                                        </button>
-                                    </div>
-                                );
-                            } ) }
-                        </div>
+                    <div>
+                        <Step4
+                            suggested={ suggested }
+                            habits={ habits }
+                            handleSelectedHabits={ handleSelectedHabits }
+                            selectedTopics={ selectedTopics }
+                        />
                     </div>
                 );
             case 5:
                 return (
                     <div>
-                        <h1>Own Your Habits</h1>
-                        <div className="habitss">
-                        { habits.map( ( habit, index ) => {
-                            return (
-                                <div className="row">
-                                    <p>{ habit.description }</p>
-                                    <button
-                                        key={ [ "delete", index ] }
-                                        onClick={ () => {
-                                            setHabitsToDelete( [ ...habitsToDelete, habit.id ] )
-                                            setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
-                                        } }
-                                    > trash can
-                                    </button>
-                                    <button
-                                        key={ index }
-                                        onClick={ () => {
-                                            setEditMe( habit )
-                                            setHabitDetail( habit.description );
-                                            setHabitCat( habit.category )
-                                            setCurrentStep( 6 )
-                                        } }
-                                    > pencil icon
-                                    </button>
-                                </div>
-                            );
-                        } ) }
-                        </div>
-                        <button
-                            onClick={ () => {
-                                setHabitCat( "" )
-                                setHabitDetail( "" )
-                                setCurrentStep( 7 )
-                            } }
-                        >
-                            write new habit
-                        </button>
+                        <Step5
+                            habits={ habits }
+                            handleSelectedHabits={ handleSelectedHabits }
+                            setEditMe={ setEditMe }
+                            setHabitDetail={ setHabitDetail }
+                            setHabitCat={ setHabitCat }
+                            setCurrentStep={ setCurrentStep }
+                            habitsToDelete={ habitsToDelete }
+                            setHabitsToDelete={ setHabitsToDelete }
+                        />
                     </div>
-
                 );
             case 6:
                 return (
                     <div>
-                        <h1>edit your habit</h1>
-                        <textarea
-                            value={ habitDetail }
-                            onChange={ ( e ) =>
-                                setHabitDetail( e.target.value ) }
+                        <Step6
+                            habitDetail={ habitDetail }
+                            setHabitDetail={ setHabitDetail }
+                            habitCat={ habitCat }
+                            setHabitCat={ setHabitCat }
+                            availableTopics={ availableTopics }
+                            setCurrentStep={ setCurrentStep }
+                            habits={ habits }
+                            setHabits={ setHabits }
+                            editMe={ editMe }
+                            habitsToEdit={ habitsToEdit }
+                            setHabitsToEdit={ setHabitsToEdit }
                         />
-                        <select
-                            value={ habitCat.toLowerCase() }
-                            onChange={ ( e ) => setHabitCat( e.target.value ) }
-                        >
-                            { availableTopics.map( ( topic ) => (
-                                <option key={ topic } value={ topic.toLowerCase() }>
-                                    { topic }
-                                </option>
-                            ) ) }
-                        </select>
-                        <div className={ habitDetail.length > 75 ? "char-count-red" : "char-count" }>
-                            { habitDetail.length } / 75 characters
-                        </div>
-                        <button
-                            disabled={ !habitCat || !habitDetail || habitDetail.length > 75 }
-                            onClick={ () => {
-                                const habit = { "category": habitCat, "description": habitDetail, "id": editMe.id }
-                                handleEditHabits( habit, editMe )
-                                setHabitsToEdit( [ ...habitsToEdit, habit ] )
-                                //some sool confetti or something animated when you commit
-                                // setHabitCat( "" )
-                                // setHabitDetail( "" )
-                                setCurrentStep( 5 )
-                            } }>
-                            Commit!
-                        </button>
                     </div>
+
+                    // <div>
+                    //     <h1>edit your habit</h1>
+                    //     <textarea
+                    //         value={ habitDetail }
+                    //         onChange={ ( e ) =>
+                    //             setHabitDetail( e.target.value ) }
+                    //     />
+                    //     <select
+                    //         value={ habitCat.toLowerCase() }
+                    //         onChange={ ( e ) => setHabitCat( e.target.value ) }
+                    //     >
+                    //         { availableTopics.map( ( topic ) => (
+                    //             <option key={ topic } value={ topic.toLowerCase() }>
+                    //                 { topic }
+                    //             </option>
+                    //         ) ) }
+                    //     </select>
+                    //     <div className={ habitDetail.length > 75 ? "char-count-red" : "char-count" }>
+                    //         { habitDetail.length } / 75 characters
+                    //     </div>
+                    //     <button
+                    //         disabled={ !habitCat || !habitDetail || habitDetail.length > 75 }
+                    //         onClick={ () => {
+                    //             const habit = { "category": habitCat, "description": habitDetail, "id": editMe.id }
+                    //             handleEditHabits( habit, editMe )
+                    //             setHabitsToEdit( [ ...habitsToEdit, habit ] )
+                    //             //some sool confetti or something animated when you commit
+                    //             // setHabitCat( "" )
+                    //             // setHabitDetail( "" )
+                    //             setCurrentStep( 5 )
+                    //         } }>
+                    //         Commit!
+                    //     </button>
+                    // </div>
                 );
             case 7:
                 return (
                     <div>
-                        <h1>create your habit</h1>
-                        <input
-                            type="text"
-                            value={ habitDetail }
-                            onChange={ ( e ) => {
-                                setHabitDetail( e.target.value )
-                            } }
+                        <Step7
+                            habitDetail={ habitDetail }
+                            setHabitDetail={ setHabitDetail }
+                            habitCat={ habitCat }
+                            setHabitCat={ setHabitCat }
+                            availableTopics={ availableTopics }
+                            setCurrentStep={ setCurrentStep }
+                            habits={ habits }
+                            setHabits={ setHabits }
+                            handleSelectedHabits={ handleSelectedHabits }
+                            confetti={ confetti }
+                            setConfetti={ setConfetti }
                         />
-                        <select
-                            value={ habitCat }
-                            onChange={ ( e ) => setHabitCat( e.target.value ) }
-                        >
-                            <option value="">Select a category</option>
-                            { availableTopics.map( ( topic ) => (
-                                <option key={ topic } value={ topic.toLowerCase() }>
-                                    { topic }
-                                </option>
-                            ) ) }
-                        </select>
-                        <div className={ habitDetail.length > 75 ? "char-count-red" : "char-count" }>
-                            { habitDetail.length } / 75 characters
-                        </div>
-                        <button
-                            disabled={ !habitCat || !habitDetail || habitDetail.length > 75 }
-                            onClick={ () => {
-                                handleSelectedHabits( { "category": habitCat, "description": habitDetail } )
-                                //some sool confetti or something animated when you commit
-                                // setHabitCat( "" )
-                                // setHabitDetail( "" )
-                                setCurrentStep( 5 )
-                            } }>
-                            Commit!
-                        </button>
-
                     </div>
+                    // <div>
+                    //     <h1>create your habit</h1>
+                    //     <input
+                    //         type="text"
+                    //         value={ habitDetail }
+                    //         onChange={ ( e ) => {
+                    //             setHabitDetail( e.target.value )
+                    //         } }
+                    //     />
+                    //     <select
+                    //         value={ habitCat }
+                    //         onChange={ ( e ) => setHabitCat( e.target.value ) }
+                    //     >
+                    //         <option value="">Select a category</option>
+                    //         { availableTopics.map( ( topic ) => (
+                    //             <option key={ topic } value={ topic.toLowerCase() }>
+                    //                 { topic }
+                    //             </option>
+                    //         ) ) }
+                    //     </select>
+                    //     <div className={ habitDetail.length > 75 ? "char-count-red" : "char-count" }>
+                    //         { habitDetail.length } / 75 characters
+                    //     </div>
+                    //     <button
+                    //         disabled={ !habitCat || !habitDetail || habitDetail.length > 75 }
+                    //         onClick={ () => {
+                    //             handleSelectedHabits( { "category": habitCat, "description": habitDetail } )
+                    //             setConfetti( true );
+                    //             setTimeout( () => {
+                    //                 setCurrentStep( 5 );
+                    //                 setConfetti( false );
+                    //             }, 2000 );
+                    //         } }>
+                    //         Commit!
+                    //     </button>
+                    //     { confetti && <div className="confetti" /> }
+
+                    // </div>
                 );
             case 8:
                 return (
-                    <div className="covers">
-                        <h2>Choose cover image</h2>
-                        { !isValidURL( coverImage ) && coverImage.length > 5 && (
-                            <p>Or please provide a valid image URL starting with http:// or https:// and ending with png, jpg, jpeg, gif, or svg.</p>
-                        ) }
-                        {/* <img className="cover" src="" onClick={ () => { setCoverImage( "" ) } } /> */ }
-                        <img className="cover1" src="https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" ) } } />
-                        <img className="cover2" src="https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" ) } } />
-                        <img className="cover3" src="https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" onClick={ () => { setCoverImage( "  https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" ) } } />
-                        <img className="cover4" src="https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg" ) } } />
-                        <img className="cover5" src="https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" onClick={ () => { setCoverImage( "  https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" ) } } />
-                        <img className="cover6" src="https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" ) } } />
-                        <input
-                            type="text"
-                            value={ coverImage }
-                            onChange={ ( e ) => setCoverImage( e.target.value )
-                            }
+                    <div>
+                        <Step8
+                            coverImage={ coverImage }
+                            setCoverImage={ setCoverImage }
+                            routineName={ routineName }
                         />
-
                     </div>
+                    // <div className="covers">
+                    //     <h2>Choose cover image</h2>
+                    //     { !isValidURL( coverImage ) && coverImage.length > 5 && (
+                    //         <p>Or please provide a valid image URL starting with http:// or https:// and ending with png, jpg, jpeg, gif, or svg.</p>
+                    //     ) }
+                    //     {/* <img className="cover" src="" onClick={ () => { setCoverImage( "" ) } } /> */ }
+                    //     <img className="cover1" src="https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg" ) } } />
+                    //     <img className="cover2" src="https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg" ) } } />
+                    //     <img className="cover3" src="https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" onClick={ () => { setCoverImage( "  https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg" ) } } />
+                    //     <img className="cover4" src="https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg" ) } } />
+                    //     <img className="cover5" src="https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" onClick={ () => { setCoverImage( "  https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg" ) } } />
+                    //     <img className="cover6" src="https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" onClick={ () => { setCoverImage( "https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" ) } } />
+                    //     <input
+                    //         type="text"
+                    //         value={ coverImage }
+                    //         onChange={ ( e ) => setCoverImage( e.target.value )
+                    //         }
+                    //     />
+
+                    // </div>
                 );
             default:
                 return ( <p>oops, step not found</p> );
@@ -427,10 +363,39 @@ function RoutineEditForm ( { existingRoutine } ) {
     };
 
     return (
-        <>
+        <div className="create-routine-container">
             <form onSubmit={ handleSubmit }>
-                { stepContent( currentStep ) }
-                <div>
+                <div className="step-content"> { stepContent( currentStep ) }</div>
+
+                <div className="button-container button-container-bottom">
+                    { currentStep !== 1 && currentStep !== 4 && currentStep !== totalSteps && (
+                        <button className="left" type="button" onClick={ handlePrevStep }>
+                            &lt; Back it Up
+                        </button>
+                    ) }
+                    { currentStep === 4 && (
+                        <button type="button" onClick={ handlePrevStep }>
+                            &lt; Pick New Topics
+                        </button>
+                    ) }
+                    { currentStep !== 1 && currentStep !== totalSteps && currentStep !== 6 && currentStep !== 7 && (
+                        <button className="right" type="button" onClick={ handleNextStep }>
+                            Onward &gt;
+                        </button>
+                    ) }
+                    { currentStep === totalSteps && <button className="right" type="button" onClick={ () => setCurrentStep( 1 ) }>
+                        &lt; Change Routine Name
+                    </button> }
+                    { currentStep === totalSteps && habits.length < 3 && <button className="rightish" type="button" onClick={ () => setCurrentStep( 5 ) }>
+                        &lt; Set at least 3 habits to submit
+                    </button> }
+                    { currentStep === totalSteps && habits.length >= 3 && <button className="rightish" type="button" onClick={ () => setCurrentStep( 5 ) }>
+                        &lt; Back to edit them habits
+                    </button> }
+                    { currentStep === totalSteps && <button type="submit" disabled={ !coverImage || habits.length < 3 }>Submit!!!</button> }
+
+                </div>
+                {/* <div>
                     { currentStep !== 1 && currentStep !== 4 && (
                         <button type="button" onClick={ handlePrevStep }>
                             &lt; Backward
@@ -447,9 +412,9 @@ function RoutineEditForm ( { existingRoutine } ) {
                         </button>
                     ) }
                     { currentStep === totalSteps && <button type="submit">Submit</button> }
-                </div>
+                </div> */}
             </form>
-        </>
+        </div>
     );
 }
 

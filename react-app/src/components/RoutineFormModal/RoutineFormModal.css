@@ -43,6 +43,24 @@ align-items: center;
   color: red;
 }
 
+.confetti {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  background-color: #f00; /* Confetti color */
+  animation: confetti-burst 0.5s ease-out;
+}
+
+@keyframes confetti-burst {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 1;
+  }
+}
 /* general h2/h3 rules */
 
 .create-routine-container h2{
