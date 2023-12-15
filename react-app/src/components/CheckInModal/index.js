@@ -16,7 +16,7 @@ function CheckinFormModal ( { habits } ) {
     const [ currentCardIndex, setCurrentCardIndex ] = useState( 0 );
 
     const handleAnswerClick = ( index, completed ) => {
-        console.log( "answerclick currcardindex", currentCardIndex )
+        // console.log( "answerclick currcardindex", currentCardIndex )
         const updatedAnswers = [ ...selectedAnswers ];
         updatedAnswers[ index ].completed = completed;
         setSelectedAnswers( updatedAnswers );
@@ -26,7 +26,6 @@ function CheckinFormModal ( { habits } ) {
         } else {
             setCurrentCardIndex( index + 1 );
         }
-
     };
 
     const handleSubmit = async () => {

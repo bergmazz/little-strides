@@ -126,13 +126,14 @@
 .checkin-options{
         display: flex;
           flex-direction: column;
-            height: 70px;
-            padding: 4%
+            height: 50px;
+            padding: 0 10px;
 }
 
 .checkin-options button{
           margin: 3%;
           background-color: #E8DEF8;
+            font-size:.8em;
 }
 
 .sub{
