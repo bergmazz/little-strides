@@ -58,16 +58,16 @@ function CheckinFormModal ( { habits } ) {
         const numberOfCards = habits.length;
         const containerWidth = document.querySelector( ".habit-steps-container" ).offsetWidth;
 
-        let cardSize = Math.min( containerWidth / numberOfCards, containerWidth * 0.5 ) * 1.4;
+        let cardSize = Math.min( containerWidth / numberOfCards, containerWidth * 0.5, 120 ) * 1.2;
         if ( numberOfCards > 10 ) {
-            cardSize = containerWidth * 0.21
+            // cardSize = Math.min( containerWidth / numberOfCards, containerWidth * 0.5, 120 ) * 2
         }
-        if ( numberOfCards > 20 ) {
-            cardSize = containerWidth * 0.11
-        }
+        // if ( numberOfCards > 20 ) {
+        //     cardSize = containerWidth * 0.11
+        // }
 
         const tz = Math.round(
-            ( cardSize / 2 ) / Math.tan( ( Math.PI / numberOfCards ) )
+            ( cardSize / 1.2 ) / Math.tan( ( Math.PI / numberOfCards ) )
         );
 
         const carousel = document.querySelector( ".habit-steps-container" );
@@ -93,6 +93,35 @@ function CheckinFormModal ( { habits } ) {
             }
         }
     };
+
+    // const makeMyCarousel = () => {
+    //     const numberOfCards = habits.length;
+    //     const carousel = document.querySelector( ".habit-steps-container" );
+
+    //     if ( carousel ) {
+    //         const cards = carousel.getElementsByClassName( "checkin-step" );
+    //         const containerWidth = carousel.offsetWidth;
+    //         const maxCardWidth = 320;
+    //         const spacing = 10;
+
+    //         const totalSpacing = ( numberOfCards - 1 ) * spacing;
+    //         const cardSize = Math.min( ( containerWidth - totalSpacing ) / numberOfCards, maxCardWidth );
+
+
+    //         for ( let i = 0; i < numberOfCards; i++ ) {
+    //             const rotation = ( 360 / numberOfCards ) * i;
+    //             const transformValue = `rotateY(${ rotation }deg) translateZ(${ containerWidth / 2 }px)`;
+    //             cards[ i ].style.transform = transformValue;
+    //             cards[ i ].style.width = `${ cardSize }px`;
+
+    //             if ( i === currentCardIndex ) {
+    //                 cards[ i ].classList.add( "current" );
+    //             } else {
+    //                 cards[ i ].classList.remove( "current" );
+    //             }
+    //         }
+    //     }
+    // };
 
     return (
         <div className="pointlesscompilingthing">
