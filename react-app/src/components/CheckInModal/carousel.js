@@ -1,13 +1,10 @@
 let carousel = document.querySelector( '.carousel' );
-let cards = carousel.querySelectorAll( '.checkin_cell' );
-let cardCount; // cardCount set from cards-range input value
+let cards = carousel.querySelectorAll( '.checkin_step' );
+let cardCount
 let selectedIndex = 0;
 let cellWidth = carousel.offsetWidth;
 let cellHeight = carousel.offsetHeight;
-// let isHorizontal = true;
-// let Fn = isHorizontal ? 'rotateY' : 'rotateX';
 let radius, theta;
-// console.log( cellWidth, cellHeight );
 
 function rotateCarousel () {
     let angle = theta * selectedIndex * -1;
@@ -15,11 +12,6 @@ function rotateCarousel () {
         'rotateY' + '(' + angle + 'deg)';
 }
 
-// let prevButton = document.querySelector( '.previous-button' );
-// prevButton.addEventListener( 'click', function () {
-//     selectedIndex--;
-//     rotateCarousel();
-// } );
 
 let nextButton = document.querySelector( '.next-button' );
 nextButton.addEventListener( 'click', function () {
@@ -27,15 +19,7 @@ nextButton.addEventListener( 'click', function () {
     rotateCarousel();
 } );
 
-// let cardsRange = document.querySelector( '.cards-range' );
-
-// cardsRange.addEventListener( 'change', changeCarousel );
-// cardsRange.addEventListener( 'input', changeCarousel );
-
-
-
 function changeCarousel () {
-    // cardCount = cardsRange.value;
     cardCount = habits.length
     theta = 360 / cardCount;
     let cellSize = cellWidth
@@ -55,21 +39,3 @@ function changeCarousel () {
     }
     rotateCarousel();
 }
-
-// let orientationRadios = document.querySelectorAll( 'input[name="orientation"]' );
-// ( function () {
-//     for ( let i = 0; i < orientationRadios.length; i++ ) {
-//         let radio = orientationRadios[ i ];
-//         radio.addEventListener( 'change', onOrientationChange );
-//     }
-// } )();
-
-// function onOrientationChange () {
-//     let checkedRadio = document.querySelector( 'input[name="orientation"]:checked' );
-//     isHorizontal = checkedRadio.value == 'horizontal';
-//     'rotateY' = isHorizontal ? 'rotateY' : 'rotateX';
-//     changeCarousel();
-// }
-
-// set initials
-// onOrientationChange();
