@@ -53,7 +53,7 @@ function Step7 ( { habitDetail, setHabitDetail, habitCat, setHabitCat, available
                     }, 2000 );
                 } }>
                 Commit!
-                { confetti && (
+                {/* { confetti && (
                     <div className="confetti-container">
                         { Array.from( { length: 50 } ).map( ( _, index ) => (
                             <div
@@ -62,7 +62,7 @@ function Step7 ( { habitDetail, setHabitDetail, habitCat, setHabitCat, available
                             />
                         ) ) }
                     </div>
-                ) }
+                ) } */}
             </button>
 
 
