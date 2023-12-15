@@ -19,8 +19,13 @@ function CheckinFormModal ( { habits } ) {
         const updatedAnswers = [ ...selectedAnswers ];
         updatedAnswers[ index ].completed = completed;
         setSelectedAnswers( updatedAnswers );
-        // Rotate to the next card
-        setCurrentCardIndex( ( prevIndex ) => ( prevIndex + 1 ) % habits.length );
+        // Rotate to the next card (changing current card calls spinCarousel in useEffect)
+        if ( index === habits.length ) {
+            setCurrentCardIndex( 0 )
+        } else {
+            setCurrentCardIndex( currentCardIndex + 1 );
+        }
+
     };
 
     const handleSubmit = async () => {
@@ -46,42 +51,29 @@ function CheckinFormModal ( { habits } ) {
     };
 
     useEffect( () => {
-        makeMyCarousel();
+        spinCarousel();
     }, [ currentCardIndex ] );
 
     useEffect( () => {
         dispatch( fetchRoutines() );
     }, [ submitted ] )
-    // carousel tutorial:
-    // https://github.khronos.org/siggraph2012course/CanvasCSSAndWebGL/demos/3dtransforms/docs/carousel.html
-    const makeMyCarousel = () => {
+
+
+
+    const spinCarousel = () => {
         const numberOfCards = habits.length;
-        const containerWidth = document.querySelector( ".habit-steps-container" ).offsetWidth;
-
-        let cardSize = Math.min( containerWidth / numberOfCards, containerWidth * 0.5, 120 ) * 1.2;
-        if ( numberOfCards > 10 ) {
-            // cardSize = Math.min( containerWidth / numberOfCards, containerWidth * 0.5, 120 ) * 2
-        }
-        // if ( numberOfCards > 20 ) {
-        //     cardSize = containerWidth * 0.11
-        // }
-
-        const tz = Math.round(
-            ( cardSize / 1.2 ) / Math.tan( ( Math.PI / numberOfCards ) )
+        const cardWidth = 150;
+        const angle = 360 / numberOfCards;
+        const translateZ = Math.round(
+            ( cardWidth / 2 ) / ( Math.tan( angle ) )
         );
-
-        const carousel = document.querySelector( ".habit-steps-container" );
-
+        const carousel = document.querySelector( ".carousel" );
         if ( carousel ) {
             const cards = carousel.getElementsByClassName( "checkin-step" );
-
             for ( let i = 0; i < numberOfCards; i++ ) {
-                // console.log( "currentcardindex---------", currentCardIndex )
-                // console.log( "i value in loop---------", i )
-                // console.log( "cards[i]---------", cards[ i ] )
-                const rotation = ( 360 / numberOfCards ) * ( i - currentCardIndex );
-                //Makes da circle
-                const transformValue = `rotateY(${ rotation }deg) translateZ(${ tz }px)`;
+                let currangle = ( i - currentCardIndex ) * angle;
+
+                const transformValue = `rotateY(${ currangle }deg) translateZ(${ translateZ }px)`;
                 cards[ i ].style.transform = transformValue;
 
                 if ( i === currentCardIndex ) {
@@ -89,39 +81,9 @@ function CheckinFormModal ( { habits } ) {
                 } else {
                     cards[ i ].classList.remove( "current" );
                 }
-                // cards[ i ].style.width = `${ cardSize }px`
             }
         }
     };
-
-    // const makeMyCarousel = () => {
-    //     const numberOfCards = habits.length;
-    //     const carousel = document.querySelector( ".habit-steps-container" );
-
-    //     if ( carousel ) {
-    //         const cards = carousel.getElementsByClassName( "checkin-step" );
-    //         const containerWidth = carousel.offsetWidth;
-    //         const maxCardWidth = 320;
-    //         const spacing = 10;
-
-    //         const totalSpacing = ( numberOfCards - 1 ) * spacing;
-    //         const cardSize = Math.min( ( containerWidth - totalSpacing ) / numberOfCards, maxCardWidth );
-
-
-    //         for ( let i = 0; i < numberOfCards; i++ ) {
-    //             const rotation = ( 360 / numberOfCards ) * i;
-    //             const transformValue = `rotateY(${ rotation }deg) translateZ(${ containerWidth / 2 }px)`;
-    //             cards[ i ].style.transform = transformValue;
-    //             cards[ i ].style.width = `${ cardSize }px`;
-
-    //             if ( i === currentCardIndex ) {
-    //                 cards[ i ].classList.add( "current" );
-    //             } else {
-    //                 cards[ i ].classList.remove( "current" );
-    //             }
-    //         }
-    //     }
-    // };
 
     return (
         <div className="pointlesscompilingthing">
@@ -136,8 +98,9 @@ function CheckinFormModal ( { habits } ) {
                 </div>
             ) : (
                     <div className="checkin-form-container">
-            <h2>How did your routine go today? </h2>
-            <div className="habit-steps-container">
+                        <h2>How did your routine go today? </h2>
+                        <div className="checkin-steps-container">
+                            <div className="carousel">
                 { habits.map( ( habit, index ) => (
                     <div key={ habit.id } className="checkin-step">
                         <div className="desc">
@@ -146,14 +109,14 @@ function CheckinFormModal ( { habits } ) {
                         <div className="checkin-options">
                             <button
                                 onClick={ () => handleAnswerClick( index, 1 ) }
-                                className={ selectedAnswers[ index ].completed === 1 ? "selected" : "" }
+                                className={ selectedAnswers[ index ].completed === 1 ? "selected next-button" : "next-button" }
                                 disabled={ index !== currentCardIndex }
                             >
                                 Yes
                             </button>
                             <button
                                 onClick={ () => handleAnswerClick( index, 0 ) }
-                                className={ selectedAnswers[ index ].completed === 0 ? "selected" : "" }
+                                className={ selectedAnswers[ index ].completed === 0 ? "selected next-button" : "next-button" }
                                 disabled={ index !== currentCardIndex }
                             >
                                 Not Today
@@ -162,7 +125,7 @@ function CheckinFormModal ( { habits } ) {
                     </div>
                 ) ) }
                         </div>
-
+                        </div>
             <div className="sub">
                 <button onClick={ handleSubmit }>Submit</button>
             </div>
