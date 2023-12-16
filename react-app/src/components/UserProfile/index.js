@@ -63,7 +63,14 @@ function UserProfile () {
     }
 
     useEffect( () => {
-        elem.scrollIntoView( { behavior: "smooth", offset: -50 } );
+        // offset didn't work with just the one line below???
+        // elem.scrollIntoView( { behavior: "smooth", offset: - 100"} );
+        const offsetPosition = elem.offsetTop - 100;
+        window.scrollTo( {
+            top: offsetPosition,
+            behavior: "smooth",
+        } );
+
     }, [ elem ] );
 
     //loading message when currentuser hasn't processed
@@ -102,9 +109,9 @@ function UserProfile () {
                 <img src={ waveSvgUp } alt="Wave" />
             </div>
 
-            <div className='usersec2'>
+            <div className='usersec2' id="progress">
 
-                <div className='progress-container' id="progress">
+                <div className='progress-container' >
                     { routines.map( ( routine ) => (
                         <div className="routine-progress" key={ routine.id }>
                             <div className='progress'>

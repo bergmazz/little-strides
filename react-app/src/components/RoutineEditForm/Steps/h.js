@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { image1, image2, image3, image4, image5, image6 } from "../../RoutineFormModal/Covers";
 
 function Step8 ( { coverImage, setCoverImage, routineName } ) {
+    const [ selectedImage, setSelectedImage ] = useState( null );
     const images = [ image1, image2, image3, image4, image5, image6 ];
-    const urls = [ "https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg", "https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg", "https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg", "https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg", "https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg", "https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" ]
+    const urls = [
+        "https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg", //cloud 1
+        "https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg", //rainbow 2
+        "https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg", //rock 3
+        "https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg",//star 4
+        "https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg",//water 5
+        "https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg"//wood 6
+    ]
 
-    const initialSelectedIndex = urls.findIndex( ( url ) => url === coverImage );
-    const [ selectedImage, setSelectedImage ] = useState(
-        initialSelectedIndex !== -1 ? images[ initialSelectedIndex ] : null
-    );
+    useEffect( () => {
+        const isCoverImageInUrls = urls.includes( coverImage );
+        setSelectedImage( isCoverImageInUrls ? coverImage : null );
+    }, [ coverImage, urls ] );
+
+    // const initialSelectedIndex = urls.findIndex( ( url ) => url === coverImage );
+    // const [ selectedImage, setSelectedImage ] = useState(
+    //     initialSelectedIndex !== -1 ? images[ initialSelectedIndex ] : null
+    // );
 
     const handleImageClick = ( image, imageUrl ) => {
         setCoverImage( imageUrl );
@@ -23,7 +36,7 @@ function Step8 ( { coverImage, setCoverImage, routineName } ) {
                 { images.map( ( imgSrc, index ) => (
                     <img
                         key={ index }
-                        className={ `cover${ index + 1 } ${ selectedImage === imgSrc ? "selected" : ""
+                        className={ `cover${ index + 1 } ${ selectedImage === urls[ index ] ? "selected" : ""
                             }` }
                         src={ imgSrc }
                         onClick={ () => handleImageClick( imgSrc, urls[ index ] ) }

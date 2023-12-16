@@ -1,23 +1,11 @@
 import React, { useState } from "react";
 import { image1, image2, image3, image4, image5, image6 } from "../Covers";
-import sparkles from "./50.png"
-function Step8 ( { coverImage, setCoverImage, routineName } ) {
+// import sparkles from "./50.png"
+function Step8 ( { coverImage, setCoverImage } ) {
     const [ selectedImage, setSelectedImage ] = useState( null );
     const images = [ image1, image2, image3, image4, image5, image6 ];
     const urls = [ "https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg", "https://images.pexels.com/photos/3900437/pexels-photo-3900437.jpeg", "https://images.pexels.com/photos/2627945/pexels-photo-2627945.jpeg", "https://images.pexels.com/photos/4388593/pexels-photo-4388593.jpeg", "https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg", "https://images.pexels.com/photos/2309266/pexels-photo-2309266.jpeg" ]
-    // const isValidURL = ( url ) => {
-    //     const pattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg))$/i;
-    //     return pattern.test( url );
-    // };
 
-    // const validateImage = ( url, onSuccess, onError ) => {
-    //     const img = new Image();
-
-    //     img.onload = onSuccess;
-    //     img.onerror = onError;
-
-    //     img.src = url;
-    // };
     const handleImageClick = ( image, imageUrl ) => {
         setCoverImage( imageUrl );
         setSelectedImage( image );
