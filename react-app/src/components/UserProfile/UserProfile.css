@@ -1,31 +1,68 @@
-/* .routine-tile{
-    transition: box-shadow 0.3s ease-in-out;
-} */
-
+.userprof{
+    overflow-x:hidden;
+}
 .userprof button {
   font-family: bobbyJones, Animatic SC, Helvetica cursive;
-  font-size: 18px;
+  font-size: 1.3em;
   width:170px;
   height: 60px;
     color: white;
     background-color: #680416;
      box-shadow:5px 6px #E8DEF8;
-       /* box-shadow:6px 8px #F8F3FF; */
 }
 
 .usersec1{
     position: relative;
     z-index:2;
-    margin: 60px 85px 0 85px;
+    margin: 4% 6% 0 6%;
 }
 .userprof h1{
-    font-size: 45px;
-    margin: 60px 0 10px 0;
+    font-size: 3em;
+    margin-bottom:0;
+}
+.userprof h3{
+margin-top: 15px;
+   font-size: 1.3em;
+}
+
+@media (min-width: 1800px) {
+.userprof h1{
+    font-size: 4.5em;
+    margin-bottom:0;
+}
+.userprof h3{
+margin-top: 15px;
+   font-size: 2em;
+}
+}
+.userprof button{
+margin-top: 20px;
 }
 
 .wave-2{
-margin-top: -40px;
+margin-top: -120px;
+margin-left: -20px;
 z-index: 8;
+width: 110vw;
+overflow:hidden;
+justify-content: center;
+}
+
+@media (max-width: 1024px) {
+    .wave-2{
+margin-top: -50px;
+}
+}
+
+@media (max-width: 666px) {
+    .wave-2{
+margin-top: -20px;
+}
+}
+@media (max-width: 666px) {
+    .wave-2{
+margin-top: 0
+}
 }
 
 .usersec2{
@@ -35,17 +72,24 @@ z-index: 8;
 
 
 .routine-progress {
-  width: 80%;
-  margin: auto;
-  text-align: left;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  margin-top: 8%
 }
 
 .routine-progress h1{
-    font-size: 1.7em;
+    margin-top: 0;
+    font-size: 3em;
+}
+.routine-progress h3{
+    margin:.5%
 }
 
 .habitbadges{
     display: flex;
+    justify-content: center;
+      align-items: center;
     font-size: 2em;
 }
 
@@ -58,16 +102,13 @@ font-family: Jost, Futura, Helvetica, Arial, sans-serif;
 .fa-star {
  color: #CDAEFF;
 }
-
 /* .shield { */
 .fa-heart{
 color: #E3A72F;
 }
-
 .fa-certificate {
 color: #058789;
 }
-
 .fa-fire{
       color:#D54B1A;
 }

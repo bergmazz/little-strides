@@ -107,10 +107,8 @@ function UserProfile () {
                 <div className='progress-container' id="progress">
                     { routines.map( ( routine ) => (
                         <div className="routine-progress" key={ routine.id }>
-                            {/* <div className="routine-tile"> */ }
                             <div className='progress'>
-                                <h1>{ routine.name }</h1>
-
+                                <h3>{ routine.name }</h3>
                                 <h1 className='bigg' > { routine.averageCompletionAllTime }% yes all time </h1>
                                 <h2>Making some strides!</h2>
                                 <div className="habitbadges">
@@ -146,7 +144,7 @@ function UserProfile () {
                                         );
                                     } ) }
                                 </div>
-                                <h1 className='biggish'>{ routine.averageToday }% for today's habits</h1>
+                                <h3 className='biggish'>{ routine.averageToday }% for today's habits</h3>
                                 <h4>{ routine.averagePastWeek }% average in the past week</h4>
 
                                 <div className="habit-descriptions">

@@ -15,13 +15,22 @@ function CheckinFormModal ( { habits } ) {
     );
     const [ currentCardIndex, setCurrentCardIndex ] = useState( 0 );
 
+    useEffect( () => {
+        spinCarousel();
+    }, [ currentCardIndex ] );
+
+    useEffect( () => {
+        dispatch( fetchRoutines() );
+    }, [ submitted ] )
+
     const handleAnswerClick = ( index, completed ) => {
         // console.log( "answerclick currcardindex", currentCardIndex )
         const updatedAnswers = [ ...selectedAnswers ];
         updatedAnswers[ index ].completed = completed;
         setSelectedAnswers( updatedAnswers );
-        // Rotate to the next card (changing current card calls spinCarousel in useEffect)
+        // Rotate to the next card
         if ( index === habits.length - 1 ) {
+            // ( changing current card calls spinCarousel in useEffect)
             setCurrentCardIndex( 0 )
         } else {
             setCurrentCardIndex( index + 1 );
@@ -49,16 +58,6 @@ function CheckinFormModal ( { habits } ) {
             // closeModal()
         }
     };
-
-    useEffect( () => {
-        spinCarousel();
-    }, [ currentCardIndex ] );
-
-    useEffect( () => {
-        dispatch( fetchRoutines() );
-    }, [ submitted ] )
-
-
 
     const spinCarousel = () => {
         const numberOfCards = habits.length;
