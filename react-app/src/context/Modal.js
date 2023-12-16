@@ -10,11 +10,11 @@ export function ModalProvider({ children }) {
   // callback function that will be called when modal is closing
   const [onModalClose, setOnModalClose] = useState(null);
 
-  const closeModal = ( showWarning = false ) => {
+  const closeModal = ( showWarning ) => {
     let shouldClose = null
-    if ( showWarning ) {
+    if ( showWarning === true ) {
       shouldClose = window.confirm(
-        "Are you sure you want to exit? Your progress will not be saved."
+        "Hmmmm, are you sure you want to exit? Your progress will not be saved."
       );
       if ( !shouldClose ) {
         return;
@@ -56,7 +56,9 @@ export function Modal() {
   if (!modalRef || !modalRef.current || !modalContent) return null;
 
   const showCloseWarning =
-    modalContent.props && modalContent.props.showWarning;
+    modalContent.props && modalContent.props.showWarning !== undefined
+      ? modalContent.props.showWarning
+      : false;
 
   // Render the following component to the div referenced by the modalRef
   return ReactDOM.createPortal(

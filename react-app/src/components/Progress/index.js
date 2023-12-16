@@ -35,7 +35,6 @@ function Progress () {
         if ( currentUser ) {
             dispatch( fetchRoutines() );
         }
-
         // dispatch( currentUserHabits() )
     }, [ dispatch, currentUser ] );
 
@@ -103,7 +102,6 @@ function Progress () {
                                     { routine.habits.map( ( habit ) => (
                                         <div key={ habit.id }>
                                             {/* <div className='bubble'> */ }
-
                                             <h3> - { habit.description }</h3>
                                             {/* </div> */ }
                                             <p>  { habit.percent } % yes all time</p>
@@ -114,22 +112,6 @@ function Progress () {
                                 </div>
                             </div>
                             <div className="routine-buttons">
-
-                                {/* { routine.checkedIn ? (
-                                    <button
-                                        className="edit-checkin"
-                                        onClick={ () => window.alert( "Edit coming soon" ) }
-                                    >
-                                        Edit Check In
-                                    </button>
-                                ) : (
-                                        <OpenModalButton
-                                        className="checkin"
-                                        buttonText="Check In"
-                                        onItemClick={ closeMenu }
-                                        modalComponent={ <CheckinFormModal habits={ routine.habits } showWarning={ false } /> }
-                                    />
-                                ) } */}
 
                                 <OpenModalButton
                                     className='checkin'

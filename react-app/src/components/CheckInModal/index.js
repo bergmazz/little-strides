@@ -91,9 +91,8 @@ function CheckinFormModal ( { habits } ) {
                     <h1>You're making strides!</h1>
                     <h4>"Yes" Responses Today:</h4>
                     <h1>{ yesPercentage.toFixed( 2 ) }%</h1>
-                    {/* <h4>"Yes" Responses Last Week:</h4> */ }
-                    {/* <h1>{ habits.averagePastWeek }</h1> */ }
-                    {/* <button onClick={ closeModal }>exit</button> */ }
+
+                    <button onClick={ closeModal }>exit</button>
                 </div>
             ) : (
                     <div className="checkin-form-container">
