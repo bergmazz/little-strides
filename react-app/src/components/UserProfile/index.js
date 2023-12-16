@@ -26,6 +26,7 @@ function UserProfile () {
     // const habits = useSelector( state => state.habit.user )
     // console.log( "------user:", currentUser );
     const [ showMenu, setShowMenu ] = useState( false );
+    let hasStreak = false;
     const BadgeShapes = [ 'star', 'shield', 'scalloped-circle' ];
     let badgeShapeIndex = 0;
 
@@ -127,8 +128,12 @@ function UserProfile () {
                                 <div className="habitbadges">
                                     { routine.habits.map( ( habit ) => {
                                         const shouldDisplayBadge = habit.streak > 1;
+                                        if ( shouldDisplayBadge ) {
+                                            hasStreak = true
+                                        }
                                         const badgeShape = shouldDisplayBadge ? BadgeShapes[ badgeShapeIndex ] : '';
                                         badgeShapeIndex = ( badgeShapeIndex + 1 ) % BadgeShapes.length;
+
                                         return (
                                             <div key={ habit.id } className={ `habit ${ badgeShape }` }>
                                                 { shouldDisplayBadge && (
@@ -156,6 +161,11 @@ function UserProfile () {
                                             </div>
                                         );
                                     } ) }
+                                    { !hasStreak && (
+                                        <p>
+                                            You haven't hit any streaks... yet!
+                                        </p>
+                                    ) }
                                 </div>
                                 <h3 className='biggish'>{ routine.averageToday }% for today's habits</h3>
                                 <h4>{ routine.averagePastWeek }% average in the past week</h4>

@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createCheckin } from "../../store/checkin";
 import { fetchRoutines } from '../../store/routine';
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+
 import "./CheckInModal.css";
 
 function CheckinFormModal ( { habits } ) {
@@ -92,7 +95,7 @@ function CheckinFormModal ( { habits } ) {
                     <h4>"Yes" Responses Today:</h4>
                     <h1>{ yesPercentage.toFixed( 2 ) }%</h1>
 
-                    <button onClick={ closeModal }>exit</button>
+                    <button onClick={ closeModal }>No thanks</button>
                 </div>
             ) : (
                     <div className="checkin-form-container">
