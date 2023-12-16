@@ -12,11 +12,13 @@ function ErrorModal ( { message } ) {
     //         setShowMenu( false );
     //     }
     // };
+    const buttonText = [ "alrighty", "ok thanks bye", "smell ya later", "whoops", "my bad", "moving onnn" ]
+    const randomIndex = Math.floor( Math.random() * buttonText.length );
 
     return (
         <div className="error">
             <p>{ message }</p>
-            <button onClick={ closeModal }>ok thanks bye</button>
+            <button onClick={ closeModal }>{ buttonText[ randomIndex ] }</button>
         </div>
     )
 }

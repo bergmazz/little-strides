@@ -1,6 +1,6 @@
 #modal-content:has(.checkin-form-container){
     height:75vh;
-            box-shadow: 7px 9px #350079;
+            box-shadow: 7px 9px#350079;
                 min-width:70vw;
     max-width: 90vw;
        overflow-y:scroll;
@@ -144,4 +144,55 @@
 .sub button{
           font-size: 1.8em;
             background-color: #E8DEF8;
+}
+
+
+#modal-content:has(.checkin-confirmation){
+    height:75vh;
+            box-shadow: 7px 9px #E3A72F;
+               width:70vw;
+    /* max-width: 90vw; */
+       overflow-y:scroll;
+       display:flex;
+        text-align: center;
+           justify-content: center;
+}
+
+
+.checkin-confirmation{
+  padding: 3% 6%;
+  margin:auto;
+ /* perspective: 1000px; */
+    display: flex;
+    flex-direction: column;
+     /* height:75vh; */
+           min-width:45vw;
+}
+
+.checkin-confirmation h2{
+margin-top: 6%;
+font-size: 3em;
+text-align:center;
+}
+
+.progress-snapshot{
+  margin:0 auto;
+ height: 390px;
+ width: 510px;
+ /* border-radius: 20px;
+   object-fit: cover; */
+}
+
+.to-post-or-not-to-post{
+display:flex;
+/* bottom: 0;
+padding:3%; */
+  justify-content: space-between;
+}
+
+.to-post-or-not-to-post button{
+font-size: 1.3em;
+background-color:white;
+   box-shadow: 4px 6px #E3A72F;
+   cursor:pointer;
 }

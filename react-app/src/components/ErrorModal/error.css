@@ -10,16 +10,19 @@
     font-size:1.5em;
     margin:50px;
     padding:2%;
+    text-align: center;
 }
 
 .error button{
 font-size:1.3em;
 display:flex;
-margin:5% auto;
-padding:2%;
+margin:5% auto 10% auto;
+    text-align: center;
+padding:2% 4%;
 border-radius: 25px;
   background-color: #F8F3FF;
-   box-shadow:5px 6px #E8DEF8
+   box-shadow:5px 6px #E8DEF8;
+   /* width: 150px; */
      /* box-shadow:5px 6px #E3A72F; */
 }
 

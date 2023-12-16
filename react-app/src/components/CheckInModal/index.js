@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createCheckin } from "../../store/checkin";
 import { fetchRoutines } from '../../store/routine';
+
+import OpenModalButton from "../OpenModalButton";
+import PostForm from "../PostForm";
+import pencil from "./pencil-pen.svg"
+
 import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
@@ -17,6 +22,8 @@ function CheckinFormModal ( { habits } ) {
         habits.map( () => ( { completed: null } ) )
     );
     const [ currentCardIndex, setCurrentCardIndex ] = useState( 0 );
+    const BadgeShapes = [ 'star', 'shield', 'scalloped-circle' ];
+    let badgeShapeIndex = 0;
 
     useEffect( () => {
         spinCarousel();
@@ -87,15 +94,86 @@ function CheckinFormModal ( { habits } ) {
         }
     };
 
+    const handleCaptureImage = () => {
+        htmlToImage.toJpeg( document.getElementById( 'progress-snapshot' ), { quality: 0.95 } )
+            .then( function ( dataUrl ) {
+                var link = document.createElement( 'a' );
+                // link.download = 'my-image-name.jpeg';
+                link.href = dataUrl;
+                // link.click();
+            } );
+
+        let hasStreak = false;
+        let topHabit = habits[ 0 ]
     return (
         <div className="pointlesscompilingthing">
             { submitted ? (
                 <div className="checkin-confirmation">
-                    <h1>You're making strides!</h1>
-                    <h4>"Yes" Responses Today:</h4>
-                    <h1>{ yesPercentage.toFixed( 2 ) }%</h1>
+                    <h2>You're making strides!</h2>
+                    <div className="progress-snapshot" id="progress-snapshot">
+                        <h1>{ Math.ceil( yesPercentage ) }% Yes Today</h1>
+                        {/* <h4>{ yesPercentage.toFixed( 2 ) }% Last Week</h4> */ }
+                        <div className="habitbadges">
+                            { habits.map( ( habit ) => {
+                                const shouldDisplayBadge = habit.streak > 1;
+                                if ( shouldDisplayBadge ) {
+                                    hasStreak = true
+                                }
+                                if ( habit.streak > topHabit.streak ) {
+                                    topHabit = habit
+                                }
+                                const badgeShape = shouldDisplayBadge ? BadgeShapes[ badgeShapeIndex ] : '';
+                                badgeShapeIndex = ( badgeShapeIndex + 1 ) % BadgeShapes.length;
+                                // console.log( habits )
+                                return (
+                                    <div key={ habit.id } className={ `habit ${ badgeShape }` }>
+                                        { shouldDisplayBadge && (
+                                            <div className={ `streak-badge ${ badgeShape }` }>
+                                                { badgeShape === 'star' && (
+                                                    <span className="fa-stack">
+                                                        <i className="fas fa-star fa-stack-2x"></i>
+                                                        <i className="fas fa-stack-1x streak-number">{ habit.streak }</i>
+                                                    </span>
+                                                ) }
+                                                { badgeShape === 'shield' && (
+                                                    <span className="fa-stack">
+                                                        <i className="fas fa-heart fa-stack-2x"></i>
+                                                        <i className="fas fa-stack-1x streak-number">{ habit.streak }</i>
+                                                    </span>
+                                                ) }
+                                                { badgeShape === 'scalloped-circle' && (
+                                                    <span className="fa-stack">
+                                                        <i className="fas fa-certificate fa-stack-2x"></i>
+                                                        <i className="fas fa-stack-1x streak-number">{ habit.streak }</i>
+                                                    </span>
+                                                ) }
+                                            </div>
+                                        ) }
+                                    </div>
+                                );
+                            } ) }
+                            { !hasStreak && (
+                                <p>
+                                    You haven't hit any streaks... yet!
+                                </p>
+                            ) }
+                        </div>
+                        <h4>Your Longest Streak:</h4>
+                        <i className="fas fa-fire"></i> { `   ${ topHabit.description }` }
+                        <h4>{ `${ topHabit.streak } check ins in a row` }</h4>
+                    </div>
+                    <div className="to-post-or-not-to-post">
+                        <button onClick={ closeModal }>No thanks</button>
+                        <OpenModalButton
+                            modalComponent={ <PostForm
+                                showWarning={ false }
+                            /> }
+                            buttonText="post progress"
+                            onClick={ handleCaptureImage }
+                        // { <img className="pencil" src={ pencil } alt="Pencil Icon" /> }
+                        />
+                    </div>
 
-                    <button onClick={ closeModal }>No thanks</button>
                 </div>
             ) : (
                     <div className="checkin-form-container">
@@ -133,8 +211,7 @@ function CheckinFormModal ( { habits } ) {
         </div>
             )
             }
-        </div>
-
+        </div >
     );
 }
 
