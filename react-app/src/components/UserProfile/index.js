@@ -17,6 +17,7 @@ import "./UserProfile.css"
 
 function UserProfile () {
     // console.log( "------ in user profile" );
+    const history = useHistory();
     const location = useLocation()
     const dispatch = useDispatch();
     const currentUser = useSelector( state => state.session.user )
@@ -30,6 +31,8 @@ function UserProfile () {
 
     const ulRef = useRef()
     // const progressSectionRef = useRef();
+    // const rotuineSectionRef = useRef();
+    // trust me guys, I tried useRefs instead of directly manipulating the dom and it didnt work
 
     useEffect( () => {
         if ( currentUser ) {
@@ -52,7 +55,6 @@ function UserProfile () {
         }
     }, [ showMenu ] );
 
-
     // for the progress scroll - goes to /user#progress
     let elem = document.getElementById( location.hash.slice( 1 ) );
     // console.log( "elemmmmmmmmmmmment", elem )
@@ -70,6 +72,10 @@ function UserProfile () {
             top: offsetPosition,
             behavior: "smooth",
         } );
+        //remove hash
+        if ( window.history && window.history.replaceState ) {
+            window.history.replaceState( {}, document.title, window.location.pathname );
+        }
 
     }, [ elem ] );
 
