@@ -1,3 +1,28 @@
+#modal-content:has(.error){
+    width: 35vw;
+      background-color: white;
+    box-shadow: 7px 9px #350079;
+}
+
 .error p{
+    display:flex;
+    justify-content: center;
+    font-size:1.5em;
     margin:50px;
+    padding:2%;
+}
+
+.error button{
+font-size:1.3em;
+display:flex;
+margin:5% auto;
+padding:2%;
+border-radius: 25px;
+  background-color: #F8F3FF;
+   box-shadow:5px 6px #E8DEF8
+     /* box-shadow:5px 6px #E3A72F; */
+}
+
+.error button:hover{
+    box-shadow:  5px 6px#CDAEFF
 }

@@ -16,7 +16,7 @@ function ErrorModal ( { message } ) {
     return (
         <div className="error">
             <p>{ message }</p>
-            <button onClick={ closeModal }>exit</button>
+            <button onClick={ closeModal }>ok thanks bye</button>
         </div>
     )
 }

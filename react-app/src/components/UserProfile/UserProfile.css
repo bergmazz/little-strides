@@ -37,6 +37,10 @@ margin-top: 15px;
 }
 .userprof button{
 margin-top: 20px;
+cursor:pointer
+}
+.userprof button:hover{
+    box-shadow:  5px 6px#CDAEFF
 }
 
 .wave-2{

@@ -246,7 +246,8 @@ function UserProfile () {
                         buttonText="Modify"
                         onItemClick={ closeMenu }
                         modalComponent={ <RoutineFormModal /> }
-                    /> */}</>
+                    /> */}
+                        </>
                 ) }
             </div>
 
