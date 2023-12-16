@@ -13,7 +13,7 @@
 
 .usersec1{
     position: relative;
-    z-index:2;
+    z-index:3;
     margin: 4% 6% 0 6%;
 }
 .userprof h1{
@@ -42,7 +42,7 @@ margin-top: 20px;
 .wave-2{
 margin-top: -120px;
 margin-left: -20px;
-z-index: 8;
+z-index: 2;
 width: 110vw;
 overflow:hidden;
 justify-content: center;
@@ -54,11 +54,11 @@ margin-top: -50px;
 }
 }
 
-@media (max-width: 666px) {
+/* @media (max-width: 666px) {
     .wave-2{
 margin-top: -20px;
 }
-}
+} */
 @media (max-width: 666px) {
     .wave-2{
 margin-top: 0
@@ -66,25 +66,36 @@ margin-top: 0
 }
 
 .usersec2{
-    z-index:2;
-    margin: -100px 85px 0px 85px;
+    z-index:-1;
+    margin: -70px 85px 0px 85px;
 }
-
+@media (max-width: 675px) {
+.usersec2{
+    margin: 0px 85px 0px 85px;
+}
+}
 
 .routine-progress {
   width: 100%;
   align-items: center;
   text-align: center;
-  margin-top: 8%
+  margin-top: 8%;
+  margin-bottom: 130px;
 }
 
 .routine-progress h1{
     margin-top: 0;
     font-size: 3em;
 }
-.routine-progress h3{
-    margin:.5%
+@media (max-width: 479px) {
+.routine-progress h1{
+    margin-top: 0;
+    font-size: 2em;
 }
+}
+ .biggish{
+    margin-top: 3%
+ }
 
 .habitbadges{
     display: flex;
@@ -114,7 +125,10 @@ color: #058789;
 }
 
 
-
+.usersec3{
+    justify-content: center;
+    text-align: center;
+}
 
 .routine-section{
     margin:40px;
@@ -122,29 +136,35 @@ color: #058789;
         grid-template-columns: 1fr 1fr;
 }
 .routine-tile{
+        margin:40px 0 40px auto;
     width: 500px;
     /* background-color: #680416; */
     border-radius:20px;
     box-shadow:5px 6px #E8DEF8;
+    padding-top: 60px;
 }
 
-.routine-img{
-          margin-top: 20px;
-    width: 80%;
-    display: column;
-    /* justify-content: center;
-    align-items: center; */
+@media (max-width: 1024px) {
+    .routine-tile{
+        width: 300px;
+    }
 }
+
+
+/* .routine-img{
+        margin: auto;
+} */
 .routine-tile img{
 height: 175px;
 width: 250px;
 border-radius: 20px;
 object-fit: cover;
-    margin: 40px 125px 0 125px;
+margin-left:12px;
 }
 .routine-tile h1{
 font-size:30px;
-    margin: 40px 80px 40px 80px;
+display:flex;
+justify-content: center;
 }
 
 .habittext {

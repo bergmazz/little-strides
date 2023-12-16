@@ -186,8 +186,8 @@ function UserProfile () {
                             <div className="routine-tile">
                                 <div className="routine-img">
                                     <img alt={ routine.name } src={ routine.coverImage } />
-                                    <h1>{ routine.name }</h1>
                                 </div>
+                                <h1>{ routine.name }</h1>
                                 <div className="habittext">
                         { routine.habits.map( ( habit ) => (
                             <div key={ habit.id }>
