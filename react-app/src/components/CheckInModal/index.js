@@ -22,6 +22,7 @@ function CheckinFormModal ( { habits } ) {
         habits.map( () => ( { completed: null } ) )
     );
     const [ currentCardIndex, setCurrentCardIndex ] = useState( 0 );
+    const [ capturedImage, setCapturedImage ] = useState( null );
     const BadgeShapes = [ 'star', 'shield', 'scalloped-circle' ];
     let badgeShapeIndex = 0;
 
@@ -95,13 +96,33 @@ function CheckinFormModal ( { habits } ) {
     };
 
     const handleCaptureImage = () => {
-        htmlToImage.toJpeg( document.getElementById( 'progress-snapshot' ), { quality: 0.95 } )
+        // htmlToImage.toJpeg( document.getElementById( 'progress-snapshot' ), { quality: 0.95 } )
+        //     .then( function ( dataUrl ) {
+        //         // var link = document.createElement( 'a' );
+        //         // link.download = 'my-image-name.jpeg';
+        //         // link.href = dataUrl;
+        //         // link.click();
+        //         setCapturedImage( dataUrl );
+        //     } )
+        //     .catch( function ( error ) {
+        //         console.error( 'Error capturing image:', error );
+        //     } );
+        console.log( "element", document.getElementById( 'progress-snapshot' ) )
+
+        htmlToImage.toPng( document.getElementById( 'progress-snapshot' ) )
             .then( function ( dataUrl ) {
-                var link = document.createElement( 'a' );
-                // link.download = 'my-image-name.jpeg';
-                link.href = dataUrl;
-                // link.click();
+                var img = new Image();
+                img.src = dataUrl;
+                console.log( "img", img )
+                // document.body.appendChild( img );
+                setCapturedImage( img.src )
+                console.log( "captured image", capturedImage )
+            } )
+            .catch( function ( error ) {
+                console.error( 'oops, something went wrong!', error );
             } );
+
+    }
 
         let hasStreak = false;
         let topHabit = habits[ 0 ]
@@ -165,11 +186,12 @@ function CheckinFormModal ( { habits } ) {
                     <div className="to-post-or-not-to-post">
                         <button onClick={ closeModal }>No thanks</button>
                         <OpenModalButton
+                            onClick={ handleCaptureImage() }
                             modalComponent={ <PostForm
-                                showWarning={ false }
+                                showWarning={ false } progressSnapShot={ capturedImage }
                             /> }
                             buttonText="post progress"
-                            onClick={ handleCaptureImage }
+
                         // { <img className="pencil" src={ pencil } alt="Pencil Icon" /> }
                         />
                     </div>

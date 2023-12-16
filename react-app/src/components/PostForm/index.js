@@ -6,7 +6,8 @@ import cloud from "./cloud.svg"
 import { post } from "../../store/post";
 import "./PostForm.css";
 
-function PostForm () {
+function PostForm ( { progressSnapshot } ) {
+    console.log( "snapshotttttt", progressSnapshot )
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
@@ -16,6 +17,12 @@ function PostForm () {
     const [ errors, setErrors ] = useState( "" );
     const [ text, setText ] = useState( "" );
     const [ image, setImage ] = useState();
+
+    useEffect( () => {
+        if ( progressSnapshot ) {
+            setImage( progressSnapshot );
+        }
+    }, [ progressSnapshot ] );
 
     const fileInputRef = useRef( null );
 
