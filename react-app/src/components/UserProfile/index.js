@@ -110,7 +110,7 @@ function UserProfile () {
             </div>
 
             <div className='usersec2' id="progress">
-
+                { routines && routines.length > 0 ? (
                 <div className='progress-container' >
                     { routines.map( ( routine ) => (
                         <div className="routine-progress" key={ routine.id }>
@@ -173,18 +173,27 @@ function UserProfile () {
                         </div >
                     ) )
                     }
-                </div>
-
+                    </div> ) : (
+                    <h1 style={ { margin: '8% auto 15% auto' } }>Get started, scroll and create a routine.</h1>
+                ) }
             </div>
             <div className="wave-2">
                 <img src={ waveSvg } alt="Wave" />
             </div>
 
-            <div className="usersec3" id="routine-section">
+            <div className="usersec3" id="manage">
                 { routines && routines.length > 0 ? (
                     <h1>Manage your routines</h1>
                 ) : (
-                    <h1>Get started, create a routine.</h1>
+                        <div style={ { margin: '8% auto 15% auto' } }>
+                            <h1 style={ { marginBottom: '3%' } } >Your routines will live here.... whenever you make one.</h1>
+                            <OpenModalButton
+                                className="create-routine"
+                                buttonText="Let's goooo"
+                                onItemClick={ closeMenu }
+                                modalComponent={ <RoutineFormModal routines={ routines } showWarning={ true } /> }
+                            />
+                        </div>
                 ) }
             { routines ? (
                     routines.map( ( routine ) => (
