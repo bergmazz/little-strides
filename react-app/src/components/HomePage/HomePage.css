@@ -88,10 +88,14 @@ justify-content: center;
 .home-posts-container{
     width: 50%;
     margin: auto;
-    height: 900px;
-    overflow-y: auto;
+    /* height: 900px;
+    overflow-y: auto; */
 }
 
+.posts-scroll{
+      height: 900px;
+    overflow-y: auto;
+}
 .home-post-tile{
        box-shadow: 7px 9px #058789;
        margin: 70px;

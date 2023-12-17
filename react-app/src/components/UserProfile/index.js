@@ -95,21 +95,22 @@ function UserProfile () {
             <div className='usersec1'>
                 <h1>Hi,  { currentUser.username }!</h1>
                 <h3>Real change happens over time. Progress, not perfection. </h3>
-            { hasReachedLimit ? (
                 <OpenModalButton
                     className="create-routine"
                     buttonText="New Routine"
                     onItemClick={ closeMenu }
-                        modalComponent={ <ErrorModal message={ "You already have 3 routines. Wouldn't want you to burn out. Please delete one to create another." } showWarning={ false } /> }
-                    />
-            ) : (
-                    <OpenModalButton
-                        className="create-routine"
-                        buttonText="New Routine"
-                        onItemClick={ closeMenu }
-                        modalComponent={ <RoutineFormModal routines={ routines } showWarning={ true } /> }
-                    />
-                ) }
+                    // TODO make scroll down to manage routines on close
+                    modalComponent={
+                        hasReachedLimit ? (
+                            <ErrorModal
+                                message="You already have 3 routines. Wouldn't want you to burn out. Please delete one to create another."
+                                showWarning={ false }
+                            />
+                        ) : (
+                            <RoutineFormModal routines={ routines } showWarning={ true } />
+                        )
+                    }
+                />
             </div>
 
             <div className="wave-2">

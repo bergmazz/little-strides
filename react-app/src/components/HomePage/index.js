@@ -45,14 +45,14 @@ const HomePage = () => {
             <div className="wave-1">
                 <img src={ waveSvg } alt="Wave" />
                 </div>
-                { !currentUser && (
+                {/* { !currentUser && (
                     <div className="logbutt">
                         <OpenModalButton
                             buttonText="Log In To"
                             onItemClick={ closeMenu }
                             modalComponent={ <LoginFormModal /> }
                         /></div>
-                ) }
+                ) } */}
             { communityPosts ? (
                     <div className="home-posts-container">
 
@@ -63,13 +63,13 @@ const HomePage = () => {
 
                         <p>Join the Discussion</p>
                             <OpenModalButton
-                                modalComponent={ <PostForm
-                                    showWarning={ false }
-                                /> }
+                                modalComponent={
+                                    currentUser ? ( <PostForm showWarning={ false } /> ) : ( <LoginFormModal /> )
+                                }
                                 buttonText={ <img className="pencil" src={ pencil } alt="Pencil Icon" /> }
                             />
                         </div>
-
+                        <div className="posts-scroLl">
                     { communityPosts.map( ( post, index ) => {
                         return (
                             <div className='home-post-tile' key={ index }>
@@ -85,10 +85,11 @@ const HomePage = () => {
                         );
                     } ) }
                     </div>
-
+                    </div>
             ) : (
                 <p>No posts, whoops.</p>
             ) }
+
         </div>
         </div>
     )
