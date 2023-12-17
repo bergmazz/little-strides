@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createCheckin } from "../../store/checkin";
@@ -131,11 +131,15 @@ function CheckinFormModal ( { habits } ) {
         if ( nodeRef.current === null ) {
             return;
         }
-        // Load the font dynamically
-        await loadFont( 'your-font-url.woff2', 'YourFontName' );
 
-        // Append @font-face rule
-        await appendFont( 'YourFontName', 'your-font-url.woff2' );
+        // font - family: bobbyJones;
+        // src: url( './font/BobbyJonesSoft.otf' ) format( "opentype" );
+
+        // // Load the font dynamically
+        // await loadFont( '../../font/BobbyJonesSoft.otf', 'bobbyJones' );
+
+        // // Append @font-face rule
+        // await appendFont( 'bobbyJones', '../../font/BobbyJonesSoft.otf' );
 
         const options = {
             height: 195,
@@ -143,9 +147,10 @@ function CheckinFormModal ( { habits } ) {
             cacheBust: true,
             useCors: true,
             imagePlaceholder: "https://images.pexels.com/photos/6289065/pexels-photo-6289065.jpeg",
-            preferredFontFormat: 'opentype',
+            // preferredFontFormat: 'opentype',
             // fontEmbedCSS
             // fontEmbedCSS: '',
+            skipFonts: true
         };
 
         // const dataUrl = await htmlToImage.toPng( node, options );
