@@ -77,7 +77,7 @@ function PostForm () {
             </div>
 
             <div className="post-image-container" >
-                <div className="progress-snapshot" >
+                    <div className="snapshot" >
                     { image && (
                         <div>
                             <img

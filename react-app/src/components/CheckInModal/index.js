@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createCheckin } from "../../store/checkin";
@@ -16,6 +16,7 @@ import "./CheckInModal.css";
 
 function CheckinFormModal ( { habits } ) {
     const dispatch = useDispatch();
+    const nodeRef = useRef();
     const { closeModal, setModalContent } = useModal();
     // const { closeModal } = useModal();
     const [ submitted, setSubmitted ] = useState( false )
@@ -97,56 +98,83 @@ function CheckinFormModal ( { habits } ) {
         }
     };
 
-    const handleCaptureImage = async () => {
-        // htmlToImage.toJpeg( document.getElementById( 'progress-snapshot' ), { quality: 0.95 } )
-        //     .then( function ( dataUrl ) {
-        //         // var link = document.createElement( 'a' );
-        //         // link.download = 'my-image-name.jpeg';
-        //         // link.href = dataUrl;
-        //         // link.click();
-        //         setCapturedImage( dataUrl );
-        //     } )
-        //     .catch( function ( error ) {
-        //         console.error( 'Error capturing image:', error );
-        //     } );
-        console.log( "ONCLICK WORKED!???" )
-        console.log( "element", document.getElementById( 'progress-snapshot' ) )
 
-        let node = document.getElementById( 'progress-snapshot' )
-        // const fontEmbedCSS = await htmlToImage.getFontEmbedCSS( node );
+    const loadFont = async ( url, fontName ) => {
+        const fontContent = await fetch( url ).then( ( r ) => r.arrayBuffer() );
+        const newFont = new FontFace( fontName, fontContent );
+
+        return newFont.load().then( () => {
+            document.fonts.add( newFont );
+        } );
+    };
+
+    const appendFont = ( font, url ) => {
+        const fontCss = document.createElement( "style" );
+        const fontCssRule = `
+      @font-face {
+        font-family: "${ font }";
+        src: url("${ url }");
+      }`;
+
+        fontCss.appendChild( document.createTextNode( fontCssRule ) );
+        document.head.appendChild( fontCss );
+    };
+
+    // const handleCaptureImage = async () => {
+    //     console.log( "ONCLICK WORKED!???" )
+    //     console.log( "element", document.getElementById( 'progress-snapshot' ) )
+
+    //     let node = document.getElementById( 'progress-snapshot' )
+    //     await document.fonts.ready;
+    //     const fontEmbedCSS = await htmlToImage.getFontEmbedCSS( node );
+    const handleCaptureImage = useCallback( async () => {
+        if ( nodeRef.current === null ) {
+            return;
+        }
+        // Load the font dynamically
+        await loadFont( 'your-font-url.woff2', 'YourFontName' );
+
+        // Append @font-face rule
+        await appendFont( 'YourFontName', 'your-font-url.woff2' );
 
         const options = {
             height: 195,
             width: 255,
+            cacheBust: true,
+            useCors: true,
             imagePlaceholder: "https://images.pexels.com/photos/6289065/pexels-photo-6289065.jpeg",
-            preferredFontFormat: 'woff2',
+            preferredFontFormat: 'opentype',
             // fontEmbedCSS
-            fontEmbedCSS: '',
+            // fontEmbedCSS: '',
         };
 
-        const dataUrl = await htmlToImage.toPng( node, options );
+        // const dataUrl = await htmlToImage.toPng( node, options );
+        const dataUrl = await toPng( nodeRef.current, options );
         console.log( "data url", dataUrl )
 
         let img = new Image();
         img.src = dataUrl;
         console.log( "img", img )
-
         // setCapturedImage( img.src )
-
         dispatch( setCapturedImage( dataUrl ) );
         // console.log( "captured image", capturedImage )
+        // await htmlToImage.toCanvas( document.getElementById( node ) )
+        //     .then( function ( canvas ) {
+        //         document.body.appendChild( canvas );
+        //     } );
 
         await setModalContent( <PostForm showWarning={ false } /> );
-    }
+    }, [ nodeRef ] )
 
         let hasStreak = false;
-        let topHabit = habits[ 0 ]
+    let topHabit = habits[ 0 ]
+
     return (
         <div className="pointlesscompilingthing">
             { submitted ? (
                 <div className="checkin-confirmation">
                     <h2>You're making strides!</h2>
-                    <div className="progress-snapshot" id="progress-snapshot">
+                    <div className="progress-snapshot" id="progress-snapshot" ref={ nodeRef }>
                         <h1>{ Math.ceil( yesPercentage ) }% Yes Today</h1>
                         {/* <h4>{ yesPercentage.toFixed( 2 ) }% Last Week</h4> */ }
                         <div className="habitbadges">
