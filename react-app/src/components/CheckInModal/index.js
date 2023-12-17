@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createCheckin } from "../../store/checkin";
 import { fetchRoutines } from '../../store/routine';
+import { setCapturedImage } from "../../store/post";
 
 import OpenModalButton from "../OpenModalButton";
 import PostForm from "../PostForm";
@@ -15,7 +16,8 @@ import "./CheckInModal.css";
 
 function CheckinFormModal ( { habits } ) {
     const dispatch = useDispatch();
-    const { closeModal } = useModal();
+    const { closeModal, setModalContent } = useModal();
+    // const { closeModal } = useModal();
     const [ submitted, setSubmitted ] = useState( false )
     const [ yesPercentage, setYesPercentage ] = useState( 0 );
     const [ selectedAnswers, setSelectedAnswers ] = useState(
@@ -95,7 +97,7 @@ function CheckinFormModal ( { habits } ) {
         }
     };
 
-    const handleCaptureImage = () => {
+    const handleCaptureImage = async () => {
         // htmlToImage.toJpeg( document.getElementById( 'progress-snapshot' ), { quality: 0.95 } )
         //     .then( function ( dataUrl ) {
         //         // var link = document.createElement( 'a' );
@@ -107,21 +109,33 @@ function CheckinFormModal ( { habits } ) {
         //     .catch( function ( error ) {
         //         console.error( 'Error capturing image:', error );
         //     } );
+        console.log( "ONCLICK WORKED!???" )
         console.log( "element", document.getElementById( 'progress-snapshot' ) )
 
-        htmlToImage.toPng( document.getElementById( 'progress-snapshot' ) )
-            .then( function ( dataUrl ) {
-                var img = new Image();
-                img.src = dataUrl;
-                console.log( "img", img )
-                // document.body.appendChild( img );
-                setCapturedImage( img.src )
-                console.log( "captured image", capturedImage )
-            } )
-            .catch( function ( error ) {
-                console.error( 'oops, something went wrong!', error );
-            } );
+        let node = document.getElementById( 'progress-snapshot' )
+        // const fontEmbedCSS = await htmlToImage.getFontEmbedCSS( node );
 
+        const options = {
+            height: 195,
+            width: 255,
+            imagePlaceholder: "https://images.pexels.com/photos/6289065/pexels-photo-6289065.jpeg",
+            preferredFontFormat: 'woff2',
+            // fontEmbedCSS
+            fontEmbedCSS: '',
+        };
+
+        const dataUrl = await htmlToImage.toPng( node, options );
+        console.log( "data url", dataUrl )
+
+        let img = new Image();
+        img.src = dataUrl;
+        console.log( "img", img )
+
+        setCapturedImage( img.src )
+        dispatch( setCapturedImage( dataUrl ) );
+        console.log( "captured image", capturedImage )
+
+        setModalContent( <PostForm showWarning={ false } /> );
     }
 
         let hasStreak = false;
@@ -185,15 +199,13 @@ function CheckinFormModal ( { habits } ) {
                     </div>
                     <div className="to-post-or-not-to-post">
                         <button onClick={ closeModal }>No thanks</button>
-                        <OpenModalButton
-                            onClick={ handleCaptureImage() }
-                            modalComponent={ <PostForm
-                                showWarning={ false } progressSnapShot={ capturedImage }
-                            /> }
+                        {/* <OpenModalButton
+                            onClick={ handleCaptureImage }
+                            modalComponent={ <PostForm showWarning={ false } /> }
                             buttonText="post progress"
-
                         // { <img className="pencil" src={ pencil } alt="Pencil Icon" /> }
-                        />
+                        /> */}
+                        <button onClick={ handleCaptureImage }>Post progress</button>
                     </div>
 
                 </div>

@@ -3,6 +3,7 @@ const SET_POSTS = 'post/SET_POSTS';
 const ADD_POST = 'post/ADD_POST';
 const DELETE_POST = 'post/DELETE_POST';
 // // const UPDATE_POST = 'post/UPDATE_POST';
+const SET_IMAGE = 'post/SET_IMAGE';
 
 // Action Creators
 export const setPosts = ( posts ) => ( {
@@ -18,6 +19,11 @@ export const addPost = ( post ) => ( {
 export const deletePostById = ( postId ) => ( {
     type: DELETE_POST,
     payload: postId,
+} );
+
+export const setCapturedImage = ( capturedImage ) => ( {
+    type: SET_IMAGE,
+    payload: capturedImage,
 } );
 
 
@@ -82,10 +88,12 @@ export const deletePost = ( postId ) => async ( dispatch ) => {
 
 //BONUS: PUT / api / posts / <post_id>
 
+//no captured image api call - just to store url in state to pass from checkin confirmation page in checkin modal to post modal
 
 // Reducer
 const initialState = {
     all: [],
+    img: null
 };
 
 const postReducer = ( state = initialState, action ) => {
@@ -98,6 +106,11 @@ const postReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 all: state.all.filter( ( post ) => post.id !== action.payload ),
+            };
+        case SET_IMAGE:
+            return {
+                ...state,
+                capturedImage: action.payload,
             };
         default:
             return state;

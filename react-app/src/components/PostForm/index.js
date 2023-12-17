@@ -6,13 +6,14 @@ import cloud from "./cloud.svg"
 import { post } from "../../store/post";
 import "./PostForm.css";
 
-function PostForm ( { progressSnapshot } ) {
-    console.log( "snapshotttttt", progressSnapshot )
+function PostForm () {
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
 
     const currentUser = useSelector( state => state.session.user )
+    const progressSnapshot = useSelector( ( state ) => state.post.capturedImage );
+    console.log( "snapshotttttt", progressSnapshot )
 
     const [ errors, setErrors ] = useState( "" );
     const [ text, setText ] = useState( "" );
