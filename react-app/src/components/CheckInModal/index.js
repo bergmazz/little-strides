@@ -24,7 +24,7 @@ function CheckinFormModal ( { habits } ) {
         habits.map( () => ( { completed: null } ) )
     );
     const [ currentCardIndex, setCurrentCardIndex ] = useState( 0 );
-    const [ capturedImage, setCapturedImage ] = useState( null );
+    // const [ capturedImage, setCapturedImage ] = useState( null );
     const BadgeShapes = [ 'star', 'shield', 'scalloped-circle' ];
     let badgeShapeIndex = 0;
 
@@ -131,11 +131,12 @@ function CheckinFormModal ( { habits } ) {
         img.src = dataUrl;
         console.log( "img", img )
 
-        setCapturedImage( img.src )
-        dispatch( setCapturedImage( dataUrl ) );
-        console.log( "captured image", capturedImage )
+        // setCapturedImage( img.src )
 
-        setModalContent( <PostForm showWarning={ false } /> );
+        dispatch( setCapturedImage( dataUrl ) );
+        // console.log( "captured image", capturedImage )
+
+        await setModalContent( <PostForm showWarning={ false } /> );
     }
 
         let hasStreak = false;

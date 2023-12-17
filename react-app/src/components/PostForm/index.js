@@ -23,6 +23,7 @@ function PostForm () {
         if ( progressSnapshot ) {
             setImage( progressSnapshot );
         }
+        console.log( "State updated. New progressSnapshot:", progressSnapshot );
     }, [ progressSnapshot ] );
 
     const fileInputRef = useRef( null );
@@ -51,7 +52,7 @@ function PostForm () {
             setErrors( "write something, silly" );
             console.error( "Error submitting post:", errors );
         } else {
-            const data = dispatch( post( text, image ) );
+            await dispatch( post( text, image ) );
             closeModal();
             history.push( "/community" );
         }

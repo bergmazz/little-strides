@@ -88,12 +88,12 @@ export const deletePost = ( postId ) => async ( dispatch ) => {
 
 //BONUS: PUT / api / posts / <post_id>
 
-//no captured image api call - just to store url in state to pass from checkin confirmation page in checkin modal to post modal
+//no captured image thiunk / api call - just to store url in state to pass from checkin confirmation page in checkin modal to post modal
 
 // Reducer
 const initialState = {
     all: [],
-    img: null
+    capturedImage: null
 };
 
 const postReducer = ( state = initialState, action ) => {
