@@ -142,8 +142,8 @@ function CheckinFormModal ( { habits } ) {
         // await appendFont( 'bobbyJones', '../../font/BobbyJonesSoft.woff2' );
 
         const options = {
-            height: 195,
-            width: 255,
+            // height: 195,
+            // width: 255,
             cacheBust: true,
             useCors: true,
             imagePlaceholder: "https://images.pexels.com/photos/6289065/pexels-photo-6289065.jpeg",
