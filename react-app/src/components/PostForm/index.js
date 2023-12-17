@@ -4,6 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import cloud from "./cloud.svg"
 import { post } from "../../store/post";
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import "./PostForm.css";
 
 function PostForm () {
@@ -13,7 +15,7 @@ function PostForm () {
 
     const currentUser = useSelector( state => state.session.user )
     const progressSnapshot = useSelector( ( state ) => state.post.capturedImage );
-    console.log( "snapshotttttt", progressSnapshot )
+    // console.log( "snapshotttttt", progressSnapshot )
 
     const [ errors, setErrors ] = useState( "" );
     const [ text, setText ] = useState( "" );
@@ -27,6 +29,7 @@ function PostForm () {
     }, [ progressSnapshot ] );
 
     const fileInputRef = useRef( null );
+    const nodeRef = useRef( null );
 
     const handleFileChange = ( e ) => {
         const file = e.target.files[ 0 ];
@@ -39,6 +42,15 @@ function PostForm () {
         fileInputRef.current.click();
     };
 
+    // const blobToDataURL = ( blob ) => {
+    //     return new Promise( ( resolve, reject ) => {
+    //         const reader = new FileReader();
+    //         reader.onloadend = () => resolve( reader.result );
+    //         reader.onerror = reject;
+    //         reader.readAsDataURL( blob );
+    //     } );
+    // };
+
     const handleSubmit = async ( e ) => {
         e.preventDefault();
         // console.log( "---------text", text )
@@ -47,6 +59,17 @@ function PostForm () {
             setImage( null )
         }
 
+        const dataUrl = await toPng( nodeRef.current );
+        if ( image !== dataUrl ) {
+            setImage( dataUrl )
+        }
+        // let imageDataUrl;
+
+        // if ( image instanceof Blob ) {
+        //     imageDataUrl = await blobToDataURL( image );
+        // } else {
+        //     imageDataUrl = image;
+        // }
         // console.log( "handlesubmit data:", data )
         if ( !text ) {
             setErrors( "write something, silly" );
@@ -83,7 +106,8 @@ function PostForm () {
                             <img
                                 alt="not found"
                                 src={ image }
-                                className="post-img"
+                                    className="post-img"
+                                    ref={ nodeRef }
                                 />
                             </div>
                     ) }

@@ -160,7 +160,7 @@ function CheckinFormModal ( { habits } ) {
 
         let img = new Image();
         img.src = dataUrl;
-        console.log( "img", img )
+        // console.log( "img", img )
         // setCapturedImage( img.src )
         dispatch( setCapturedImage( dataUrl ) );
         // console.log( "captured image", capturedImage )
