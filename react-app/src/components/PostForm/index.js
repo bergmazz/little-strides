@@ -59,7 +59,8 @@ function PostForm () {
             setImage( null )
         }
 
-        const dataUrl = await toPng( nodeRef.current );
+        const dataUrl = await toPng( nodeRef.current.src );
+        console.log( "---------data url image handlesubmit", image )
         if ( image !== dataUrl ) {
             setImage( dataUrl )
         }
