@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import { allUserHabits, createHabit } from '../../store/habit';
 import { fetchPosts } from '../../store/post';
+import pencil from "./pencil-pen.svg"
+import wave from "./communitywave.svg"
 import { anxiety, relationships, exercise, wellness, stress, sleep, depression, productivity } from "../RoutineFormModal/Topics";
-
+import PostForm from "../PostForm";
 import './Community.css';
 
 function Community () {
@@ -67,10 +69,27 @@ function Community () {
     };
 
     return (
-        <div className='community-container'>
-            {/* <h1>***FEATURE IN PROGRESS!***</h1> */ }
-            <h2 className="feed">Your Feed</h2>
+        <>
+            <div>
+                <div className="feed">
+                    <h2>Surround yourself with support</h2>
+                </div>
+                <div
+                    className="write-community"
+                >
+                    <p>Join the Discussion</p>
+                    <OpenModalButton
+                        modalComponent={ <PostForm showWarning={ false } /> }
+                        buttonText={ <img className="pencil-community" src={ pencil } alt="Pencil Icon" /> }
+                    />
+                </div>
+            </div>
 
+            <div className="waveee">
+                <img src={ wave } alt="Wave" />
+            </div>
+
+            <div className='community-container'>
             <div className="topics-feed-container">
                 { availableTopics.map( ( topic ) => (
                     <button
@@ -144,7 +163,8 @@ function Community () {
             ) : (
                 <p>No habits found in the community.</p>
             ) }
-        </div>
+            </div>
+        </>
     );
 }
 

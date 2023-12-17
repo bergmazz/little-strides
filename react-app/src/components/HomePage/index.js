@@ -42,17 +42,10 @@ const HomePage = () => {
                 <h4>Commit to a routine, check in daily, and watch your life change. </h4>
             </div>
             <div className="home-background-container">
-            <div className="wave-1">
+                <div className="wave-1">
                 <img src={ waveSvg } alt="Wave" />
                 </div>
-                {/* { !currentUser && (
-                    <div className="logbutt">
-                        <OpenModalButton
-                            buttonText="Log In To"
-                            onItemClick={ closeMenu }
-                            modalComponent={ <LoginFormModal /> }
-                        /></div>
-                ) } */}
+
             { communityPosts ? (
                     <div className="home-posts-container">
 
@@ -69,7 +62,7 @@ const HomePage = () => {
                                 buttonText={ <img className="pencil" src={ pencil } alt="Pencil Icon" /> }
                             />
                         </div>
-                        <div className="posts-scroLl">
+                        <div className="posts-scroll">
                     { communityPosts.map( ( post, index ) => {
                         return (
                             <div className='home-post-tile' key={ index }>

@@ -7,15 +7,59 @@
   burgundy
   #680416;
     */
-.community-container{
+/* .community-container{
     width: 70%;
+    margin: auto;
+} */
+.community-container:not(.waveee) {
+      width: 70%;
     margin: auto;
 }
 
-.feed{
-  margin: 100px 70px 70px 70px;
-  font-size: 2.5em;
+.waveee{
+width: 110vw;
+overflow:hidden;
+margin-top: -20%;
+margin-left: -10%;
+z-index: 3;
+justify-content: center;
 }
+
+.feed{
+  text-align: right;
+ display: flex;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 5;
+  font-size: 3vw;
+}
+
+.feed h2{
+  max-width: 18ch;
+ /* display: flex;
+  justify-content: flex-end; */
+}
+
+.write-community{
+ display: flex;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 5;
+  font-size: 3vw;
+  color:   #680416;
+  /* cursor: pointer; */
+  }
+
+  .write-community button{
+  /* color:   #680416; */
+  cursor: pointer;
+    background-color:white;
+  }
+
+  .pencil-community{
+  color:   #680416;
+  /* background-color:white; */
+  }
 
 .topic-button {
   font-size:1em;
