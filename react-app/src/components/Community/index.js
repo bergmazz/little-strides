@@ -77,7 +77,7 @@ function Community () {
                 <div
                     className="write-community"
                 >
-                    <p>Join the Discussion</p>
+                    {/* <p>post about your progress</p> */ }
                     <OpenModalButton
                         modalComponent={ <PostForm showWarning={ false } /> }
                         buttonText={ <img className="pencil-community" src={ pencil } alt="Pencil Icon" /> }

@@ -26,6 +26,8 @@ justify-content: center;
 }
 
 .feed{
+  width: 90%;
+  margin: 4% 0 0 0;
   text-align: right;
  display: flex;
   justify-content: flex-end;
@@ -35,17 +37,18 @@ justify-content: center;
 }
 
 .feed h2{
-  max-width: 18ch;
+  max-width: 30ch;
  /* display: flex;
   justify-content: flex-end; */
 }
 
 .write-community{
+    width: 90%;
  display: flex;
   justify-content: flex-end;
   position: relative;
   z-index: 5;
-  font-size: 3vw;
+  font-size: 2.5vw;
   color:   #680416;
   /* cursor: pointer; */
   }
