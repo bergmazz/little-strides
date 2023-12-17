@@ -4,8 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import cloud from "./cloud.svg"
 import { post } from "../../store/post";
-import * as htmlToImage from 'html-to-image';
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import "./PostForm.css";
 
 function PostForm () {

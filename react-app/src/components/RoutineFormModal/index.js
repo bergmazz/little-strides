@@ -100,12 +100,6 @@ function RoutineFormModal ( { routines } ) {
 
     const handleSelectedHabits = ( habit ) => {
         const { description, category } = habit;
-
-        if ( habits.length >= 15 && !habits.some( ( h ) => h.description === description ) ) {
-            alert( "You can only add up to 15 habits." );
-            return;
-        }
-
         if ( habits.some( ( h ) => h.description === description ) ) {
             setHabits( ( habits ) => habits.filter( ( h ) => h.description !== habit.description ) );
         } else {
@@ -116,6 +110,11 @@ function RoutineFormModal ( { routines } ) {
     const handleSubmit = async ( e ) => {
         e.stopPropagation();
         e.preventDefault();
+
+        if ( !topTopic ) {
+            setTopTopic( "wellness" )
+        }
+
         if ( habits.length >= 3 && currentStep === totalSteps ) {
             const routine = await dispatch(
                 createRoutine( {
@@ -250,6 +249,7 @@ function RoutineFormModal ( { routines } ) {
     };
 
     return (
+        <>
             <div className="create-routine-container">
                 {/* <h1>Create New Routine - Step { currentStep }</h1> */ }
                 <form onSubmit={ handleSubmit }>
@@ -285,7 +285,8 @@ function RoutineFormModal ( { routines } ) {
 
                 </div>
                         </form>
-        </div>
+            </div>
+        </>
     );
 }
 
