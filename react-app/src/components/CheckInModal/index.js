@@ -99,26 +99,26 @@ function CheckinFormModal ( { habits } ) {
     };
 
 
-    const loadFont = async ( url, fontName ) => {
-        const fontContent = await fetch( url ).then( ( r ) => r.arrayBuffer() );
-        const newFont = new FontFace( fontName, fontContent );
+    // const loadFont = async ( url, fontName ) => {
+    //     const fontContent = await fetch( url ).then( ( r ) => r.arrayBuffer() );
+    //     const newFont = new FontFace( fontName, fontContent );
 
-        return newFont.load().then( () => {
-            document.fonts.add( newFont );
-        } );
-    };
+    //     return newFont.load().then( () => {
+    //         document.fonts.add( newFont );
+    //     } );
+    // };
 
-    const appendFont = ( font, url ) => {
-        const fontCss = document.createElement( "style" );
-        const fontCssRule = `
-      @font-face {
-        font-family: "${ font }";
-        src: url("${ url }");
-      }`;
+    // const appendFont = ( font, url ) => {
+    //     const fontCss = document.createElement( "style" );
+    //     const fontCssRule = `
+    //   @font-face {
+    //     font-family: "${ font }";
+    //     src: url("${ url }");
+    //   }`;
 
-        fontCss.appendChild( document.createTextNode( fontCssRule ) );
-        document.head.appendChild( fontCss );
-    };
+    //     fontCss.appendChild( document.createTextNode( fontCssRule ) );
+    //     document.head.appendChild( fontCss );
+    // };
 
     // const handleCaptureImage = async () => {
     //     console.log( "ONCLICK WORKED!???" )
@@ -136,10 +136,10 @@ function CheckinFormModal ( { habits } ) {
         // src: url( './font/BobbyJonesSoft.otf' ) format( "opentype" );
 
         // // Load the font dynamically
-        // await loadFont( '../../font/BobbyJonesSoft.otf', 'bobbyJones' );
+        // await loadFont( '../../font/BobbyJonesSoft.woff2', 'bobbyJones' );
 
         // // Append @font-face rule
-        // await appendFont( 'bobbyJones', '../../font/BobbyJonesSoft.otf' );
+        // await appendFont( 'bobbyJones', '../../font/BobbyJonesSoft.woff2' );
 
         const options = {
             height: 195,
@@ -148,9 +148,10 @@ function CheckinFormModal ( { habits } ) {
             useCors: true,
             imagePlaceholder: "https://images.pexels.com/photos/6289065/pexels-photo-6289065.jpeg",
             // preferredFontFormat: 'opentype',
+            preferredFontFormat: 'woff2',
             // fontEmbedCSS
             // fontEmbedCSS: '',
-            skipFonts: true
+            // skipFonts: true
         };
 
         // const dataUrl = await htmlToImage.toPng( node, options );
