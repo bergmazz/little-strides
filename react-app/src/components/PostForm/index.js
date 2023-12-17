@@ -23,7 +23,9 @@ function PostForm () {
 
     useEffect( () => {
         if ( progressSnapshot ) {
+            console.log( "if porgresssnap ran:", progressSnapshot );
             setImage( progressSnapshot );
+            console.log( "image updated to progresssnap:", progressSnapshot );
         }
         console.log( "State updated. New progressSnapshot:", progressSnapshot );
     }, [ progressSnapshot ] );
@@ -31,25 +33,48 @@ function PostForm () {
     const fileInputRef = useRef( null );
     const nodeRef = useRef( null );
 
-    const handleFileChange = ( e ) => {
+    // const blobToPNG = async ( node ) => {
+    //     console.log( "---------img before to png:", image )
+    //     console.log( "---------node before to png:", node )
+    //     const dataUrl = await toPng( node );
+    //     //this console log below is blank, help????
+    //     console.log( "---------node after to png:", dataUrl )
+    //     return dataUrl
+    // };
+    const blobToDataURL = ( blob ) => {
+        return new Promise( ( resolve ) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve( reader.result );
+            reader.readAsDataURL( blob );
+        } );
+    };
+
+    useEffect( () => {
+        console.log( "---------noderef current:", nodeRef.current );
+        const node = nodeRef.current
+        console.log( "---------node variable:", node )
+        // const dataUrl = blobToPNG( node )
+        // console.log( "---------data url variable:", dataUrl )
+    }, [ nodeRef ] );
+
+    const handleFileChange = async ( e ) => {
         const file = e.target.files[ 0 ];
         if ( file ) {
-            setImage( URL.createObjectURL( file ) );
+            const imageUrl = URL.createObjectURL( file );
+            setImage( imageUrl );
+
+            const img = new Image();
+            img.onload = async () => {
+                const dataUrl = await blobToDataURL( file );
+                setImage( dataUrl );
+            };
+            img.src = imageUrl;
         }
     };
 
     const handleButtonClick = () => {
         fileInputRef.current.click();
     };
-
-    // const blobToDataURL = ( blob ) => {
-    //     return new Promise( ( resolve, reject ) => {
-    //         const reader = new FileReader();
-    //         reader.onloadend = () => resolve( reader.result );
-    //         reader.onerror = reject;
-    //         reader.readAsDataURL( blob );
-    //     } );
-    // };
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
@@ -58,20 +83,6 @@ function PostForm () {
         if ( !image || image.length < 1 || image === "" ) {
             setImage( null )
         }
-
-        const dataUrl = await toPng( nodeRef.current.src );
-        console.log( "---------data url image handlesubmit", image )
-        if ( image !== dataUrl ) {
-            setImage( dataUrl )
-        }
-        // let imageDataUrl;
-
-        // if ( image instanceof Blob ) {
-        //     imageDataUrl = await blobToDataURL( image );
-        // } else {
-        //     imageDataUrl = image;
-        // }
-        // console.log( "handlesubmit data:", data )
         if ( !text ) {
             setErrors( "write something, silly" );
             console.error( "Error submitting post:", errors );
@@ -101,7 +112,7 @@ function PostForm () {
             </div>
 
             <div className="post-image-container" >
-                    <div className="snapshot" >
+                    <div className="snapshot">
                     { image && (
                         <div>
                             <img
