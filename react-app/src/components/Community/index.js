@@ -15,6 +15,7 @@ function Community () {
     // const routines = useSelector( state => state.routine.routines )
     const communityHabits = useSelector( ( state ) => state.habit.all );
     const communityPosts = useSelector( ( state ) => state.post.all );
+
     useEffect( () => {
         dispatch( allUserHabits() );
         dispatch( fetchPosts() );
@@ -22,8 +23,10 @@ function Community () {
 
 
     const [ selectedTopics, setSelectedTopics ] = useState( [] );
+    const [ filteredPosts, setFilteredPosts ] = useState( [] );
+    const [ filteredHabits, setFilteredHabits ] = useState( [] );
 
-    // const handleSelectedHabit = ( habit, routine ) => {
+    // const handleSelectedHabit =  ( habit, routine ) => {
     //     const { description, category } = habit;
     //     const newHabit = await dispatch(
     //         createHabit( {
@@ -32,6 +35,18 @@ function Community () {
     //             category: habit.category
     //         } ) )
     // };
+
+    useEffect( () => {
+        const filterdddPosts = communityPosts.filter( post => {
+            const postTopics = post.topics;
+            return selectedTopics.some( topic => postTopics.includes( topic ) );
+        } );
+        setFilteredPosts( filterdddPosts );
+
+        const filteredddHabits = communityHabits.filter( habit => selectedTopics.includes( habit.topic ) );
+        setFilteredHabits( filteredddHabits );
+    }, [ selectedTopics, communityPosts, communityHabits ] );
+
 
     const availableTopics = [
         'Anxiety',
@@ -104,9 +119,13 @@ function Community () {
                 ) ) }
             </div>
 
-            { communityPosts ? (
+                {/* filter these posts based on the selected topic- each post has array of 0-3 topics attached based on the user's routines
+                    show post for every topic in its array but dont show same post duplicated */}
+
+                { communityPosts ? (
                 <div className="posts-container">
-                    { communityPosts.map( ( post, index ) => {
+                        { filteredPosts
+                            .map( ( post, index ) => {
                         return (
                             <div className='post-tile' key={ index }>
                                 { post.image && <img className="post-img" src={ post.image } /> }
@@ -127,7 +146,8 @@ function Community () {
 
                 <h2>Check Out Other's Habits by Topic</h2>
                 {/* start with wellness selected as default
-                one topic must always be selected, max 3 topics */}
+                one topic must always be selected, max 3 topics
+                */}
 
             <div>
                 <div className="topics-container-one-row">
@@ -145,11 +165,38 @@ function Community () {
                     ) ) }
                 </div>
                 </div>
+                {/*
+                one to three topics will be selected
 
-                show five habits per topic- at random index (not first five etc)
+                filter community habits by topic
+
+                show a max of 15 habits - either 5 habits per topic if 3 topics, up to 7 each if 2 topics, up to 15 if 1 topic
+                for the habits per topic- show at random(not first five indexed etc)
+
+                user should be able to add communtityHabit to any of their routines - user has between zero and 3 routines
+                 if currentUser.Routines
+                     but only if that routine has 14 or less habits (there is a maximum of 15 habits per routine)
+                                routine.habits
+                                                if ( habits.length >= 15 && !habits.some( ( h ) => h.description === description ) ) {
+                                    alert( "You can only add up to 15 habits." );
+                                return;
+                                                }
+
+                   under each habit, there should be a button per routine that says something like `add to ${routine.name}`
+
+                dispatch new habit to the rout
+                            const newHabit = await dispatch(
+                                        createHabit( {
+                                            routineId: routine.id,
+                                            description: habit.description,
+                                            category: habit.category
+                                        } ) )
+ */}
+
+
             { communityHabits ? (
                 <div className="community-habit-steps-container">
-                    { communityHabits.map( ( habit, index ) => {
+                        { filteredHabits.map( ( habit, index ) => {
                         if ( selectedTopics.includes( habit.topic ) )
                         // const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
                         return (

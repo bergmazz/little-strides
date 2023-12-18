@@ -10,6 +10,7 @@ import { fetchPosts } from '../../store/post';
 import "./HomePage.css"
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal"
+import { createHabit } from "../../store/habit";
 import ErrorModal from '../ErrorModal';
 import PostForm from "../PostForm";
 
