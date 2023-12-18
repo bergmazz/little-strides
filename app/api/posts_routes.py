@@ -4,6 +4,7 @@ from app.models import Post, Routine, Habit, db
 from .auth_routes import validation_errors_to_error_messages
 from app.forms import PostForm
 from flask_login import current_user, login_required
+from sqlalchemy import desc
 
 posts= Blueprint('posts', __name__)
 
@@ -13,7 +14,7 @@ def get_all_posts():
     """
     Get a list of all community posts
     """
-    all_posts = Post.query.all()
+    all_posts = Post.query.order_by(desc(Post.created_at)).all()
     posts = [post.to_dict() for post in all_posts]
 
     return jsonify({'posts': posts}), 200
