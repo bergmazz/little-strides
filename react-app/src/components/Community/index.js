@@ -90,6 +90,8 @@ function Community () {
             </div>
 
             <div className='community-container'>
+
+
             <div className="topics-feed-container">
                 { availableTopics.map( ( topic ) => (
                     <button
@@ -123,7 +125,9 @@ function Community () {
             ) }
 
 
-            <h2>Browse Other's Habits by Topic</h2>
+                <h2>Check Out Other's Habits by Topic</h2>
+                {/* start with wellness selected as default
+                one topic must always be selected, max 3 topics */}
 
             <div>
                 <div className="topics-container-one-row">
@@ -140,8 +144,9 @@ function Community () {
                         </button>
                     ) ) }
                 </div>
-            </div>
+                </div>
 
+                show five habits per topic- at random index (not first five etc)
             { communityHabits ? (
                 <div className="community-habit-steps-container">
                     { communityHabits.map( ( habit, index ) => {

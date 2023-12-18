@@ -21,11 +21,13 @@ class Post(db.Model, UserMixin):
     likes = db.relationship(
         "Like", cascade="all, delete-orphan", lazy="joined", backref='post')
 
+
     def to_dict(self):
 
         return {
             'id': self.id,
             'user': self.user.to_simple_dict(),
             'image': self.image,
-            'content': self.content
+            'content': self.content,
+            'topics': self.user.get_topics()
         }
