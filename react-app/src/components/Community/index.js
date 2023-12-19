@@ -11,8 +11,8 @@ import './Community.css';
 
 function Community () {
     const dispatch = useDispatch();
-    // const currentUser = useSelector( ( state ) => state.session.user );
-    // const routines = useSelector( state => state.routine.routines )
+    const currentUser = useSelector( ( state ) => state.session.user );
+    const routines = useSelector( state => state.routine.routines )
     const communityHabits = useSelector( ( state ) => state.habit.all );
     const communityPosts = useSelector( ( state ) => state.post.all );
 
@@ -23,18 +23,24 @@ function Community () {
 
 
     const [ selectedTopics, setSelectedTopics ] = useState( [] );
-    const [ filteredPosts, setFilteredPosts ] = useState( [] );
-    const [ filteredHabits, setFilteredHabits ] = useState( [] );
+    const [ filteredPosts, setFilteredPosts ] = useState( communityPosts );
+    const [ filteredHabits, setFilteredHabits ] = useState( communityHabits );
 
-    // const handleSelectedHabit =  ( habit, routine ) => {
-    //     const { description, category } = habit;
-    //     const newHabit = await dispatch(
-    //         createHabit( {
-    //             routineId: routine.id,
-    //             description: habit.description,
-    //             category: habit.category
-    //         } ) )
-    // };
+    const handleSelectedHabit = async ( habit, routine ) => {
+
+        if ( routine.habits.length <= 14 ) {
+            const newHabit = await dispatch(
+                createHabit( {
+                    routineId: routine.id,
+                    description: habit.description,
+                    category: habit.category
+                } ) )
+        } else {
+            alert( "You can only add up to 15 habits." );
+        }
+
+    };
+
 
     useEffect( () => {
         const filterdddPosts = communityPosts.filter( post => {
@@ -73,13 +79,14 @@ function Community () {
     const handleSelectTopics = ( selectedTopic ) => {
         if ( selectedTopics.includes( selectedTopic ) ) {
             setSelectedTopics( selectedTopics.filter( ( topic ) => topic !== selectedTopic ) )
-        } else {
-            if ( selectedTopics.length < 3 ) {
+        }
+        else {
+            // if ( selectedTopics.length < 3 ) {
                 setSelectedTopics( [
                     ...selectedTopics,
                     selectedTopic,
                 ] );
-            }
+            // }
         }
     };
 
@@ -92,7 +99,6 @@ function Community () {
                 <div
                     className="write-community"
                 >
-                    {/* <p>post about your progress</p> */ }
                     <OpenModalButton
                         modalComponent={ <PostForm showWarning={ false } /> }
                         buttonText={ <img className="pencil-community" src={ pencil } alt="Pencil Icon" /> }
@@ -119,9 +125,6 @@ function Community () {
                 ) ) }
             </div>
 
-                {/* filter these posts based on the selected topic- each post has array of 0-3 topics attached based on the user's routines
-                    show post for every topic in its array but dont show same post duplicated */}
-
                 { communityPosts ? (
                 <div className="posts-container">
                         { filteredPosts
@@ -145,11 +148,7 @@ function Community () {
 
 
                 <h2>Check Out Other's Habits by Topic</h2>
-                {/* start with wellness selected as default
-                one topic must always be selected, max 3 topics
-                */}
 
-            <div>
                 <div className="topics-container-one-row">
                     { availableTopics.map( ( topic ) => (
                         <button
@@ -164,58 +163,38 @@ function Community () {
                         </button>
                     ) ) }
                 </div>
-                </div>
-                {/*
-                one to three topics will be selected
 
-                filter community habits by topic
-
-                show a max of 15 habits - either 5 habits per topic if 3 topics, up to 7 each if 2 topics, up to 15 if 1 topic
-                for the habits per topic- show at random(not first five indexed etc)
-
-                user should be able to add communtityHabit to any of their routines - user has between zero and 3 routines
-                 if currentUser.Routines
-                     but only if that routine has 14 or less habits (there is a maximum of 15 habits per routine)
-                                routine.habits
-                                                if ( habits.length >= 15 && !habits.some( ( h ) => h.description === description ) ) {
-                                    alert( "You can only add up to 15 habits." );
-                                return;
-                                                }
-
-                   under each habit, there should be a button per routine that says something like `add to ${routine.name}`
-
-                dispatch new habit to the rout
-                            const newHabit = await dispatch(
-                                        createHabit( {
-                                            routineId: routine.id,
-                                            description: habit.description,
-                                            category: habit.category
-                                        } ) )
- */}
-
-
-            { communityHabits ? (
-                <div className="community-habit-steps-container">
-                        { filteredHabits.map( ( habit, index ) => {
-                        if ( selectedTopics.includes( habit.topic ) )
-                        // const [ habitText, habitTopic ] = habit.split( " !#*SPLIT " );
-                        return (
-                            <div className='community-habits' >
-                                <button
-                                    key={ index }
-                                >
-                                    { habit.description }
-                                </button>
-                            </div>
-                        );
-                    } ) }
-                </div>
-
-
+                <div>
+                    { communityHabits ? (
+                        <div className="community-habits-container">
+                            { communityHabits.map( ( habit, index ) => {
+                                return (
+                                    <div key={ habit.id } className="habitcard">
+                                        <div className="desc">
+                                            <p>{ habit.description }</p>
+                                        </div>
+                                        <div className="routine-options">
+                                            { currentUser && routines.map( ( routine ) => (
+                                                <button
+                                                    key={ routine.id }
+                                                    onClick={ () => handleSelectedHabit( habit, routine ) }
+                                                    className="routine-button"
+                                                >
+                                                    Add to { routine.name }
+                                                </button>
+                                            ) ) }
+                                        </div>
+                                    </div>
+                                );
+                            } ) }
+                        </div>
             ) : (
                 <p>No habits found in the community.</p>
-            ) }
+                    ) }
             </div>
+
+            </div>
+
         </>
     );
 }
