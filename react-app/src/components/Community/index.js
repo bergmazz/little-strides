@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import { allUserHabits, createHabit } from '../../store/habit';
 import { fetchPosts } from '../../store/post';
+import { fetchRoutines } from '../../store/routine';
 import pencil from "./pencil-pen.svg"
 import wave from "./communitywave.svg"
 import { anxiety, relationships, exercise, wellness, stress, sleep, depression, productivity } from "../RoutineFormModal/Topics";
@@ -19,12 +20,13 @@ function Community () {
     useEffect( () => {
         dispatch( allUserHabits() );
         dispatch( fetchPosts() );
+        dispatch( fetchRoutines() )
     }, [ dispatch ] );
 
 
-    const [ selectedTopics, setSelectedTopics ] = useState( [] );
-    const [ filteredPosts, setFilteredPosts ] = useState( communityPosts );
-    const [ filteredHabits, setFilteredHabits ] = useState( communityHabits );
+    const [ selectedTopics, setSelectedTopics ] = useState( [ "Anxiety", "Relationships", "Exercise" ] );
+    const [ filteredPosts, setFilteredPosts ] = useState( [] );
+    const [ filteredHabits, setFilteredHabits ] = useState( [] );
 
     const handleSelectedHabit = async ( habit, routine ) => {
 
@@ -33,8 +35,11 @@ function Community () {
                 createHabit( {
                     routineId: routine.id,
                     description: habit.description,
-                    category: habit.category
+                    category: habit.category.toLowerCase()
                 } ) )
+            if ( newHabit.id ) {
+                alert( "You added it!!!!" );
+            }
         } else {
             alert( "You can only add up to 15 habits." );
         }
