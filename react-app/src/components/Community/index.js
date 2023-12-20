@@ -102,7 +102,8 @@ function Community () {
         <>
             <div>
                 <div className="feed">
-                    <h2>Surround yourself with support</h2>
+                    <h2>Surround yourself</h2>
+                    <h2>with support</h2>
                 </div>
                 <div
                     className="write-community"
@@ -135,7 +136,7 @@ function Community () {
                     ) ) }
                 </div>
                 { communityPosts ? (
-                <div className="posts-container">
+                    <div className="posts-container">
                         { filteredPosts
                             .map( ( post, index ) => {
                         return (
@@ -166,7 +167,7 @@ function Community () {
                     </button>
                 ) ) }
             </div> */}
-                <h1>Check Out Other's Habits In Your Community!</h1>
+                <h1 className='checkitouttt'>Check Out Other's Habits In Your Community!</h1>
 
                 <div>
                     { communityHabits ? (
