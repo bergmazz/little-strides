@@ -9,10 +9,13 @@
 
     */
 
-
+.homepage-container{
+  overflow-x:hidden;
+}
 .wave-1{
 width: 110vw;
 overflow:hidden;
+overflow-x:hidden;
 margin-top: -120px;
 margin-left: -20px;
 z-index: 3;
@@ -98,17 +101,25 @@ justify-content: center;
        padding:30px;
        border-radius: 20px;
        background-color: white;
+       width:300px;
+         display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 /* .home-post-user{
 
 } */
 
-.home-post-img{
+.post-img{
+  display: flex;
+  justify-content: center;
  height: 195px;
  width: 255px;
  border-radius: 20px;
    object-fit: cover;
+   margin: 20px auto 30px auto;
+
 }
 
 /* .home-post-content{
