@@ -5,11 +5,21 @@
     max-height: 95vh;
             box-shadow: 7px 9px #350079;
 }
+
 .signup{
     width:60vw;
     margin:auto;
 }
+@media (max-width: 640px) {
+.signup{
+    width:80vw;
+    margin:auto;
+}
+#modal-content:has(.signup){
+    width: 85%;
+}
 
+}
 .signup input::placeholder{
         color: #CDAEFF
 }
@@ -24,7 +34,11 @@
          border: 1px solid  #E8DEF8;
              font-size: 1em;
 }
-
+@media (max-width: 440px) {
+.signup input {
+    width: 75%;
+}
+}
 .signup h2{
   font-size: 2.6em;
      margin: 1em auto;

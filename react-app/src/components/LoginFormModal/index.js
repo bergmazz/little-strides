@@ -45,7 +45,10 @@ function LoginFormModal() {
 
   return (
     <div className="login">
-      <h2>Hello there! Welcome back.</h2>
+      <div className="hi">
+        <h2>Hello there!</h2>
+        <h2>Welcome back.</h2>
+      </div>
       <form onSubmit={handleSubmit}>
         <ul>
           { errors.map( ( error, idx ) => {
