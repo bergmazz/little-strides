@@ -124,18 +124,26 @@ margin: 1%;
   height: auto;
   display: block;
 }
-
+@media (max-width: 900px) {
+  /* .topics-container-one-row {
+    flex-direction: column;
+  } */
+  .topics-container-one-row button {
+    flex-basis: 20%;
+  }
+}
 .community-habits-container {
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
   padding: 16px;
+  margin-bottom:40px;
 }
 
 .habitcard {
   flex: 0 0 auto;
   margin-right: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #F8F3FF;
   border-radius: 10px;
 }
 
@@ -153,15 +161,18 @@ margin: 1%;
 }
 
 .routine-button {
-  box-shadow: 4px 6px #058789;
+  box-shadow: 4px 6px#E8DEF8;
   background-color: white;
   border: none;
   padding: 8px 16px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   font-size: 14px;
   cursor: pointer;
   border-radius: 15px;
   margin: 10px 4px;
+}
+
+.routine-button button:hover{
+  box-shadow: 4px 6px #CDAEFF
 }

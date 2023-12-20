@@ -29,7 +29,10 @@ function Community () {
     const [ filteredHabits, setFilteredHabits ] = useState( [] );
 
     const handleSelectedHabit = async ( habit, routine ) => {
-
+        if ( routine.habits.some( ( h ) => h.description === habit.description ) ) {
+            alert( "You already have that sameee one!!" );
+            return
+        }
         if ( routine.habits.length <= 14 ) {
             const newHabit = await dispatch(
                 createHabit( {
@@ -116,20 +119,21 @@ function Community () {
             </div>
 
             <div className='community-container'>
-
-
-            <div className="topics-feed-container">
-                { availableTopics.map( ( topic ) => (
-                    <button
-                        key={ topic }
-                        className={ `topic-button ${ selectedTopics.includes( topic ) ? 'chosen' : '' }` }
-                        onClick={ () => handleSelectTopics( topic ) }
-                    >
-                        { topic }
-                    </button>
-                ) ) }
-            </div>
-
+                <h1>Fillter your feed by topic</h1>
+                <div className="topics-container-one-row">
+                    { availableTopics.map( ( topic ) => (
+                        <button
+                            key={ topic }
+                            className={ `topic-button ${ selectedTopics.includes( topic ) ? "selected" : "" }` }
+                            onClick={ () => handleSelectTopics( topic ) }
+                        >
+                            <img
+                                src={ topicImages[ topic.toLowerCase() ] }
+                                alt={ topic }
+                            />
+                        </button>
+                    ) ) }
+                </div>
                 { communityPosts ? (
                 <div className="posts-container">
                         { filteredPosts
@@ -151,23 +155,18 @@ function Community () {
                 <p>No posts, whoops.</p>
             ) }
 
-
-                <h2>Check Out Other's Habits by Topic</h2>
-
-                <div className="topics-container-one-row">
-                    { availableTopics.map( ( topic ) => (
-                        <button
-                            key={ topic }
-                            className={ `topic-button ${ selectedTopics.includes( topic ) ? "selected" : "" }` }
-                            onClick={ () => handleSelectTopics( topic ) }
-                        >
-                            <img
-                                src={ topicImages[ topic.toLowerCase() ] }
-                                alt={ topic }
-                            />
-                        </button>
-                    ) ) }
-                </div>
+                {/* <div className="topics-feed-container">
+                { availableTopics.map( ( topic ) => (
+                    <button
+                        key={ topic }
+                        className={ `topic-button ${ selectedTopics.includes( topic ) ? 'chosen' : '' }` }
+                        onClick={ () => handleSelectTopics( topic ) }
+                    >
+                        { topic }
+                    </button>
+                ) ) }
+            </div> */}
+                <h1>Check Out Other's Habits In Your Community!</h1>
 
                 <div>
                     { communityHabits ? (
