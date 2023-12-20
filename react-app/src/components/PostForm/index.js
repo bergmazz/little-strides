@@ -48,9 +48,9 @@ function PostForm () {
     };
 
     useEffect( () => {
-        console.log( "---------noderef current:", nodeRef.current );
+        // console.log( "---------noderef current:", nodeRef.current );
         const node = nodeRef.current
-        console.log( "---------node variable:", node )
+        // console.log( "---------node variable:", node )
         // const dataUrl = blobToPNG( node )
         // console.log( "---------data url variable:", dataUrl )
     }, [ nodeRef ] );
@@ -95,9 +95,6 @@ function PostForm () {
         <div className="post-form-container" >
             <div className="post-grid">
                 <div className="writing-container" >
-                    {/* <div className="user-blurb" >
-                    { currentUser.username }
-                </div> */}
                     <textarea
                     value={ text }
                     placeholder="start typing....."
@@ -139,23 +136,16 @@ function PostForm () {
                         onChange={ handleFileChange }
                     />
 
-                    <div>
+                    <div className="buttonssss">
                     <button type="button" onClick={ handleButtonClick }>
-                        <img className="upload" src={ cloud } alt="Upload Cloud" />
-                        {/* <i className="fas fa-regular fa-cloud-arrow-up"></i>  */ }
+                            <img className="upload" src={ cloud } alt="Upload Cloud" />
                         </button>
                         { image && (
                             <button className="kill" onClick={ () => setImage( "" ) }>Remove</button>
                         ) }
                     </div>
-                    <p>Share a snapshot of your progress or upload a photo</p>
-            </div>
-            {/* <ul>
-                { errors.map( ( error, idx ) => {
-                    let parts = error.split( ":" );
-                    return <li key={ idx }>{ parts[ 1 ] }</li>;
-                } ) }
-            </ul> */}
+                    <p>Upload a photo, or share a snapshot of your progress, only if you wanna</p>
+                </div>
             </div>
 
             <div className="share-button">

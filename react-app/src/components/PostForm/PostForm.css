@@ -1,6 +1,6 @@
 #modal-content:has(.post-form-container){
     /* background-color: #F8F3FF; */
-    width: 45%;
+    width: 50%;
     /* min-height: 55vh;
     max-height: 75vh; */
             box-shadow: 7px 9px #350079;
@@ -46,6 +46,11 @@
 .kill{
     margin-left: 1em;
 }
+
+.snapshot{
+    height:220px;
+}
+
 .post-grid{
     display: grid;
 grid-template-columns: repeat(5, 1fr);
@@ -56,7 +61,35 @@ grid-template-columns: repeat(5, 1fr);
     "wc wc wc up up";
 }
 
+@media (max-width: 1375px) {
+.post-grid{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+}
+.writing-container{
+        width: 70%;
+margin:auto;
+}
+.writing-container textarea {
+    width: 70%;
+    resize: none;
+        border-radius: 20px;
+        margin:auto;
+}
+.buttonssss{
+        display:flex;
+    margin: auto;
+            justify-content:center;
+}
 
+}
+
+@media (max-width: 620px) {
+#modal-content:has(.post-form-container){
+    width: 90%;
+}
+}
 .share-button button{
     margin: 1em auto;
 font-size: 1.5em;
