@@ -11,6 +11,7 @@
         justify-content: center;
     align-items: center;
     margin: 3em;
+    height:fit-content
 }
 
 .writing-container{
@@ -46,10 +47,10 @@
 .kill{
     margin-left: 1em;
 }
-
+/*
 .snapshot{
     height:220px;
-}
+} */
 
 .post-grid{
     display: grid;
@@ -62,6 +63,10 @@ grid-template-columns: repeat(5, 1fr);
 }
 
 @media (max-width: 1375px) {
+    .post-form-container{
+       max-height: 80%;
+                overflow-y: overlay;
+    }
 .post-grid{
     display: flex;
     flex-direction: column;
@@ -82,7 +87,11 @@ margin:auto;
     margin: auto;
             justify-content:center;
 }
-
+.post-grid p {
+       max-width: 70%;
+        text-align: center;
+        margin:20px auto 0 auto
+}
 }
 
 @media (max-width: 620px) {

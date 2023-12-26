@@ -24,7 +24,18 @@ function Community () {
     }, [ dispatch ] );
 
 
-    const [ selectedTopics, setSelectedTopics ] = useState( [ "Anxiety", "Relationships", "Exercise" ] );
+    const availableTopics = [
+        'Anxiety',
+        'Relationships',
+        'Exercise',
+        'Stress',
+        'Wellness',
+        'Sleep',
+        'Depression',
+        'Productivity',
+    ];
+
+    const [ selectedTopics, setSelectedTopics ] = useState( availableTopics );
     const [ filteredPosts, setFilteredPosts ] = useState( [] );
     const [ filteredHabits, setFilteredHabits ] = useState( [] );
 
@@ -62,16 +73,6 @@ function Community () {
     }, [ selectedTopics, communityPosts, communityHabits ] );
 
 
-    const availableTopics = [
-        'Anxiety',
-        'Relationships',
-        'Exercise',
-        'Stress',
-        'Wellness',
-        'Sleep',
-        'Depression',
-        'Productivity',
-    ];
 
     const topicImages = {
         anxiety: anxiety,
