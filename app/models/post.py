@@ -13,7 +13,7 @@ class Post(db.Model, UserMixin):
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
     content = db.Column(db.String(750), nullable=False)
-    image = db.Column(db.String(255))
+    image = db.Column(db.String())
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
