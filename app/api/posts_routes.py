@@ -6,6 +6,9 @@ from app.forms import PostForm
 from flask_login import current_user, login_required
 from sqlalchemy import desc
 
+from ..aws import s3, bucket, upload_to_s3
+import boto3
+
 posts= Blueprint('posts', __name__)
 
 # GET /api/posts
@@ -33,10 +36,12 @@ def create_post():
         content = form.data['content']
         image = form.data['image']
 
+        s3_image_url = upload_to_s3(image) if image else None
+
         new_post = Post(
             user_id=current_user.id,
             content=content,
-            image=image
+            image=s3_image_url
         )
 
         db.session.add(new_post)

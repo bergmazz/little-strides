@@ -98,60 +98,16 @@ function CheckinFormModal ( { habits } ) {
         }
     };
 
-
-    // const loadFont = async ( url, fontName ) => {
-    //     const fontContent = await fetch( url ).then( ( r ) => r.arrayBuffer() );
-    //     const newFont = new FontFace( fontName, fontContent );
-
-    //     return newFont.load().then( () => {
-    //         document.fonts.add( newFont );
-    //     } );
-    // };
-
-    // const appendFont = ( font, url ) => {
-    //     const fontCss = document.createElement( "style" );
-    //     const fontCssRule = `
-    //   @font-face {
-    //     font-family: "${ font }";
-    //     src: url("${ url }");
-    //   }`;
-
-    //     fontCss.appendChild( document.createTextNode( fontCssRule ) );
-    //     document.head.appendChild( fontCss );
-    // };
-
-    // const handleCaptureImage = async () => {
-    //     console.log( "ONCLICK WORKED!???" )
-    //     console.log( "element", document.getElementById( 'progress-snapshot' ) )
-
-    //     let node = document.getElementById( 'progress-snapshot' )
-    //     await document.fonts.ready;
-    //     const fontEmbedCSS = await htmlToImage.getFontEmbedCSS( node );
     const handleCaptureImage = useCallback( async () => {
         if ( nodeRef.current === null ) {
             return;
         }
 
-        // font - family: bobbyJones;
-        // src: url( './font/BobbyJonesSoft.otf' ) format( "opentype" );
-
-        // // Load the font dynamically
-        // await loadFont( '../../font/BobbyJonesSoft.woff2', 'bobbyJones' );
-
-        // // Append @font-face rule
-        // await appendFont( 'bobbyJones', '../../font/BobbyJonesSoft.woff2' );
-
         const options = {
-            // height: 195,
-            // width: 255,
             cacheBust: true,
             useCors: true,
             imagePlaceholder: "https://images.pexels.com/photos/6289065/pexels-photo-6289065.jpeg",
-            // preferredFontFormat: 'opentype',
             preferredFontFormat: 'woff2',
-            // fontEmbedCSS
-            // fontEmbedCSS: '',
-            // skipFonts: true
         };
 
         // const dataUrl = await htmlToImage.toPng( node, options );
@@ -234,12 +190,6 @@ function CheckinFormModal ( { habits } ) {
                     </div>
                     <div className="to-post-or-not-to-post">
                         <button onClick={ closeModal }>No thanks</button>
-                        {/* <OpenModalButton
-                            onClick={ handleCaptureImage }
-                            modalComponent={ <PostForm showWarning={ false } /> }
-                            buttonText="post progress"
-                        // { <img className="pencil" src={ pencil } alt="Pencil Icon" /> }
-                        /> */}
                         <button onClick={ handleCaptureImage }>Post progress</button>
                     </div>
 

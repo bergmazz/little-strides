@@ -18,6 +18,7 @@ function PostForm () {
     const [ errors, setErrors ] = useState( "" );
     const [ text, setText ] = useState( "" );
     const [ image, setImage ] = useState();
+    const [ theFile, setTheFile ] = useState();
 
     useEffect( () => {
         if ( progressSnapshot ) {
@@ -31,14 +32,6 @@ function PostForm () {
     const fileInputRef = useRef( null );
     const nodeRef = useRef( null );
 
-    // const blobToPNG = async ( node ) => {
-    //     console.log( "---------img before to png:", image )
-    //     console.log( "---------node before to png:", node )
-    //     const dataUrl = await toPng( node );
-    //     //this console log below is blank, help????
-    //     console.log( "---------node after to png:", dataUrl )
-    //     return dataUrl
-    // };
     const blobToDataURL = ( blob ) => {
         return new Promise( ( resolve ) => {
             const reader = new FileReader();
@@ -58,6 +51,7 @@ function PostForm () {
     const handleFileChange = async ( e ) => {
         const file = e.target.files[ 0 ];
         if ( file ) {
+            //url for client-side preview
             const imageUrl = URL.createObjectURL( file );
             setImage( imageUrl );
 
@@ -65,8 +59,10 @@ function PostForm () {
             img.onload = async () => {
                 const dataUrl = await blobToDataURL( file );
                 setImage( dataUrl );
+                setTheFile( file )
             };
             img.src = imageUrl;
+
         }
     };
 
@@ -77,7 +73,7 @@ function PostForm () {
     const handleSubmit = async ( e ) => {
         e.preventDefault();
         // console.log( "---------text", text )
-        console.log( "---------image handlesubmit", image )
+        // console.log( "---------image handlesubmit", image )
         if ( !image || image.length < 1 || image === "" ) {
             setImage( null )
         }
@@ -85,7 +81,7 @@ function PostForm () {
             setErrors( "write something, silly" );
             console.error( "Error submitting post:", errors );
         } else {
-            await dispatch( post( text, image ) );
+            await dispatch( post( text, theFile ) );
             closeModal();
             history.push( "/community" );
         }
