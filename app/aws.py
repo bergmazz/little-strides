@@ -1,4 +1,5 @@
 import boto3
+from io import BytesIO
 import os
 from dotenv import load_dotenv
 from datetime import datetime
@@ -19,17 +20,22 @@ s3 = boto3.client(
 bucket = 'littlestridesbucket'
 
 
-def generate_unique_filename(original_filename):
+def generate_unique_filename():
     current_datetime = datetime.now().strftime('%Y%m%d%H%M%S')
     unique_id = str(uuid.uuid4())
-    return f"{current_datetime}_{unique_id}_{original_filename}"
+    return f"{current_datetime}_{unique_id}"
 
 
-def upload_to_s3(file):
+# def upload_to_s3(file):
+def upload_to_s3(blob_data):
+    print("in upload to s3 function")
+    # print("file:", file)
+    # print("blob aka file:", blob_data)
     try:
-        filename = generate_unique_filename(file.filename)
-
-        s3.upload_file(file, bucket, filename)
+        filename = generate_unique_filename()
+        blob_data_bytes = blob_data.encode('utf-8')
+        # s3.upload_file(file, bucket, filename)
+        s3.upload_fileobj(BytesIO(blob_data_bytes), bucket, filename)
 
         s3_image_url = f"https://{bucket}.s3-{s3.meta.region_name}.amazonaws.com/{filename}"
 

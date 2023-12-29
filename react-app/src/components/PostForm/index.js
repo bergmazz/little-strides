@@ -74,14 +74,21 @@ function PostForm () {
         e.preventDefault();
         // console.log( "---------text", text )
         // console.log( "---------image handlesubmit", image )
+        // console.log( "---------thefile handlesubmit", theFile )
         if ( !image || image.length < 1 || image === "" ) {
+            console.log( "---------setting image to null handlesubmit" )
             setImage( null )
         }
         if ( !text ) {
             setErrors( "write something, silly" );
             console.error( "Error submitting post:", errors );
         } else {
-            await dispatch( post( text, theFile ) );
+            // const formData = new FormData();
+            // formData.append( "text", text );
+            // formData.append( "image", theFile );
+            // await dispatch( post( formData ) );
+            // await dispatch( post( text, theFile ) );
+            await dispatch( post( text, image ) );
             closeModal();
             history.push( "/community" );
         }

@@ -49,7 +49,8 @@ export const fetchPosts = () => async ( dispatch ) => {
 
 //POST / api / posts
 export const post = ( content, image ) => async ( dispatch ) => {
-    console.log( "---------content PASSED INTO THUNK", content, image )
+    console.log( "---------content PASSED INTO THUNK", content )
+    console.log( "---------image PASSED INTO THUNK", image )
 
     const response = await fetch( '/api/posts', {
         method: 'POST',
@@ -88,7 +89,7 @@ export const deletePost = ( postId ) => async ( dispatch ) => {
 
 //BONUS: PUT / api / posts / <post_id>
 
-//no captured image thiunk / api call - just to store url in state to pass from checkin confirmation page in checkin modal to post modal
+//no captured image thunk / api call - just to store url in state to pass from checkin confirmation page in checkin modal to post modal
 
 // Reducer
 const initialState = {
