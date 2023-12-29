@@ -49,8 +49,8 @@ export const fetchPosts = () => async ( dispatch ) => {
 
 //POST / api / posts
 export const post = ( content, image ) => async ( dispatch ) => {
-    console.log( "---------content PASSED INTO THUNK", content )
-    console.log( "---------image PASSED INTO THUNK", image )
+    // console.log( "---------content PASSED INTO THUNK", content )
+    // console.log( "---------image PASSED INTO THUNK", image )
 
     const response = await fetch( '/api/posts', {
         method: 'POST',

@@ -48,9 +48,12 @@ def upload_to_s3(base64_thing):
         # blob_data_bytes = blob_data.encode('utf-8')
         # s3.upload_file(file, bucket, filename)
         # s3.upload_fileobj(BytesIO(blob_data_bytes), bucket, filename)
-        s3.upload_fileobj(BytesIO(image_data), bucket, filename)
+        s3.upload_fileobj(BytesIO(image_data),
+                          bucket, filename,
+                          ExtraArgs={'ContentType': mime_type})
 
-        s3_image_url = f"https://{bucket}.s3-{s3.meta.region_name}.amazonaws.com/{filename}"
+        s3_image_url = f"https://{bucket}.s3.amazonaws.com/{filename}"
+        # s3_image_url = f"https://{bucket}.s3-{s3.meta.region_name}.amazonaws.com/{filename}"
 
         return s3_image_url
 
