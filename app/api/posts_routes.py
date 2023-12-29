@@ -37,7 +37,7 @@ def create_post():
         image = form.data['image']
         # print("--------image    ----    ", image)
         s3_image_url = upload_to_s3(image) if image else None
-        print("--------s3url    ----    ", s3_image_url)
+        # print("--------s3url    ----    ", s3_image_url)
 
         new_post = Post(
             user_id=current_user.id,
@@ -72,4 +72,40 @@ def delete_post(post_id):
 
 # BONUS
 # PUT /api/posts/<post_id>
-# """Update the content of your post"""
+
+
+@posts.route('/<int:post_id>', methods=['PUT'])
+@login_required
+def update_post(post_id):
+    """
+    Update the content of your post
+    """
+    post = Post.query.get(post_id)
+
+    if not post:
+        return jsonify({'error': 'Post not found'}), 404
+
+    if post.user_id != current_user.id:
+        return jsonify({'error': 'Post does not belong to the current user.'}), 403
+
+    form = PostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        updated_content = form.data['content']
+        updated_image = form.data['image']
+
+        # Update content if provided
+        if updated_content:
+            post.content = updated_content
+
+        # Update image if provided
+        if updated_image:
+            s3_image_url = upload_to_s3(updated_image)
+            post.image = s3_image_url
+
+        db.session.commit()
+
+        return post.to_dict(), 200
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400

@@ -2,7 +2,7 @@
 const SET_POSTS = 'post/SET_POSTS';
 const ADD_POST = 'post/ADD_POST';
 const DELETE_POST = 'post/DELETE_POST';
-// // const UPDATE_POST = 'post/UPDATE_POST';
+const UPDATE_POST = 'post/UPDATE_POST';
 const SET_IMAGE = 'post/SET_IMAGE';
 
 // Action Creators
@@ -26,6 +26,10 @@ export const setCapturedImage = ( capturedImage ) => ( {
     payload: capturedImage,
 } );
 
+export const editPost = ( postId, updatedContent, updatedImage ) => ( {
+    type: UPDTE_POST,
+    payload: { postId, updatedContent, updatedImage },
+} );
 
 
 //Thunks
@@ -88,6 +92,25 @@ export const deletePost = ( postId ) => async ( dispatch ) => {
 }
 
 //BONUS: PUT / api / posts / <post_id>
+export const updatePost = ( postId, updatedContent, updatedImage ) => async ( dispatch ) => {
+    const response = await fetch( `/api/posts/${ postId }`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify( {
+            content: updatedContent,
+            image: updatedImage,
+        } ),
+    } );
+
+    const data = await response.json();
+
+    if ( response.ok ) {
+        dispatch( editPost( postId, updatedContent, updatedImage ) );
+        return data;
+    }
+};
 
 //no captured image thunk / api call - just to store url in state to pass from checkin confirmation page in checkin modal to post modal
 
@@ -112,6 +135,13 @@ const postReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 capturedImage: action.payload,
+            };
+        case UPDATE_POST:
+            return {
+                ...state,
+                all: state.all.map( ( post ) =>
+                    post.id === action.payload.id ? action.payload : post
+                ),
             };
         default:
             return state;
