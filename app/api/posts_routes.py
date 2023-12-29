@@ -35,7 +35,7 @@ def create_post():
     if form.validate_on_submit():
         content = form.data['content']
         image = form.data['image']
-        print("--------image    ----    ", image)
+        # print("--------image    ----    ", image)
         s3_image_url = upload_to_s3(image) if image else None
         print("--------s3url    ----    ", s3_image_url)
 
