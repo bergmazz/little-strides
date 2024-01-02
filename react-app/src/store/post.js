@@ -27,7 +27,7 @@ export const setCapturedImage = ( capturedImage ) => ( {
 } );
 
 export const editPost = ( postId, updatedContent, updatedImage ) => ( {
-    type: UPDTE_POST,
+    type: UPDATE_POST,
     payload: { postId, updatedContent, updatedImage },
 } );
 

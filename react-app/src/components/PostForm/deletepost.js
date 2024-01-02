@@ -26,11 +26,10 @@ function PostDeleteForm ( { post } ) {
             <button type="button" onClick={ handleDelete }>
                 Delete
             </button>
-            <p>(Click outside of this box to cancel)</p>
             {/* cancel button triggers the are you sure warning :( */ }
-            {/* <button type="button" onClick={ closeModal }>
+            <button type="button" onClick={ closeModal }>
                 Cancel
-            </button> */}
+            </button>
         </div>
     );
 }

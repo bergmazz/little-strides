@@ -72,8 +72,6 @@ def delete_post(post_id):
 
 # BONUS
 # PUT /api/posts/<post_id>
-
-
 @posts.route('/<int:post_id>', methods=['PUT'])
 @login_required
 def update_post(post_id):
@@ -95,11 +93,9 @@ def update_post(post_id):
         updated_content = form.data['content']
         updated_image = form.data['image']
 
-        # Update content if provided
         if updated_content:
             post.content = updated_content
 
-        # Update image if provided
         if updated_image:
             s3_image_url = upload_to_s3(updated_image)
             post.image = s3_image_url

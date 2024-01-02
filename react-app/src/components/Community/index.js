@@ -23,6 +23,10 @@ function Community () {
         dispatch( fetchRoutines() )
     }, [ dispatch ] );
 
+    // useEffect( () => {
+    //     dispatch( fetchPosts() );
+    // }, [ communityPosts ] );
+
 
     const availableTopics = [
         'Anxiety',

@@ -170,7 +170,9 @@ function UserProfile () {
                                 </div>
                                 <h3 className='biggish'>{ routine.averageToday }% for today's habits</h3>
                                 <h4>{ routine.averagePastWeek }% average in the past week</h4>
-
+                                { hasStreak && (
+                                    <h2>Your longest streaks so far</h2>
+                                ) }
                                 <div className="habit-descriptions">
                                     { routine.habits.map( ( habit ) => {
                                         return (

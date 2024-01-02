@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import cloud from "./cloud.svg"
-import { post } from "../../store/post";
+import { updatePost } from "../../store/post";
 import "./PostForm.css";
 
 function PostForm () {
@@ -12,22 +12,11 @@ function PostForm () {
     const { closeModal } = useModal();
 
     const currentUser = useSelector( state => state.session.user )
-    const progressSnapshot = useSelector( ( state ) => state.post.capturedImage );
-    // console.log( "snapshotttttt", progressSnapshot )
 
     const [ errors, setErrors ] = useState( "" );
     const [ text, setText ] = useState( "" );
     const [ image, setImage ] = useState();
     // const [ theFile, setTheFile ] = useState();
-
-    useEffect( () => {
-        if ( progressSnapshot ) {
-            // console.log( "if porgresssnap ran:", progressSnapshot );
-            setImage( progressSnapshot );
-            // console.log( "image updated to progresssnap:", progressSnapshot );
-        }
-        // console.log( "State updated. New progressSnapshot:", progressSnapshot );
-    }, [ progressSnapshot ] );
 
     const fileInputRef = useRef( null );
     const nodeRef = useRef( null );
@@ -83,12 +72,7 @@ function PostForm () {
             setErrors( "write something, silly" );
             console.error( "Error submitting post:", errors );
         } else {
-            // const formData = new FormData();
-            // formData.append( "text", text );
-            // formData.append( "image", theFile );
-            // await dispatch( post( formData ) );
-            // await dispatch( post( text, theFile ) );
-            await dispatch( post( text, image ) );
+            await dispatch( updatePost( text, image ) );
             closeModal();
             history.push( "/community" );
         }
@@ -99,39 +83,34 @@ function PostForm () {
             <div className="post-grid">
                 <div className="writing-container" >
                     <textarea
-                    value={ text }
-                    placeholder="start typing....."
-                    onChange={ ( e ) =>
-                        setText( e.target.value ) }
-                />
+                        value={ text }
+                        placeholder="start typing....."
+                        onChange={ ( e ) =>
+                            setText( e.target.value ) }
+                    />
                     <div className={ text.length > 750 || text.length < 4 ? "valid char-count-red" : "valid char-count" }>
                         { text.length } / 750 characters
                     </div>
-            </div>
+                </div>
 
-            <div className="post-image-container" >
+                <div className="post-image-container" >
                     <div className="snapshot">
-                    { image && (
-                        <div>
-                            <img
-                                alt="not found"
-                                src={ image }
+                        { image && (
+                            <div>
+                                <img
+                                    alt="not found"
+                                    src={ image }
                                     className="post-img"
                                     ref={ nodeRef }
                                 />
                             </div>
-                    ) }
+                        ) }
 
+                    </div>
                 </div>
-            </div>
 
 
-            <div className="upload-pic-button">
-                {/* <input type="file" onChange={ handleFileChange } /> */ }
-                    {/* <input type="file" onChange={ ( e ) => setImage( URL.createObjectURL( e.target.files[ 0 ] ) ) } /> */ }
-                    {/* <button >cloud</button> */ }
-                    {/* <i className="fas fa-regular fa-cloud-arrow-up"></i> */ }
-
+                <div className="upload-pic-button">
                     <input
                         type="file"
                         ref={ fileInputRef }
@@ -140,7 +119,7 @@ function PostForm () {
                     />
 
                     <div className="buttonssss">
-                    <button type="button" onClick={ handleButtonClick }>
+                        <button type="button" onClick={ handleButtonClick }>
                             <img className="upload" src={ cloud } alt="Upload Cloud" />
                         </button>
                         { image && (
