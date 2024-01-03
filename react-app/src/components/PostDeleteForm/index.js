@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { fetchPosts, deletePost } from "../../store/post";
-import "./delete.css"
 
 function PostDeleteForm ( { post } ) {
     const dispatch = useDispatch();

@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import cloud from "./cloud.svg"
+import cloud from "../PostForm/cloud.svg"
 import { updatePost } from "../../store/post";
-import "./PostForm.css";
+import "./PostEditForm.css";
 
 function PostForm () {
     const dispatch = useDispatch();

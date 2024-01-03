@@ -1,13 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
+import { useModal } from "../../context/Modal";
 import { allUserHabits, createHabit } from '../../store/habit';
 import { fetchPosts } from '../../store/post';
 import { fetchRoutines } from '../../store/routine';
 import pencil from "./pencil-pen.svg"
+import pencilonly from "./pencilonly.svg"
+import trash from "./trash.svg"
 import wave from "./communitywave.svg"
 import { anxiety, relationships, exercise, wellness, stress, sleep, depression, productivity } from "../RoutineFormModal/Topics";
 import PostForm from "../PostForm";
+import PostEditForm from "../PostEditForm"
+import PostDeleteForm from "../PostDeleteForm"
 import './Community.css';
 
 function Community () {
@@ -17,6 +22,7 @@ function Community () {
     const communityHabits = useSelector( ( state ) => state.habit.all );
     const communityPosts = useSelector( ( state ) => state.post.all );
     const [ showH2, setShowH2 ] = useState( false );
+    const { closeModal, setModalContent } = useModal();
 
     useEffect( () => {
         dispatch( allUserHabits() );
@@ -172,6 +178,29 @@ function Community () {
                                 <p className="post-user">
                                     - { post.user.username }
                                 </p>
+                                { post.user.username === currentUser.username && (
+                                    < div className="row">
+                                        <button
+                                            className="deletebutt"
+                                            onClick={ async () => {
+                                                await setModalContent( <PostDeleteForm showWarning={ false } post={ post } /> );
+                                            } }
+                                        >
+                                            <img src={ trash } alt="delete"></img>
+                                        </button>
+
+                                        <div className="editbutt">
+                                            <button
+                                                onClick={ async () => {
+                                                    await setModalContent( <PostEditForm showWarning={ false } post={ post } /> );
+                                                } }
+                                            >
+                                                <img src={ pencilonly } alt="edit"></img>
+                                            </button>
+                                        </div>
+                                    </div>
+                                )
+                                }
                             </div>
                         );
                     } ) }
