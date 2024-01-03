@@ -179,9 +179,9 @@ function Community () {
                                     - { post.user.username }
                                 </p>
                                 { post.user.username === currentUser.username && (
-                                    < div className="row">
+                                    < div className="postrow">
                                         <button
-                                            className="deletebutt"
+                                            className="deletepostbutt"
                                             onClick={ async () => {
                                                 await setModalContent( <PostDeleteForm showWarning={ false } post={ post } /> );
                                             } }
@@ -189,7 +189,7 @@ function Community () {
                                             <img src={ trash } alt="delete"></img>
                                         </button>
 
-                                        <div className="editbutt">
+                                        <div className="editpostbutt">
                                             <button
                                                 onClick={ async () => {
                                                     await setModalContent( <PostEditForm showWarning={ false } post={ post } /> );
