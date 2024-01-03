@@ -24,9 +24,10 @@ function Community () {
         dispatch( fetchRoutines() )
     }, [ dispatch ] );
 
-    // useEffect( () => {
-    //     dispatch( fetchPosts() );
-    // }, [ communityPosts ] );
+    useEffect( () => {
+        dispatch( fetchPosts() );
+        setFilteredPosts( communityPosts )
+    }, [ communityPosts.length ] );
 
 
     const availableTopics = [

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import cloud from "./cloud.svg"
-import { post } from "../../store/post";
+import { post, fetchPosts } from "../../store/post";
 import "./PostForm.css";
 
 function PostForm () {
@@ -88,7 +88,8 @@ function PostForm () {
             // formData.append( "image", theFile );
             // await dispatch( post( formData ) );
             // await dispatch( post( text, theFile ) );
-            await dispatch( post( text, image ) );
+            dispatch( post( text, image ) );
+            dispatch( fetchPosts() );
             closeModal();
             history.push( "/community" );
         }
