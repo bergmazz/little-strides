@@ -12,6 +12,7 @@ import CheckinFormModal from '../CheckInModal'
 import { fetchRoutines } from '../../store/routine';
 import waveSvgUp from "./57.svg"
 import waveSvg from "./52.svg"
+import shoe from "./purpleshoe.png"
 import "./UserProfile.css"
 
 
@@ -26,6 +27,7 @@ function UserProfile () {
     // const habits = useSelector( state => state.habit.user )
     // console.log( "------user:", currentUser );
     const [ showMenu, setShowMenu ] = useState( false );
+    const [ showH2, setShowH2 ] = useState( false );
     let hasStreak = false;
     const BadgeShapes = [ 'star', 'shield', 'scalloped-circle' ];
     let badgeShapeIndex = 0;
@@ -80,13 +82,27 @@ function UserProfile () {
 
     }, [ elem ] );
 
+
+    useEffect( () => {
+        const timer = setTimeout( () => {
+            setShowH2( true );
+        }, 4000 );
+        return () => clearTimeout( timer );
+    }, [] );
+
     //loading message when currentuser hasn't processed
     if ( !currentUser ) return (
-        <div className='no-user'>
-            <h1 className='no-user'>.       .        .   .. ....   ....  ..  .....Hold tight for sec.</h1>
-            {/* <Link to="/login" className="page-login-link">
-                <button className="login-signup-button" type="submit">Login</button>
-            </Link> */}
+        <div className='loading'>
+            <div className='no-user'>
+                <div className="dot-spin" />
+            </div>
+            { showH2 && <h3>It's been a sec, did you actually log in?</h3> }
+            {/* <img className="logo" src={ shoe }></img> */ }
+            {/* <div className="walking-shoes">
+                <img className="logo walking" src={ shoe } alt="Shoe Image 1" />
+                <img className="logo walking" src={ shoe } alt="Shoe Image 2" />
+                <img className="logo walking" src={ shoe } alt="Shoe Image 3" />
+            </div> */}
         </div>
     )
 

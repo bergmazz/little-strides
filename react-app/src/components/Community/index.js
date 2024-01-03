@@ -16,6 +16,7 @@ function Community () {
     const routines = useSelector( state => state.routine.routines )
     const communityHabits = useSelector( ( state ) => state.habit.all );
     const communityPosts = useSelector( ( state ) => state.post.all );
+    const [ showH2, setShowH2 ] = useState( false );
 
     useEffect( () => {
         dispatch( allUserHabits() );
@@ -102,6 +103,23 @@ function Community () {
             // }
         }
     };
+
+    useEffect( () => {
+        const timer = setTimeout( () => {
+            setShowH2( true );
+        }, 4000 );
+        return () => clearTimeout( timer );
+    }, [] );
+
+    if ( !currentUser ) return (
+        <div className='loading'>
+            <div className='no-user'>
+                <div className="dot-spin" />
+            </div>
+            { showH2 && <h3>It's been a sec, did you actually log in?</h3> }
+        </div>
+    )
+
 
     return (
         <>
