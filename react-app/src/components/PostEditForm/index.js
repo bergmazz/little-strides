@@ -3,21 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import cloud from "../PostForm/cloud.svg"
-import { updatePost } from "../../store/post";
+import { updatePost, fetchPosts } from "../../store/post";
 import "./PostEditForm.css";
 
-function PostForm () {
+function PostEditForm ( { post } ) {
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
-
+    // console.log( "---------post:", post )
+    // console.log( "---------post id:", post.id )
     const currentUser = useSelector( state => state.session.user )
 
     const [ errors, setErrors ] = useState( "" );
-    const [ text, setText ] = useState( "" );
-    const [ image, setImage ] = useState();
+    const [ oldImage, setOldImage ] = useState( post.image );
+    const [ text, setText ] = useState( post.content );
+    const [ image, setImage ] = useState( post.image );
     // const [ theFile, setTheFile ] = useState();
-
+    console.log( "---------post image:", image )
     const fileInputRef = useRef( null );
     const nodeRef = useRef( null );
 
@@ -68,11 +70,20 @@ function PostForm () {
             console.log( "---------setting image to null handlesubmit" )
             setImage( null )
         }
+        console.log( "---------new post image in submit:", image )
+        console.log( "---------old post image in submit:", oldImage )
+        if ( image === oldImage ) {
+            console.log( "---------the image hasn't changed- setting image to null handlesubmit" )
+            setImage( null )
+        }
         if ( !text ) {
             setErrors( "write something, silly" );
             console.error( "Error submitting post:", errors );
         } else {
-            await dispatch( updatePost( text, image ) );
+            const postId = post.id
+            console.log( "---------post image in submit:", image )
+            dispatch( updatePost( postId, text, image ) );
+            dispatch( fetchPosts() );
             closeModal();
             history.push( "/community" );
         }
@@ -138,4 +149,4 @@ function PostForm () {
     )
 }
 
-export default PostForm;
+export default PostEditForm;

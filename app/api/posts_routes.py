@@ -93,7 +93,7 @@ def update_post(post_id):
         updated_content = form.data['content']
         updated_image = form.data['image']
 
-        if updated_content:
+        if updated_content is not None:
             post.content = updated_content
 
         if updated_image:

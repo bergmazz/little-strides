@@ -31,7 +31,6 @@ export const editPost = ( postId, updatedContent, updatedImage ) => ( {
     payload: { postId, updatedContent, updatedImage },
 } );
 
-
 //Thunks
 export const fetchPosts = () => async ( dispatch ) => {
     // GET / api / posts
@@ -98,6 +97,7 @@ export const updatePost = ( postId, updatedContent, updatedImage ) => async ( di
         headers: {
             'Content-Type': 'application/json',
         },
+
         body: JSON.stringify( {
             content: updatedContent,
             image: updatedImage,
