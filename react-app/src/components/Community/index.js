@@ -111,6 +111,7 @@ function Community () {
         }
     };
 
+
     useEffect( () => {
         const timer = setTimeout( () => {
             setShowH2( true );

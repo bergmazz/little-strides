@@ -34,6 +34,26 @@ const HomePage = () => {
         }
     };
 
+    const [ loading, setLoading ] = useState( true );
+
+    useEffect( () => {
+        const timer = setTimeout( () => {
+            setLoading( false );
+        }, 1000 );
+
+        return () => clearTimeout( timer );
+    }, [] );
+
+    if ( loading ) {
+        return (
+            <div className='loading'>
+                <div className='no-user'>
+                    <div className="dot-spin" />
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="homepage-container">
             <div className="slogan">
