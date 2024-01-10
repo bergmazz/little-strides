@@ -120,7 +120,7 @@ function PostEditForm ( { post } ) {
                     </div>
                     { fileTypeError && (
                         <div className="file-error-message">
-                            Unsupported file type. Please choose a PNG, JPEG, or JPG file.
+                            You tried an unsupported file type. Please choose a PNG or JPEG/JPG file.
                         </div>
                     ) }
                 </div>

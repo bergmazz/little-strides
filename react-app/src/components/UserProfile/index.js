@@ -10,7 +10,8 @@ import CheckinFormModal from '../CheckInModal'
 // import UserRoutines from "./";
 // import UserProgress from "./";
 import { fetchRoutines } from '../../store/routine';
-import waveSvgUp from "./57.svg"
+// import waveSvgUp from "./57.svg"
+import waveSvgUp from "./54.svg"
 import waveSvg from "./52.svg"
 import shoe from "./purpleshoe.png"
 import "./UserProfile.css"
