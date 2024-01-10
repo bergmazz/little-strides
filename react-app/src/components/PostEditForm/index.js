@@ -72,10 +72,14 @@ function PostEditForm ( { post } ) {
         } else {
             const postId = post.id
             console.log( "---------post image in submit:", image )
-            dispatch( updatePost( postId, text, image ) );
-            dispatch( fetchPosts() );
-            closeModal();
+            dispatch( updatePost( postId, text, image ) )
+                .then( () => {
+                    dispatch( fetchPosts() );
+                    closeModal();
             // history.push( "/community" );
+                } )
+            // dispatch( fetchPosts() );
+            // closeModal();
         }
     };
 
