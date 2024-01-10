@@ -92,13 +92,15 @@ def update_post(post_id):
     if form.validate_on_submit():
         updated_content = form.data['content']
         updated_image = form.data['image']
+        print("-------------------updated image:", updated_image)
 
         if updated_content is not None:
             post.content = updated_content
 
-        if updated_image:
-            s3_image_url = upload_to_s3(updated_image)
-            post.image = s3_image_url
+        if updated_image is not None:
+            if updated_image is not post.image:
+                s3_image_url = upload_to_s3(updated_image)
+                post.image = s3_image_url
 
         db.session.commit()
 

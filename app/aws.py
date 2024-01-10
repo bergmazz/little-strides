@@ -34,6 +34,8 @@ def upload_to_s3(base64_thing):
     # print("file:", file)
     # print("blob aka file:", blob_data)
     try:
+        if "https://littlestridesbucket.s3.amazonaws.com" in base64_thing:
+            return base64_thing
 
         base64_image = base64_thing.split(",")[1]
         image_data = base64.b64decode(base64_image)
@@ -45,9 +47,6 @@ def upload_to_s3(base64_thing):
         extension = mime_type.split("/")[1]
         filename = generate_unique_filename(extension)
 
-        # blob_data_bytes = blob_data.encode('utf-8')
-        # s3.upload_file(file, bucket, filename)
-        # s3.upload_fileobj(BytesIO(blob_data_bytes), bucket, filename)
         s3.upload_fileobj(BytesIO(image_data),
                           bucket, filename,
                           ExtraArgs={'ContentType': mime_type})

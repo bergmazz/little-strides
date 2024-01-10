@@ -10,8 +10,6 @@ function PostEditForm ( { post } ) {
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
-    // console.log( "---------post:", post )
-    // console.log( "---------post id:", post.id )
     const currentUser = useSelector( state => state.session.user )
 
     const [ errors, setErrors ] = useState( "" );
@@ -32,11 +30,7 @@ function PostEditForm ( { post } ) {
     };
 
     useEffect( () => {
-        // console.log( "---------noderef current:", nodeRef.current );
         const node = nodeRef.current
-        // console.log( "---------node variable:", node )
-        // const dataUrl = blobToPNG( node )
-        // console.log( "---------data url variable:", dataUrl )
     }, [ nodeRef ] );
 
     const handleFileChange = async ( e ) => {
@@ -70,12 +64,8 @@ function PostEditForm ( { post } ) {
             console.log( "---------setting image to null handlesubmit" )
             setImage( null )
         }
-        console.log( "---------new post image in submit:", image )
-        console.log( "---------old post image in submit:", oldImage )
-        if ( image === oldImage ) {
-            console.log( "---------the image hasn't changed- setting image to null handlesubmit" )
-            setImage( null )
-        }
+        // console.log( "---------new post image in submit:", image )
+
         if ( !text ) {
             setErrors( "write something, silly" );
             console.error( "Error submitting post:", errors );
@@ -85,7 +75,7 @@ function PostEditForm ( { post } ) {
             dispatch( updatePost( postId, text, image ) );
             dispatch( fetchPosts() );
             closeModal();
-            history.push( "/community" );
+            // history.push( "/community" );
         }
     };
 
