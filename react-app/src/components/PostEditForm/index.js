@@ -16,6 +16,7 @@ function PostEditForm ( { post } ) {
     const [ oldImage, setOldImage ] = useState( post.image );
     const [ text, setText ] = useState( post.content );
     const [ image, setImage ] = useState( post.image );
+    const [ fileTypeError, setFileTypeError ] = useState( false );
     // const [ theFile, setTheFile ] = useState();
     console.log( "---------post image:", image )
     const fileInputRef = useRef( null );
@@ -36,17 +37,23 @@ function PostEditForm ( { post } ) {
     const handleFileChange = async ( e ) => {
         const file = e.target.files[ 0 ];
         if ( file ) {
-            //url for client-side preview
-            const imageUrl = URL.createObjectURL( file );
-            setImage( imageUrl );
+            const allowedTypes = [ "image/png", "image/jpeg", "image/jpg" ];
 
-            const img = new Image();
-            img.onload = async () => {
-                const dataUrl = await blobToDataURL( file );
-                setImage( dataUrl );
-                // setTheFile( file )
-            };
-            img.src = imageUrl;
+            if ( allowedTypes.includes( file.type ) ) {
+                setFileTypeError( false );
+                const imageUrl = URL.createObjectURL( file );
+                setImage( imageUrl );
+
+                const img = new Image();
+                img.onload = async () => {
+                    const dataUrl = await blobToDataURL( file );
+                    setImage( dataUrl );
+                };
+                img.src = imageUrl;
+            } else {
+                setFileTypeError( true );
+                setImage( null );
+            }
 
         }
     };
@@ -110,8 +117,12 @@ function PostEditForm ( { post } ) {
                                 />
                             </div>
                         ) }
-
                     </div>
+                    { fileTypeError && (
+                        <div className="file-error-message">
+                            Unsupported file type. Please choose a PNG, JPEG, or JPG file.
+                        </div>
+                    ) }
                 </div>
 
 

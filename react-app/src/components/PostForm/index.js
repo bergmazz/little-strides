@@ -18,6 +18,7 @@ function PostForm () {
     const [ errors, setErrors ] = useState( "" );
     const [ text, setText ] = useState( "" );
     const [ image, setImage ] = useState();
+    const [ fileTypeError, setFileTypeError ] = useState( false );
     // const [ theFile, setTheFile ] = useState();
 
     useEffect( () => {
@@ -41,27 +42,30 @@ function PostForm () {
     };
 
     useEffect( () => {
-        // console.log( "---------noderef current:", nodeRef.current );
         const node = nodeRef.current
-        // console.log( "---------node variable:", node )
-        // const dataUrl = blobToPNG( node )
-        // console.log( "---------data url variable:", dataUrl )
     }, [ nodeRef ] );
 
     const handleFileChange = async ( e ) => {
         const file = e.target.files[ 0 ];
         if ( file ) {
+            const allowedTypes = [ "image/png", "image/jpeg", "image/jpg" ];
             //url for client-side preview
-            const imageUrl = URL.createObjectURL( file );
-            setImage( imageUrl );
+            if ( allowedTypes.includes( file.type ) ) {
+                setFileTypeError( false );
+                const imageUrl = URL.createObjectURL( file );
+                setImage( imageUrl );
 
-            const img = new Image();
-            img.onload = async () => {
-                const dataUrl = await blobToDataURL( file );
-                setImage( dataUrl );
-                // setTheFile( file )
-            };
-            img.src = imageUrl;
+                const img = new Image();
+                img.onload = async () => {
+                    const dataUrl = await blobToDataURL( file );
+                    setImage( dataUrl );
+                    // setTheFile( file )
+                };
+                img.src = imageUrl;
+            } else {
+                setFileTypeError( true );
+                setImage( null );
+            }
 
         }
     };
@@ -72,9 +76,6 @@ function PostForm () {
 
     const handleSubmit = async ( e ) => {
         e.preventDefault();
-        // console.log( "---------text", text )
-        // console.log( "---------image handlesubmit", image )
-        // console.log( "---------thefile handlesubmit", theFile )
         if ( !image || image.length < 1 || image === "" ) {
             console.log( "---------setting image to null handlesubmit" )
             setImage( null )
@@ -83,11 +84,6 @@ function PostForm () {
             setErrors( "write something, silly" );
             console.error( "Error submitting post:", errors );
         } else {
-            // const formData = new FormData();
-            // formData.append( "text", text );
-            // formData.append( "image", theFile );
-            // await dispatch( post( formData ) );
-            // await dispatch( post( text, theFile ) );
             dispatch( post( text, image ) );
             dispatch( fetchPosts() );
             closeModal();
@@ -121,9 +117,13 @@ function PostForm () {
                                     ref={ nodeRef }
                                 />
                             </div>
+                        ) }
+                    </div>
+                    { fileTypeError && (
+                        <div className="file-error-message">
+                            Unsupported file type. Please choose a PNG, JPEG, or JPG file.
+                        </div>
                     ) }
-
-                </div>
             </div>
 
 
