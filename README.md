@@ -1,6 +1,16 @@
-# Flask React Project
+# Little Strides- A Flask React Project
+![Screen Shot 2024-01-10 at 6 32 53 PM](https://github.com/bergmazz/little-strides/assets/106289871/981c7f3f-cb7e-44fe-a1a6-e106dccbfd7c)
 
-This is the starter for the Flask React project.
+Welcome to Little Strides! This is a platform for habit tracking and progress-sharing. Users are encouraged to build positive routines, track habits, and post about their progress to connect with a supportive community. Whether you're looking to enhance your productivity, manage stress, or achieve personal goals, Little Strides is here to help you on your journey.
+
+![checkinlarger](https://github.com/bergmazz/little-strides/assets/106289871/f34cefb9-e253-46b5-a596-fee1945dd429)
+
+![Screen Shot 2024-01-10 at 9 47 25 PM](https://github.com/bergmazz/little-strides/assets/106289871/8a90df87-6515-4c7b-b848-20fd2350f01a)
+
+
+![Screen Shot 2024-01-10 at 9 44 42 PM](https://github.com/bergmazz/little-strides/assets/106289871/d832a453-14a2-44c1-8dae-022fe1e04ae6)
+
+
 
 ## Getting started
 1. Clone this repository (only this branch)
