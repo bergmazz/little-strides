@@ -150,7 +150,7 @@ function Community () {
             </div>
 
             <div className='community-container'>
-                <h1>Fillter your feed by topic</h1>
+                <h1>Filter your feed by topic</h1>
                 <div className="topics-container-one-row">
                     { availableTopics.map( ( topic ) => (
                         <button
