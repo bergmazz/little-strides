@@ -25,8 +25,20 @@ Python for back-end development. Flask framework used for building the backend. 
 ![checkinlarger](https://github.com/bergmazz/little-strides/assets/106289871/f34cefb9-e253-46b5-a596-fee1945dd429)
 ## Routines and Habits - a multi-step form shared between the parent and child features
 ![Screen Shot 2024-01-10 at 9 47 25 PM](https://github.com/bergmazz/little-strides/assets/106289871/8a90df87-6515-4c7b-b848-20fd2350f01a)
-## Progress - your biggest achievements and most recent percentage of sucessfully completed habits per routine
+## Progress - your biggest achievements and recent percentage of sucessfully completed habits
 ![Screen Shot 2024-01-10 at 9 44 42 PM](https://github.com/bergmazz/little-strides/assets/106289871/d832a453-14a2-44c1-8dae-022fe1e04ae6)
+## Community - view posts and adopt other users' habits
+![Screen Shot 2024-01-16 at 11 42 26 PM](https://github.com/bergmazz/little-strides/assets/106289871/2bcb55e3-f6d2-431b-a366-d0cbd76eb591)
+![Screen Shot 2024-01-16 at 11 41 22 PM](https://github.com/bergmazz/little-strides/assets/106289871/5e40f71e-c906-43aa-9614-1346d356e752)
+
+## Still In Progress
+ - Mood Rating
+   ![Screen Shot 2024-01-16 at 11 49 46 PM](https://github.com/bergmazz/little-strides/assets/106289871/dfb42c63-fd48-4cb6-884e-a3dadc7a5508)
+ - Progress graph showing sucessful habit completion vs mood rating
+   ![Screen Shot 2024-01-16 at 11 50 44 PM](https://github.com/bergmazz/little-strides/assets/106289871/8e62338c-4fa3-434b-979f-d03c3aed7b68)
+ - Likes and comments on posts
+   ![Screen Shot 2024-01-16 at 11 51 16 PM](https://github.com/bergmazz/little-strides/assets/106289871/85a4d171-8910-4e94-8cd8-f663b226e267)
+ - More responsive design and CSS tweaks
 
 
 ## Run Locally or Check Out the [Live Site](https://little-strides.onrender.com/)
