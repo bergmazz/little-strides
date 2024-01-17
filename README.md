@@ -1,19 +1,36 @@
-# Little Strides- A Flask React Project
+# Welcome to Little Strides- A Flask React Project
+This is a platform for habit tracking and progress-sharing, inspired by an iOS app called Most Days. Users are encouraged to build positive routines, track habits, and post about their progress to connect with a supportive community. Whether you're looking to enhance your productivity, manage stress, or achieve personal goals, Little Strides is here to help you on your journey.
+
 ![Screen Shot 2024-01-10 at 6 32 53 PM](https://github.com/bergmazz/little-strides/assets/106289871/981c7f3f-cb7e-44fe-a1a6-e106dccbfd7c)
 
-Welcome to Little Strides! This is a platform for habit tracking and progress-sharing. Users are encouraged to build positive routines, track habits, and post about their progress to connect with a supportive community. Whether you're looking to enhance your productivity, manage stress, or achieve personal goals, Little Strides is here to help you on your journey.
+## Technology 
+<div align="center">
+  <img alt="Python" src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54">
+  <img alt="Flask" src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white">
+  <img alt="JavaScript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E">
+  <img alt="React" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB">
+  <img alt="React Router" src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white">
+  <img alt="Redux" src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white">
+  <img alt="Postgres" src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white">
+  <img alt="SQLite" src="https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white">
+  <img alt="AWS" src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white">
+  <img alt="Canva" src="https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white">
+  <img alt="Figma" src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white">
+  <img alt="MDN Web Docs" src="https://img.shields.io/badge/MDN_Web_Docs-black?style=for-the-badge&logo=mdnwebdocs&logoColor=white">
+</div>
+Python for back-end development. Flask framework used for building the backend. JavaScript for front-end development. React library for building the user interface. Redux for state management in the front-end. PostgreSQL database hosted on Render for production. SQLite database used for local development. Amazon Web Services for image storage. Canva and Figma for design. MDN for almost every kind of brain fart.
 
+# Features
+## Check In - a simple yes or no for every habit in your routine
 ![checkinlarger](https://github.com/bergmazz/little-strides/assets/106289871/f34cefb9-e253-46b5-a596-fee1945dd429)
-
+## Routines and Habits - a multi-step form shared between the parent and child features
 ![Screen Shot 2024-01-10 at 9 47 25 PM](https://github.com/bergmazz/little-strides/assets/106289871/8a90df87-6515-4c7b-b848-20fd2350f01a)
-
-
+## Progress - your biggest achievements and most recent percentage of sucessfully completed habits per routine
 ![Screen Shot 2024-01-10 at 9 44 42 PM](https://github.com/bergmazz/little-strides/assets/106289871/d832a453-14a2-44c1-8dae-022fe1e04ae6)
 
 
-
-## Getting started
-1. Clone this repository (only this branch)
+## Run Locally or Check Out the [Live Site](https://little-strides.onrender.com/)
+1. Clone this repository
 
 2. Install dependencies
 
@@ -21,7 +38,7 @@ Welcome to Little Strides! This is a platform for habit tracking and progress-sh
       pipenv install -r requirements.txt
       ```
 
-3. Create a **.env** file based on the example with proper settings for your
+3. Create an **.env** file based on the example (.env.example) with proper settings for your
    development environment
 
 4. Make sure the SQLite3 database connection URL is in the **.env** file
@@ -49,110 +66,16 @@ Welcome to Little Strides! This is a platform for habit tracking and progress-sh
    flask run
    ```
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+7. To run the React App in development, change to the `react-app` directory.
+ ```bash
+   npm install
+ ```
+ ```bash
+   npm start
+ ```
+The project should then be accessible at http://localhost:3000 :) 
 
+## Contributing
 
-## Deployment through Render.com
-
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
-
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
-
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
-
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
-
-### Part A: Configure the Start and Build Commands
-
-Start by giving your application a name.
-
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
-
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
-
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
-
-For your Flask project, enter the following command into the Build field, all in
-one line:
-
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
-
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
-
-Now, add your start command in the Start field:
-
-```shell
-# start script
-gunicorn app:app
-```
-
-_If you are using websockets, use the following start command instead for increased performance:_
-
-`gunicorn --worker-class eventlet -w 1 app:app`
-
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
